@@ -18,13 +18,11 @@ class _SignInPageState extends State<SignInPage> {
   late final TextEditingController _emailController;
   late final TextEditingController _passwordController;
 
-  bool _isPasswordVisible = false;
-  
   final AuthService authService = GetIt.instance<AuthService>();
 
   /// Stream subscription for monitoring changes in the authentication state.
   late StreamSubscription<AuthState> _authStateSubscription;
-  
+
   /// Initializes the state of the widget.
   /// Sets up the text controllers for email, password, and phone.
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
@@ -89,53 +87,16 @@ class _SignInPageState extends State<SignInPage> {
                     padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                     child: AppLogo(aspectRatio: 16 / 9),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(
-                      'Email',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  TextFormField(
+                  EmailFormField(
+                    title: 'Email',
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'me@example.com',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
+                    hintText: 'john@elegantmedia.com.au',
                   ),
                   const FixedGap(mainAxisExtent: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(
-                      'Password',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  TextFormField(
+                  PasswordFormField(
+                    title: 'Password',
                     controller: _passwordController,
-                    obscureText: !_isPasswordVisible,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(_isPasswordVisible ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
+                    hintText: '*******',
                   ),
                   const FixedGap(mainAxisExtent: 16),
                   SizedBox(

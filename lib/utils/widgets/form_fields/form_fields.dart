@@ -53,6 +53,7 @@ library;
 
 export 'base_text_field.dart';
 export 'description_form_field.dart';
+export 'email_form_field.dart';
 export 'password_form_field.dart';
 export 'phone_form_field.dart';
 export 'stepper_form_field.dart';

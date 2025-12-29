@@ -19,14 +19,13 @@ class _SignUpPageState extends State<SignUpPage> {
   late final TextEditingController _passwordController;
   late final TextEditingController _phoneController;
 
-  String _countryCode = GetIt.instance<AppSettings>().countryCodes.first;
-  bool _isPasswordVisible = false;
-  
+  final String _countryCode = GetIt.instance<AppSettings>().countryCodes.first;
+
   final AuthService authService = GetIt.instance<AuthService>();
 
   /// Stream subscription for monitoring changes in the authentication state.
   late StreamSubscription<AuthState> _authStateSubscription;
-  
+
   /// Initializes the state of the widget.
   /// Sets up the text controllers for email, password, and phone.
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
@@ -90,99 +89,21 @@ class _SignUpPageState extends State<SignUpPage> {
               child: ExtendedColumn(
                 children: [
                   const RelativeGap(mainAxisExtent: 0.05),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(
-                      'Email',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  TextFormField(
+                  EmailFormField(
+                    title: 'Email',
                     controller: _emailController,
-                    decoration: const InputDecoration(
-                      hintText: 'me@example.com',
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email';
-                      }
-                      return null;
-                    },
+                    hintText: 'john@elegantmedia.com.au',
                   ),
                   const FixedGap(mainAxisExtent: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(
-                      'Password',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  TextFormField(
+                  PasswordFormField(
+                    title: 'Password',
                     controller: _passwordController,
-                    obscureText: !_isPasswordVisible,
-                    decoration: InputDecoration(
-                      hintText: 'Password',
-                      suffixIcon: IconButton(
-                        icon: Icon(_isPasswordVisible ? FontAwesomeIcons.eyeSlash : FontAwesomeIcons.eye),
-                        onPressed: () {
-                          setState(() {
-                            _isPasswordVisible = !_isPasswordVisible;
-                          });
-                        },
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
+                    hintText: '*******',
                   ),
                   const FixedGap(mainAxisExtent: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                    child: Text(
-                      'Mobile Number',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Expanded(
-                        flex: 2,
-                        child: DropdownButtonFormField<String>(
-                          initialValue: _countryCode,
-                          onChanged: (value) {
-                            setState(() {
-                              _countryCode = value!;
-                            });
-                          },
-                          items: GetIt.instance<AppSettings>().countryCodes.map((countryCode) {
-                            return DropdownMenuItem<String>(
-                              value: countryCode,
-                              child: Text(countryCode),
-                            );
-                          }).toList(),
-                        ),
-                      ),
-                      const FixedGap(mainAxisExtent: 8),
-                      Expanded(
-                        flex: 6,
-                        child: TextFormField(
-                          controller: _phoneController,
-                          decoration: const InputDecoration(
-                            hintText: '1234567890',
-                          ),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return 'Please enter your mobile number';
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
-                    ],
+                  PhoneFormField(
+                    phoneNumberController: _phoneController,
+                    phoneFocusNode: FocusNode(),
                   ),
                   const FixedGap(mainAxisExtent: 24),
                   Padding(
@@ -196,23 +117,25 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextSpan(
                             text: 'Terms and Conditions',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                              // TODO(ishanga): Add Terms and Conditions page
-                            },
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // TODO(ishanga): Add Terms and Conditions page
+                              },
                           ),
                           const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
                           TextSpan(
                             text: 'Privacy Policy',
                             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.secondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = () {
-                              // TODO(ishanga): Add Privacy Policy page
-                            },
+                                  color: Theme.of(context).colorScheme.secondary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () {
+                                // TODO(ishanga): Add Privacy Policy page
+                              },
                           ),
                           const TextSpan(text: '.'),
                         ],

@@ -44,19 +44,24 @@ import 'package:starter/utils/widgets/form_fields/base_text_field.dart';
 /// - [StepperFormField] for numeric inputs with increment/decrement.
 class PasswordFormField extends StatefulWidget {
   /// Creates a password form field.
+  ///
+  /// If [validator] is null, a default validator is used that checks:
+  /// - Non-empty input
+  /// - Minimum length of [minLength] characters (default: 8)
   const PasswordFormField({
     required this.controller,
     required this.hintText,
     super.key,
     this.title,
     this.validator,
+    this.minLength = 8,
     this.onChanged,
     this.autovalidateMode = AutovalidateMode.onUserInteraction,
     this.textInputAction,
     this.focusNode,
     this.onEditingComplete,
     this.enabled = true,
-  });
+  }) : assert(minLength > 0, 'minLength must be positive');
 
   /// Controller for the password value.
   final TextEditingController controller;
@@ -67,8 +72,16 @@ class PasswordFormField extends StatefulWidget {
   /// Optional label above the field.
   final String? title;
 
-  /// Password validation function.
+  /// Custom password validation function.
+  ///
+  /// If null, uses a default validator that checks for non-empty
+  /// and minimum [minLength] characters.
   final String? Function(String?)? validator;
+
+  /// Minimum password length for default validation.
+  ///
+  /// Defaults to 8 characters.
+  final int minLength;
 
   /// Callback when password changes.
   final void Function(String)? onChanged;
@@ -103,6 +116,17 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
     });
   }
 
+  /// Default validator for password input.
+  String? _defaultValidator(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your password';
+    }
+    if (value.length < widget.minLength) {
+      return 'Password must be at least ${widget.minLength} characters';
+    }
+    return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
@@ -112,7 +136,7 @@ class _PasswordFormFieldState extends State<PasswordFormField> {
       hintText: widget.hintText,
       title: widget.title,
       obscureText: !_isVisible,
-      validator: widget.validator,
+      validator: widget.validator ?? _defaultValidator,
       onChanged: widget.onChanged,
       autovalidateMode: widget.autovalidateMode,
       textInputAction: widget.textInputAction,
@@ -136,7 +160,7 @@ extension PasswordFormFieldFactories on PasswordFormField {
   /// Creates a password field with minimum length validation.
   static PasswordFormField withMinLength({
     required TextEditingController controller,
-    required int minLength,
+    int minLength = 8,
     String hintText = 'Enter password',
     String? title,
   }) {
