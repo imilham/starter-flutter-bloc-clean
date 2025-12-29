@@ -152,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Expanded(
                         flex: 2,
                         child: DropdownButtonFormField<String>(
-                          value: _countryCode,
+                          initialValue: _countryCode,
                           onChanged: (value) {
                             setState(() {
                               _countryCode = value!;
