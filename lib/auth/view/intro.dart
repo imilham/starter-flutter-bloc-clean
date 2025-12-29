@@ -1,0 +1,49 @@
+import 'package:flutter/material.dart';
+import 'package:starter/app/app.dart';
+import 'package:starter/utils/utils.dart';
+
+class IntroPage extends StatefulWidget {
+  const IntroPage({super.key});
+
+  @override
+  State<IntroPage> createState() => _IntroPageState();
+}
+
+class _IntroPageState extends State<IntroPage> {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: ExtendedColumn(
+        children: [
+          const RelativeGap(mainAxisExtent: 0.2),
+          const AppLogo(aspectRatio: 16 / 9),
+          const RelativeGap(mainAxisExtent: 0.1),
+          ElevatedButton(
+            onPressed: () {
+              Pages.signUp.go(context);
+            },
+            child: const Text('Sign Up'),
+          ),
+          const Spacer(),
+          const FixedGap(mainAxisExtent: 0.1),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text('Already have an account?'),
+              TextButton(
+                onPressed: () {
+                  Pages.signIn.go(context);
+                },
+                style: TextButton.styleFrom(
+                  padding: EdgeInsets.zero,
+                ),
+                child: const Text('Sign In', style: TextStyle(fontWeight: FontWeight.bold)),
+              ),
+            ],
+          ),
+          const RelativeGap(mainAxisExtent: 0.02),
+        ],
+      ),
+    );
+  }
+}
