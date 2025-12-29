@@ -89,7 +89,7 @@ Instead of a simple clone, we "pluck" the professional logic from the corporate 
 
 **Step 4** — Inject the logic, dependencies, and linting rules
 
-    git checkout starter/main -- lib/ pubspec.yaml analysis_options.yaml
+    git checkout starter/main -- lib/ pubspec.yaml analysis_options.yaml README.md DEVELOPMENT_SOP.md
 
 
 **Step 5** — Install dependencies
