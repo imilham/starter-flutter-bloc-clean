@@ -93,7 +93,7 @@ void main() {
       await tester.pumpWidget(buildTestWidget(
         maxPhoneLength: 5,
         minPhoneLength: 3,
-      ));
+      ),);
 
       await tester.enterText(find.byType(TextFormField), '1234567890');
       await tester.pump();
@@ -109,7 +109,7 @@ void main() {
           }
           return null;
         },
-      ));
+      ),);
 
       final widgetFinder = find.byType(PhoneFormField);
       final widget = tester.widget<PhoneFormField>(widgetFinder);
@@ -125,7 +125,7 @@ void main() {
 
       await tester.pumpWidget(buildTestWidget(
         onChanged: (value) => changedValue = value,
-      ));
+      ),);
 
       await tester.enterText(find.byType(TextFormField), '12345');
       await tester.pump();
@@ -159,7 +159,7 @@ void main() {
         phoneNumberHintText: 'Custom hint',
         maxPhoneLength: 11,
         minPhoneLength: 8,
-      ));
+      ),);
 
       final widgetFinder = find.byType(PhoneFormField);
       final widget = tester.widget<PhoneFormField>(widgetFinder);

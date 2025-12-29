@@ -32,6 +32,8 @@ dependencies:
   url_launcher: ^6.3.1
   uuid: ^4.5.1
 
+  image_picker_android: any
+  image_picker_platform_interface: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
