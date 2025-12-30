@@ -43,10 +43,10 @@ class ProfileCompleteController extends ProfileRepository with ChangeNotifier {
   int _currentStep = 0;
 
   /// Controller for navigating through profile completion pages.
-  /// 
+  ///
   /// The [_pageController] manages the page transitions in a PageView widget.
-  /// 
-  /// The [_stateController] broadcasts state updates to listeners, allowing 
+  ///
+  /// The [_stateController] broadcasts state updates to listeners, allowing
   /// components to react to changes in the profile completion process.
   final PageController _pageController = PageController();
   final StreamController<ProfileState> _stateController = StreamController<ProfileState>.broadcast();
@@ -75,7 +75,7 @@ class ProfileCompleteController extends ProfileRepository with ChangeNotifier {
   ///
   /// [stepOneFormKey] is the key for the first step form.
   /// [stepTwoFormKey] is the key for the second step form.
-  /// 
+  ///
   /// These keys are used to validate and control the respective forms.
   GlobalKey<FormState> get stepOneFormKey => _stepOneFormKey;
   GlobalKey<FormState> get stepTwoFormKey => _stepTwoFormKey;
@@ -109,7 +109,7 @@ class ProfileCompleteController extends ProfileRepository with ChangeNotifier {
   }
 
   /// Navigates to the previous step in the profile completion process.
-  /// 
+  ///
   /// Decreases the current step index and animates to the previous page
   /// if not on the first step already. After changing the step, notifies
   /// listeners to update the UI.
@@ -165,7 +165,7 @@ class ProfileCompleteController extends ProfileRepository with ChangeNotifier {
   }
 
   /// Disposes resources when the controller is no longer needed.
-  /// 
+  ///
   /// This method is called when the controller is being removed from memory.
   /// It disposes the [_pageController] and closes the [_stateController] stream
   /// before calling the parent class's dispose method.

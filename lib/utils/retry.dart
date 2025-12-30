@@ -131,9 +131,7 @@ class RetryOptions {
         final future = fn(attempt);
         // TODO(ishanga): Improve timeout handling - consider per-operation timeout vs cumulative timeout
         // Current implementation only handles per-attempt timeout, not total operation timeout
-        final result = timeoutPerAttempt != null
-            ? await Future.value(future).timeout(timeoutPerAttempt!)
-            : await future;
+        final result = timeoutPerAttempt != null ? await Future.value(future).timeout(timeoutPerAttempt!) : await future;
 
         attemptHistory.add(
           RetryAttempt(

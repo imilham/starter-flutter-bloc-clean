@@ -1,8 +1,7 @@
-
 /// This class represents a user session. It contains the user ID, access token, and the creation date of the session.
-/// 
+///
 /// **Note:** This class is not generated from a JSON object. So don't replace it with a generated class.
-/// 
+///
 /// Every time when new values are added to the class, the [Session.fromJson], [toJson] and [syncPreserveAccessToken] methods should be updated accordingly.
 class Session {
   Session({
@@ -14,10 +13,10 @@ class Session {
   });
 
   /// Creates a [Session] object from a JSON map.
-  /// 
+  ///
   /// **Note:** Since [Session.fromJson] will called from various places in the application,
   /// with different JSON maps, it is important to handle the edge cases properly.
-  /// 
+  ///
   /// Returns a [Session] object with the parsed data.
   factory Session.fromJson(Map<String, dynamic> json) {
     return Session(
@@ -51,13 +50,13 @@ class Session {
   }
 
   /// Syncs and preserves the access token of a session.
-  /// 
+  ///
   /// This method takes a [Session] object as input and returns a new [Session] object with the same properties, except for the access token.
   /// The access token of the input session is replaced with the current access token.
-  /// 
+  ///
   /// Parameters:
   /// - [session]: The session object to sync and preserve the access token.
-  /// 
+  ///
   /// Returns:
   /// A new [Session] object with the same properties as the input session, except for the access token.
   Session syncPreserveAccessToken(Session session) {

@@ -4,7 +4,8 @@ import 'package:starter/utils/utils.dart';
 
 class ShellController extends StatelessWidget {
   const ShellController({
-    required this.navigationShell, super.key,
+    required this.navigationShell,
+    super.key,
   });
 
   final StatefulNavigationShell navigationShell;

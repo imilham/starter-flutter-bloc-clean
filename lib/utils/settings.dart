@@ -118,14 +118,14 @@ class AppSettings {
   }
 
   /// Retrieves the device ID asynchronously.
-  /// 
+  ///
   /// This method checks the default target platform and retrieves the device ID accordingly.
   /// If the default target platform is Android, it uses the `deviceInfoPlugin` to get the Android device ID.
   /// If the default target platform is iOS, it uses the `DeviceInfoPlugin` to get the iOS device ID.
   /// If the default target platform is neither Android nor iOS, it returns a default device ID of 'UNKNOWN'.
-  /// 
+  ///
   /// If an error occurs while retrieving the device ID, it logs the error and returns a default device ID of 'UNKNOWN'.
-  /// 
+  ///
   /// Returns the device ID as a `String`.
   Future<String> getDeviceId() async {
     try {

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 /// A widget that extends the functionality of the `Column` widget by providing additional features.
 /// It ensures that the content within the column is scrollable if it exceeds the available height.
-/// 
+///
 /// The `ExtendedColumn` widget takes a list of children widgets and wraps them in a `LayoutBuilder`,
 /// `SingleChildScrollView`, `ConstrainedBox`, and `IntrinsicHeight` to achieve the desired behavior.
-/// 
+///
 /// Example usage:
 /// ```dart
 /// ExtendedColumn(
@@ -18,7 +18,7 @@ import 'package:flutter/material.dart';
 /// ```
 class ExtendedColumn extends StatefulWidget {
   /// Creates a new `ExtendedColumn` widget.
-  /// 
+  ///
   /// The `children` parameter is required and should contain a list of widgets to be displayed in the column.
   const ExtendedColumn({
     required this.children,

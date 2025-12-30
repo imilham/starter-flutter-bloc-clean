@@ -153,7 +153,7 @@ class AuthRepository extends ApiClient {
       return onError(e);
     }
   }
-  
+
   /// Fetches the current user's profile information from the server.
   ///
   /// This method makes a GET request to the '/profile' endpoint with the provided

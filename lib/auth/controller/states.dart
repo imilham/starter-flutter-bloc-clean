@@ -40,7 +40,7 @@ class AuthCodeVerified extends AuthState {
 class AuthCodeVerificationFailed extends AuthState {
   /// The error message associated with the code verification failure.
   const AuthCodeVerificationFailed(this.message);
-  
+
   /// The error message associated with the code verification failure.
   final String message;
 }

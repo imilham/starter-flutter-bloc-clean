@@ -21,7 +21,8 @@ import 'package:gap/gap.dart';
 /// ```
 class RelativeGap extends StatelessWidget {
   const RelativeGap({
-    required this.mainAxisExtent, super.key,
+    required this.mainAxisExtent,
+    super.key,
   });
 
   final double mainAxisExtent;
@@ -39,9 +40,9 @@ class RelativeGap extends StatelessWidget {
 ///
 /// The [mainAxisExtent] parameter specifies the extent of the gap along the main axis.
 /// The extent of the gap along the main axis.
-/// 
+///
 /// Example usage:
-/// 
+///
 /// ```dart
 ///   Column(
 ///    children: [
@@ -51,11 +52,12 @@ class RelativeGap extends StatelessWidget {
 ///    ],
 ///   )
 /// ```
-/// 
-/// 
+///
+///
 class FixedGap extends StatelessWidget {
   const FixedGap({
-    required this.mainAxisExtent, super.key,
+    required this.mainAxisExtent,
+    super.key,
   });
 
   final double mainAxisExtent;

@@ -9,7 +9,6 @@ import 'package:image_picker_platform_interface/image_picker_platform_interface.
 /// This class provides methods for picking and taking images using the device's camera or gallery.
 /// It uses the `image_picker` package to handle image selection.
 class AppImageUtils {
-
   AppImageUtils._() {
     _init();
   }
@@ -19,7 +18,7 @@ class AppImageUtils {
     _instance ??= AppImageUtils._();
     return _instance!;
   }
-  
+
   /// Initializes the image picker platform and sets the Android photo picker option if the platform is Android.
   void _init() {
     final imagePickerPlatform = ImagePickerPlatform.instance;

@@ -3,7 +3,7 @@ import 'package:starter/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
 class ProfileRepository extends ApiClient {
-  ProfileRepository(): super(interceptors: [AuthInterceptor(rejectIfNoSession: true)]);
+  ProfileRepository() : super(interceptors: [AuthInterceptor(rejectIfNoSession: true)]);
 
   /// Fetches the user profile from the server.
   /// Returns a [UserProfile] object if successful, otherwise throws an error.

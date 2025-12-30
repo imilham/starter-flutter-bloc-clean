@@ -28,7 +28,7 @@ class UserProfileService extends ProfileRepository with ChangeNotifier {
   UserProfile? get userProfile => _userProfile;
 
   /// Sets the user profile and notifies listeners of the change.
-  /// 
+  ///
   /// This setter updates the private [_userProfile] field and triggers a rebuild
   /// of any widgets that are listening to this service.
   ///

@@ -29,14 +29,14 @@ class _StarterAppState extends State<StarterApp> {
   @override
   void initState() {
     /// Subscribes to changes in the Hive box containing sessions and listens for authentication state changes.
-    /// 
+    ///
     /// The [onAuthStateChanged] callback function will be called whenever there is a change in the authentication state.
     _authStateSubscription = Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey).watch().listen(onAuthStateChanged);
 
     _profileStateSubscription = GetIt.instance<UserProfileService>().profileStateStream.listen((event) async {
       if (event is ProfileDeleted) {
         await GetIt.instance<AuthService>().onUserProfileDeleted();
-      } 
+      }
     });
 
     /// Listens to changes in the theme mode provided by the [_themeServiceProvider].
@@ -53,11 +53,11 @@ class _StarterAppState extends State<StarterApp> {
   }
 
   /// Callback function that is triggered when the authentication state changes.
-  /// 
+  ///
   /// It updates the current session in the app state based on the provided [event].
   /// If the [event] value is not null, it sets the current session to the value of the event.
   /// If the [event] value is null, it resets the app state to the initial state by setting the current session to null and isInitialized to false.
-  /// 
+  ///
   /// **Note**: In the future, we'll also use this function to clear saved user cache related data from other services.
   void onAuthStateChanged(BoxEvent event) {
     log('onAuthStateChanged: ${event.value}', name: 'StarterAppState');
@@ -92,7 +92,7 @@ class _StarterAppState extends State<StarterApp> {
             darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
             themeMode: context.watch<ThemeServiceProvider>().themeMode,
             routerConfig: GetIt.instance<AppRouter>().goRouter,
-            builder:(context, child) => OverlayUtility(child: child),
+            builder: (context, child) => OverlayUtility(child: child),
           );
         },
       ),
