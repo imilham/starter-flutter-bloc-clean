@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-/// Extension on [BuildContext] for easy access to theme text styles.
+/// Extension on [BuildContext] for easy access to theme properties.
 ///
 /// This follows Flutter industry best practices by providing concise
-/// access to [TextTheme] styles while maintaining theme-awareness.
+/// access to [ThemeData], [TextTheme], and [ColorScheme].
 ///
-/// ## Usage
+/// ## Text Style Usage
 /// ```dart
 /// // Instead of:
 /// Text('Hello', style: Theme.of(context).textTheme.bodyMedium)
@@ -20,16 +20,18 @@ import 'package:flutter/material.dart';
 /// ))
 /// ```
 ///
+/// ## Color Usage
+/// ```dart
+/// // Instead of:
+/// color: Theme.of(context).colorScheme.primary
+///
+/// // You can write:
+/// color: context.colorScheme.primary
+/// ```
+///
 /// ## Theme-Aware
 /// All styles automatically update when the theme changes (light/dark mode).
-///
-/// ## Available Styles
-/// - Display: [displayLarge], [displayMedium], [displaySmall]
-/// - Headline: [headlineLarge], [headlineMedium], [headlineSmall]
-/// - Title: [titleLarge], [titleMedium], [titleSmall]
-/// - Body: [bodyLarge], [bodyMedium], [bodySmall]
-/// - Label: [labelLarge], [labelMedium], [labelSmall]
-extension TextStyleExtension on BuildContext {
+extension ThemeExtension on BuildContext {
   // ─────────────────────────────────────────────────────────────────────
   // THEME ACCESS
   // ─────────────────────────────────────────────────────────────────────

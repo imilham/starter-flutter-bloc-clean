@@ -3,7 +3,7 @@
 /// Extensions for common Flutter patterns.
 ///
 /// Available extensions:
-/// - [TextStyleExtension] - Easy access to theme text styles
+/// - [ThemeExtension] - Easy access to theme, text styles, and colors
 ///
 /// ## Usage
 /// ```dart
@@ -13,9 +13,13 @@
 /// Text('Hello', style: context.bodyMedium)
 /// Text('Title', style: context.titleLarge)
 ///
-/// // Theme access
-/// final colors = context.colorScheme;
+/// // Colors
+/// color: context.colorScheme.primary
+/// color: context.colorScheme.error
+///
+/// // Theme
+/// final theme = context.theme;
 /// ```
 library;
 
-export 'text_style_extension.dart';
+export 'theme_extension.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:starter/utils/extensions/text_style_extension.dart';
+import 'package:starter/utils/extensions/theme_extension.dart';
 
 void main() {
   group('TextStyleExtension', () {
