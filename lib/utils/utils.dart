@@ -7,6 +7,7 @@ export 'package:provider/provider.dart';
 export 'package:recase/recase.dart';
 
 export './assets/assets.dart';
+export './constants/constants.dart';
 export './extensions/extensions.dart';
 export './image.dart';
 export './network/network.dart';

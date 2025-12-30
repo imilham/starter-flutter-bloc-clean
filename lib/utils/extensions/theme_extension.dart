@@ -109,4 +109,26 @@ extension ThemeExtension on BuildContext {
 
   /// Smallest label text style.
   TextStyle? get labelSmall => textTheme.labelSmall;
+
+  // ─────────────────────────────────────────────────────────────────────
+  // SCREEN SIZE
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// Screen size from MediaQuery.
+  Size get screenSize => MediaQuery.sizeOf(this);
+
+  /// Screen width.
+  double get screenWidth => screenSize.width;
+
+  /// Screen height.
+  double get screenHeight => screenSize.height;
+
+  /// Screen padding (safe area insets).
+  EdgeInsets get screenPadding => MediaQuery.paddingOf(this);
+
+  /// Whether the device is in landscape mode.
+  bool get isLandscape => screenWidth > screenHeight;
+
+  /// Whether the device is in portrait mode.
+  bool get isPortrait => screenHeight > screenWidth;
 }
