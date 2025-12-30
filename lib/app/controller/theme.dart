@@ -6,12 +6,12 @@ import 'package:hive_flutter/hive_flutter.dart';
 /// A service provider class for managing the theme of the application.
 /// This class provides methods to toggle the theme between light and dark,
 /// and retrieve the current theme data and mode.
-/// 
+///
 /// **Important**: Don't make colors public
 /// Always access through [Theme] using [BuildContext]
-/// 
+///
 /// Example Usage:
-/// 
+///
 /// ```dart
 /// color: Theme.of(context).colorScheme.primary
 /// ```

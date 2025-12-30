@@ -138,7 +138,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Text(
                   'Please enter your verification code',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: context.textTheme.headlineSmall,
                 ),
                 const FixedGap(mainAxisExtent: 16),
                 Text(

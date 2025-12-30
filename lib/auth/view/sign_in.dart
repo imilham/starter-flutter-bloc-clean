@@ -111,7 +111,7 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   const FixedGap(mainAxisExtent: 16),
-                  CommonElevatedButton.small(
+                  CommonElevatedButton(
                     text: 'Sign In',
                     isLoading: snapshot.data is AuthLoading,
                     onPressed: () {
