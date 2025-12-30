@@ -98,7 +98,6 @@ void main() {
           home: Scaffold(
             body: CommonElevatedButton(
               text: 'Test',
-              size: ButtonSize.large,
             ),
           ),
         ),
