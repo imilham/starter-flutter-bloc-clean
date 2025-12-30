@@ -17,13 +17,13 @@ class AuthService extends AuthRepository {
   Stream<AuthState> get onAuthStateChanges => _authStateSubject.stream;
 
   /// Logs in the user with the provided [email] and [password].
-  /// 
+  ///
   /// This method sets the authentication state to [AuthLoading] and then attempts to log in the user using the provided credentials.
   /// It retrieves the device platform and device ID from the [AppSettings] instance using [GetIt] and creates a [LogInRequestModel] with the email, password, device ID, and device platform.
   /// The method then calls the [logIn] function to send the login request and awaits the response.
   /// If the login is successful, the session is saved using [_saveSession] and the authentication state is set to [AuthSuccess] with the session response.
   /// If an error occurs during the login process, the authentication state is set to [AuthFailed] with the error message.
-  /// 
+  ///
   /// Throws an exception if any error occurs during the login process.
   Future<void> login(String email, String password) async {
     _authStateSubject.add(AuthLoading());
@@ -89,11 +89,11 @@ class AuthService extends AuthRepository {
   }
 
   /// Verifies the given [code] for email verification.
-  /// 
+  ///
   /// This method updates the authentication state to [AuthLoading] and then proceeds to verify the email using the provided [code].
   /// If the verification is successful, the session is saved and the authentication state is updated to [AuthCodeVerified].
   /// If the verification fails, the authentication state is updated to [AuthCodeVerificationFailed] with the error message.
-  /// 
+  ///
   /// Throws an [Exception] if no session is found.
   Future<void> verify(String code) async {
     _authStateSubject.add(AuthLoading());
@@ -146,11 +146,11 @@ class AuthService extends AuthRepository {
   }
 
   /// Sends a forgot password request for the given [email].
-  /// 
+  ///
   /// This method simulates a forgot password request by delaying for 2 seconds.
   /// If the [email] matches the demo email, it emits an [AuthForgotPasswordSubmitSuccess] event.
   /// Otherwise, it throws an [Exception] with the message 'Invalid email' and emits an [AuthForgotPasswordSubmitFailed] event.
-  /// 
+  ///
   /// Throws an [Exception] if an error occurs during the process.
   Future<void> forgotPassword(String email) async {
     _authStateSubject.add(AuthLoading());
@@ -185,7 +185,7 @@ class AuthService extends AuthRepository {
       if (session == null) {
         throw Exception('No session found');
       }
-      
+
       await logOut(token: session.accessToken);
       await _deleteSession();
       _authStateSubject.add(AuthLogout());
@@ -222,16 +222,15 @@ class AuthService extends AuthRepository {
     await _storage.delete('session');
   }
 
-  
   /// Refreshes the current user session by obtaining a new authentication token.
-  /// 
+  ///
   /// This method is typically called when the current session has expired or
   /// is about to expire. It handles the token refresh process automatically
   /// and updates the user's authentication state.
-  /// 
+  ///
   /// Throws [Exception] if the refresh fails due to invalid credentials
   /// or network issues.
-  /// 
+  ///
   /// Example:
   /// ```dart
   /// try {
@@ -254,14 +253,15 @@ class AuthService extends AuthRepository {
       );
 
       try {
-
         final result = await options.retryWithResult<UserProfile>(
           (attempt) => getCurrentUser(token: session!.accessToken),
-          retryIf: (error) => error is DioException && [
-            DioExceptionType.connectionError,
-            DioExceptionType.connectionTimeout,
-            DioExceptionType.receiveTimeout,
-          ].contains(error.type),
+          retryIf: (error) =>
+              error is DioException &&
+              [
+                DioExceptionType.connectionError,
+                DioExceptionType.connectionTimeout,
+                DioExceptionType.receiveTimeout,
+              ].contains(error.type),
           onRetry: (p0, p1) {
             log('Retrying session verification: Attempt $p1', name: 'AuthService');
             final lastError = p0 is DioException ? p0.message : p0.toString();
@@ -282,6 +282,7 @@ class AuthService extends AuthRepository {
 
         /// Update the user profile in the UserProfileService
         GetIt.instance<UserProfileService>().userProfile = response;
+
         /// Sync the session with the new user profile
         /// and preserve the access token
         /// This is to ensure that the access token is not lost
@@ -289,6 +290,7 @@ class AuthService extends AuthRepository {
         /// and the session is saved again
         session = session.syncPreserveAccessToken(Session.fromJson(response.toJson()));
         _authStateSubject.add(AuthSuccess(session: session));
+
         /// We need to save the session again to trigger the session change listener in the [App] in app.dart
         await _saveSession(session);
       } on CancelledException {
@@ -297,7 +299,7 @@ class AuthService extends AuthRepository {
         _authStateSubject.add(AuthInitial());
       } on Exception catch (e) {
         log('Error verifying session', name: 'AuthService', error: e);
-        _authStateSubject.add(AuthRetryingFailed(message:  'Error connecting to server!'));
+        _authStateSubject.add(AuthRetryingFailed(message: 'Error connecting to server!'));
         rethrow;
       }
     } else {
@@ -306,23 +308,23 @@ class AuthService extends AuthRepository {
   }
 
   /// Refreshes the current session without implementing retry logic.
-  /// 
+  ///
   /// This method retrieves the current session and attempts to refresh it by:
   /// 1. Fetching the current user data using the existing access token
   /// 2. Updating the user profile in the UserProfileService
   /// 3. Syncing the session while preserving the access token
   /// 4. Emitting appropriate auth states during the process
   /// 5. Saving the updated session to trigger session change listeners
-  /// 
+  ///
   /// The method emits different [AuthState] values:
   /// - [AuthLoading] when the refresh process starts
   /// - [AuthSuccess] when the session is successfully refreshed
   /// - [AuthRetryingFailed] if an error occurs during the refresh
   /// - [AuthInitial] if no session exists
-  /// 
+  ///
   /// This method does not implement automatic retry mechanisms - failures
   /// result in an immediate error state emission.
-  /// 
+  ///
   /// Throws: Does not throw exceptions directly, but catches and handles
   /// errors by emitting [AuthRetryingFailed] state.
   Future<void> refreshSessionWithOutRetry() async {
@@ -334,6 +336,7 @@ class AuthService extends AuthRepository {
 
         /// Update the user profile in the UserProfileService
         GetIt.instance<UserProfileService>().userProfile = response;
+
         /// Sync the session with the new user profile
         /// and preserve the access token
         /// This is to ensure that the access token is not lost
@@ -341,11 +344,12 @@ class AuthService extends AuthRepository {
         /// and the session is saved again
         session = session.syncPreserveAccessToken(Session.fromJson(response.toJson()));
         _authStateSubject.add(AuthSuccess(session: session));
+
         /// We need to save the session again to trigger the session change listener in the [App] in app.dart
         await _saveSession(session);
       } catch (e) {
         log('Error verifying session', name: 'AuthService', error: e);
-        _authStateSubject.add(AuthRetryingFailed(message:  'Error connecting to server!'));
+        _authStateSubject.add(AuthRetryingFailed(message: 'Error connecting to server!'));
       }
     } else {
       _authStateSubject.add(AuthInitial());
@@ -353,14 +357,15 @@ class AuthService extends AuthRepository {
   }
 
   /// Performs necessary actions when a user profile is deleted.
-  /// 
+  ///
   /// This method:
   /// 1. Deletes the current session by calling [_deleteSession]
   /// 2. Resets the authentication state to [AuthInitial]
-  /// 
+  ///
   /// Returns a [Future] that completes when all operations are done.
   Future<void> onUserProfileDeleted() async {
     log('User profile deleted', name: 'AuthService');
+
     /// Delete the current session
     /// and reset the authentication state
     /// to [AuthInitial]

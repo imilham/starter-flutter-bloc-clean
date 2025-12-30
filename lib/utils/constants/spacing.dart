@@ -79,3 +79,51 @@ class AppSpacing {
   /// All padding: 24px
   static const allLg = EdgeInsets.all(lg);
 }
+
+/// Pre-built gap widgets for consistent spacing in layouts.
+///
+/// These work in both Row (horizontal) and Column (vertical) widgets.
+/// The gap automatically adapts based on the parent's main axis.
+///
+/// ## Usage
+/// ```dart
+/// Column(
+///   children: [
+///     Text('Hello'),
+///     Gap.sm,  // 8px vertical gap
+///     Text('World'),
+///   ],
+/// )
+///
+/// Row(
+///   children: [
+///     Icon(Icons.star),
+///     Gap.xs,  // 4px horizontal gap
+///     Text('Starred'),
+///   ],
+/// )
+/// ```
+class Gap {
+  Gap._();
+
+  /// 2px gap
+  static const extraSmall2 = SizedBox.square(dimension: 2);
+
+  /// 4px gap
+  static const extraSmall4 = SizedBox.square(dimension: 4);
+
+  /// 8px gap
+  static const small8 = SizedBox.square(dimension: 8);
+
+  /// 12px gap
+  static const medium12 = SizedBox.square(dimension: 12);
+
+  /// 16px gap
+  static const medium16 = SizedBox.square(dimension: 16);
+
+  /// 24px gap
+  static const large24 = SizedBox.square(dimension: 24);
+
+  /// 32px gap
+  static const extraLarge32 = SizedBox.square(dimension: 32);
+}

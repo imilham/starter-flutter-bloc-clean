@@ -39,8 +39,8 @@ class _SignInPageState extends State<SignInPage> {
   /// The error message is obtained from the [AuthState] object.
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
-    if (state is AuthFailed && mounted) {
-      await CommonDialog.alert(context, title: 'Sign In Failed', message: state.message);
+    if (state is AuthLoading && mounted) {
+      await CommonDialog.confirm(context, title: 'Sign In Failed', message: 'state.message');
     }
   }
 

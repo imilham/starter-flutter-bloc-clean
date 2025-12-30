@@ -71,6 +71,7 @@ class ThemeServiceProvider with ChangeNotifier {
     return ThemeData(
       scaffoldBackgroundColor: _darkBackgroundColor,
       colorScheme: ColorScheme.fromSeed(
+        brightness: Brightness.dark,
         seedColor: _primaryColor,
         primary: _primaryColor,
         onPrimary: Colors.white,
