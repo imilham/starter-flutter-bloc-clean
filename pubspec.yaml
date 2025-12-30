@@ -34,6 +34,7 @@ dependencies:
 
   image_picker_android: any
   image_picker_platform_interface: any
+  cached_network_image: ^3.4.1
 dev_dependencies:
   flutter_test:
     sdk: flutter

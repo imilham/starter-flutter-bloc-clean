@@ -40,23 +40,7 @@ class _SignInPageState extends State<SignInPage> {
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
     if (state is AuthFailed && mounted) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Sign In Failed'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
-      );
+      await CommonDialog.alert(context, title: 'Sign In Failed', message: state.message);
     }
   }
 

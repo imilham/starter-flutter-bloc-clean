@@ -4,22 +4,8 @@
 ///
 /// Available extensions:
 /// - [ThemeExtension] - Easy access to theme, text styles, and colors
-///
-/// ## Usage
-/// ```dart
-/// import 'package:starter/utils/extensions/extensions.dart';
-///
-/// // Text styles
-/// Text('Hello', style: context.bodyMedium)
-/// Text('Title', style: context.titleLarge)
-///
-/// // Colors
-/// color: context.colorScheme.primary
-/// color: context.colorScheme.error
-///
-/// // Theme
-/// final theme = context.theme;
-/// ```
+/// - [SnackBarExtension] - Easy snackbar display
 library;
 
+export 'snackbar_extension.dart';
 export 'theme_extension.dart';
