@@ -39,8 +39,12 @@ class _SignInPageState extends State<SignInPage> {
   /// The error message is obtained from the [AuthState] object.
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
-    if (state is AuthLoading && mounted) {
-      await CommonDialog.confirm(context, title: 'Sign In Failed', message: 'state.message');
+    if (state is AuthFailed && mounted) {
+      await CommonDialog.alert(
+        context,
+        title: 'Sign In Failed',
+        message: state.message,
+      );
     }
   }
 
@@ -57,8 +61,9 @@ class _SignInPageState extends State<SignInPage> {
     return StreamBuilder<AuthState>(
       stream: authService.onAuthStateChanges,
       builder: (context, snapshot) {
+        final isLoading = snapshot.data is AuthLoading;
         return AbsorbPointer(
-          absorbing: snapshot.data is AuthLoading,
+          absorbing: isLoading,
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Sign In'),
@@ -76,13 +81,13 @@ class _SignInPageState extends State<SignInPage> {
                     controller: _emailController,
                     hintText: 'john@elegantmedia.com.au',
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   PasswordFormField(
                     title: 'Password',
                     controller: _passwordController,
                     hintText: '*******',
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   SizedBox(
                     width: double.infinity,
                     child: Center(
@@ -94,10 +99,10 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   CommonElevatedButton(
                     text: 'Sign In',
-                    isLoading: snapshot.data is AuthLoading,
+                    isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         authService.login(
@@ -107,23 +112,23 @@ class _SignInPageState extends State<SignInPage> {
                       }
                     },
                   ),
-                  const FixedGap(mainAxisExtent: 48),
+                  Gap.extraLarge32,
                   SizedBox(
                     width: double.infinity,
                     child: Center(
                       child: Text(
                         'Or continue with',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: context.bodyMedium,
                       ),
                     ),
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -131,10 +136,10 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {},
                         ),
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -142,10 +147,10 @@ class _SignInPageState extends State<SignInPage> {
                           onPressed: () {},
                         ),
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -155,7 +160,7 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ],
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

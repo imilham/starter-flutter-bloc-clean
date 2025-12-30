@@ -24,22 +24,10 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
 
   Future<void> onAuthStateChanged(ProfileState state) async {
     if (state is ProfileUpdateFailed && mounted) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog.adaptive(
-            title: const Text('Error'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+      await CommonDialog.alert(
+        context,
+        title: 'Error',
+        message: state.message,
       );
     }
   }
@@ -56,8 +44,9 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
     return StreamBuilder<ProfileState>(
       stream: controller.state,
       builder: (context, snapshot) {
+        final isLoading = snapshot.data is ProfileLoading;
         return AbsorbPointer(
-          absorbing: snapshot.data is ProfileLoading,
+          absorbing: isLoading,
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Sign Up'),
@@ -85,27 +74,29 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                     physics: const NeverScrollableScrollPhysics(),
                     children: [
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: AppSpacing.allMd,
                         color: Colors.red,
                         child: const Center(child: Text('Step 1')),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: AppSpacing.allMd,
                         color: Colors.green,
                         child: const Center(child: Text('Step 2')),
                       ),
                       Container(
-                        padding: const EdgeInsets.all(16),
+                        padding: AppSpacing.allMd,
                         color: Colors.blue,
                         child: const Center(child: Text('Step 3')),
                       ),
                     ],
                   ),
                 ),
-                const FixedGap(mainAxisExtent: 16),
+                Gap.medium16,
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  child: ElevatedButton(
+                  padding: AppSpacing.horizontalMd,
+                  child: CommonElevatedButton(
+                    text: controller.currentStep == 2 ? 'Explore The App' : 'Continue',
+                    isLoading: isLoading,
                     onPressed: () {
                       if (controller.currentStep == 0) {
                         controller.onSubmitFirstStep();
@@ -115,22 +106,6 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                         controller.onSubmitLastStep();
                       }
                     },
-                    child: Builder(
-                      builder: (context) {
-                        if (snapshot.data is ProfileLoading) {
-                          return SizedBox(
-                            height: 18,
-                            width: 18,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.6),
-                              ),
-                            ),
-                          );
-                        }
-                        return Text(controller.currentStep == 2 ? 'Explore The App' : 'Continue');
-                      },
-                    ),
                   ),
                 ),
                 const RelativeGap(mainAxisExtent: 0.05),

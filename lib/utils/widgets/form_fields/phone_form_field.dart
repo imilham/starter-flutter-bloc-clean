@@ -3,7 +3,7 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:starter/utils/widgets/relative_gap.dart';
+import 'package:starter/utils/constants/spacing.dart';
 
 /// A specialized form field for phone number input with country code picker.
 ///
@@ -231,7 +231,7 @@ class _PhoneFormFieldState extends State<PhoneFormField> {
         // Title label
         if (widget.title != null) _buildTitle(theme),
 
-        const FixedGap(mainAxisExtent: 8),
+        Gap.small8,
 
         // Phone input row
         Row(

@@ -34,40 +34,16 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
     if (state is AuthCodeVerificationFailed && mounted) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+      await CommonDialog.alert(
+        context,
+        title: 'Error',
+        message: state.message,
       );
-    } else if (state is AuthCodeResendFailed) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Error'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+    } else if (state is AuthCodeResendFailed && mounted) {
+      await CommonDialog.alert(
+        context,
+        title: 'Error',
+        message: state.message,
       );
     }
   }
@@ -84,38 +60,39 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
     final defaultPinTheme = PinTheme(
       width: 50,
       height: 50,
-      textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color: Theme.of(context).colorScheme.onSurface,
-          ),
+      textStyle: context.titleLarge?.copyWith(
+        color: context.colorScheme.onSurface,
+      ),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
       ),
     );
     final focusedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
       ),
     );
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primary.withValues(alpha: 0.2),
+        color: context.colorScheme.primary.withValues(alpha: 0.2),
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Theme.of(context).colorScheme.primary, width: 2),
+        border: Border.all(color: context.colorScheme.primary, width: 2),
       ),
     );
     final followingPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
       ),
     );
     return StreamBuilder<AuthState>(
       stream: _authService.onAuthStateChanges,
       builder: (context, snapshot) {
+        final isLoading = snapshot.data is AuthLoading;
         return AbsorbPointer(
-          absorbing: snapshot.data is AuthLoading,
+          absorbing: isLoading,
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Verification'),
@@ -125,7 +102,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     await _authService.logout();
                   },
                   style: TextButton.styleFrom(
-                    foregroundColor: Theme.of(context).colorScheme.error,
+                    foregroundColor: context.colorScheme.error,
                   ),
                   child: const Text('Log Out'),
                 ),
@@ -138,15 +115,16 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Text(
                   'Please enter your verification code',
                   textAlign: TextAlign.center,
-                  style: context.textTheme.headlineSmall,
+                  style: context.headlineSmall,
                 ),
-                const FixedGap(mainAxisExtent: 16),
+                Gap.medium16,
                 Text(
                   'The verification code has been sent to sample@mail.com',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: context.bodyMedium,
                 ),
-                const FixedGap(mainAxisExtent: 48),
+                Gap.extraLarge32,
+                Gap.medium16,
                 SizedBox(
                   width: double.infinity,
                   child: Pinput(
@@ -158,41 +136,42 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     followingPinTheme: followingPinTheme,
                   ),
                 ),
-                const FixedGap(mainAxisExtent: 48),
+                Gap.extraLarge32,
+                Gap.medium16,
                 CommonElevatedButton(
                   text: 'Sign In',
-                  isLoading: snapshot.data is AuthLoading,
+                  isLoading: isLoading,
                   onPressed: () async {
                     if (_codeController.text.isNotEmpty) {
                       await _authService.verify(_codeController.text);
                     }
                   },
                 ),
-                const FixedGap(mainAxisExtent: 16),
+                Gap.medium16,
                 const Spacer(),
                 Text(
-                  'Didn’t receive the verification code?',
+                  "Didn't receive the verification code?",
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: context.bodyMedium,
                 ),
-                const FixedGap(mainAxisExtent: 4),
+                Gap.extraSmall4,
                 TextButton(
                   onPressed: _authService.resendVerificationCode,
                   child: const Text('Resend the Code'),
                 ),
-                const FixedGap(mainAxisExtent: 16),
+                Gap.medium16,
                 Text(
                   'Or',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: context.bodyMedium,
                 ),
-                const FixedGap(mainAxisExtent: 16),
+                Gap.medium16,
                 Text(
                   'Send the verification code to your mobile number?',
                   textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.bodyMedium,
+                  style: context.bodyMedium,
                 ),
-                const FixedGap(mainAxisExtent: 4),
+                Gap.extraSmall4,
                 TextButton(
                   onPressed: () {},
                   child: const Text('Send the code'),

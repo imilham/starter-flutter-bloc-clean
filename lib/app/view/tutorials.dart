@@ -16,7 +16,8 @@ class _TutorialPageState extends State<TutorialPage> {
   final List<Map<String, dynamic>> _pages = [
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -34,7 +35,8 @@ class _TutorialPageState extends State<TutorialPage> {
     },
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -52,7 +54,8 @@ class _TutorialPageState extends State<TutorialPage> {
     },
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -104,21 +107,21 @@ class _TutorialPageState extends State<TutorialPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 24),
+                        padding: AppSpacing.horizontalLg,
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Theme.of(context).cardColor,
+                            color: context.theme.cardColor,
                             borderRadius: BorderRadius.circular(16),
                             boxShadow: [
                               BoxShadow(
-                                color: Theme.of(context).colorScheme.shadow,
+                                color: context.colorScheme.shadow,
                                 blurRadius: 16,
                                 offset: const Offset(0, 6),
                               ),
                             ],
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(24),
+                            padding: AppSpacing.allLg,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -128,14 +131,14 @@ class _TutorialPageState extends State<TutorialPage> {
                                     padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                                     margin: const EdgeInsets.only(bottom: 16),
                                     decoration: BoxDecoration(
-                                      color: Theme.of(context).cardColor,
+                                      color: context.theme.cardColor,
                                       borderRadius: BorderRadius.circular(8),
                                       border: Border.all(
-                                        color: Theme.of(context).colorScheme.primary,
+                                        color: context.colorScheme.primary,
                                       ),
                                       boxShadow: [
                                         BoxShadow(
-                                          color: Theme.of(context).colorScheme.shadow,
+                                          color: context.colorScheme.shadow,
                                           blurRadius: 8,
                                           offset: const Offset(0, 4),
                                         ),
@@ -145,7 +148,7 @@ class _TutorialPageState extends State<TutorialPage> {
                                       children: [
                                         Container(
                                           decoration: BoxDecoration(
-                                            color: Theme.of(context).primaryColor,
+                                            color: context.theme.primaryColor,
                                             shape: BoxShape.circle,
                                           ),
                                           child: Padding(
@@ -160,49 +163,49 @@ class _TutorialPageState extends State<TutorialPage> {
                                             ),
                                           ),
                                         ),
-                                        const FixedGap(mainAxisExtent: 16),
+                                        Gap.medium16,
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              (_pages[index]['features']as List<Map>)[index]['title'].toString(),
-                                              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                                                color: Theme.of(context).colorScheme.secondary,
+                                              (_pages[index]['features'] as List<Map>)[index]['title'].toString(),
+                                              style: context.titleMedium?.copyWith(
+                                                color: context.colorScheme.secondary,
                                                 fontWeight: FontWeight.bold,
                                               ),
                                             ),
-                                            const FixedGap(mainAxisExtent: 4),
+                                            Gap.extraSmall4,
                                             Text(
-                                              (_pages[index]['features']as List<Map>)[index]['description'].toString(),
-                                              style: Theme.of(context).textTheme.bodyMedium,
+                                              (_pages[index]['features'] as List<Map>)[index]['description'].toString(),
+                                              style: context.bodyMedium,
                                             ),
                                           ],
                                         ),
-                                        const FixedGap(mainAxisExtent: 16),
+                                        Gap.medium16,
                                       ],
                                     ),
                                   ),
                                 ),
-                                const FixedGap(mainAxisExtent: 12),
+                                Gap.medium12,
                                 Text(
                                   _pages[index]['title'].toString(),
-                                  style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                                    color: Theme.of(context).colorScheme.secondary,
+                                  style: context.titleLarge?.copyWith(
+                                    color: context.colorScheme.secondary,
                                     fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const FixedGap(mainAxisExtent: 16),
+                                Gap.medium16,
                                 Text(
                                   _pages[index]['description'].toString(),
-                                  style: Theme.of(context).textTheme.bodyMedium,
+                                  style: context.bodyMedium,
                                 ),
-                                const FixedGap(mainAxisExtent: 24),
+                                Gap.large24,
                               ],
                             ),
                           ),
                         ),
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                     ],
                   );
                 },
@@ -222,7 +225,7 @@ class _TutorialPageState extends State<TutorialPage> {
                       width: _currentIndex == index ? 16 : 8,
                       height: 8,
                       decoration: BoxDecoration(
-                        color: _currentIndex == index ? Theme.of(context).primaryColor : Colors.grey,
+                        color: _currentIndex == index ? context.theme.primaryColor : Colors.grey,
                         borderRadius: BorderRadius.circular(4),
                       ),
                     ),
@@ -230,9 +233,10 @@ class _TutorialPageState extends State<TutorialPage> {
                 ),
               ),
             ),
-            const FixedGap(mainAxisExtent: 48),
+            Gap.extraLarge32,
+            Gap.medium16,
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
+              padding: AppSpacing.horizontalMd,
               child: ElevatedButton(
                 onPressed: () {
                   GetIt.I<AppStates>().isTutorialShown = true;

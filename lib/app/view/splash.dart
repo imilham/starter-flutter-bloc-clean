@@ -45,7 +45,7 @@ class _SplashPageState extends State<SplashPage> {
               padding: EdgeInsets.all(16),
               child: AppLogo(aspectRatio: 1.5),
             ),
-            const FixedGap(mainAxisExtent: 16),
+            Gap.medium16,
             StreamBuilder(
               stream: GetIt.instance<AuthService>().onAuthStateChanges,
               builder: (context, snapshot) {
@@ -60,12 +60,12 @@ class _SplashPageState extends State<SplashPage> {
                           height: 24,
                           child: CircularProgressIndicator(),
                         ),
-                        const FixedGap(mainAxisExtent: 16),
+                        Gap.medium16,
                         Text(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.error,
+                          style: context.titleMedium?.copyWith(
+                            color: context.colorScheme.error,
                           ),
                         ),
                         Builder(
@@ -80,8 +80,8 @@ class _SplashPageState extends State<SplashPage> {
                                 textAlign: TextAlign.center,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                                style: context.labelMedium?.copyWith(
+                                  color: context.colorScheme.onSurface.withValues(alpha: 0.5),
                                 ),
                               ),
                             );
@@ -92,15 +92,16 @@ class _SplashPageState extends State<SplashPage> {
                             if (state.retryCount != null && state.retryCount! > 0) {
                               return Text(
                                 'Attempt ${state.retryCount!} of ${state.maxRetries}',
-                                style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                                  color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                                style: context.labelSmall?.copyWith(
+                                  color: context.colorScheme.onSurface.withValues(alpha: 0.5),
                                 ),
                               );
                             }
                             return const SizedBox.shrink();
                           },
                         ),
-                        const FixedGap(mainAxisExtent: 48),
+                        Gap.extraLarge32,
+                        Gap.medium16,
                         Builder(
                           builder: (context) {
                             if (state.cancellationToken == null) {
@@ -133,8 +134,8 @@ class _SplashPageState extends State<SplashPage> {
                         Text(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            color: Theme.of(context).colorScheme.error,
+                          style: context.titleMedium?.copyWith(
+                            color: context.colorScheme.error,
                           ),
                         ),
                         Padding(
@@ -142,8 +143,8 @@ class _SplashPageState extends State<SplashPage> {
                           child: Text(
                             'Try again later or contact support if the issue persists.',
                             textAlign: TextAlign.center,
-                            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5),
+                            style: context.labelMedium?.copyWith(
+                              color: context.colorScheme.onSurface.withValues(alpha: 0.5),
                             ),
                           ),
                         ),

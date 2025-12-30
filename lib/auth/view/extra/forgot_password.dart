@@ -18,12 +18,12 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   late final TextEditingController _emailController;
 
   bool _isSubmitted = false;
-  
+
   final AuthService authService = GetIt.instance<AuthService>();
 
   /// Stream subscription for monitoring changes in the authentication state.
   late StreamSubscription<AuthState> _authStateSubscription;
-  
+
   /// Initializes the state of the widget.
   /// Sets up the text controllers for email, password, and phone.
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
@@ -40,22 +40,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
     if (state is AuthForgotPasswordSubmitFailed && mounted) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Request Failed'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+      await CommonDialog.alert(
+        context,
+        title: 'Request Failed',
+        message: state.message,
       );
     } else if (state is AuthForgotPasswordSubmitSuccess) {
       if (mounted) {
@@ -78,8 +66,9 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     return StreamBuilder<AuthState>(
       stream: authService.onAuthStateChanges,
       builder: (context, snapshot) {
+        final isLoading = snapshot.data is AuthLoading;
         return AbsorbPointer(
-          absorbing: snapshot.data is AuthLoading,
+          absorbing: isLoading,
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Forgot Password'),
@@ -90,25 +79,27 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                   return ExtendedColumn(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const FixedGap(mainAxisExtent: 48),
+                      Gap.extraLarge32,
+                      Gap.medium16,
                       Text(
                         'Please Check Your Email',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.headlineMedium,
+                        style: context.headlineMedium,
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                       Text(
                         'A password reset link has been sent to your dedicated email',
                         textAlign: TextAlign.center,
-                        style: Theme.of(context).textTheme.titleMedium,
+                        style: context.titleMedium,
                       ),
-                      const FixedGap(mainAxisExtent: 48),
+                      Gap.extraLarge32,
+                      Gap.medium16,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
                             "Didn't receive the email?",
-                            style: Theme.of(context).textTheme.bodyMedium,
+                            style: context.bodyMedium,
                           ),
                           TextButton(
                             onPressed: () {
@@ -116,11 +107,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                                 _isSubmitted = false;
                               });
                             },
-                            child: Builder(
-                              builder: (context) {
-                                return const Text('Resend');
-                              },
-                            ),
+                            child: const Text('Resend'),
                           ),
                         ],
                       ),
@@ -137,50 +124,24 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         child: AppLogo(aspectRatio: 16 / 9),
                       ),
                       Text(
-                        'Enter your registered email address below and we’ll send you a password reset email',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        "Enter your registered email address below and we'll send you a password reset email",
+                        style: context.bodyLarge,
                       ),
-                      const FixedGap(mainAxisExtent: 16),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
-                        child: Text(
-                          'Email',
-                          style: Theme.of(context).textTheme.titleMedium,
-                        ),
-                      ),
-                      TextFormField(
+                      Gap.medium16,
+                      EmailFormField(
+                        title: 'Email',
                         controller: _emailController,
-                        decoration: const InputDecoration(
-                          hintText: 'me@example.com',
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter your email';
-                          }
-                          return null;
-                        },
+                        hintText: 'me@example.com',
                       ),
-                      const FixedGap(mainAxisExtent: 24),
-                      ElevatedButton(
+                      Gap.large24,
+                      CommonElevatedButton(
+                        text: 'Submit',
+                        isLoading: isLoading,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
                             authService.forgotPassword(_emailController.text);
                           }
                         },
-                        child: Builder(
-                          builder: (context) {
-                            if (snapshot.data is AuthLoading) {
-                              return SizedBox(
-                                height: 24,
-                                width: 24,
-                                child: CircularProgressIndicator(
-                                  valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.6)),
-                                ),
-                              );
-                            }
-                            return const Text('Submit');
-                          },
-                        ),
                       ),
                       const RelativeGap(mainAxisExtent: 0.02),
                     ],

@@ -25,7 +25,7 @@ class _IntroPageState extends State<IntroPage> {
             child: const Text('Sign Up'),
           ),
           const Spacer(),
-          const FixedGap(mainAxisExtent: 0.1),
+          Gap.small8,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -37,7 +37,7 @@ class _IntroPageState extends State<IntroPage> {
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                 ),
-                child: const Text('Sign In', style: TextStyle(fontWeight: FontWeight.bold)),
+                child: Text('Sign In', style: context.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
               ),
             ],
           ),

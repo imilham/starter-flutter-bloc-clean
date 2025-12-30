@@ -44,22 +44,10 @@ class _SignUpPageState extends State<SignUpPage> {
   /// The dialog is dismissed when the user taps the 'OK' button.
   Future<void> onAuthStateChanged(AuthState state) async {
     if (state is AuthFailed && mounted) {
-      await showAdaptiveDialog<void>(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: const Text('Sign Up Failed'),
-            content: Text(state.message),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        },
+      await CommonDialog.alert(
+        context,
+        title: 'Sign Up Failed',
+        message: state.message,
       );
     }
   }
@@ -78,8 +66,9 @@ class _SignUpPageState extends State<SignUpPage> {
     return StreamBuilder<AuthState>(
       stream: authService.onAuthStateChanges,
       builder: (context, snapshot) {
+        final isLoading = snapshot.data is AuthLoading;
         return AbsorbPointer(
-          absorbing: snapshot.data is AuthLoading,
+          absorbing: isLoading,
           child: Scaffold(
             appBar: AppBar(
               title: const Text('Sign Up'),
@@ -94,32 +83,32 @@ class _SignUpPageState extends State<SignUpPage> {
                     controller: _emailController,
                     hintText: 'john@elegantmedia.com.au',
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   PasswordFormField(
                     title: 'Password',
                     controller: _passwordController,
                     hintText: '*******',
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   PhoneFormField(
                     phoneNumberController: _phoneController,
                     phoneFocusNode: FocusNode(),
                   ),
-                  const FixedGap(mainAxisExtent: 24),
+                  Gap.large24,
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: AppSpacing.horizontalMd,
                     child: RichText(
                       textAlign: TextAlign.center,
                       text: TextSpan(
                         text: 'By continuing, you agree to our ',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: context.bodyMedium,
                         children: [
                           TextSpan(
                             text: 'Terms and Conditions',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: context.bodyMedium?.copyWith(
+                              color: context.colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // TODO(ishanga): Add Terms and Conditions page
@@ -128,10 +117,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
                           TextSpan(
                             text: 'Privacy Policy',
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                                  color: Theme.of(context).colorScheme.secondary,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                            style: context.bodyMedium?.copyWith(
+                              color: context.colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // TODO(ishanga): Add Privacy Policy page
@@ -142,10 +131,10 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ),
                   ),
-                  const FixedGap(mainAxisExtent: 24),
+                  Gap.large24,
                   CommonElevatedButton(
                     text: 'Verify Account',
-                    isLoading: snapshot.data is AuthLoading,
+                    isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         authService.signUp(
@@ -156,23 +145,24 @@ class _SignUpPageState extends State<SignUpPage> {
                       }
                     },
                   ),
-                  const FixedGap(mainAxisExtent: 48),
+                  Gap.extraLarge32,
+                  Gap.medium16,
                   SizedBox(
                     width: double.infinity,
                     child: Center(
                       child: Text(
                         'Or continue with',
-                        style: Theme.of(context).textTheme.bodyMedium,
+                        style: context.bodyMedium,
                       ),
                     ),
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -180,10 +170,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           onPressed: () {},
                         ),
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -191,10 +181,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           onPressed: () {},
                         ),
                       ),
-                      const FixedGap(mainAxisExtent: 16),
+                      Gap.medium16,
                       Container(
                         decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.surface,
+                          color: context.colorScheme.surface,
                           borderRadius: const BorderRadius.all(Radius.circular(12)),
                         ),
                         child: IconButton(
@@ -204,7 +194,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ],
                   ),
-                  const FixedGap(mainAxisExtent: 16),
+                  Gap.medium16,
                   const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -217,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                         ),
-                        child: const Text('Sign In', style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text('Sign In', style: context.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
                       ),
                     ],
                   ),

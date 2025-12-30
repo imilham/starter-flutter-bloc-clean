@@ -59,7 +59,7 @@ void main() {
 
       expect(find.text('Loading...'), findsOneWidget);
 
-      controller.close();
+      await controller.close();
     });
 
     testWidgets('shows success content when state is success', (tester) async {

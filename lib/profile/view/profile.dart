@@ -38,7 +38,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
           }
           return ExtendedColumn(
             children: [
-              const FixedGap(mainAxisExtent: 16),
+              Gap.medium16,
               SizedBox(
                 width: double.infinity,
                 height: 120,
@@ -54,7 +54,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                           child: Container(
                             padding: const EdgeInsets.all(4),
                             decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
+                              color: context.colorScheme.primary,
                               borderRadius: const BorderRadius.all(Radius.circular(8)),
                             ),
                             child: InkWell(
@@ -62,7 +62,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                                 log('Edit Profile');
                               },
                               customBorder: const CircleBorder(),
-                              child: Icon(Icons.edit, color: Theme.of(context).colorScheme.onPrimary),
+                              child: Icon(Icons.edit, color: context.colorScheme.onPrimary),
                             ),
                           ),
                         ),
@@ -71,29 +71,25 @@ class _MyProfilePageState extends State<MyProfilePage> {
                   ),
                 ),
               ),
-              const FixedGap(mainAxisExtent: 16),
+              Gap.medium16,
               UserDetailItem(
                 title: 'First Name',
                 value: userProfile.firstName,
               ),
-              const FixedGap(mainAxisExtent: 8),
+              Gap.small8,
               UserDetailItem(
                 title: 'Last Name',
                 value: userProfile.lastName,
               ),
-              const FixedGap(mainAxisExtent: 8),
+              Gap.small8,
               const Spacer(),
               ElevatedButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 child: const Text('Edit Profile'),
               ),
-              const FixedGap(mainAxisExtent: 16),
+              Gap.medium16,
               OutlinedButton(
-                onPressed: () {
-                  
-                },
+                onPressed: () {},
                 child: const Text('Change Password'),
               ),
               const RelativeGap(mainAxisExtent: 0.05),
@@ -121,23 +117,23 @@ class UserDetailItem extends StatelessWidget {
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.surface,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
-          color: Theme.of(context).colorScheme.outline,
+          color: context.colorScheme.outline,
         ),
       ),
       child: Row(
         children: [
           Text(
             title,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: context.bodyMedium,
           ),
           const Spacer(),
           Text(
             value,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.6),
+            style: context.bodyMedium?.copyWith(
+              color: context.colorScheme.onSurface.withValues(alpha: 0.6),
             ),
           ),
         ],

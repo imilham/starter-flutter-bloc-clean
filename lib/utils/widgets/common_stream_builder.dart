@@ -77,11 +77,6 @@ class CommonStreamBuilder<T> extends StatelessWidget {
       stream: stream,
       initialData: initialData,
       builder: (context, snapshot) {
-        // Handle connection states
-        if (snapshot.connectionState == ConnectionState.waiting && snapshot.data == null) {
-          return loading ?? _defaultLoading();
-        }
-
         // Handle stream errors
         if (snapshot.hasError) {
           return Center(
@@ -90,13 +85,15 @@ class CommonStreamBuilder<T> extends StatelessWidget {
         }
 
         final data = snapshot.data;
+
+        // If no data yet (waiting for first stream emission), show loading
         if (data == null) {
-          return loading ?? _defaultLoading();
+          return loading ?? const Center(child: CircularProgressIndicator());
         }
 
-        // Check for loading state
-        if (_checkIsLoading(data)) {
-          return loading ?? _defaultLoading();
+        // Check for loading state ONLY if isLoading callback is provided
+        if (isLoading != null && isLoading!(data) && loading != null) {
+          return loading!;
         }
 
         // Check for error state
@@ -104,26 +101,10 @@ class CommonStreamBuilder<T> extends StatelessWidget {
           return error?.call(data) ?? builder(data);
         }
 
-        // Success state
+        // Success state - always go to builder
         return builder(data);
       },
     );
-  }
-
-  /// Default loading indicator.
-  Widget _defaultLoading() {
-    return const Center(
-      child: CircularProgressIndicator(),
-    );
-  }
-
-  /// Check if state represents loading.
-  bool _checkIsLoading(T state) {
-    if (isLoading != null) {
-      return isLoading!(state);
-    }
-    // Default: check if type name contains 'Loading'
-    return state.runtimeType.toString().contains('Loading');
   }
 
   /// Check if state represents error.
