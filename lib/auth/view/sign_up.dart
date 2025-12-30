@@ -31,9 +31,9 @@ class _SignUpPageState extends State<SignUpPage> {
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
   @override
   void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
-    _phoneController = TextEditingController();
+    _emailController = TextEditingController(text: 'john@elegantmedia.com.au');
+    _passwordController = TextEditingController(text: '*******2222');
+    _phoneController = TextEditingController(text: '0412345678');
     _authStateSubscription = authService.onAuthStateChanges.listen(onAuthStateChanged);
     super.initState();
   }
@@ -143,7 +143,9 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
                   ),
                   const FixedGap(mainAxisExtent: 24),
-                  ElevatedButton(
+                  CommonElevatedButton(
+                    text: 'Verify Account',
+                    isLoading: snapshot.data is AuthLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         authService.signUp(
@@ -153,20 +155,6 @@ class _SignUpPageState extends State<SignUpPage> {
                         );
                       }
                     },
-                    child: Builder(
-                      builder: (context) {
-                        if (snapshot.data is AuthLoading) {
-                          return SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.6)),
-                            ),
-                          );
-                        }
-                        return const Text('Verify Account');
-                      },
-                    ),
                   ),
                   const FixedGap(mainAxisExtent: 48),
                   SizedBox(

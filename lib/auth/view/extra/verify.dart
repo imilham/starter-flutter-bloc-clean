@@ -18,7 +18,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
 
   /// Stream subscription for monitoring changes in the authentication state.
   late StreamSubscription<AuthState> _authStateSubscription;
-  
+
   /// Initializes the state of the widget.
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
   @override
@@ -85,8 +85,8 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
       width: 50,
       height: 50,
       textStyle: Theme.of(context).textTheme.titleLarge?.copyWith(
-        color: Theme.of(context).colorScheme.onSurface,
-      ),
+            color: Theme.of(context).colorScheme.onSurface,
+          ),
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
@@ -159,24 +159,14 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   ),
                 ),
                 const FixedGap(mainAxisExtent: 48),
-                ElevatedButton(
+                CommonElevatedButton(
+                  text: 'Sign In',
+                  isLoading: snapshot.data is AuthLoading,
                   onPressed: () async {
-                    await _authService.verify(_codeController.text);
+                    if (_codeController.text.isNotEmpty) {
+                      await _authService.verify(_codeController.text);
+                    }
                   },
-                  child: Builder(
-                    builder: (context) {
-                      if (snapshot.data is AuthLoading) {
-                        return SizedBox(
-                          height: 24,
-                          width: 24,
-                          child: CircularProgressIndicator(
-                            valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.6)),
-                          ),
-                        );
-                      }
-                      return const Text('Verify');
-                    },
-                  ),
                 ),
                 const FixedGap(mainAxisExtent: 16),
                 const Spacer(),

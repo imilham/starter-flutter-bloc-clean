@@ -28,8 +28,8 @@ class _SignInPageState extends State<SignInPage> {
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
   @override
   void initState() {
-    _emailController = TextEditingController();
-    _passwordController = TextEditingController();
+    _emailController = TextEditingController(text: 'john@elegantmedia.com.au');
+    _passwordController = TextEditingController(text: '*******2222');
     _authStateSubscription = authService.onAuthStateChanges.listen(onAuthStateChanged);
     super.initState();
   }
@@ -111,7 +111,9 @@ class _SignInPageState extends State<SignInPage> {
                     ),
                   ),
                   const FixedGap(mainAxisExtent: 16),
-                  ElevatedButton(
+                  CommonElevatedButton.small(
+                    text: 'Sign In',
+                    isLoading: snapshot.data is AuthLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         authService.login(
@@ -120,20 +122,6 @@ class _SignInPageState extends State<SignInPage> {
                         );
                       }
                     },
-                    child: Builder(
-                      builder: (context) {
-                        if (snapshot.data is AuthLoading) {
-                          return SizedBox(
-                            height: 24,
-                            width: 24,
-                            child: CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation<Color>(Theme.of(context).colorScheme.onPrimary.withValues(alpha: 0.6)),
-                            ),
-                          );
-                        }
-                        return const Text('Sign In');
-                      },
-                    ),
                   ),
                   const FixedGap(mainAxisExtent: 48),
                   SizedBox(

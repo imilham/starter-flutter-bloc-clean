@@ -62,7 +62,7 @@ void main() {
 
       await tester.pumpWidget(buildTestWidget(
         onChanged: (value) => changedValue = value,
-      ));
+      ),);
 
       await tester.enterText(find.byType(TextFormField), 'user@test.com');
       await tester.pump();
@@ -80,7 +80,7 @@ void main() {
     testWidgets('uses custom validator when provided', (tester) async {
       await tester.pumpWidget(buildTestWidget(
         validator: (value) => value != 'allowed@test.com' ? 'Not allowed' : null,
-      ));
+      ),);
 
       final widgetFinder = find.byType(EmailFormField);
       final widget = tester.widget<EmailFormField>(widgetFinder);
