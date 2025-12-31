@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:starter/utils/utils.dart';
 
 /// A horizontal step indicator widget for multi-step flows.
@@ -37,7 +38,7 @@ import 'package:starter/utils/utils.dart';
 ///
 /// See also:
 /// - [Stepper] for a full-featured step-by-step form widget.
-/// - [PageIndicator] for dot-style page indicators.
+/// - [TabPageSelector] for dot-style page indicators.
 class StepIndicator extends StatelessWidget {
   /// Creates a step indicator with the specified number of steps.
   ///

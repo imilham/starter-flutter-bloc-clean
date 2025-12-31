@@ -38,7 +38,7 @@ void main() {
 
       expect(find.text('Loading...'), findsOneWidget);
 
-      controller.close();
+      await controller.close();
     });
 
     testWidgets('shows loading when state is Loading type', (tester) async {
@@ -82,7 +82,7 @@ void main() {
 
       expect(find.text('Data: Hello'), findsOneWidget);
 
-      controller.close();
+      await controller.close();
     });
 
     testWidgets('shows error widget when state is Error type', (tester) async {
@@ -106,7 +106,7 @@ void main() {
 
       expect(find.text('Error: Something went wrong'), findsOneWidget);
 
-      controller.close();
+      await controller.close();
     });
 
     testWidgets('uses custom isLoading function', (tester) async {
@@ -130,7 +130,7 @@ void main() {
 
       expect(find.text('Custom Loading...'), findsOneWidget);
 
-      controller.close();
+      await controller.close();
     });
   });
 }
