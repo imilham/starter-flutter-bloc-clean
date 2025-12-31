@@ -1,7 +1,7 @@
 export './adaptive_loader.dart';
-export './alert_dialog_box.dart';
 export './buttons/buttons.dart';
 export './common_bottom_sheet.dart';
+export './common_carousel.dart';
 export './common_dialog.dart';
 export './common_image.dart';
 export './common_stream_builder.dart';
