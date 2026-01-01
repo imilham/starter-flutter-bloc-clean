@@ -29,14 +29,21 @@ class MorePage extends StatelessWidget {
         title: 'Help & Support',
         icon: Icons.help_outline,
         onTap: () {
-          // TODO: Navigate to help page
+          // TODO(ilham): Navigate to help page
+        },
+      ),
+      MenuItem(
+        title: 'Component Examples',
+        icon: Icons.design_services_outlined,
+        onTap: () {
+          Pages.example.push(context);
         },
       ),
       MenuItem(
         title: 'About',
         icon: Icons.info_outline,
         onTap: () {
-          // TODO: Navigate to about page
+          // TODO(ilham): Navigate to about page
         },
       ),
       MenuItem(

@@ -2,31 +2,23 @@
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
-/// A widget for displaying network images with caching and placeholder.
+/// A universal image widget that smartly handles Network, Asset, and SVG images.
 ///
-/// Uses [CachedNetworkImage] internally for efficient caching.
+/// Automatically detects input type based on the [url] string:
+/// - **Network**: Starts with 'http' or 'https'
+/// - **Asset**: Anything else
+/// - **SVG**: Ends with '.svg'
 ///
 /// ## Usage
 /// ```dart
-/// // Basic usage
-/// CommonImage(url: 'https://example.com/image.jpg')
-///
-/// // With custom size
-/// CommonImage(
-///   url: 'https://example.com/image.jpg',
-///   width: 100,
-///   height: 100,
-/// )
-///
-/// // Circle avatar style
-/// CommonImage.circle(
-///   url: 'https://example.com/avatar.jpg',
-///   radius: 40,
-/// )
+/// CommonImage(url: 'https://site.com/img.png') // Network Image
+/// CommonImage(url: 'assets/logo.svg')          // Asset SVG
+/// CommonImage(url: 'assets/banner.png')        // Asset PNG
 /// ```
 class CommonImage extends StatelessWidget {
-  /// Creates a network image with caching.
+  /// Creates a smart image widget.
   const CommonImage({
     required this.url,
     super.key,
@@ -36,22 +28,28 @@ class CommonImage extends StatelessWidget {
     this.placeholder,
     this.errorWidget,
     this.borderRadius,
+    this.color, // Useful for SVGs
   }) : _isCircle = false;
 
-  /// Creates a circular network image (for avatars).
+  /// Creates a circular image (avatar style).
   const CommonImage.circle({
     required this.url,
     required double radius,
     super.key,
     this.placeholder,
     this.errorWidget,
+    this.color,
   })  : width = radius * 2,
         height = radius * 2,
         fit = BoxFit.cover,
         borderRadius = null,
         _isCircle = true;
 
-  /// The URL of the image to display.
+  /// The URL or Path of the image.
+  ///
+  /// - `http...` -> Network
+  /// - `assets/...` -> Asset
+  /// - `...svg` -> SVG
   final String url;
 
   /// Width of the image.
@@ -63,7 +61,7 @@ class CommonImage extends StatelessWidget {
   /// How the image should fit within its bounds.
   final BoxFit fit;
 
-  /// Widget to show while loading.
+  /// Widget to show while loading (Network only).
   final Widget? placeholder;
 
   /// Widget to show on error.
@@ -72,33 +70,84 @@ class CommonImage extends StatelessWidget {
   /// Border radius for rounded corners.
   final BorderRadius? borderRadius;
 
+  /// Color filter for SVGs or images.
+  final Color? color;
+
   final bool _isCircle;
+
+  bool get _isNetwork => url.startsWith('http');
+  bool get _isSvg => url.toLowerCase().endsWith('.svg');
 
   @override
   Widget build(BuildContext context) {
     final colorScheme = Theme.of(context).colorScheme;
+    Widget imageContent;
 
-    final Widget image = CachedNetworkImage(
-      imageUrl: url,
-      width: width,
-      height: height,
-      fit: fit,
-      placeholder: (context, url) => placeholder ?? _defaultPlaceholder(colorScheme),
-      errorWidget: (context, url, error) => errorWidget ?? _defaultError(colorScheme),
-    );
+    if (_isSvg) {
+      imageContent = _buildSvg(context);
+    } else if (_isNetwork) {
+      imageContent = _buildNetworkImage(colorScheme);
+    } else {
+      imageContent = _buildAssetImage(colorScheme);
+    }
 
     if (_isCircle) {
-      return ClipOval(child: image);
+      return ClipOval(child: imageContent);
     }
 
     if (borderRadius != null) {
       return ClipRRect(
         borderRadius: borderRadius!,
-        child: image,
+        child: imageContent,
       );
     }
 
-    return image;
+    return imageContent;
+  }
+
+  Widget _buildSvg(BuildContext context) {
+    // Handle Network SVG
+    if (_isNetwork) {
+      return SvgPicture.network(
+        url,
+        width: width,
+        height: height,
+        fit: fit,
+        colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+        placeholderBuilder: (context) => placeholder ?? _defaultPlaceholder(Theme.of(context).colorScheme),
+      );
+    }
+    // Handle Asset SVG
+    return SvgPicture.asset(
+      url,
+      width: width,
+      height: height,
+      fit: fit,
+      colorFilter: color != null ? ColorFilter.mode(color!, BlendMode.srcIn) : null,
+    );
+  }
+
+  Widget _buildNetworkImage(ColorScheme colorScheme) {
+    return CachedNetworkImage(
+      imageUrl: url,
+      width: width,
+      height: height,
+      fit: fit,
+      color: color,
+      placeholder: (context, url) => placeholder ?? _defaultPlaceholder(colorScheme),
+      errorWidget: (context, url, error) => errorWidget ?? _defaultError(colorScheme),
+    );
+  }
+
+  Widget _buildAssetImage(ColorScheme colorScheme) {
+    return Image.asset(
+      url,
+      width: width,
+      height: height,
+      fit: fit,
+      color: color,
+      errorBuilder: (context, error, stackTrace) => errorWidget ?? _defaultError(colorScheme),
+    );
   }
 
   Widget _defaultPlaceholder(ColorScheme colorScheme) {
@@ -127,7 +176,7 @@ class CommonImage extends StatelessWidget {
       child: Icon(
         Icons.broken_image,
         color: colorScheme.outline,
-        size: 32,
+        size: 24,
       ),
     );
   }

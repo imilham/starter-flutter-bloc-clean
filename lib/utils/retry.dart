@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'dart:math' as math;
 
-// TODO(ishanga):
-// Add comprehensive logging and metrics support throughout the retry system
+// TODO(ishanga): Add comprehensive logging and metrics support throughout the retry system
 // Consider integrating with structured logging frameworks for better observability
 // Implement memory optimization for long-running retry operations
 // Large attempt histories could consume significant memory in high-throughput scenarios

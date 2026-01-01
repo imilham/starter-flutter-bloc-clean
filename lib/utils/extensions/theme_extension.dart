@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter/utils/extensions/app_colors_extension.dart';
 
 /// Extension on [BuildContext] for easy access to theme properties.
 ///
@@ -44,6 +45,9 @@ extension ThemeExtension on BuildContext {
 
   /// Access to the current [ColorScheme].
   ColorScheme get colorScheme => theme.colorScheme;
+
+  /// Access to custom [AppColors].
+  AppColors get appColors => theme.extension<AppColors>()!;
 
   // ─────────────────────────────────────────────────────────────────────
   // DISPLAY STYLES

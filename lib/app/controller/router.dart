@@ -179,6 +179,15 @@ class AppRouter {
                       child: const SettingsPage(),
                     ),
                   ),
+                  GoRoute(
+                    path: Pages.example.toPath(isSubRoute: true),
+                    name: Pages.example.toPathName(),
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: const ExamplePage(),
+                    ),
+                  ),
                 ],
               ),
             ],

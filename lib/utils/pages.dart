@@ -19,6 +19,7 @@ enum Pages {
   more,
   settings,
   profile,
+  example,
 }
 
 extension PagesExtension on Pages {
@@ -44,13 +45,21 @@ extension PagesExtension on Pages {
     return ReCase(name.toLowerCase()).constantCase;
   }
 
-  void go(BuildContext context,
-      {Map<String, String> params = const <String, String>{}, Map<String, dynamic> queryParams = const <String, dynamic>{}, Object? extra,}) {
+  void go(
+    BuildContext context, {
+    Map<String, String> params = const <String, String>{},
+    Map<String, dynamic> queryParams = const <String, dynamic>{},
+    Object? extra,
+  }) {
     GoRouter.of(context).goNamed(toPathName(), pathParameters: params, queryParameters: queryParams, extra: extra);
   }
 
-  void push(BuildContext context,
-      {Map<String, String> params = const <String, String>{}, Map<String, dynamic> queryParams = const <String, dynamic>{}, Object? extra,}) {
+  void push(
+    BuildContext context, {
+    Map<String, String> params = const <String, String>{},
+    Map<String, dynamic> queryParams = const <String, dynamic>{},
+    Object? extra,
+  }) {
     GoRouter.of(context).pushNamed(toPathName(), pathParameters: params, queryParameters: queryParams, extra: extra);
   }
 }

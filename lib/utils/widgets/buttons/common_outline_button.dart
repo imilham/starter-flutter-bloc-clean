@@ -22,6 +22,7 @@ import 'package:starter/utils/widgets/buttons/button_enums.dart';
 /// // Small button (220px fixed width)
 /// CommonSecondaryButton.small(
 ///   text: 'Back',
+/// ///   isLoading: isAuthLoading,
 ///   onPressed: () => goBack(),
 /// )
 /// ```

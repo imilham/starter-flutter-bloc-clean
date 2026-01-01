@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:starter/utils/extensions/app_colors_extension.dart';
 
 /// A service provider class for managing the theme of the application.
 /// This class provides methods to toggle the theme between light and dark,
@@ -64,6 +65,14 @@ class ThemeServiceProvider with ChangeNotifier {
       appBarTheme: _appBarTheme(),
       iconTheme: _iconThemeData(),
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
+      extensions: const [
+        AppColors(
+          shimmerColor: Color(0xffE0E0E0),
+          shimmerBgColor: Color(0xffF0F0F0),
+          // 5. Initialize it here:
+          // brandPink: Color(0xFFE91E63),
+        ),
+      ],
     );
   }
 
@@ -91,6 +100,14 @@ class ThemeServiceProvider with ChangeNotifier {
       appBarTheme: _appBarTheme(),
       iconTheme: _iconThemeData(),
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
+      extensions: [
+        AppColors(
+          shimmerColor: const Color(0xff07A8FE).withValues(alpha: 0.24),
+          shimmerBgColor: const Color(0xFF3A3A3C),
+          // 5. Initialize it here:
+          // brandPink: Color(0xFFE91E63),
+        ),
+      ],
     );
   }
 
