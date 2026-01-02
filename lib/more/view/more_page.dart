@@ -33,10 +33,10 @@ class MorePage extends StatelessWidget {
         },
       ),
       MenuItem(
-        title: 'Component Examples',
-        icon: Icons.design_services_outlined,
+        title: 'Design System',
+        icon: Icons.palette_outlined,
         onTap: () {
-          Pages.example.push(context);
+          Pages.designSystem.push(context);
         },
       ),
       MenuItem(

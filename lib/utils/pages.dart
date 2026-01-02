@@ -19,7 +19,7 @@ enum Pages {
   more,
   settings,
   profile,
-  example,
+  designSystem,
 }
 
 extension PagesExtension on Pages {

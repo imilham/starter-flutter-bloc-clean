@@ -180,12 +180,12 @@ class AppRouter {
                     ),
                   ),
                   GoRoute(
-                    path: Pages.example.toPath(isSubRoute: true),
-                    name: Pages.example.toPathName(),
+                    path: Pages.designSystem.toPath(isSubRoute: true),
+                    name: Pages.designSystem.toPathName(),
                     parentNavigatorKey: _rootNavigatorKey,
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: const ExamplePage(),
+                      child: const DesignSystemPage(),
                     ),
                   ),
                 ],
