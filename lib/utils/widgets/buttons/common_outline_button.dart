@@ -1,7 +1,7 @@
 // ignore_for_file: comment_references
 
 import 'package:flutter/material.dart';
-import 'package:starter/utils/widgets/buttons/button_enums.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A themed outlined button with built-in loading state.
 ///
@@ -142,7 +142,7 @@ class CommonOutlineButton extends StatelessWidget {
     }
 
     final iconWidget = Icon(icon, size: _iconSize);
-    const gap = SizedBox(width: 8);
+    const gap = Gap.small8;
 
     return Row(
       mainAxisSize: MainAxisSize.min,

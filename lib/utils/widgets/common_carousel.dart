@@ -2,7 +2,7 @@
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:starter/utils/widgets/common_image.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A premium carousel widget that wraps [CarouselSlider] with consistent styling,
 /// animations, and indicators.
@@ -138,7 +138,7 @@ class _CommonCarouselState extends State<CommonCarousel> {
           ),
         ),
         if (widget.showIndicator) ...[
-          const SizedBox(height: 16),
+          Gap.medium16,
           _buildIndicator(),
         ],
       ],

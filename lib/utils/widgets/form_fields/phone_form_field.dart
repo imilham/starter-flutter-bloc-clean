@@ -242,7 +242,7 @@ class _PhoneFormFieldState extends State<PhoneFormField> {
               colorScheme: colorScheme,
               borderColor: borderColor,
             ),
-            const SizedBox(width: 12),
+            Gap.medium12,
             // Phone Number Input
             Expanded(
               child: _buildPhoneNumberField(),

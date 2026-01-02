@@ -54,7 +54,7 @@ class _StylesTab extends StatelessWidget {
       children: [
         const SectionHeader.large('Colors'),
         const Text('Material Color Scheme'),
-        const SizedBox(height: 8),
+        Gap.small8,
         Wrap(
           spacing: 12,
           runSpacing: 12,
@@ -65,9 +65,9 @@ class _StylesTab extends StatelessWidget {
             _ColorChip(name: 'Error', color: context.colorScheme.error),
           ],
         ),
-        const SizedBox(height: 24),
+        Gap.large24,
         const Text('Custom App Colors (ThemeExtension)'),
-        const SizedBox(height: 8),
+        Gap.small8,
         Wrap(
           spacing: 12,
           runSpacing: 12,
@@ -91,13 +91,13 @@ class _StylesTab extends StatelessWidget {
         const Divider(),
         _TypeSample(style: context.bodyLarge, name: 'Body Large'),
         _TypeSample(style: context.bodyLarge?.bold, name: 'Body Large Bold'),
-        const SizedBox(height: 8),
+        Gap.small8,
         _TypeSample(style: context.bodyMedium, name: 'Body Medium'),
         _TypeSample(style: context.bodyMedium?.bold, name: 'Body Medium Bold'),
-        const SizedBox(height: 8),
+        Gap.small8,
         _TypeSample(style: context.bodySmall, name: 'Body Small'),
         _TypeSample(style: context.bodySmall?.bold, name: 'Body Small Bold'),
-        const SizedBox(height: 8),
+        Gap.small8,
         _TypeSample(style: context.labelSmall, name: 'Label Small'),
       ],
     );
@@ -132,17 +132,17 @@ class _ComponentsTabState extends State<_ComponentsTab> {
           text: 'Primary Button',
           onPressed: () {},
         ),
-        const SizedBox(height: 8),
+        Gap.small8,
         CommonElevatedButton(
           text: 'Loading Button',
           isLoading: true,
           onPressed: () {},
         ),
-        const SizedBox(height: 8),
+        Gap.small8,
         const CommonElevatedButton(
           text: 'Disabled Button',
         ),
-        const SizedBox(height: 16),
+        Gap.medium16,
         CommonOutlineButton(
           text: 'Outline Button',
           onPressed: () {},
@@ -166,7 +166,7 @@ class _ComponentsTabState extends State<_ComponentsTab> {
           title: 'Simple Input',
           hintText: 'Type something...',
         ),
-        const SizedBox(height: 16),
+        Gap.medium16,
         PasswordFormField(
           controller: _passController,
           title: 'Password Input',
@@ -248,7 +248,7 @@ class _ColorChip extends StatelessWidget {
             border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
           ),
         ),
-        const SizedBox(height: 4),
+        Gap.extraSmall4,
         Text(name, style: context.labelSmall),
       ],
     );

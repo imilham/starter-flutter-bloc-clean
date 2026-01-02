@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A compact circular progress indicator with theme-aware styling.
 ///
@@ -148,7 +149,7 @@ class FullScreenLoader extends StatelessWidget {
           children: [
             const CircularProgressIndicator(),
             if (message != null) ...[
-              const SizedBox(height: 16),
+              Gap.medium16,
               Text(
                 message!,
                 style: theme.textTheme.bodyMedium?.copyWith(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A utility class for showing styled bottom sheets.
 ///
@@ -116,7 +117,7 @@ class _BottomSheetContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           if (showDragHandle) ...[
-            const SizedBox(height: 8),
+            Gap.small8,
             Container(
               width: 40,
               height: 4,
@@ -127,7 +128,7 @@ class _BottomSheetContent extends StatelessWidget {
             ),
           ],
           if (title != null) ...[
-            const SizedBox(height: 16),
+            Gap.medium16,
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -136,7 +137,7 @@ class _BottomSheetContent extends StatelessWidget {
               ),
             ),
           ],
-          const SizedBox(height: 16),
+          Gap.medium16,
           Flexible(child: child),
         ],
       ),
