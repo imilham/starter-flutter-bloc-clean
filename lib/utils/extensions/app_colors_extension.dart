@@ -19,8 +19,11 @@ class AppColors extends ThemeExtension<AppColors> {
   const AppColors({
     required this.shimmerColor,
     required this.shimmerBgColor,
-    // 1. Add your new color here:
-    // required this.brandPink,
+    required this.exampleColor1,
+    required this.exampleColor2,
+    required this.exampleColor3,
+    required this.exampleColor4,
+    required this.exampleColor5,
   });
 
   /// The color of the shimmering effect itself.
@@ -29,33 +32,51 @@ class AppColors extends ThemeExtension<AppColors> {
   /// The background color behind the shimmer.
   final Color shimmerBgColor;
 
-  // 2. Define the property:
-  // final Color brandPink;
+  // TODO(ilham): Remove these example colors later
+  final Color exampleColor1;
+  final Color exampleColor2;
+  final Color exampleColor3;
+  final Color exampleColor4;
+  final Color exampleColor5;
 
   @override
-  AppColors copyWith({
+  ThemeExtension<AppColors> copyWith({
     Color? shimmerColor,
     Color? shimmerBgColor,
-    // 3. Add to copyWith:
-    // Color? brandPink,
+    Color? exampleColor1,
+    Color? exampleColor2,
+    Color? exampleColor3,
+    Color? exampleColor4,
+    Color? exampleColor5,
   }) {
     return AppColors(
       shimmerColor: shimmerColor ?? this.shimmerColor,
       shimmerBgColor: shimmerBgColor ?? this.shimmerBgColor,
-      // brandPink: brandPink ?? this.brandPink,
+      exampleColor1: exampleColor1 ?? this.exampleColor1,
+      exampleColor2: exampleColor2 ?? this.exampleColor2,
+      exampleColor3: exampleColor3 ?? this.exampleColor3,
+      exampleColor4: exampleColor4 ?? this.exampleColor4,
+      exampleColor5: exampleColor5 ?? this.exampleColor5,
     );
   }
 
   @override
-  AppColors lerp(ThemeExtension<AppColors>? other, double t) {
+  ThemeExtension<AppColors> lerp(
+    covariant ThemeExtension<AppColors>? other,
+    double t,
+  ) {
     if (other is! AppColors) {
       return this;
     }
+
     return AppColors(
       shimmerColor: Color.lerp(shimmerColor, other.shimmerColor, t)!,
       shimmerBgColor: Color.lerp(shimmerBgColor, other.shimmerBgColor, t)!,
-      // 4. Add to lerp (animation):
-      // brandPink: Color.lerp(brandPink, other.brandPink, t)!,
+      exampleColor1: Color.lerp(exampleColor1, other.exampleColor1, t)!,
+      exampleColor2: Color.lerp(exampleColor2, other.exampleColor2, t)!,
+      exampleColor3: Color.lerp(exampleColor3, other.exampleColor3, t)!,
+      exampleColor4: Color.lerp(exampleColor4, other.exampleColor4, t)!,
+      exampleColor5: Color.lerp(exampleColor5, other.exampleColor5, t)!,
     );
   }
 }

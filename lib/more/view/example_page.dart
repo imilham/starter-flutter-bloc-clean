@@ -99,6 +99,50 @@ class _ExamplePageState extends State<ExamplePage> {
             ),
 
             const Divider(height: 48),
+            _buildSectionHeader('Custom Themed Widgets'),
+            const Text('These colors are NOT in the standard Material Scheme but adapt to Light/Dark mode via ThemeExtension.'),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Container(
+                  width: 60,
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: context.appColors.exampleColor1,
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text('1', style: TextStyle(color: Colors.white)),
+                ),
+                Container(
+                  width: 80,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: context.appColors.exampleColor2,
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text('2', style: TextStyle(color: Colors.white)),
+                ),
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: context.appColors.exampleColor3,
+                    border: Border.all(
+                      color: context.appColors.exampleColor4,
+                      width: 4,
+                    ),
+                    shape: BoxShape.circle,
+                  ),
+                  alignment: Alignment.center,
+                  child: const Text('3', style: TextStyle(color: Colors.white)),
+                ),
+              ],
+            ),
+
+            const Divider(height: 48),
             _buildSectionHeader('Overlays & Feedback'),
             Wrap(
               spacing: 16,

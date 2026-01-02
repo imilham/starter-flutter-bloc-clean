@@ -65,12 +65,15 @@ class ThemeServiceProvider with ChangeNotifier {
       appBarTheme: _appBarTheme(),
       iconTheme: _iconThemeData(),
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
-      extensions: const [
+      extensions: [
         AppColors(
-          shimmerColor: Color(0xffE0E0E0),
-          shimmerBgColor: Color(0xffF0F0F0),
-          // 5. Initialize it here:
-          // brandPink: Color(0xFFE91E63),
+          shimmerColor: Colors.grey.shade300,
+          shimmerBgColor: Colors.grey.shade100,
+          exampleColor1: Colors.indigoAccent,
+          exampleColor2: Colors.teal,
+          exampleColor3: Colors.amber,
+          exampleColor4: Colors.deepOrange,
+          exampleColor5: Colors.pink,
         ),
       ],
     );
@@ -104,8 +107,11 @@ class ThemeServiceProvider with ChangeNotifier {
         AppColors(
           shimmerColor: const Color(0xff07A8FE).withValues(alpha: 0.24),
           shimmerBgColor: const Color(0xFF3A3A3C),
-          // 5. Initialize it here:
-          // brandPink: Color(0xFFE91E63),
+          exampleColor1: Colors.indigoAccent.shade100,
+          exampleColor2: Colors.tealAccent,
+          exampleColor3: Colors.amberAccent,
+          exampleColor4: Colors.deepOrangeAccent,
+          exampleColor5: Colors.pinkAccent,
         ),
       ],
     );
