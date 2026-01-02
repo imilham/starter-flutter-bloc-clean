@@ -51,7 +51,7 @@ class _StylesTab extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const _SectionHeader(title: 'Colors'),
+        const SectionHeader.large('Colors'),
         const Text('Material Color Scheme'),
         const SizedBox(height: 8),
         Wrap(
@@ -82,7 +82,7 @@ class _StylesTab extends StatelessWidget {
           ],
         ),
         const Divider(height: 32),
-        const _SectionHeader(title: 'Typography'),
+        const SectionHeader.large('Typography'),
         _TypeSample(style: context.displaySmall, name: 'Display Small'),
         _TypeSample(style: context.headlineMedium, name: 'Headline Medium'),
         _TypeSample(style: context.headlineSmall, name: 'Headline Small'),
@@ -126,7 +126,7 @@ class _ComponentsTabState extends State<_ComponentsTab> {
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
-        const _SectionHeader(title: 'Buttons'),
+        const SectionHeader.large('Buttons'),
         CommonElevatedButton(
           text: 'Primary Button',
           onPressed: () {},
@@ -147,10 +147,10 @@ class _ComponentsTabState extends State<_ComponentsTab> {
           onPressed: () {},
         ),
         const Divider(height: 32),
-        const _SectionHeader(title: 'Loader'),
+        const SectionHeader.large('Loader'),
         const Center(child: CommonCircularLoader.custom(size: 32)),
         const Divider(height: 32),
-        const _SectionHeader(title: 'Carousel'),
+        const SectionHeader.large('Carousel'),
         CommonCarousel.images(
           imageUrls: const [
             'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
@@ -159,7 +159,7 @@ class _ComponentsTabState extends State<_ComponentsTab> {
           height: 150,
         ),
         const Divider(height: 32),
-        const _SectionHeader(title: 'Inputs'),
+        const SectionHeader.large('Inputs'),
         CommonBaseTextField(
           controller: _simpleController,
           title: 'Simple Input',
@@ -187,7 +187,7 @@ class _OverlaysTab extends StatelessWidget {
         direction: Axis.vertical,
         crossAxisAlignment: WrapCrossAlignment.center,
         children: [
-          const _SectionHeader(title: 'Dialogs'),
+          const SectionHeader.large('Dialogs'),
           CommonElevatedButton(
             text: 'Show Alert Dialog',
             onPressed: () {
@@ -210,7 +210,7 @@ class _OverlaysTab extends StatelessWidget {
             },
           ),
           const SizedBox(height: 24),
-          const _SectionHeader(title: 'Bottom Sheet'),
+          const SectionHeader.large('Bottom Sheet'),
           CommonElevatedButton(
             text: 'Show Bottom Sheet',
             onPressed: () {
@@ -226,30 +226,6 @@ class _OverlaysTab extends StatelessWidget {
             },
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.title});
-
-  final String title;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12),
-      child: Text(
-        title,
-        style:
-            // Theme.of(context).textTheme.titleLarge?.copyWith(
-            //   color: context.colorScheme.primary,
-            //   fontWeight: FontWeight.bold,
-            // ),
-            context.titleLarge?.bold.copyWith(
-          color: context.colorScheme.primary,
-        ),
       ),
     );
   }

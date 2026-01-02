@@ -9,4 +9,5 @@ export './extended_column.dart';
 export './form_fields/form_fields.dart';
 export './input_formatters.dart';
 export './relative_gap.dart';
+export './section_header.dart';
 export './step_indicator.dart';
