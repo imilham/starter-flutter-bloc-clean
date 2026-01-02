@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart' as gap_pkg;
 
 /// App-wide spacing constants for consistent layouts.
 ///
@@ -107,23 +108,23 @@ class Gap {
   Gap._();
 
   /// 2px gap
-  static const extraSmall2 = SizedBox.square(dimension: 2);
+  static const extraSmall2 = gap_pkg.Gap(2);
 
   /// 4px gap
-  static const extraSmall4 = SizedBox.square(dimension: 4);
+  static const extraSmall4 = gap_pkg.Gap(4);
 
   /// 8px gap
-  static const small8 = SizedBox.square(dimension: 8);
+  static const small8 = gap_pkg.Gap(8);
 
   /// 12px gap
-  static const medium12 = SizedBox.square(dimension: 12);
+  static const medium12 = gap_pkg.Gap(12);
 
   /// 16px gap
-  static const medium16 = SizedBox.square(dimension: 16);
+  static const medium16 = gap_pkg.Gap(16);
 
   /// 24px gap
-  static const large24 = SizedBox.square(dimension: 24);
+  static const large24 = gap_pkg.Gap(24);
 
   /// 32px gap
-  static const extraLarge32 = SizedBox.square(dimension: 32);
+  static const extraLarge32 = gap_pkg.Gap(32);
 }

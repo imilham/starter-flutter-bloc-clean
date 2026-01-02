@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter/app/app.dart';
+
 import 'package:starter/utils/utils.dart';
 
 class DesignSystemPage extends StatelessWidget {
@@ -181,52 +182,48 @@ class _OverlaysTab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Wrap(
-        spacing: 16,
-        direction: Axis.vertical,
-        crossAxisAlignment: WrapCrossAlignment.center,
-        children: [
-          const SectionHeader.large('Dialogs'),
-          CommonElevatedButton(
-            text: 'Show Alert Dialog',
-            onPressed: () {
-              CommonDialog.alert(
-                context,
-                title: 'This is an Alert',
-                message: 'Here is some important information for the user.',
-              );
-            },
-          ),
-          CommonElevatedButton(
-            text: 'Show Confirm Dialog',
-            onPressed: () {
-              CommonDialog.confirm(
-                context,
-                title: 'Are you sure?',
-                message: 'This action cannot be undone.',
-                isDangerous: true,
-              );
-            },
-          ),
-          const SizedBox(height: 24),
-          const SectionHeader.large('Bottom Sheet'),
-          CommonElevatedButton(
-            text: 'Show Bottom Sheet',
-            onPressed: () {
-              CommonBottomSheet.show<void>(
-                context,
-                title: 'My Bottom Sheet',
-                child: Container(
-                  height: 200,
-                  alignment: Alignment.center,
-                  child: const Text('Sheet Content Goes Here'),
-                ),
-              );
-            },
-          ),
-        ],
-      ),
+    return ExtendedColumn(
+      children: [
+        const SectionHeader.large('Dialogs'),
+        CommonElevatedButton(
+          text: 'Show Alert Dialog',
+          onPressed: () {
+            CommonDialog.alert(
+              context,
+              title: 'This is an Alert',
+              message: 'Here is some important information for the user.',
+            );
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Confirm Dialog',
+          onPressed: () {
+            CommonDialog.confirm(
+              context,
+              title: 'Are you sure?',
+              message: 'This action cannot be undone.',
+              isDangerous: true,
+            );
+          },
+        ),
+        Gap.large24,
+        const SectionHeader.large('Bottom Sheet'),
+        CommonElevatedButton(
+          text: 'Show Bottom Sheet',
+          onPressed: () {
+            CommonBottomSheet.show<void>(
+              context,
+              title: 'My Bottom Sheet',
+              child: Container(
+                height: 200,
+                alignment: Alignment.center,
+                child: const Text('Sheet Content Goes Here'),
+              ),
+            );
+          },
+        ),
+      ],
     );
   }
 }

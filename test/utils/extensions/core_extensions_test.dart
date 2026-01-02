@@ -61,7 +61,7 @@ void main() {
 
     test('isNullOrEmpty checks correctly', () {
       expect((null as List?).isNullOrEmpty, true);
-      expect([].isNullOrEmpty, true);
+      expect(<int>[].isNullOrEmpty, true);
       expect([1].isNullOrEmpty, false);
     });
   });
