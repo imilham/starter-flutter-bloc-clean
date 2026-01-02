@@ -107,5 +107,85 @@ context.showSuccessSnackBar('Saved successfully!');
 ```
 
 ### Benefits
-- **UX**: Automatically hides the previous snackbar before showing a new one (prevents queues).
 - **Consistency**: Enforces standard styling for Error and Success states globally.
+
+---
+
+## CoreExtensions
+
+**File:** `core_extensions.dart`
+
+Contains logical helpers for Strings, Lists, and Dates. These reduce null-safety boilerplate and provide consistent validation.
+
+### 1. String Extensions
+
+#### Null Safety
+```dart
+String? username;
+
+print(username.orEmpty);          // ""
+print(username.orEmpty('Guest')); // "Guest"
+print(username.isNullOrEmpty);    // true
+```
+
+#### Validation & Formatting
+```dart
+// Validation
+if (email.isValidEmail) {
+  // Proceed with login
+}
+
+// Formatting
+Text(name.capitalize); // "john" -> "John"
+```
+
+---
+
+### 2. List Extensions
+
+#### Safe Access
+Default list access throws an error if index is invalid. Use `.safeElementAt` instead.
+```dart
+final List<String> items = ['A', 'B'];
+
+// ❌ Old Way (Risk of RangeError)
+final item = items[5]; // CRASH!
+
+// ✅ New Way (Safe)
+final item = items.safeElementAt(5); // Returns null
+```
+
+#### Checks
+```dart
+if (list.isNullOrEmpty) {
+  return SizedBox();
+}
+```
+
+---
+
+### 3. Date Extensions
+
+#### Formatting
+Wraps `intl` package for cleaner syntax.
+```dart
+final date = DateTime.now();
+Text(date.format('dd MMM yyyy')); // "02 Jan 2026"
+```
+
+#### Boolean Helpers
+```dart
+if (date.isToday) {
+  return Text("Today");
+}
+
+if (date.isYesterday) {
+  return Text("Yesterday");
+}
+```
+
+### Benefits
+- **Safety**: `.safeElementAt` and `.orEmpty` prevent `RangeError` and `null` display issues.
+- **Velocity**: Provides one-line solutions for common tasks like Regex validation and Date formatting.
+- **Readability**: Logic reads like English sentences (`date.isToday`, `email.isValidEmail`).
+
