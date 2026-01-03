@@ -24,8 +24,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Account'),
+      appBar: const CommonAppBar(
+        title: 'Account',
       ),
       body: StreamBuilder<ProfileState>(
         stream: _userProfileService.profileStateStream,

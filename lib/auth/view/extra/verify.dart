@@ -94,8 +94,8 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Verification'),
+            appBar: CommonAppBar(
+              title: 'Verification',
               actions: [
                 TextButton(
                   onPressed: () async {

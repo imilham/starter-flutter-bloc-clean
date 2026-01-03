@@ -65,8 +65,8 @@ class _SignInPageState extends State<SignInPage> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Sign In'),
+            appBar: const CommonAppBar(
+              title: 'Sign In',
             ),
             body: Form(
               key: _formKey,

@@ -56,8 +56,8 @@ class MorePage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('More'),
+      appBar: const CommonAppBar(
+        title: 'More',
       ),
       body: ListView.builder(
         itemCount: menuItems.length,

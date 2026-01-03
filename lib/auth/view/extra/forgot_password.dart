@@ -70,8 +70,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Forgot Password'),
+            appBar: const CommonAppBar(
+              title: 'Forgot Password',
             ),
             body: Builder(
               builder: (context) {

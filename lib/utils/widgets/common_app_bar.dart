@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 /// A customizable App Bar that provides a consistent look and feel across the application.
 ///
@@ -14,11 +15,13 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     this.title,
     this.showBackButton = true,
+    this.leading,
     this.actions,
     this.centerTitle,
     this.bottom,
     this.backgroundColor,
     this.onBackPress,
+    this.systemOverlayStyle,
   });
 
   /// The title of the app bar. Can be a [String] or a [Widget].
@@ -53,6 +56,16 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
   /// If provided, this replaces the default `Navigator.pop(context)` behavior.
   final VoidCallback? onBackPress;
 
+  /// A widget to display before the [title].
+  ///
+  /// If provided, this overrides the default back button.
+  final Widget? leading;
+
+  /// Defines the status bar color and icon brightness.
+  ///
+  /// Use [SystemUiOverlayStyle.dark] or [SystemUiOverlayStyle.light].
+  final SystemUiOverlayStyle? systemOverlayStyle;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
@@ -74,16 +87,18 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       title: titleWidget,
       centerTitle: centerTitle,
       automaticallyImplyLeading: showBackButton,
-      leading: showBackButton
-          ? IconButton(
-              icon: const Icon(Icons.arrow_back),
-              onPressed: onBackPress ?? () => Navigator.of(context).maybePop(),
-              tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-            )
-          : null,
+      leading: leading ??
+          (showBackButton
+              ? IconButton(
+                  icon: const Icon(Icons.arrow_back),
+                  onPressed: onBackPress ?? () => Navigator.of(context).maybePop(),
+                  tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+                )
+              : null),
       actions: actions,
       bottom: bottom,
       backgroundColor: backgroundColor,
+      systemOverlayStyle: systemOverlayStyle,
       elevation: 0,
       scrolledUnderElevation: 2,
     );

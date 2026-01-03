@@ -48,15 +48,10 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Sign Up'),
-              automaticallyImplyLeading: false,
-              leading: controller.currentStep > 0
-                  ? IconButton(
-                      icon: const Icon(Icons.arrow_back_ios_new_rounded),
-                      onPressed: controller.previousStep,
-                    )
-                  : null,
+            appBar: CommonAppBar(
+              title: 'Sign Up',
+              showBackButton: controller.currentStep > 0,
+              onBackPress: controller.previousStep,
             ),
             body: Column(
               children: [

@@ -13,6 +13,7 @@ class DesignSystemPage extends StatelessWidget {
       child: Scaffold(
         appBar: CommonAppBar(
           title: 'Design System',
+          leading: const Icon(Icons.design_services), // Demo: Custom Leading Icon
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Styles'),

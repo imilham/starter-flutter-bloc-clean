@@ -12,6 +12,7 @@ enum RouterAuthState {
   notInitialized,
   notLoggedIn,
   notVerified,
+  notCompleted,
   authenticated,
 }
 
@@ -204,6 +205,7 @@ class AppRouter {
         RouterAuthState.notInitialized: Pages.splash,
         RouterAuthState.notLoggedIn: Pages.intro,
         RouterAuthState.notVerified: Pages.verify,
+        RouterAuthState.notCompleted: Pages.completeAccount,
         RouterAuthState.authenticated: Pages.home,
       };
 
@@ -233,6 +235,7 @@ class AppRouter {
     if (!_appStates.isInitialized) return RouterAuthState.notInitialized;
     if (!_appStates.isLogin) return RouterAuthState.notLoggedIn;
     if (!_appStates.isCodeVerified) return RouterAuthState.notVerified;
+    if (!_appStates.isAccountCompleted) return RouterAuthState.notCompleted;
     return RouterAuthState.authenticated;
   }
 }

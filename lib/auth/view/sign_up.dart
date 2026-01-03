@@ -70,8 +70,8 @@ class _SignUpPageState extends State<SignUpPage> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: AppBar(
-              title: const Text('Sign Up'),
+            appBar: const CommonAppBar(
+              title: 'Sign Up',
             ),
             body: Form(
               key: _formKey,
