@@ -136,7 +136,7 @@ class ThemeServiceProvider with ChangeNotifier {
           horizontal: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(4),
+          borderRadius: BorderRadius.circular(16),
         ),
         minimumSize: const Size(double.infinity, 48),
       ),
@@ -157,7 +157,7 @@ class ThemeServiceProvider with ChangeNotifier {
           horizontal: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(16),
         ),
         minimumSize: const Size(double.infinity, 48),
       ),

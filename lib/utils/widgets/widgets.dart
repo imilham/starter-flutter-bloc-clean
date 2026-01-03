@@ -1,5 +1,6 @@
 export './adaptive_loader.dart';
 export './buttons/buttons.dart';
+export './common_app_bar.dart';
 export './common_bottom_sheet.dart';
 export './common_carousel.dart';
 export './common_dialog.dart';

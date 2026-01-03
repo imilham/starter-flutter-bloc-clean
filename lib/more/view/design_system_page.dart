@@ -11,8 +11,8 @@ class DesignSystemPage extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Design System'),
+        appBar: CommonAppBar(
+          title: 'Design System',
           bottom: const TabBar(
             tabs: [
               Tab(text: 'Styles'),
