@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A customizable App Bar that provides a consistent look and feel across the application.
 ///
@@ -88,10 +91,10 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
       centerTitle: centerTitle,
       automaticallyImplyLeading: showBackButton,
       leading: leading ??
-          (showBackButton
+          (showBackButton && context.canPop()
               ? IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  onPressed: onBackPress ?? () => Navigator.of(context).maybePop(),
+                  icon: Platform.isAndroid ? const Icon(Icons.arrow_back) : const Icon(Icons.arrow_back_ios),
+                  onPressed: onBackPress ?? () => context.pop(),
                   tooltip: MaterialLocalizations.of(context).backButtonTooltip,
                 )
               : null),
