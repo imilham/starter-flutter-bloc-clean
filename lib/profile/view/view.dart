@@ -1,2 +1,2 @@
-export './complete/complete.dart';
 export './profile.dart';
+export 'complete/complete.dart';
