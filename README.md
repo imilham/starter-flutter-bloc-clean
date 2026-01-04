@@ -13,7 +13,7 @@
 
 For detailed instructions on cloning, branch selection, and project setup, please refer to the official documentation:
 
-👉 **[View Cloning Guide & SOP](https://docs.google.com/document/d/1wu_kuN0Mr40Fq2KrGjfYJ2mbBscGztuUPV9csJ2Fw_o/edit?tab=t.0)**
+👉 **[View Cloning Guide & SOP](https://docs.google.com/document/d/1C1Bp0MGl6SzpteSpHiG3OEZL_h7firR_a-HA8s8godM/edit?usp=sharing)**
 
 ---
 
