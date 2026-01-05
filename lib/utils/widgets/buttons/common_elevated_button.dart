@@ -47,6 +47,9 @@ class CommonElevatedButton extends StatelessWidget {
     this.icon,
     this.iconPosition = IconPosition.leading,
     this.size = ButtonSize.large,
+    this.backgroundColor,
+    this.foregroundColor,
+    this.textStyle,
   });
 
   /// Creates a small-sized elevated button (220px width).
@@ -98,6 +101,15 @@ class CommonElevatedButton extends StatelessWidget {
   /// - [ButtonSize.large]: full width (default)
   final ButtonSize size;
 
+  /// Optional background color override.
+  final Color? backgroundColor;
+
+  /// Optional foreground color (text/icon) override.
+  final Color? foregroundColor;
+
+  /// Optional text style override.
+  final TextStyle? textStyle;
+
   /// Button height is always 48px.
   static const double _height = 48;
 
@@ -116,6 +128,9 @@ class CommonElevatedButton extends StatelessWidget {
     final button = ElevatedButton(
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
+        backgroundColor: backgroundColor,
+        foregroundColor: foregroundColor,
+        textStyle: textStyle,
         minimumSize: Size(
           size == ButtonSize.small ? _smallWidth : double.infinity,
           _height,

@@ -1,0 +1,77 @@
+import 'package:flutter/material.dart';
+import 'package:starter/utils/utils.dart';
+
+// TODO: remove-samples-im
+
+class ComponentsSample extends StatefulWidget {
+  const ComponentsSample({super.key});
+
+  @override
+  State<ComponentsSample> createState() => _ComponentsSampleState();
+}
+
+class _ComponentsSampleState extends State<ComponentsSample> {
+  final TextEditingController _simpleController = TextEditingController();
+  final TextEditingController _passController = TextEditingController();
+
+  @override
+  void dispose() {
+    _simpleController.dispose();
+    _passController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView(
+      padding: const EdgeInsets.all(16),
+      children: [
+        const SectionHeader.large('Buttons'),
+        CommonElevatedButton(
+          text: 'Primary Button',
+          onPressed: () {},
+        ),
+        Gap.small8,
+        CommonElevatedButton(
+          text: 'Loading Button',
+          isLoading: true,
+          onPressed: () {},
+        ),
+        Gap.small8,
+        const CommonElevatedButton(
+          text: 'Disabled Button',
+        ),
+        Gap.medium16,
+        CommonOutlineButton(
+          text: 'Outline Button',
+          onPressed: () {},
+        ),
+        const Divider(height: 32),
+        const SectionHeader.large('Loader'),
+        const Center(child: CommonCircularLoader.custom(size: 32)),
+        const Divider(height: 32),
+        const SectionHeader.large('Carousel'),
+        CommonCarousel.images(
+          imageUrls: const [
+            'https://images.unsplash.com/photo-1506744038136-46273834b3fb',
+            'https://images.unsplash.com/photo-1469474968028-56623f02e42e',
+          ],
+          height: 150,
+        ),
+        const Divider(height: 32),
+        const SectionHeader.large('Inputs'),
+        CommonBaseTextField(
+          controller: _simpleController,
+          title: 'Simple Input',
+          hintText: 'Type something...',
+        ),
+        Gap.medium16,
+        PasswordFormField(
+          controller: _passController,
+          title: 'Password Input',
+          hintText: 'Password',
+        ),
+      ],
+    );
+  }
+}
