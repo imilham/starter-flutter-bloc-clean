@@ -28,7 +28,6 @@ class CommonText extends StatelessWidget {
 
   const CommonText._(
     this.text, {
-    super.key,
     this.style,
     this.textAlign,
     this.overflow,

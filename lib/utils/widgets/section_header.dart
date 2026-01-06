@@ -93,7 +93,7 @@ class SectionHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            child: Text(
+            child: CommonText(
               title,
               style: _getStyle(context),
             ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A widget that displays the app logo.
 ///
@@ -23,7 +24,7 @@ class AppLogo extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
             fallbackHeight: 100,
             fallbackWidth: 100,
-            child: const Text('Logo goes here'),
+            child: const CommonText('Logo goes here').size12px,
           ),
         ),
       ),

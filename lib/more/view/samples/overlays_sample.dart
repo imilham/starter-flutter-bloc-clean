@@ -44,7 +44,7 @@ class OverlaysSample extends StatelessWidget {
               child: Container(
                 height: 200,
                 alignment: Alignment.center,
-                child: const Text('Sheet Content Goes Here'),
+                child: const CommonText('Sheet Content Goes Here'),
               ),
             );
           },
@@ -69,13 +69,13 @@ class OverlaysSample extends StatelessWidget {
           text: 'Show Custom Snackbar',
           onPressed: () {
             context.showCustomSnackBar(
-              content: const Row(
+              content: Row(
                 children: [
-                  Icon(Icons.star, color: Colors.amber),
+                  const Icon(Icons.star, color: Colors.amber),
                   Gap.small8,
-                  Expanded(child: Text('You earned 50 points!')),
+                  Expanded(child: const CommonText('You earned 50 points!').size14px.setColor(Colors.white)),
                   Gap.small8,
-                  Icon(Icons.celebration, color: Colors.pinkAccent),
+                  const Icon(Icons.celebration, color: Colors.pinkAccent),
                 ],
               ),
               backgroundColor: Colors.indigo,

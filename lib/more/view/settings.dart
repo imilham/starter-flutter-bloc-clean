@@ -20,7 +20,7 @@ class _SettingsPageState extends State<SettingsPage> {
         child: Column(
           children: [
             Gap.medium16,
-            const Text('Settings Page'),
+            const CommonText('Settings Page').size16px,
             Gap.medium16,
             // theme toggle switch
             Consumer<ThemeServiceProvider>(

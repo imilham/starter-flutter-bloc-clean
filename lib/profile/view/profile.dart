@@ -85,12 +85,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
               const Spacer(),
               ElevatedButton(
                 onPressed: () {},
-                child: const Text('Edit Profile'),
+                child: const CommonText('Edit Profile').size14px.bold,
               ),
               Gap.medium16,
               OutlinedButton(
                 onPressed: () {},
-                child: const Text('Change Password'),
+                child: const CommonText('Change Password').size14px.bold,
               ),
               const RelativeGap(mainAxisExtent: 0.05),
             ],
@@ -125,17 +125,9 @@ class UserDetailItem extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text(
-            title,
-            style: context.bodyMedium,
-          ),
+          CommonText(title).size14px,
           const Spacer(),
-          Text(
-            value,
-            style: context.bodyMedium?.copyWith(
-              color: context.colorScheme.onSurface.withValues(alpha: 0.6),
-            ),
-          ),
+          CommonText(value).size14px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.6)),
         ],
       ),
     );

@@ -12,7 +12,7 @@ class StylesSample extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         const SectionHeader.large('Colors'),
-        const Text('Material Color Scheme'),
+        const CommonText('Material Color Scheme').size14px,
         Gap.small8,
         Wrap(
           spacing: 12,
@@ -25,7 +25,7 @@ class StylesSample extends StatelessWidget {
           ],
         ),
         Gap.large24,
-        const Text('Custom App Colors (ThemeExtension)'),
+        const CommonText('Custom App Colors (ThemeExtension)').size14px,
         Gap.small8,
         Wrap(
           spacing: 12,
@@ -84,7 +84,7 @@ class _ColorChip extends StatelessWidget {
           ),
         ),
         Gap.extraSmall4,
-        Text(name, style: context.labelSmall),
+        CommonText(name).size10px.bold.setColor(context.colorScheme.onSurface),
       ],
     );
   }
@@ -107,20 +107,18 @@ class _TypeSample extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
+                CommonText(
                   name,
-                  style: context.bodySmall?.copyWith(color: Colors.grey.shade600),
-                ),
-                Text(
+                ).size12px.setColor(Colors.grey.shade600),
+                CommonText(
                   '${style?.fontSize?.toStringAsFixed(0)}sp',
-                  style: context.labelSmall?.copyWith(color: Colors.grey.shade400),
-                ),
+                ).size10px.setColor(Colors.grey.shade400),
               ],
             ),
           ),
           Expanded(
             flex: 5,
-            child: Text(
+            child: CommonText(
               'Quick Brown Fox',
               style: style,
               overflow: TextOverflow.ellipsis,

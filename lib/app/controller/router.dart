@@ -123,10 +123,10 @@ class AppRouter {
                   key: state.pageKey,
                   child: Scaffold(
                     appBar: AppBar(
-                      title: const Text('Chat'),
+                      title: const CommonText('Chat').size18px.bold,
                     ),
-                    body: const Center(
-                      child: Text('Chat Page'),
+                    body: Center(
+                      child: const CommonText('Chat Page').size16px,
                     ),
                   ),
                 ),

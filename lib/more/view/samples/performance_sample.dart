@@ -38,22 +38,21 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
+              const CommonText(
                 'The Engineering Trick: RepaintBoundary',
-                style: context.titleMedium?.bold,
-              ),
+              ).size16px.bold.setColor(context.colorScheme.onSurfaceVariant),
               Gap.small8,
-              const Text(
+              const CommonText(
                 'By default, if one small icon animates, Flutter might repaint the entire screen. '
                 'By wrapping that icon in a RepaintBoundary, you create a separate "layer." '
                 'Now, Flutter only repaints that small area, saving massive amounts of GPU power.',
-              ),
+              ).size14px.setColor(context.colorScheme.onSurfaceVariant),
             ],
           ),
         ),
         Gap.large24,
         const SectionHeader.large('Live Demo'),
-        const Text(
+        const CommonText(
           'To verify optimization:\n'
           '1. Open Flutter DevTools (cmd + shift + p -> Open DevTools)\n'
           '2. Go to "Performance" or "Inspector" tab\n'
@@ -61,7 +60,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           '4. Without RepaintBoundary, the whole list might flash.\n'
           '5. With RepaintBoundary, ONLY the logo flashes.',
           style: TextStyle(height: 1.5),
-        ),
+        ).size14px,
         Gap.medium16,
         Center(
           child: RepaintBoundary(
@@ -77,7 +76,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             color: Colors.black.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const Text(
+          child: const CommonText(
             '// Code Example\n'
             'RepaintBoundary(\n'
             '  child: RotationTransition(\n'
@@ -85,8 +84,8 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             '    child: FlutterLogo(),\n'
             '  ),\n'
             ')',
-            style: TextStyle(fontFamily: 'monospace', fontSize: 12),
-          ),
+            style: TextStyle(fontFamily: 'monospace'),
+          ).size12px,
         ),
       ],
     );

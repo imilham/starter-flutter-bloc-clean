@@ -18,18 +18,18 @@ class _IntroPageState extends State<IntroPage> {
           const RelativeGap(mainAxisExtent: 0.2),
           const AppLogo(aspectRatio: 16 / 9),
           const RelativeGap(mainAxisExtent: 0.1),
-          ElevatedButton(
+          CommonElevatedButton(
             onPressed: () {
               Pages.signUp.go(context);
             },
-            child: const Text('Sign Up'),
+            text: 'Sign Up',
           ),
           const Spacer(),
           Gap.small8,
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Text('Already have an account?'),
+              const CommonText('Already have an account?').size14px,
               TextButton(
                 onPressed: () {
                   Pages.signIn.go(context);
@@ -37,7 +37,7 @@ class _IntroPageState extends State<IntroPage> {
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                 ),
-                child: Text('Sign In', style: context.bodyMedium?.copyWith(fontWeight: FontWeight.bold)),
+                child: const CommonText('Sign In').size14px.bold,
               ),
             ],
           ),

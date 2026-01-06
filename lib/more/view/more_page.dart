@@ -65,8 +65,8 @@ class MorePage extends StatelessWidget {
           final item = menuItems[index];
           return ListTile(
             leading: Icon(item.icon),
-            title: Text(item.title),
-            subtitle: item.subtitle != null ? Text(item.subtitle!) : null,
+            title: CommonText(item.title).size16px,
+            subtitle: item.subtitle != null ? CommonText(item.subtitle!).size12px : null,
             onTap: item.onTap,
           );
         },

@@ -95,7 +95,7 @@ class _SignInPageState extends State<SignInPage> {
                         onPressed: () {
                           Pages.forgotPassword.go(context);
                         },
-                        child: const Text('Forgot Password?'),
+                        child: const CommonText('Forgot Password?').size14px.bold,
                       ),
                     ),
                   ),
@@ -116,10 +116,7 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(
                     width: double.infinity,
                     child: Center(
-                      child: Text(
-                        'Or continue with',
-                        style: context.bodyMedium,
-                      ),
+                      child: const CommonText('Or continue with').size14px,
                     ),
                   ),
                   Gap.medium16,
@@ -165,7 +162,7 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Text("Don't have an account?"),
+                      const CommonText("Don't have an account?").size14px,
                       TextButton(
                         onPressed: () {
                           Pages.signUp.go(context);
@@ -173,7 +170,7 @@ class _SignInPageState extends State<SignInPage> {
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                         ),
-                        child: const Text('Sign Up'),
+                        child: const CommonText('Sign Up').size14px.bold,
                       ),
                     ],
                   ),

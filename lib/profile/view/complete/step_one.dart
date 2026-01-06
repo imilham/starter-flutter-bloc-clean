@@ -6,12 +6,12 @@ class StepOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const ExtendedColumn(
+    return ExtendedColumn(
       padding: AppSpacing.allMd,
       children: [
-        Text('Step 1: Personal Details'),
+        const CommonText('Step 1: Personal Details').size18px.bold,
         Gap.medium16,
-        Center(child: Text('Form content goes here')),
+        Center(child: const CommonText('Form content goes here').size14px),
       ],
     );
   }

@@ -61,13 +61,10 @@ class _SplashPageState extends State<SplashPage> {
                           child: CircularProgressIndicator(),
                         ),
                         Gap.medium16,
-                        Text(
+                        CommonText(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: context.titleMedium?.copyWith(
-                            color: context.colorScheme.error,
-                          ),
-                        ),
+                        ).size16px.setColor(context.colorScheme.error),
                         Builder(
                           builder: (context) {
                             if (state.lastError == null || state.lastError!.isEmpty) {
@@ -75,27 +72,21 @@ class _SplashPageState extends State<SplashPage> {
                             }
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              child: Text(
+                              child: CommonText(
                                 state.lastError ?? '',
                                 textAlign: TextAlign.center,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: context.labelMedium?.copyWith(
-                                  color: context.colorScheme.onSurface.withValues(alpha: 0.5),
-                                ),
-                              ),
+                              ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5)),
                             );
                           },
                         ),
                         Builder(
                           builder: (context) {
                             if (state.retryCount != null && state.retryCount! > 0) {
-                              return Text(
+                              return CommonText(
                                 'Attempt ${state.retryCount!} of ${state.maxRetries}',
-                                style: context.labelSmall?.copyWith(
-                                  color: context.colorScheme.onSurface.withValues(alpha: 0.5),
-                                ),
-                              );
+                              ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5));
                             }
                             return const SizedBox.shrink();
                           },
@@ -118,7 +109,7 @@ class _SplashPageState extends State<SplashPage> {
                                   side: const BorderSide(color: Colors.red),
                                 ),
                                 icon: const Icon(Icons.cancel),
-                                label: const Text('Cancel & Logout'),
+                                label: const CommonText('Cancel & Logout').size14px,
                               );
                             }
                             return const SizedBox.shrink();
@@ -131,22 +122,16 @@ class _SplashPageState extends State<SplashPage> {
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Text(
+                        CommonText(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: context.titleMedium?.copyWith(
-                            color: context.colorScheme.error,
-                          ),
-                        ),
+                        ).size16px.setColor(context.colorScheme.error),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
+                          child: const CommonText(
                             'Try again later or contact support if the issue persists.',
                             textAlign: TextAlign.center,
-                            style: context.labelMedium?.copyWith(
-                              color: context.colorScheme.onSurface.withValues(alpha: 0.5),
-                            ),
-                          ),
+                          ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5)),
                         ),
                       ],
                     );

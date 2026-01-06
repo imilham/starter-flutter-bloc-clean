@@ -10,8 +10,8 @@ class HomePage extends StatelessWidget {
       appBar: const CommonAppBar(
         title: 'Home',
       ),
-      body: const Center(
-        child: Text('Home Content'),
+      body: Center(
+        child: const CommonText('Home Content').size16px.bold,
       ),
     );
   }

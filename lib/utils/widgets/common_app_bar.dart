@@ -76,7 +76,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     // Resolve title widget
     Widget? titleWidget;
     if (title is String) {
-      titleWidget = Text(
+      titleWidget = CommonText(
         title as String,
         style: theme.textTheme.titleLarge?.copyWith(
           fontWeight: FontWeight.w600,
