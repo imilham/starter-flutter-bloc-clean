@@ -110,9 +110,9 @@ class _ComponentsSampleState extends State<ComponentsSample> {
 
         const SectionHeader(title: 'Date Conversion'),
 
-        const CommonText.size16('Original: 06/01/2026').size16.italic,
+        const CommonText('Original: 06/01/2026').size16px.italic,
         Gap.small8,
-        CommonText.size20(date.format('dd MMM yyyy')).bold.setColor(context.colorScheme.primary),
+        CommonText(date.format('dd MMM yyyy')).size20px.bold.setColor(context.colorScheme.primary),
 
         Gap.extraLarge32,
 

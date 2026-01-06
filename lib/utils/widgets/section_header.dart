@@ -124,13 +124,13 @@ class SectionHeader extends StatelessWidget {
       case SectionHeaderStyle.large:
         // Large headers often look good in Primary color, but let's stick to standard text color unless overridden
         // Or we can default to Primary as per your local _SectionHeader implementation
-        return context.titleLarge?.bold.copyWith(
+        return context.titleLarge?.bold?.copyWith(
           color: color ?? context.colorScheme.primary, // Keeping your local preference
         );
       case SectionHeaderStyle.medium:
-        return context.titleMedium?.bold.copyWith(color: baseColor);
+        return context.titleMedium?.bold?.copyWith(color: baseColor);
       case SectionHeaderStyle.small:
-        return context.labelLarge?.bold.copyWith(color: baseColor);
+        return context.labelLarge?.bold?.copyWith(color: baseColor);
     }
   }
 }
