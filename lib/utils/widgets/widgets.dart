@@ -5,6 +5,7 @@ export './common_bottom_sheet.dart';
 export './common_carousel.dart';
 export './common_dialog.dart';
 export './common_image.dart';
+export './common_shimmer.dart';
 export './common_stream_builder.dart';
 export './extended_column.dart';
 export './form_fields/form_fields.dart';

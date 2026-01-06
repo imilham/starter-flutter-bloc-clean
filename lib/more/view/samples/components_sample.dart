@@ -23,6 +23,7 @@ class _ComponentsSampleState extends State<ComponentsSample> {
 
   @override
   Widget build(BuildContext context) {
+    final date = DateTime.now();
     return ListView(
       padding: const EdgeInsets.all(16),
       children: [
@@ -97,12 +98,25 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           hintText: 'Password',
         ),
         Gap.medium16,
+        Gap.medium16,
         CommonBaseTextField(
           controller: TextEditingController(),
           title: 'Read Only Input',
           hintText: 'Cannot edit this',
           readOnly: true,
         ),
+
+        Gap.medium12,
+
+        const SectionHeader(title: 'Date Conversion'),
+
+        const CommonText.size16('Original: 06/01/2026').size16.italic,
+        Gap.small8,
+        CommonText.size20(date.format('dd MMM yyyy')).bold.setColor(context.colorScheme.primary),
+
+        Gap.extraLarge32,
+
+        // this is the sampe for the date conversion
       ],
     );
   }
