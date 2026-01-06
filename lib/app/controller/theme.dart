@@ -15,6 +15,7 @@ import 'package:starter/utils/extensions/app_colors_extension.dart';
 ///
 /// ```dart
 /// color: Theme.of(context).colorScheme.primary
+/// color: context.colorScheme.primary - this method is using the extensions
 /// ```
 class ThemeServiceProvider with ChangeNotifier {
   ThemeServiceProvider({bool isDark = false}) : _isDark = isDark;

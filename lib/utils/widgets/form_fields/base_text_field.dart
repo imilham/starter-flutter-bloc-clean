@@ -16,7 +16,7 @@ import 'package:flutter/services.dart';
 ///
 /// ## Example Usage
 /// ```dart
-/// BaseTextField(
+/// CommonBaseTextField(
 ///   controller: _emailController,
 ///   hintText: 'Enter email',
 ///   title: 'Email Address',
