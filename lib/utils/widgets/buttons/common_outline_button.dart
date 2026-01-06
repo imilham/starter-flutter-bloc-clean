@@ -44,6 +44,7 @@ class CommonOutlineButton extends StatelessWidget {
     this.width,
     this.height,
     this.textStyle,
+    this.alignment,
   });
 
   /// Creates a small-sized secondary button (220px width).
@@ -92,6 +93,9 @@ class CommonOutlineButton extends StatelessWidget {
 
   final TextStyle? textStyle;
 
+  /// Optional alignment when specifying width. Defaults to [Alignment.center].
+  final AlignmentGeometry? alignment;
+
   /// Button height is defaults to 48px.
   static const double _defaultHeight = 48;
 
@@ -123,6 +127,14 @@ class CommonOutlineButton extends StatelessWidget {
     if (size == ButtonSize.large && width == null) {
       return SizedBox(
         width: double.infinity,
+        child: button,
+      );
+    }
+
+    // If width is specified, we wrap in Align to break parent constraints
+    if (width != null) {
+      return Align(
+        alignment: alignment ?? Alignment.center,
         child: button,
       );
     }

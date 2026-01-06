@@ -42,9 +42,33 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           text: 'Disabled Button',
         ),
         Gap.medium16,
+        Gap.medium16,
         CommonOutlineButton(
           text: 'Outline Button',
           onPressed: () {},
+        ),
+        Gap.small8,
+        CommonElevatedButton(
+          text: 'Custom Width (120)',
+          onPressed: () {},
+        ),
+        Gap.small8,
+        Row(
+          children: [
+            Expanded(
+              child: CommonElevatedButton.small(
+                text: 'Small Button',
+                onPressed: () {},
+              ),
+            ),
+            Gap.small8,
+            Expanded(
+              child: CommonOutlineButton.small(
+                text: 'Small Outline',
+                onPressed: () {},
+              ),
+            ),
+          ],
         ),
         const Divider(height: 32),
         const SectionHeader.large('Loader'),
@@ -66,10 +90,18 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           hintText: 'Type something...',
         ),
         Gap.medium16,
+        Gap.medium16,
         PasswordFormField(
           controller: _passController,
           title: 'Password Input',
           hintText: 'Password',
+        ),
+        Gap.medium16,
+        CommonBaseTextField(
+          controller: TextEditingController(),
+          title: 'Read Only Input',
+          hintText: 'Cannot edit this',
+          readOnly: true,
         ),
       ],
     );

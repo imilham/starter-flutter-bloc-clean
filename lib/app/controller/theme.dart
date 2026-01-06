@@ -70,6 +70,7 @@ class ThemeServiceProvider with ChangeNotifier {
         AppColors(
           shimmerColor: Colors.grey.shade300,
           shimmerBgColor: Colors.grey.shade100,
+          success: const Color(0xFF22C55E), // Green 500
           exampleColor1: Colors.indigoAccent,
           exampleColor2: Colors.teal,
           exampleColor3: Colors.amber,
@@ -108,6 +109,7 @@ class ThemeServiceProvider with ChangeNotifier {
         AppColors(
           shimmerColor: const Color(0xff07A8FE).withValues(alpha: 0.24),
           shimmerBgColor: const Color(0xFF3A3A3C),
+          success: const Color(0xFF4ADE80), // Green 400
           exampleColor1: Colors.indigoAccent.shade100,
           exampleColor2: Colors.tealAccent,
           exampleColor3: Colors.amberAccent,

@@ -19,6 +19,7 @@ class AppColors extends ThemeExtension<AppColors> {
   const AppColors({
     required this.shimmerColor,
     required this.shimmerBgColor,
+    required this.success,
     required this.exampleColor1,
     required this.exampleColor2,
     required this.exampleColor3,
@@ -32,6 +33,9 @@ class AppColors extends ThemeExtension<AppColors> {
   /// The background color behind the shimmer.
   final Color shimmerBgColor;
 
+  /// Semantic success color.
+  final Color success;
+
   // TODO(ilham): Remove these example colors later
   final Color exampleColor1;
   final Color exampleColor2;
@@ -43,6 +47,7 @@ class AppColors extends ThemeExtension<AppColors> {
   ThemeExtension<AppColors> copyWith({
     Color? shimmerColor,
     Color? shimmerBgColor,
+    Color? success,
     Color? exampleColor1,
     Color? exampleColor2,
     Color? exampleColor3,
@@ -52,6 +57,7 @@ class AppColors extends ThemeExtension<AppColors> {
     return AppColors(
       shimmerColor: shimmerColor ?? this.shimmerColor,
       shimmerBgColor: shimmerBgColor ?? this.shimmerBgColor,
+      success: success ?? this.success,
       exampleColor1: exampleColor1 ?? this.exampleColor1,
       exampleColor2: exampleColor2 ?? this.exampleColor2,
       exampleColor3: exampleColor3 ?? this.exampleColor3,
@@ -72,6 +78,7 @@ class AppColors extends ThemeExtension<AppColors> {
     return AppColors(
       shimmerColor: Color.lerp(shimmerColor, other.shimmerColor, t)!,
       shimmerBgColor: Color.lerp(shimmerBgColor, other.shimmerBgColor, t)!,
+      success: Color.lerp(success, other.success, t)!,
       exampleColor1: Color.lerp(exampleColor1, other.exampleColor1, t)!,
       exampleColor2: Color.lerp(exampleColor2, other.exampleColor2, t)!,
       exampleColor3: Color.lerp(exampleColor3, other.exampleColor3, t)!,

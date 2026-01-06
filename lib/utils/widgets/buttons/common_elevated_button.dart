@@ -52,6 +52,7 @@ class CommonElevatedButton extends StatelessWidget {
     this.textStyle,
     this.width,
     this.height,
+    this.alignment,
   });
 
   /// Creates a small-sized elevated button (220px width).
@@ -115,6 +116,9 @@ class CommonElevatedButton extends StatelessWidget {
   final double? width;
   final double? height;
 
+  /// Optional alignment when specifying width. Defaults to [Alignment.center].
+  final AlignmentGeometry? alignment;
+
   /// Button height is defaults to 48px.
   static const double _defaultHeight = 48;
 
@@ -148,6 +152,15 @@ class CommonElevatedButton extends StatelessWidget {
     if (size == ButtonSize.large && width == null) {
       return SizedBox(
         width: double.infinity,
+        child: button,
+      );
+    }
+
+    // If width is specified, we wrap in Align to break parent constraints (e.g. ListView stretching)
+    // allowing the button to respect the requested width.
+    if (width != null) {
+      return Align(
+        alignment: alignment ?? Alignment.center,
         child: button,
       );
     }

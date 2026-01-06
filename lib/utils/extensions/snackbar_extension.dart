@@ -55,7 +55,7 @@ extension SnackBarExtension on BuildContext {
             Expanded(child: Text(message)),
           ],
         ),
-        backgroundColor: Colors.green,
+        backgroundColor: appColors.success,
         duration: duration,
         behavior: SnackBarBehavior.floating,
       ),
@@ -80,6 +80,34 @@ extension SnackBarExtension on BuildContext {
         backgroundColor: Theme.of(this).colorScheme.error,
         duration: duration,
         behavior: SnackBarBehavior.floating,
+      ),
+    );
+  }
+
+  /// Shows a fully custom snackbar with arbitrary widget content.
+  void showCustomSnackBar({
+    required Widget content,
+    Duration duration = const Duration(seconds: 3),
+    SnackBarBehavior behavior = SnackBarBehavior.floating,
+    Color? backgroundColor,
+    SnackBarAction? action,
+    double? elevation,
+    ShapeBorder? shape,
+    EdgeInsetsGeometry? margin,
+    EdgeInsetsGeometry? padding,
+  }) {
+    ScaffoldMessenger.of(this).hideCurrentSnackBar();
+    ScaffoldMessenger.of(this).showSnackBar(
+      SnackBar(
+        content: content,
+        action: action,
+        duration: duration,
+        behavior: behavior,
+        backgroundColor: backgroundColor,
+        elevation: elevation,
+        shape: shape,
+        margin: behavior == SnackBarBehavior.floating ? margin : null,
+        padding: padding,
       ),
     );
   }

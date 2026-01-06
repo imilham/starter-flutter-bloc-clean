@@ -49,6 +49,39 @@ class OverlaysSample extends StatelessWidget {
             );
           },
         ),
+        Gap.large24,
+        const SectionHeader.large('Snackbars'),
+        CommonElevatedButton(
+          text: 'Show Success Snackbar',
+          onPressed: () {
+            context.showSuccessSnackBar('Operation completed successfully!');
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Error Snackbar',
+          onPressed: () {
+            context.showErrorSnackBar('Something went wrong!');
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Custom Snackbar',
+          onPressed: () {
+            context.showCustomSnackBar(
+              content: const Row(
+                children: [
+                  Icon(Icons.star, color: Colors.amber),
+                  Gap.small8,
+                  Expanded(child: Text('You earned 50 points!')),
+                  Gap.small8,
+                  Icon(Icons.celebration, color: Colors.pinkAccent),
+                ],
+              ),
+              backgroundColor: Colors.indigo,
+            );
+          },
+        ),
       ],
     );
   }

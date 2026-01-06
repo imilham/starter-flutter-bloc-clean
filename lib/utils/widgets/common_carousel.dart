@@ -1,5 +1,7 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
@@ -117,10 +119,23 @@ class CommonCarousel extends StatefulWidget {
 }
 
 class _CommonCarouselState extends State<CommonCarousel> {
-  int _currentIndex = 0;
+  late final ValueNotifier<int> _currentIndexNotifier;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndexNotifier = ValueNotifier(0);
+  }
+
+  @override
+  void dispose() {
+    _currentIndexNotifier.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    log(_currentIndexNotifier.value.toString());
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -132,7 +147,7 @@ class _CommonCarouselState extends State<CommonCarousel> {
             enlargeCenterPage: widget.enlargeCenterPage,
             viewportFraction: widget.viewportFraction,
             onPageChanged: (index, reason) {
-              setState(() => _currentIndex = index);
+              _currentIndexNotifier.value = index;
               widget.onPageChanged?.call(index);
             },
           ),
@@ -146,32 +161,37 @@ class _CommonCarouselState extends State<CommonCarousel> {
   }
 
   Widget _buildIndicator() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: widget.items.asMap().entries.map((entry) {
-        final index = entry.key;
-        final isSelected = _currentIndex == index;
+    return ValueListenableBuilder<int>(
+      valueListenable: _currentIndexNotifier,
+      builder: (context, currentIndex, _) {
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: widget.items.asMap().entries.map((entry) {
+            final index = entry.key;
+            final isSelected = currentIndex == index;
 
-        if (widget.indicatorBuilder != null) {
-          return widget.indicatorBuilder!(context, index, isSelected);
-        }
+            if (widget.indicatorBuilder != null) {
+              return widget.indicatorBuilder!(context, index, isSelected);
+            }
 
-        final colorScheme = Theme.of(context).colorScheme;
-        final activeColor = widget.indicatorActiveColor ?? colorScheme.primary;
-        final inactiveColor = widget.indicatorInactiveColor ?? colorScheme.onSurface.withValues(alpha: 0.2);
+            final colorScheme = Theme.of(context).colorScheme;
+            final activeColor = widget.indicatorActiveColor ?? colorScheme.primary;
+            final inactiveColor = widget.indicatorInactiveColor ?? colorScheme.onSurface.withValues(alpha: 0.2);
 
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.fastOutSlowIn,
-          width: isSelected ? widget.indicatorActiveWidth : widget.indicatorSize.width,
-          height: widget.indicatorSize.height,
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(widget.indicatorSize.height / 2),
-            color: isSelected ? activeColor : inactiveColor,
-          ),
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.fastOutSlowIn,
+              width: isSelected ? widget.indicatorActiveWidth : widget.indicatorSize.width,
+              height: widget.indicatorSize.height,
+              margin: const EdgeInsets.symmetric(horizontal: 4),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(widget.indicatorSize.height / 2),
+                color: isSelected ? activeColor : inactiveColor,
+              ),
+            );
+          }).toList(),
         );
-      }).toList(),
+      },
     );
   }
 }
