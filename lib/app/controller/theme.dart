@@ -198,11 +198,11 @@ class ThemeServiceProvider with ChangeNotifier {
       ),
       filled: true,
       fillColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
-      hintStyle: const TextStyle(
-        color: Colors.white,
+      hintStyle: TextStyle(
+        color: _isDark ? Colors.white70 : Colors.black54,
       ),
-      labelStyle: const TextStyle(
-        color: Colors.white,
+      labelStyle: TextStyle(
+        color: _isDark ? Colors.white : Colors.black87,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.never,
       enabledBorder: OutlineInputBorder(

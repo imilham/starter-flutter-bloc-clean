@@ -41,6 +41,9 @@ class CommonOutlineButton extends StatelessWidget {
     this.icon,
     this.iconPosition = IconPosition.leading,
     this.size = ButtonSize.large,
+    this.width,
+    this.height,
+    this.textStyle,
   });
 
   /// Creates a small-sized secondary button (220px width).
@@ -84,8 +87,13 @@ class CommonOutlineButton extends StatelessWidget {
   /// - [ButtonSize.large]: full width (default)
   final ButtonSize size;
 
-  /// Button height is always 48px.
-  static const double _height = 48;
+  final double? width;
+  final double? height;
+
+  final TextStyle? textStyle;
+
+  /// Button height is defaults to 48px.
+  static const double _defaultHeight = 48;
 
   /// Small button width.
   static const double _smallWidth = 220;
@@ -102,16 +110,17 @@ class CommonOutlineButton extends StatelessWidget {
     final button = OutlinedButton(
       onPressed: isLoading ? null : onPressed,
       style: OutlinedButton.styleFrom(
+        textStyle: textStyle,
         minimumSize: Size(
-          size == ButtonSize.small ? _smallWidth : double.infinity,
-          _height,
+          width ?? (size == ButtonSize.small ? _smallWidth : double.infinity),
+          height ?? _defaultHeight,
         ),
       ),
       child: child,
     );
 
-    // Large buttons expand to full width
-    if (size == ButtonSize.large) {
+    // Large buttons expand to full width unless width is specified
+    if (size == ButtonSize.large && width == null) {
       return SizedBox(
         width: double.infinity,
         child: button,
@@ -123,13 +132,15 @@ class CommonOutlineButton extends StatelessWidget {
 
   /// Builds the loading spinner.
   Widget _buildLoader(ColorScheme colorScheme) {
-    return SizedBox(
-      height: _iconSize,
-      width: _iconSize,
-      child: CircularProgressIndicator(
-        strokeWidth: 5,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          colorScheme.primary.withValues(alpha: 0.7),
+    return RepaintBoundary(
+      child: SizedBox(
+        height: _iconSize,
+        width: _iconSize,
+        child: CircularProgressIndicator(
+          strokeWidth: 3,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            colorScheme.primary.withValues(alpha: 0.7),
+          ),
         ),
       ),
     );

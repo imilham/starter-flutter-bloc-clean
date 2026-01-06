@@ -50,6 +50,8 @@ class CommonElevatedButton extends StatelessWidget {
     this.backgroundColor,
     this.foregroundColor,
     this.textStyle,
+    this.width,
+    this.height,
   });
 
   /// Creates a small-sized elevated button (220px width).
@@ -110,8 +112,11 @@ class CommonElevatedButton extends StatelessWidget {
   /// Optional text style override.
   final TextStyle? textStyle;
 
-  /// Button height is always 48px.
-  static const double _height = 48;
+  final double? width;
+  final double? height;
+
+  /// Button height is defaults to 48px.
+  static const double _defaultHeight = 48;
 
   /// Small button width.
   static const double _smallWidth = 220;
@@ -132,15 +137,15 @@ class CommonElevatedButton extends StatelessWidget {
         foregroundColor: foregroundColor,
         textStyle: textStyle,
         minimumSize: Size(
-          size == ButtonSize.small ? _smallWidth : double.infinity,
-          _height,
+          width ?? (size == ButtonSize.small ? _smallWidth : double.infinity),
+          height ?? _defaultHeight,
         ),
       ),
       child: child,
     );
 
-    // Large buttons expand to full width
-    if (size == ButtonSize.large) {
+    // Large buttons expand to full width unless width is specified
+    if (size == ButtonSize.large && width == null) {
       return SizedBox(
         width: double.infinity,
         child: button,
@@ -152,13 +157,15 @@ class CommonElevatedButton extends StatelessWidget {
 
   /// Builds the loading spinner.
   Widget _buildLoader(ColorScheme colorScheme) {
-    return SizedBox(
-      height: _iconSize,
-      width: _iconSize,
-      child: CircularProgressIndicator(
-        strokeWidth: 5,
-        valueColor: AlwaysStoppedAnimation<Color>(
-          colorScheme.onPrimary.withValues(alpha: 0.7),
+    return RepaintBoundary(
+      child: SizedBox(
+        height: _iconSize,
+        width: _iconSize,
+        child: CircularProgressIndicator(
+          strokeWidth: 3,
+          valueColor: AlwaysStoppedAnimation<Color>(
+            colorScheme.onPrimary.withValues(alpha: 0.7),
+          ),
         ),
       ),
     );
