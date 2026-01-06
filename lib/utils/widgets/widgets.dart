@@ -7,7 +7,6 @@ export './common_dialog.dart';
 export './common_image.dart';
 export './common_shimmer.dart';
 export './common_stream_builder.dart';
-export './common_text.dart';
 export './extended_column.dart';
 export './form_fields/form_fields.dart';
 export './input_formatters.dart';

@@ -12,7 +12,7 @@ class StylesSample extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         const SectionHeader.large('Colors'),
-        const CommonText('Material Color Scheme').size14px,
+        const Text('Material Color Scheme', style: TextStyle(fontSize: 14)), // or bodySmall()
         Gap.small8,
         Wrap(
           spacing: 12,
@@ -25,7 +25,7 @@ class StylesSample extends StatelessWidget {
           ],
         ),
         Gap.large24,
-        const CommonText('Custom App Colors (ThemeExtension)').size14px,
+        const Text('Custom App Colors (ThemeExtension)', style: TextStyle(fontSize: 14)),
         Gap.small8,
         Wrap(
           spacing: 12,
@@ -42,22 +42,56 @@ class StylesSample extends StatelessWidget {
           ],
         ),
         const Divider(height: 32),
-        const SectionHeader.large('Typography'),
-        _TypeSample(style: context.displaySmall, name: 'Display Small'),
-        _TypeSample(style: context.headlineMedium, name: 'Headline Medium'),
-        _TypeSample(style: context.headlineSmall, name: 'Headline Small'),
-        _TypeSample(style: context.titleMedium, name: 'Title Medium'),
-        const Divider(),
-        _TypeSample(style: context.bodyLarge, name: 'Body Large'),
-        _TypeSample(style: context.bodyLarge?.bold, name: 'Body Large Bold'),
+        const SectionHeader.large('Typography (styles.dart)'),
+        const Text('These are the standard semantic styles used throughout the app.'),
+        Gap.medium16,
+
+        const SectionHeader.small('Headlines'),
+        _TypeSample(style: headline1(), name: 'headline1'),
+        _TypeSample(style: headline2(), name: 'headline2'),
+        _TypeSample(style: headline3(), name: 'headline3'),
+        _TypeSample(style: headline4(), name: 'headline4'),
+        _TypeSample(style: headline5(), name: 'headline5'),
+        _TypeSample(style: headline6(), name: 'headline6'),
+
+        const SectionHeader.small('Body'),
+        _TypeSample(style: bodyRegular(), name: 'bodyRegular'),
+        _TypeSample(style: bodySmall(), name: 'bodySmall'),
+        _TypeSample(style: bodyXSmall(), name: 'bodyXSmall'),
+
+        const SectionHeader.small('Buttons'),
+        _TypeSample(style: buttonRegular(textColor: context.colorScheme.onSurface), name: 'buttonRegular'),
+        _TypeSample(style: buttonSmall(textColor: context.colorScheme.onSurface), name: 'buttonSmall'),
+        _TypeSample(style: buttonXSmall(textColor: context.colorScheme.onSurface), name: 'buttonXSmall'),
+
+        const SectionHeader.small('Form'),
+        _TypeSample(style: formLabel(textColor: context.colorScheme.onSurface), name: 'formLabel'),
+        _TypeSample(style: formBody(textColor: context.colorScheme.onSurface), name: 'formBody'),
+        _TypeSample(style: formHint(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint'),
+
+        const SectionHeader.small('AppBar'),
+        _TypeSample(style: appBar(textColor: context.colorScheme.onSurface), name: 'appBar'),
+        _TypeSample(style: appBarDescription(textColor: context.colorScheme.onSurface), name: 'appBarDescription'),
+
+        const SectionHeader.small('Tabs'),
+        _TypeSample(style: tab3Xs(textColor: context.colorScheme.onSurface), name: 'tab3Xs'),
+
+        const Divider(height: 32),
+        const SectionHeader.large('Usage Examples'),
+        const Text('Passing parameters overrides defaults:'),
         Gap.small8,
-        _TypeSample(style: context.bodyMedium, name: 'Body Medium'),
-        _TypeSample(style: context.bodyMedium?.bold, name: 'Body Medium Bold'),
-        Gap.small8,
-        _TypeSample(style: context.bodySmall, name: 'Body Small'),
-        _TypeSample(style: context.bodySmall?.bold, name: 'Body Small Bold'),
-        Gap.small8,
-        _TypeSample(style: context.labelSmall, name: 'Label Small'),
+        _TypeSample(
+          style: bodyRegular(fontWeight: FontWeight.bold),
+          name: 'bodyRegular(fontWeight: FontWeight.bold)',
+        ),
+        _TypeSample(
+          style: bodyRegular(fontStyle: FontStyle.italic),
+          name: 'bodyRegular(fontStyle: FontStyle.italic)',
+        ),
+        _TypeSample(
+          style: bodyRegular(textColor: context.colorScheme.error),
+          name: 'bodyRegular(textColor: context.colorScheme.error)',
+        ),
       ],
     );
   }
@@ -84,7 +118,10 @@ class _ColorChip extends StatelessWidget {
           ),
         ),
         Gap.extraSmall4,
-        CommonText(name).size10px.bold.setColor(context.colorScheme.onSurface),
+        Text(
+          name,
+          style: tab3Xs(fontWeight: FontWeight.bold, textColor: context.colorScheme.onSurface),
+        ),
       ],
     );
   }
@@ -107,18 +144,20 @@ class _TypeSample extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                CommonText(
+                Text(
                   name,
-                ).size12px.setColor(Colors.grey.shade600),
-                CommonText(
+                  style: bodyXSmall(textColor: Colors.grey.shade600),
+                ),
+                Text(
                   '${style?.fontSize?.toStringAsFixed(0)}sp',
-                ).size10px.setColor(Colors.grey.shade400),
+                  style: tab3Xs(textColor: Colors.grey.shade400),
+                ),
               ],
             ),
           ),
           Expanded(
             flex: 5,
-            child: CommonText(
+            child: Text(
               'Quick Brown Fox',
               style: style,
               overflow: TextOverflow.ellipsis,

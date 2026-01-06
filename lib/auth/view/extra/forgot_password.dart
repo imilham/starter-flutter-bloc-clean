@@ -81,30 +81,36 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                     children: [
                       Gap.extraLarge32,
                       Gap.medium16,
-                      const CommonText(
+                      Text(
                         'Please Check Your Email',
                         textAlign: TextAlign.center,
-                      ).size24px.bold,
+                        style: headline2(fontWeight: FontWeight.bold),
+                      ),
                       Gap.medium16,
-                      const CommonText(
+                      Text(
                         'A password reset link has been sent to your dedicated email',
                         textAlign: TextAlign.center,
-                      ).size16px,
+                        style: bodyRegular(),
+                      ),
                       Gap.extraLarge32,
                       Gap.medium16,
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const CommonText(
+                          Text(
                             "Didn't receive the email?",
-                          ).size14px,
+                            style: bodyRegular(),
+                          ),
                           TextButton(
                             onPressed: () {
                               setState(() {
                                 _isSubmitted = false;
                               });
                             },
-                            child: const CommonText('Resend').size14px.bold,
+                            child: Text(
+                              'Resend',
+                              style: bodyRegular(fontWeight: FontWeight.bold),
+                            ),
                           ),
                         ],
                       ),
@@ -120,9 +126,10 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         padding: EdgeInsets.symmetric(horizontal: 48, vertical: 16),
                         child: AppLogo(aspectRatio: 16 / 9),
                       ),
-                      const CommonText(
+                      Text(
                         "Enter your registered email address below and we'll send you a password reset email",
-                      ).size16px,
+                        style: bodyRegular(),
+                      ),
                       Gap.medium16,
                       EmailFormField(
                         title: 'Email',

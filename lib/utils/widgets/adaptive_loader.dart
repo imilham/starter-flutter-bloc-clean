@@ -41,64 +41,70 @@ import 'package:starter/utils/utils.dart';
 /// - [LinearProgressIndicator] for horizontal progress indicators.
 /// - [RefreshIndicator] for pull-to-refresh functionality.
 class CommonCircularLoader extends StatelessWidget {
-  /// Creates a circular loader with default (light) styling.
+  /// Creates a circular loader with adaptive styling.
   ///
-  /// Uses [ColorScheme.onSecondary] with 50% opacity for the indicator color.
-  /// Best used on secondary colored backgrounds or buttons.
+  /// - In Light Theme: Shows dark variant (Primary color).
+  /// - In Dark Theme: Shows light variant (White/OnSurface).
   const CommonCircularLoader({super.key})
-      : isDark = false,
+      : isLightColor = null,
         size = 17.0,
         strokeWidth = 4.0;
 
-  /// Creates a circular loader with dark styling.
+  /// Creates a circular loader with explicit LIGHT styling (White).
   ///
-  /// Uses [ColorScheme.onPrimary] with 50% opacity for the indicator color.
-  /// Best used on primary colored backgrounds or dark surfaces.
+  /// Best used on dark backgrounds (e.g., primary buttons, dark containers).
+  const CommonCircularLoader.light({super.key})
+      : isLightColor = true,
+        size = 17.0,
+        strokeWidth = 4.0;
+
+  /// Creates a circular loader with explicit DARK styling (Primary/Black).
+  ///
+  /// Best used on light backgrounds (e.g., white cards, light containers).
   const CommonCircularLoader.dark({super.key})
-      : isDark = true,
+      : isLightColor = false,
         size = 17.0,
         strokeWidth = 4.0;
 
   /// Creates a custom-sized circular loader.
-  ///
-  /// Allows customization of [size] and [strokeWidth] while maintaining
-  /// the same color behavior as the default constructor.
   const CommonCircularLoader.custom({
     super.key,
     this.size = 17.0,
     this.strokeWidth = 4.0,
-    this.isDark = false,
+    this.isLightColor,
   });
 
-  /// Whether to use dark mode styling.
-  ///
-  /// When true, uses [ColorScheme.onPrimary].
-  /// When false, uses [ColorScheme.onSecondary].
-  final bool isDark;
+  /// If true, forces light color (White).
+  /// If false, forces dark color (Primary).
+  /// If null, adapts to theme:
+  /// - Dark Theme -> Light Color (true)
+  /// - Light Theme -> Dark Color (false)
+  final bool? isLightColor;
 
-  /// The size (width and height) of the loader.
-  ///
-  /// Defaults to 17.0 logical pixels.
   final double size;
-
-  /// The width of the circular stroke.
-  ///
-  /// Defaults to 4.0 logical pixels.
   final double strokeWidth;
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
+    final isDarkTheme = theme.brightness == Brightness.dark;
 
-    // Select color based on dark/light variant
-    final indicatorColor = isDark ? colorScheme.onPrimary.withValues(alpha: 0.5) : colorScheme.onSecondary.withValues(alpha: 0.5);
+    // Determine if we should use the "Light Color" (White)
+    // 1. Explicitly requested (.light())
+    // 2. OR Adaptive (null) AND we are in Dark Theme (Dark BG needs Light Color)
+    final useLightColor = isLightColor ?? isDarkTheme;
+
+    // Dark Color: Primary (Purple) or Secondary or Black.
+    // Light Color: OnPrimary (White) or OnSurface (White).
+    final indicatorColor = useLightColor ? colorScheme.onPrimary : colorScheme.primary;
 
     return SizedBox(
       width: size,
       height: size,
       child: CircularProgressIndicator(
         strokeWidth: strokeWidth,
-        valueColor: AlwaysStoppedAnimation<Color>(indicatorColor),
+        valueColor: AlwaysStoppedAnimation<Color>(indicatorColor.withValues(alpha: 0.5)),
       ),
     );
   }

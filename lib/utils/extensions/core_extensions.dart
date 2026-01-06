@@ -106,3 +106,30 @@ extension DateTimeExtensions on DateTime {
     return year == yesterday.year && month == yesterday.month && day == yesterday.day;
   }
 }
+
+// -----------------------------------------------------------------------------
+// DATE STRING EXTENSIONS
+// -----------------------------------------------------------------------------
+
+extension DateStringExtensions on String {
+  /// Converts a date string to [DateTime].
+  ///
+  /// Returns null if the string cannot be parsed.
+  /// Supports ISO 8601 formats (e.g., "2026-01-06T12:00:00").
+  DateTime? get toDateTime => DateTime.tryParse(this);
+
+  /// Formats a date string to a specific [pattern].
+  ///
+  /// Example:
+  /// ```dart
+  /// "2026-01-06".formatDate("dd MMM yyyy"); // "06 Jan 2026"
+  /// "invalid".formatDate("dd MMM yyyy"); // "invalid"
+  /// ```
+  ///
+  /// If parsing fails, returns the original string.
+  String formatDate(String pattern, {String? locale}) {
+    final date = DateTime.tryParse(this);
+    if (date == null) return this;
+    return DateFormat(pattern, locale).format(date);
+  }
+}

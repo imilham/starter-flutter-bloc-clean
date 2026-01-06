@@ -93,9 +93,9 @@ class SectionHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Flexible(
-            child: CommonText(
+            child: Text(
               title,
-              style: _getStyle(context),
+              style: _getStyle(),
             ),
           ),
           if (action != null) ...[
@@ -117,20 +117,16 @@ class SectionHeader extends StatelessWidget {
     }
   }
 
-  TextStyle? _getStyle(BuildContext context) {
-    final baseColor = color ?? context.colorScheme.onSurface;
+  TextStyle _getStyle() {
+    final baseColor = color; // Style helpers handle null color by defaulting to baseColor
 
     switch (style) {
       case SectionHeaderStyle.large:
-        // Large headers often look good in Primary color, but let's stick to standard text color unless overridden
-        // Or we can default to Primary as per your local _SectionHeader implementation
-        return context.titleLarge?.bold?.copyWith(
-          color: color ?? context.colorScheme.primary, // Keeping your local preference
-        );
+        return headline3(textColor: baseColor);
       case SectionHeaderStyle.medium:
-        return context.titleMedium?.bold?.copyWith(color: baseColor);
+        return headline4(textColor: baseColor);
       case SectionHeaderStyle.small:
-        return context.labelLarge?.bold?.copyWith(color: baseColor);
+        return headline5(textColor: baseColor);
     }
   }
 }

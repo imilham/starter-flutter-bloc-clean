@@ -61,10 +61,11 @@ class _SplashPageState extends State<SplashPage> {
                           child: CircularProgressIndicator(),
                         ),
                         Gap.medium16,
-                        CommonText(
+                        Text(
                           state.message,
                           textAlign: TextAlign.center,
-                        ).size16px.setColor(context.colorScheme.error),
+                          style: bodyRegular(textColor: context.colorScheme.error),
+                        ),
                         Builder(
                           builder: (context) {
                             if (state.lastError == null || state.lastError!.isEmpty) {
@@ -72,21 +73,23 @@ class _SplashPageState extends State<SplashPage> {
                             }
                             return Padding(
                               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              child: CommonText(
+                              child: Text(
                                 state.lastError ?? '',
                                 textAlign: TextAlign.center,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                              ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                                style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                              ),
                             );
                           },
                         ),
                         Builder(
                           builder: (context) {
                             if (state.retryCount != null && state.retryCount! > 0) {
-                              return CommonText(
+                              return Text(
                                 'Attempt ${state.retryCount!} of ${state.maxRetries}',
-                              ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5));
+                                style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                              );
                             }
                             return const SizedBox.shrink();
                           },
@@ -109,7 +112,10 @@ class _SplashPageState extends State<SplashPage> {
                                   side: const BorderSide(color: Colors.red),
                                 ),
                                 icon: const Icon(Icons.cancel),
-                                label: const CommonText('Cancel & Logout').size14px,
+                                label: Text(
+                                  'Cancel & Logout',
+                                  style: bodyRegular(),
+                                ),
                               );
                             }
                             return const SizedBox.shrink();
@@ -122,16 +128,18 @@ class _SplashPageState extends State<SplashPage> {
                     return Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        CommonText(
+                        Text(
                           state.message,
                           textAlign: TextAlign.center,
-                        ).size16px.setColor(context.colorScheme.error),
+                          style: bodyRegular(textColor: context.colorScheme.error),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: const CommonText(
+                          child: Text(
                             'Try again later or contact support if the issue persists.',
                             textAlign: TextAlign.center,
-                          ).size12px.setColor(context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                            style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                          ),
                         ),
                       ],
                     );

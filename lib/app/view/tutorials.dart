@@ -16,7 +16,8 @@ class _TutorialPageState extends State<TutorialPage> {
   final List<Map<String, dynamic>> _pages = [
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -34,7 +35,8 @@ class _TutorialPageState extends State<TutorialPage> {
     },
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -52,7 +54,8 @@ class _TutorialPageState extends State<TutorialPage> {
     },
     {
       'title': 'Withdrawal Restricted Savings Accounts',
-      'description': 'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+      'description':
+          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
       'features': [
         {
           'title': 'Feature 1',
@@ -164,13 +167,18 @@ class _TutorialPageState extends State<TutorialPage> {
                                         Column(
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
-                                            CommonText(
+                                            Text(
                                               (_pages[index]['features'] as List<Map>)[index]['title'].toString(),
-                                            ).size16px.bold.setColor(context.colorScheme.secondary),
+                                              style: bodyRegular(
+                                                textColor: context.colorScheme.secondary,
+                                                fontWeight: FontWeight.bold,
+                                              ),
+                                            ),
                                             Gap.extraSmall4,
-                                            CommonText(
+                                            Text(
                                               (_pages[index]['features'] as List<Map>)[index]['description'].toString(),
-                                            ).size14px,
+                                              style: bodyRegular(),
+                                            ),
                                           ],
                                         ),
                                         Gap.medium16,
@@ -179,13 +187,18 @@ class _TutorialPageState extends State<TutorialPage> {
                                   ),
                                 ),
                                 Gap.medium12,
-                                CommonText(
+                                Text(
                                   _pages[index]['title'].toString(),
-                                ).size24px.bold.setColor(context.colorScheme.secondary),
+                                  style: headline2(
+                                    textColor: context.colorScheme.secondary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
                                 Gap.medium16,
-                                CommonText(
+                                Text(
                                   _pages[index]['description'].toString(),
-                                ).size14px,
+                                  style: bodyRegular(),
+                                ),
                                 Gap.large24,
                               ],
                             ),
@@ -228,7 +241,10 @@ class _TutorialPageState extends State<TutorialPage> {
                 onPressed: () {
                   GetIt.I<AppStates>().isTutorialShown = true;
                 },
-                child: CommonText(_currentIndex == 2 ? 'Get Started' : 'Skip').size14px.bold,
+                child: Text(
+                  _currentIndex == 2 ? 'Get Started' : 'Skip',
+                  style: bodyRegular(fontWeight: FontWeight.bold),
+                ),
               ),
             ),
             const RelativeGap(mainAxisExtent: 0.04),

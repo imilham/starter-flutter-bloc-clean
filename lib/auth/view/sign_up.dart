@@ -105,7 +105,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         children: [
                           TextSpan(
                             text: 'Terms and Conditions',
-                            style: context.bodyMedium?.setColor(context.colorScheme.secondary).bold,
+                            style: context.bodyMedium?.copyWith(
+                              color: context.colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // TODO(ishanga): Add Terms and Conditions page
@@ -114,7 +117,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
                           TextSpan(
                             text: 'Privacy Policy',
-                            style: context.bodyMedium?.setColor(context.colorScheme.secondary).bold,
+                            style: context.bodyMedium?.copyWith(
+                              color: context.colorScheme.secondary,
+                              fontWeight: FontWeight.bold,
+                            ),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 // TODO(ishanga): Add Privacy Policy page
@@ -144,7 +150,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   SizedBox(
                     width: double.infinity,
                     child: Center(
-                      child: const CommonText('Or continue with').size14px,
+                      child: Text(
+                        'Or continue with',
+                        style: bodyRegular(),
+                      ),
                     ),
                   ),
                   Gap.medium16,
@@ -190,7 +199,10 @@ class _SignUpPageState extends State<SignUpPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CommonText('Already have an account?').size14px,
+                      Text(
+                        'Already have an account?',
+                        style: bodyRegular(),
+                      ),
                       TextButton(
                         onPressed: () {
                           Pages.signIn.go(context);
@@ -198,7 +210,10 @@ class _SignUpPageState extends State<SignUpPage> {
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                         ),
-                        child: const CommonText('Sign In').size14px.bold,
+                        child: Text(
+                          'Sign In',
+                          style: bodyRegular(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),

@@ -29,7 +29,10 @@ class _IntroPageState extends State<IntroPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const CommonText('Already have an account?').size14px,
+              Text(
+                'Already have an account?',
+                style: bodyRegular(),
+              ),
               TextButton(
                 onPressed: () {
                   Pages.signIn.go(context);
@@ -37,7 +40,10 @@ class _IntroPageState extends State<IntroPage> {
                 style: TextButton.styleFrom(
                   padding: EdgeInsets.zero,
                 ),
-                child: const CommonText('Sign In').size14px.bold,
+                child: Text(
+                  'Sign In',
+                  style: bodyRegular(fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),

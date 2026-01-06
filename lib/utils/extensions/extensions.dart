@@ -9,5 +9,4 @@ library;
 
 export 'core_extensions.dart';
 export 'snackbar_extension.dart';
-export 'text_style_extension.dart';
 export 'theme_extension.dart';

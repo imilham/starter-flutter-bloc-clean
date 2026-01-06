@@ -24,7 +24,10 @@ class AppLogo extends StatelessWidget {
             color: Theme.of(context).colorScheme.secondary,
             fallbackHeight: 100,
             fallbackWidth: 100,
-            child: const CommonText('Logo goes here').size12px,
+            child: Text(
+              'Logo goes here',
+              style: tab3Xs(),
+            ),
           ),
         ),
       ),

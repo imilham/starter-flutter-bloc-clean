@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:google_fonts/google_fonts.dart';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/utils/extensions/app_colors_extension.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A service provider class for managing the theme of the application.
 /// This class provides methods to toggle the theme between light and dark,
@@ -71,11 +72,6 @@ class ThemeServiceProvider with ChangeNotifier {
           shimmerColor: Colors.grey.shade300,
           shimmerBgColor: Colors.grey.shade100,
           success: const Color(0xFF22C55E), // Green 500
-          exampleColor1: Colors.indigoAccent,
-          exampleColor2: Colors.teal,
-          exampleColor3: Colors.amber,
-          exampleColor4: Colors.deepOrange,
-          exampleColor5: Colors.pink,
         ),
       ],
     );
@@ -110,18 +106,13 @@ class ThemeServiceProvider with ChangeNotifier {
           shimmerColor: const Color(0xff07A8FE).withValues(alpha: 0.24),
           shimmerBgColor: const Color(0xFF3A3A3C),
           success: const Color(0xFF4ADE80), // Green 400
-          exampleColor1: Colors.indigoAccent.shade100,
-          exampleColor2: Colors.tealAccent,
-          exampleColor3: Colors.amberAccent,
-          exampleColor4: Colors.deepOrangeAccent,
-          exampleColor5: Colors.pinkAccent,
         ),
       ],
     );
   }
 
   String? _fontFamily() {
-    return GoogleFonts.poppins().fontFamily;
+    return appFontFamily;
   }
 
   ElevatedButtonThemeData _elevatedButtonThemeData() {
@@ -130,10 +121,7 @@ class ThemeServiceProvider with ChangeNotifier {
         foregroundColor: Colors.white,
         backgroundColor: _primaryColor,
         elevation: 0,
-        textStyle: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.bold,
-        ),
+        textStyle: buttonRegular(textColor: Colors.white),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
@@ -152,9 +140,7 @@ class ThemeServiceProvider with ChangeNotifier {
         foregroundColor: _isDark ? Colors.white : Colors.white,
         backgroundColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
         elevation: 0,
-        textStyle: const TextStyle(
-          fontSize: 16,
-        ),
+        textStyle: buttonRegular(textColor: _isDark ? Colors.white : Colors.white),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
@@ -172,10 +158,7 @@ class ThemeServiceProvider with ChangeNotifier {
       style: TextButton.styleFrom(
         foregroundColor: _secondaryColor,
         elevation: 0,
-        textStyle: const TextStyle(
-          fontSize: 14,
-          fontWeight: FontWeight.bold,
-        ),
+        textStyle: buttonSmall(textColor: _secondaryColor),
         padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 12,
@@ -200,11 +183,11 @@ class ThemeServiceProvider with ChangeNotifier {
       ),
       filled: true,
       fillColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
-      hintStyle: TextStyle(
-        color: _isDark ? Colors.white70 : Colors.black54,
+      hintStyle: formHint(
+        textColor: _isDark ? Colors.white70 : Colors.black54,
       ),
-      labelStyle: TextStyle(
-        color: _isDark ? Colors.white : Colors.black87,
+      labelStyle: formLabel(
+        textColor: _isDark ? Colors.white : Colors.black87,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.never,
       enabledBorder: OutlineInputBorder(
@@ -222,10 +205,8 @@ class ThemeServiceProvider with ChangeNotifier {
       iconTheme: IconThemeData(
         color: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
-      titleTextStyle: TextStyle(
-        color: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
+      titleTextStyle: appBar(
+        textColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
     );
   }
@@ -244,13 +225,8 @@ class ThemeServiceProvider with ChangeNotifier {
       selectedItemColor: _secondaryColor,
       unselectedItemColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       showUnselectedLabels: true,
-      selectedLabelStyle: const TextStyle(
-        fontSize: 12,
-        fontWeight: FontWeight.bold,
-      ),
-      unselectedLabelStyle: const TextStyle(
-        fontSize: 12,
-      ),
+      selectedLabelStyle: tab3Xs(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: tab3Xs(),
     );
   }
 

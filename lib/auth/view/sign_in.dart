@@ -95,7 +95,10 @@ class _SignInPageState extends State<SignInPage> {
                         onPressed: () {
                           Pages.forgotPassword.go(context);
                         },
-                        child: const CommonText('Forgot Password?').size14px.bold,
+                        child: Text(
+                          'Forgot Password?',
+                          style: bodyRegular(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                   ),
@@ -116,7 +119,10 @@ class _SignInPageState extends State<SignInPage> {
                   SizedBox(
                     width: double.infinity,
                     child: Center(
-                      child: const CommonText('Or continue with').size14px,
+                      child: Text(
+                        'Or continue with',
+                        style: bodyRegular(),
+                      ),
                     ),
                   ),
                   Gap.medium16,
@@ -162,7 +168,10 @@ class _SignInPageState extends State<SignInPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const CommonText("Don't have an account?").size14px,
+                      Text(
+                        "Don't have an account?",
+                        style: bodyRegular(),
+                      ),
                       TextButton(
                         onPressed: () {
                           Pages.signUp.go(context);
@@ -170,7 +179,10 @@ class _SignInPageState extends State<SignInPage> {
                         style: TextButton.styleFrom(
                           padding: EdgeInsets.zero,
                         ),
-                        child: const CommonText('Sign Up').size14px.bold,
+                        child: Text(
+                          'Sign Up',
+                          style: bodyRegular(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ],
                   ),

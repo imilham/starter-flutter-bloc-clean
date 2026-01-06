@@ -104,7 +104,10 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   style: TextButton.styleFrom(
                     foregroundColor: context.colorScheme.error,
                   ),
-                  child: const CommonText('Log Out').size14px,
+                  child: Text(
+                    'Log Out',
+                    style: bodyRegular(),
+                  ),
                 ),
               ],
             ),
@@ -112,15 +115,17 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const RelativeGap(mainAxisExtent: 0.05),
-                const CommonText(
+                Text(
                   'Please enter your verification code',
                   textAlign: TextAlign.center,
-                ).size24px.bold,
+                  style: headline2(),
+                ),
                 Gap.medium16,
-                const CommonText(
+                Text(
                   'The verification code has been sent to sample@mail.com',
                   textAlign: TextAlign.center,
-                ).size14px,
+                  style: bodyRegular(),
+                ),
                 Gap.extraLarge32,
                 Gap.medium16,
                 SizedBox(
@@ -147,29 +152,38 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 ),
                 Gap.medium16,
                 const Spacer(),
-                const CommonText(
+                Text(
                   "Didn't receive the verification code?",
                   textAlign: TextAlign.center,
-                ).size14px,
+                  style: bodyRegular(),
+                ),
                 Gap.extraSmall4,
                 TextButton(
                   onPressed: _authService.resendVerificationCode,
-                  child: const CommonText('Resend the Code').size14px.bold,
+                  child: Text(
+                    'Resend the Code',
+                    style: bodyRegular(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 Gap.medium16,
-                const CommonText(
+                Text(
                   'Or',
                   textAlign: TextAlign.center,
-                ).size14px,
+                  style: bodyRegular(),
+                ),
                 Gap.medium16,
-                const CommonText(
+                Text(
                   'Send the verification code to your mobile number?',
                   textAlign: TextAlign.center,
-                ).size14px,
+                  style: bodyRegular(),
+                ),
                 Gap.extraSmall4,
                 TextButton(
                   onPressed: () {},
-                  child: const CommonText('Send the code').size14px.bold,
+                  child: Text(
+                    'Send the code',
+                    style: bodyRegular(fontWeight: FontWeight.bold),
+                  ),
                 ),
                 const RelativeGap(mainAxisExtent: 0.02),
               ],

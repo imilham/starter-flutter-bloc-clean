@@ -11,7 +11,10 @@ class HomePage extends StatelessWidget {
         title: 'Home',
       ),
       body: Center(
-        child: const CommonText('Home Content').size16px.bold,
+        child: Text(
+          'Home Content',
+          style: bodyRegular(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

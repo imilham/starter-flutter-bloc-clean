@@ -89,14 +89,21 @@ class _IsolateSampleState extends State<IsolateSample> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CommonText(
+              Text(
                 'The Engineering Trick: Isolates',
-              ).size16px.bold.setColor(context.colorScheme.onSurfaceVariant),
+                style: bodyRegular(
+                  fontWeight: FontWeight.bold,
+                  textColor: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
               Gap.small8,
-              const CommonText(
+              Text(
                 'Dart is single-threaded. Heavy calculations (like parsing huge JSON or filtering lists) block the UI thread, causing "jank" (dropped frames).\n\n'
                 'Isolates allow you to run code in a separate thread memory space. The UI stays buttery smooth while the heavy lifting happens in the background.',
-              ).size14px.setColor(context.colorScheme.onSurfaceVariant),
+                style: bodySmall(
+                  textColor: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
             ],
           ),
         ),
@@ -104,9 +111,10 @@ class _IsolateSampleState extends State<IsolateSample> {
 
         // JANK DEMO UI
         const SectionHeader.large('Live Demo: UI Freeze Test'),
-        const CommonText(
+        Text(
           'Tap the counter button repeatedly while running tasks. If the counter stops updating, the UI is frozen.',
-        ).size14px,
+          style: bodySmall(),
+        ),
         Gap.medium16,
 
         Center(
@@ -116,9 +124,13 @@ class _IsolateSampleState extends State<IsolateSample> {
               color: context.colorScheme.primaryContainer,
               shape: BoxShape.circle,
             ),
-            child: CommonText(
+            child: Text(
               '$_counter',
-            ).size32px.bold.setColor(context.colorScheme.onPrimaryContainer),
+              style: headline1(
+                textColor: context.colorScheme.onPrimaryContainer,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ),
         ),
         Gap.small8,
@@ -171,13 +183,16 @@ class _IsolateSampleState extends State<IsolateSample> {
           ),
           child: Column(
             children: [
-              const CommonText('Status / Result').size14px.bold,
+              Text(
+                'Status / Result',
+                style: bodySmall(fontWeight: FontWeight.bold),
+              ),
               Gap.small8,
-              CommonText(
+              Text(
                 _result,
                 textAlign: TextAlign.center,
-                style: const TextStyle(fontFamily: 'monospace'),
-              ).size14px,
+                style: bodySmall().copyWith(fontFamily: 'monospace'),
+              ),
             ],
           ),
         ),
@@ -189,13 +204,13 @@ class _IsolateSampleState extends State<IsolateSample> {
             color: Colors.black.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const CommonText(
+          child: Text(
             '// Code Example (Flutter 3.7+)\n'
             'final result = await Isolate.run(() {\n'
             '  return heavyComputation();\n'
             '});',
-            style: TextStyle(fontFamily: 'monospace'),
-          ).size12px,
+            style: bodyXSmall().copyWith(fontFamily: 'monospace'),
+          ),
         ),
       ],
     );

@@ -12,11 +12,23 @@ class ShimmerSample extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         const SectionHeader.large('Basic Shapes'),
-        const CommonText('Rectangular (Default)').size14px,
+        Text('Rectangular (Default)', style: bodyRegular()),
         Gap.small8,
         const CommonShimmer(width: double.infinity, height: 100),
         Gap.medium16,
-        const CommonText('Circular').size14px,
+        const SectionHeader.large('List Loading'),
+        Gap.small8,
+        Container(
+          height: 100,
+          color: Colors.grey.shade100,
+          alignment: Alignment.center,
+          child: Text(
+            'Shimmer Placeholder',
+            style: bodyRegular(textColor: Colors.grey),
+          ),
+        ),
+        Gap.medium16,
+        Text('Circular', style: bodyRegular()),
         Gap.small8,
         const Row(
           children: [
@@ -29,7 +41,7 @@ class ShimmerSample extends StatelessWidget {
         ),
         const Divider(height: 32),
         const SectionHeader.large('Complex Layouts'),
-        const CommonText('List Item Skeleton').size14px,
+        Text('List Item Skeleton', style: bodyRegular()),
         Gap.small8,
         ListView.separated(
           shrinkWrap: true,
@@ -39,7 +51,7 @@ class ShimmerSample extends StatelessWidget {
           itemBuilder: (_, __) => const _ShimmerListItem(),
         ),
         Gap.large24,
-        const CommonText('Card Skeleton').size14px,
+        Text('Card Skeleton', style: bodySmall()),
         Gap.small8,
         CommonShimmer.content(
           child: Column(

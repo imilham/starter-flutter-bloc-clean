@@ -50,7 +50,8 @@ class _ComponentsSampleState extends State<ComponentsSample> {
         ),
         Gap.small8,
         CommonElevatedButton(
-          text: 'Custom Width (120)',
+          text: 'Fixed Width (120)',
+          width: 120,
           onPressed: () {},
         ),
         Gap.small8,
@@ -73,7 +74,18 @@ class _ComponentsSampleState extends State<ComponentsSample> {
         ),
         const Divider(height: 32),
         const SectionHeader.large('Loader'),
-        const Center(child: CommonCircularLoader.custom(size: 32)),
+        const Text('Adaptive (Theme Aware)'),
+        const Center(child: CommonCircularLoader()),
+        Gap.small8,
+        const Text('Force Dark Color (Purple)'),
+        const Center(child: CommonCircularLoader.dark()),
+        Gap.small8,
+        const Text('Force Light Color (White) - on Dark Box'),
+        Container(
+          height: 50,
+          color: Colors.black,
+          child: const Center(child: CommonCircularLoader.light()),
+        ),
         const Divider(height: 32),
         const SectionHeader.large('Carousel'),
         CommonCarousel.images(
@@ -105,18 +117,31 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           hintText: 'Cannot edit this',
           readOnly: true,
         ),
-
         Gap.medium12,
-
         const SectionHeader(title: 'Date Conversion'),
-
-        const CommonText('Original: 06/01/2026').size16px.italic,
+        Text(
+          'Original: 06/01/2026',
+          style: bodyRegular(
+            fontWeight: FontWeight.w200,
+            fontStyle: FontStyle.italic,
+          ),
+        ),
         Gap.small8,
-        CommonText(date.format('dd MMM yyyy')).size20px.bold.setColor(context.colorScheme.primary),
-
+        Text(
+          date.format('dd MMM yyyy'),
+          style: headline3(textColor: context.colorScheme.primary),
+        ),
         Gap.extraLarge32,
-
-        // this is the sampe for the date conversion
+        Gap.large24,
+        Text(
+          'String Date Parsing & Formatting:',
+          style: bodySmall(fontWeight: FontWeight.bold),
+        ),
+        Gap.small8,
+        Text(
+          '2026-01-06T12:00:00'.formatDate('MMMM dd, yyyy'),
+          style: bodyRegular(textColor: context.colorScheme.primary),
+        ),
       ],
     );
   }

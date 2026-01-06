@@ -44,7 +44,7 @@ class OverlaysSample extends StatelessWidget {
               child: Container(
                 height: 200,
                 alignment: Alignment.center,
-                child: const CommonText('Sheet Content Goes Here'),
+                child: Text('Sheet Content Goes Here', style: bodyRegular()),
               ),
             );
           },
@@ -73,7 +73,12 @@ class OverlaysSample extends StatelessWidget {
                 children: [
                   const Icon(Icons.star, color: Colors.amber),
                   Gap.small8,
-                  Expanded(child: const CommonText('You earned 50 points!').size14px.setColor(Colors.white)),
+                  Expanded(
+                    child: Text(
+                      'You earned 50 points!',
+                      style: bodySmall(textColor: Colors.white),
+                    ),
+                  ),
                   Gap.small8,
                   const Icon(Icons.celebration, color: Colors.pinkAccent),
                 ],

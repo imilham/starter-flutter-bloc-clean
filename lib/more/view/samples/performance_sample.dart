@@ -38,29 +38,36 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const CommonText(
+              Text(
                 'The Engineering Trick: RepaintBoundary',
-              ).size16px.bold.setColor(context.colorScheme.onSurfaceVariant),
+                style: bodyRegular(
+                  fontWeight: FontWeight.bold,
+                  textColor: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
               Gap.small8,
-              const CommonText(
+              Text(
                 'By default, if one small icon animates, Flutter might repaint the entire screen. '
                 'By wrapping that icon in a RepaintBoundary, you create a separate "layer." '
                 'Now, Flutter only repaints that small area, saving massive amounts of GPU power.',
-              ).size14px.setColor(context.colorScheme.onSurfaceVariant),
+                style: bodySmall(
+                  textColor: context.colorScheme.onSurfaceVariant,
+                ),
+              ),
             ],
           ),
         ),
         Gap.large24,
         const SectionHeader.large('Live Demo'),
-        const CommonText(
+        Text(
           'To verify optimization:\n'
           '1. Open Flutter DevTools (cmd + shift + p -> Open DevTools)\n'
           '2. Go to "Performance" or "Inspector" tab\n'
           '3. Enable "Highlight Repaints" (Rainbow icon)\n'
           '4. Without RepaintBoundary, the whole list might flash.\n'
           '5. With RepaintBoundary, ONLY the logo flashes.',
-          style: TextStyle(height: 1.5),
-        ).size14px,
+          style: bodySmall(height: 1.5),
+        ),
         Gap.medium16,
         Center(
           child: RepaintBoundary(
@@ -76,7 +83,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             color: Colors.black.withValues(alpha: 0.05),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: const CommonText(
+          child: Text(
             '// Code Example\n'
             'RepaintBoundary(\n'
             '  child: RotationTransition(\n'
@@ -84,8 +91,8 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             '    child: FlutterLogo(),\n'
             '  ),\n'
             ')',
-            style: TextStyle(fontFamily: 'monospace'),
-          ).size12px,
+            style: bodyXSmall().copyWith(fontFamily: 'monospace'),
+          ),
         ),
       ],
     );
