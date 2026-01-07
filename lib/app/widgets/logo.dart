@@ -26,7 +26,7 @@ class AppLogo extends StatelessWidget {
             fallbackWidth: 100,
             child: Text(
               'Logo goes here',
-              style: tab3Xs(),
+              style: tab10(),
             ),
           ),
         ),

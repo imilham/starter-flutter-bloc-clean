@@ -87,7 +87,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 onPressed: () {},
                 child: Text(
                   'Edit Profile',
-                  style: bodyRegular(fontWeight: FontWeight.bold),
+                  style: bodyRegular16(fontWeight: FontWeight.bold),
                 ),
               ),
               Gap.medium16,
@@ -95,7 +95,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
                 onPressed: () {},
                 child: Text(
                   'Change Password',
-                  style: bodyRegular(fontWeight: FontWeight.bold),
+                  style: bodyRegular16(fontWeight: FontWeight.bold),
                 ),
               ),
               const RelativeGap(mainAxisExtent: 0.05),
@@ -133,12 +133,12 @@ class UserDetailItem extends StatelessWidget {
         children: [
           Text(
             title,
-            style: bodyRegular(),
+            style: bodyRegular16(),
           ),
           const Spacer(),
           Text(
             value,
-            style: bodyRegular(textColor: context.colorScheme.onSurface.withValues(alpha: 0.6)),
+            style: bodyRegular16(textColor: context.colorScheme.onSurface.withValues(alpha: 0.6)),
           ),
         ],
       ),

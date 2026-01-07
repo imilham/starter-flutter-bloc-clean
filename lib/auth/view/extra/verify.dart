@@ -106,7 +106,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   ),
                   child: Text(
                     'Log Out',
-                    style: bodyRegular(),
+                    style: bodyRegular16(),
                   ),
                 ),
               ],
@@ -118,13 +118,13 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Text(
                   'Please enter your verification code',
                   textAlign: TextAlign.center,
-                  style: headline2(),
+                  style: headline24(),
                 ),
                 Gap.medium16,
                 Text(
                   'The verification code has been sent to sample@mail.com',
                   textAlign: TextAlign.center,
-                  style: bodyRegular(),
+                  style: bodyRegular16(),
                 ),
                 Gap.extraLarge32,
                 Gap.medium16,
@@ -155,34 +155,34 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Text(
                   "Didn't receive the verification code?",
                   textAlign: TextAlign.center,
-                  style: bodyRegular(),
+                  style: bodyRegular16(),
                 ),
                 Gap.extraSmall4,
                 TextButton(
                   onPressed: _authService.resendVerificationCode,
                   child: Text(
                     'Resend the Code',
-                    style: bodyRegular(fontWeight: FontWeight.bold),
+                    style: bodyRegular16(fontWeight: FontWeight.bold),
                   ),
                 ),
                 Gap.medium16,
                 Text(
                   'Or',
                   textAlign: TextAlign.center,
-                  style: bodyRegular(),
+                  style: bodyRegular16(),
                 ),
                 Gap.medium16,
                 Text(
                   'Send the verification code to your mobile number?',
                   textAlign: TextAlign.center,
-                  style: bodyRegular(),
+                  style: bodyRegular16(),
                 ),
                 Gap.extraSmall4,
                 TextButton(
                   onPressed: () {},
                   child: Text(
                     'Send the code',
-                    style: bodyRegular(fontWeight: FontWeight.bold),
+                    style: bodyRegular16(fontWeight: FontWeight.bold),
                   ),
                 ),
                 const RelativeGap(mainAxisExtent: 0.02),

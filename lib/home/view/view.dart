@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Text(
           'Home Content',
-          style: bodyRegular(fontWeight: FontWeight.bold),
+          style: bodyRegular16(fontWeight: FontWeight.bold),
         ),
       ),
     );

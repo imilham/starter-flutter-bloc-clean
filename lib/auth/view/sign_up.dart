@@ -152,7 +152,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     child: Center(
                       child: Text(
                         'Or continue with',
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                     ),
                   ),
@@ -201,7 +201,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     children: [
                       Text(
                         'Already have an account?',
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                       TextButton(
                         onPressed: () {
@@ -212,7 +212,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         ),
                         child: Text(
                           'Sign In',
-                          style: bodyRegular(fontWeight: FontWeight.bold),
+                          style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

@@ -97,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
                         },
                         child: Text(
                           'Forgot Password?',
-                          style: bodyRegular(fontWeight: FontWeight.bold),
+                          style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ),
@@ -121,7 +121,7 @@ class _SignInPageState extends State<SignInPage> {
                     child: Center(
                       child: Text(
                         'Or continue with',
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                     ),
                   ),
@@ -170,7 +170,7 @@ class _SignInPageState extends State<SignInPage> {
                     children: [
                       Text(
                         "Don't have an account?",
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                       TextButton(
                         onPressed: () {
@@ -181,7 +181,7 @@ class _SignInPageState extends State<SignInPage> {
                         ),
                         child: Text(
                           'Sign Up',
-                          style: bodyRegular(fontWeight: FontWeight.bold),
+                          style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],

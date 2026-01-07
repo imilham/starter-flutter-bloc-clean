@@ -31,7 +31,7 @@ class _IntroPageState extends State<IntroPage> {
             children: [
               Text(
                 'Already have an account?',
-                style: bodyRegular(),
+                style: bodyRegular16(),
               ),
               TextButton(
                 onPressed: () {
@@ -42,7 +42,7 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 child: Text(
                   'Sign In',
-                  style: bodyRegular(fontWeight: FontWeight.bold),
+                  style: bodyRegular16(fontWeight: FontWeight.bold),
                 ),
               ),
             ],

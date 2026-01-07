@@ -84,13 +84,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       Text(
                         'Please Check Your Email',
                         textAlign: TextAlign.center,
-                        style: headline2(fontWeight: FontWeight.bold),
+                        style: headline24(fontWeight: FontWeight.bold),
                       ),
                       Gap.medium16,
                       Text(
                         'A password reset link has been sent to your dedicated email',
                         textAlign: TextAlign.center,
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                       Gap.extraLarge32,
                       Gap.medium16,
@@ -99,7 +99,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         children: [
                           Text(
                             "Didn't receive the email?",
-                            style: bodyRegular(),
+                            style: bodyRegular16(),
                           ),
                           TextButton(
                             onPressed: () {
@@ -109,7 +109,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                             },
                             child: Text(
                               'Resend',
-                              style: bodyRegular(fontWeight: FontWeight.bold),
+                              style: bodyRegular16(fontWeight: FontWeight.bold),
                             ),
                           ),
                         ],
@@ -128,7 +128,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       Text(
                         "Enter your registered email address below and we'll send you a password reset email",
-                        style: bodyRegular(),
+                        style: bodyRegular16(),
                       ),
                       Gap.medium16,
                       EmailFormField(

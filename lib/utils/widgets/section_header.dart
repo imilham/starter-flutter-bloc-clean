@@ -122,11 +122,11 @@ class SectionHeader extends StatelessWidget {
 
     switch (style) {
       case SectionHeaderStyle.large:
-        return headline3(textColor: baseColor);
+        return headline20(textColor: baseColor);
       case SectionHeaderStyle.medium:
-        return headline4(textColor: baseColor);
+        return headline16(textColor: baseColor);
       case SectionHeaderStyle.small:
-        return headline5(textColor: baseColor);
+        return headline14(textColor: baseColor);
     }
   }
 }

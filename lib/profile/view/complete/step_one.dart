@@ -12,13 +12,13 @@ class StepOne extends StatelessWidget {
       children: [
         Text(
           'Step 1: Personal Details',
-          style: headline3(fontWeight: FontWeight.bold),
+          style: headline20(fontWeight: FontWeight.bold),
         ),
         Gap.medium16,
         Center(
           child: Text(
             'Form content goes here',
-            style: bodyRegular(),
+            style: bodyRegular16(),
           ),
         ),
         Text.rich(
@@ -26,11 +26,11 @@ class StepOne extends StatelessWidget {
             children: [
               TextSpan(
                 text: 'By continuing, you agree to our ',
-                style: bodyXSmall(),
+                style: bodyXSmall12(),
               ),
               TextSpan(
                 text: 'Terms of Service',
-                style: bodyXSmall(
+                style: bodyXSmall12(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.primary,
                 ),
@@ -38,11 +38,11 @@ class StepOne extends StatelessWidget {
               ),
               TextSpan(
                 text: ' and ',
-                style: bodyXSmall(),
+                style: bodyXSmall12(),
               ),
               TextSpan(
                 text: 'Privacy Policy',
-                style: bodyXSmall(
+                style: bodyXSmall12(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.primary,
                 ),

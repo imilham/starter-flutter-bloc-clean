@@ -50,60 +50,60 @@ TextStyle _font({
 String? get appFontFamily => _font().fontFamily;
 
 /// Heading Styles
-TextStyle headline1({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline32({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.x2xl.size,
+      fontSize: FontSize.xxLarge32.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline2({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline24({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.xl.size,
+      fontSize: FontSize.xLarge24.size,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline3({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline20({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.lg.size,
+      fontSize: FontSize.large20.size,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline4({Color? textColor, double? letterSpacing = 0.0, TextDecoration? decoration, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline16({Color? textColor, double? letterSpacing = 0.0, TextDecoration? decoration, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       decoration: decoration,
       fontStyle: fontStyle,
     );
 
-TextStyle headline4LinkText({Color? textColor, double? letterSpacing, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline16LinkText({Color? textColor, double? letterSpacing, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       letterSpacing: letterSpacing ?? 0.0,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline5({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline14({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.xs.size,
+      fontSize: FontSize.xSmall14.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline6({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline12({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.x2xs.size,
+      fontSize: FontSize.xxSmall12.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
@@ -111,27 +111,27 @@ TextStyle headline6({Color? textColor, double? letterSpacing = 0.0, double? heig
     );
 
 /// Body Styles
-TextStyle bodyRegular({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle bodyRegular16({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
       height: height,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w400,
       fontStyle: fontStyle,
     );
 
-TextStyle bodySmall({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle bodySmall14({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.xs.size,
+      fontSize: FontSize.xSmall14.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w500,
       fontStyle: fontStyle,
     );
 
-TextStyle bodyXSmall({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle bodyXSmall12({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.x2xs.size,
+      fontSize: FontSize.xxSmall12.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w400,
@@ -139,58 +139,58 @@ TextStyle bodyXSmall({Color? textColor, double? letterSpacing = 0.0, double? hei
     );
 
 ///Button Styles
-TextStyle buttonRegular({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonRegular16({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
     );
 
-TextStyle buttonSmall({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonSmall14({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
       color: textColor,
-      fontSize: FontSize.xs.size,
+      fontSize: FontSize.xSmall14.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
     );
 
-TextStyle buttonXSmall({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonXSmall12({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
       color: textColor,
-      fontSize: FontSize.x2xs.size,
+      fontSize: FontSize.xxSmall12.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
     );
 
 ///Form Styles
-TextStyle formBody({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle formBody16({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w400,
     );
 
-TextStyle formHint({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
+TextStyle formHint16({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w500,
     );
 
-TextStyle tab3Xs({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle tab10({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.x3xs.size,
+      fontSize: FontSize.xxxSmall10.size,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w500,
       fontStyle: fontStyle,
     );
 
-TextStyle formLabel({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle formLabel14({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.xs.size,
+      fontSize: FontSize.xSmall14.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w500,
@@ -198,52 +198,53 @@ TextStyle formLabel({Color? textColor, double? letterSpacing = 0.0, double? heig
     );
 
 /// AppBar Title Style
-TextStyle appBar({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
+TextStyle appBar16({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
       color: textColor,
-      fontSize: FontSize.s.size,
+      fontSize: FontSize.small16.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w600,
     );
 
-TextStyle appBarDescription({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle appBarDescription12({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
-      fontSize: FontSize.x2xs.size,
+      fontSize: FontSize.xxSmall12.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w400,
       fontStyle: fontStyle,
     );
 
+/// Font size definitions with descriptive names including the actual pixel size
 enum FontSize {
-  x2xl,
-  xl,
-  lg,
-  md,
-  s,
-  xs,
-  x2xs,
-  x3xs,
+  xxLarge32,
+  xLarge24,
+  large20,
+  medium18,
+  small16,
+  xSmall14,
+  xxSmall12,
+  xxxSmall10,
 }
 
 extension FontSizeExtension on FontSize {
   double get size {
     switch (this) {
-      case FontSize.x2xl:
+      case FontSize.xxLarge32:
         return 32;
-      case FontSize.xl:
+      case FontSize.xLarge24:
         return 24;
-      case FontSize.lg:
+      case FontSize.large20:
         return 20;
-      case FontSize.md:
+      case FontSize.medium18:
         return 18;
-      case FontSize.s:
+      case FontSize.small16:
         return 16;
-      case FontSize.xs:
+      case FontSize.xSmall14:
         return 14;
-      case FontSize.x2xs:
+      case FontSize.xxSmall12:
         return 12;
-      case FontSize.x3xs:
+      case FontSize.xxxSmall10:
         return 10;
     }
   }

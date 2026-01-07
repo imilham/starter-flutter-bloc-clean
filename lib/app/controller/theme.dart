@@ -133,7 +133,7 @@ class ThemeServiceProvider with ChangeNotifier {
         foregroundColor: _isDark ? _darkBackgroundColor : Colors.white,
         backgroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         elevation: 0,
-        textStyle: buttonRegular(
+        textStyle: buttonRegular16(
           textColor: _isDark ? _darkBackgroundColor : Colors.white,
         ),
         padding: const EdgeInsets.symmetric(
@@ -159,7 +159,7 @@ class ThemeServiceProvider with ChangeNotifier {
         side: BorderSide(
           color: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         ),
-        textStyle: buttonRegular(
+        textStyle: buttonRegular16(
           textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         ),
         padding: const EdgeInsets.symmetric(
@@ -179,7 +179,7 @@ class ThemeServiceProvider with ChangeNotifier {
       style: TextButton.styleFrom(
         foregroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         elevation: 0,
-        textStyle: buttonSmall(
+        textStyle: buttonSmall14(
           textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         ),
         padding: const EdgeInsets.symmetric(
@@ -206,10 +206,10 @@ class ThemeServiceProvider with ChangeNotifier {
       ),
       filled: true,
       fillColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
-      hintStyle: formHint(
+      hintStyle: formHint16(
         textColor: _isDark ? Colors.white70 : Colors.black54,
       ),
-      labelStyle: formLabel(
+      labelStyle: formLabel14(
         textColor: _isDark ? Colors.white : Colors.black87,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -228,7 +228,7 @@ class ThemeServiceProvider with ChangeNotifier {
       iconTheme: IconThemeData(
         color: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
-      titleTextStyle: appBar(
+      titleTextStyle: appBar16(
         textColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
     );
@@ -248,8 +248,8 @@ class ThemeServiceProvider with ChangeNotifier {
       selectedItemColor: _secondaryColor,
       unselectedItemColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       showUnselectedLabels: true,
-      selectedLabelStyle: tab3Xs(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: tab3Xs(),
+      selectedLabelStyle: tab10(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: tab10(),
     );
   }
 

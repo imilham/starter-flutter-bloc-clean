@@ -40,7 +40,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             children: [
               Text(
                 'The Engineering Trick: RepaintBoundary',
-                style: bodyRegular(
+                style: bodyRegular16(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.onSurfaceVariant,
                 ),
@@ -50,7 +50,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
                 'By default, if one small icon animates, Flutter might repaint the entire screen. '
                 'By wrapping that icon in a RepaintBoundary, you create a separate "layer." '
                 'Now, Flutter only repaints that small area, saving massive amounts of GPU power.',
-                style: bodySmall(
+                style: bodySmall14(
                   textColor: context.colorScheme.onSurfaceVariant,
                 ),
               ),
@@ -66,7 +66,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           '3. Enable "Highlight Repaints" (Rainbow icon)\n'
           '4. Without RepaintBoundary, the whole list might flash.\n'
           '5. With RepaintBoundary, ONLY the logo flashes.',
-          style: bodySmall(height: 1.5),
+          style: bodySmall14(height: 1.5),
         ),
         Gap.medium16,
         Center(
@@ -91,7 +91,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
             '    child: FlutterLogo(),\n'
             '  ),\n'
             ')',
-            style: bodyXSmall().copyWith(fontFamily: 'monospace'),
+            style: bodyXSmall12().copyWith(fontFamily: 'monospace'),
           ),
         ),
       ],

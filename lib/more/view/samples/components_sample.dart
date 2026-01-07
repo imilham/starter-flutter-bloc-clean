@@ -107,7 +107,7 @@ class _ComponentsSampleState extends State<ComponentsSample> {
         const SectionHeader(title: 'Date Conversion'),
         Text(
           'Original: 06/01/2026',
-          style: bodyRegular(
+          style: bodyRegular16(
             fontWeight: FontWeight.w200,
             fontStyle: FontStyle.italic,
           ),
@@ -115,18 +115,18 @@ class _ComponentsSampleState extends State<ComponentsSample> {
         Gap.small8,
         Text(
           date.format('dd MMM yyyy'),
-          style: headline3(textColor: context.colorScheme.primary),
+          style: headline20(textColor: context.colorScheme.primary),
         ),
         Gap.extraLarge32,
         Gap.large24,
         Text(
           'String Date Parsing & Formatting:',
-          style: bodySmall(fontWeight: FontWeight.bold),
+          style: bodySmall14(fontWeight: FontWeight.bold),
         ),
         Gap.small8,
         Text(
           '2026-01-06T12:00:00'.formatDate('MMMM dd, yyyy'),
-          style: bodyRegular(textColor: context.colorScheme.primary),
+          style: bodyRegular16(textColor: context.colorScheme.primary),
         ),
       ],
     );

@@ -22,7 +22,7 @@ class _SettingsPageState extends State<SettingsPage> {
             Gap.medium16,
             Text(
               'Settings Page',
-              style: bodyRegular(),
+              style: bodyRegular16(),
             ),
             Gap.medium16,
             // theme toggle switch

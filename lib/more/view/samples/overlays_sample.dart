@@ -44,7 +44,7 @@ class OverlaysSample extends StatelessWidget {
               child: Container(
                 height: 200,
                 alignment: Alignment.center,
-                child: Text('Sheet Content Goes Here', style: bodyRegular()),
+                child: Text('Sheet Content Goes Here', style: bodyRegular16()),
               ),
             );
           },
@@ -76,7 +76,7 @@ class OverlaysSample extends StatelessWidget {
                   Expanded(
                     child: Text(
                       'You earned 50 points!',
-                      style: bodySmall(textColor: Colors.white),
+                      style: bodySmall14(textColor: Colors.white),
                     ),
                   ),
                   Gap.small8,

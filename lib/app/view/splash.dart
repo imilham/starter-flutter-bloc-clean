@@ -64,7 +64,7 @@ class _SplashPageState extends State<SplashPage> {
                         Text(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: bodyRegular(textColor: context.colorScheme.error),
+                          style: bodyRegular16(textColor: context.colorScheme.error),
                         ),
                         Builder(
                           builder: (context) {
@@ -78,7 +78,7 @@ class _SplashPageState extends State<SplashPage> {
                                 textAlign: TextAlign.center,
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
-                                style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                                style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
                               ),
                             );
                           },
@@ -88,7 +88,7 @@ class _SplashPageState extends State<SplashPage> {
                             if (state.retryCount != null && state.retryCount! > 0) {
                               return Text(
                                 'Attempt ${state.retryCount!} of ${state.maxRetries}',
-                                style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                                style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
                               );
                             }
                             return const SizedBox.shrink();
@@ -114,7 +114,7 @@ class _SplashPageState extends State<SplashPage> {
                                 icon: const Icon(Icons.cancel),
                                 label: Text(
                                   'Cancel & Logout',
-                                  style: bodyRegular(),
+                                  style: bodyRegular16(),
                                 ),
                               );
                             }
@@ -131,14 +131,14 @@ class _SplashPageState extends State<SplashPage> {
                         Text(
                           state.message,
                           textAlign: TextAlign.center,
-                          style: bodyRegular(textColor: context.colorScheme.error),
+                          style: bodyRegular16(textColor: context.colorScheme.error),
                         ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                           child: Text(
                             'Try again later or contact support if the issue persists.',
                             textAlign: TextAlign.center,
-                            style: tab3Xs(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
+                            style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
                           ),
                         ),
                       ],

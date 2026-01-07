@@ -91,7 +91,7 @@ class _IsolateSampleState extends State<IsolateSample> {
             children: [
               Text(
                 'The Engineering Trick: Isolates',
-                style: bodyRegular(
+                style: bodyRegular16(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.onSurfaceVariant,
                 ),
@@ -100,7 +100,7 @@ class _IsolateSampleState extends State<IsolateSample> {
               Text(
                 'Dart is single-threaded. Heavy calculations (like parsing huge JSON or filtering lists) block the UI thread, causing "jank" (dropped frames).\n\n'
                 'Isolates allow you to run code in a separate thread memory space. The UI stays buttery smooth while the heavy lifting happens in the background.',
-                style: bodySmall(
+                style: bodySmall14(
                   textColor: context.colorScheme.onSurfaceVariant,
                 ),
               ),
@@ -113,7 +113,7 @@ class _IsolateSampleState extends State<IsolateSample> {
         const SectionHeader.large('Live Demo: UI Freeze Test'),
         Text(
           'Tap the counter button repeatedly while running tasks. If the counter stops updating, the UI is frozen.',
-          style: bodySmall(),
+          style: bodySmall14(),
         ),
         Gap.medium16,
 
@@ -126,7 +126,7 @@ class _IsolateSampleState extends State<IsolateSample> {
             ),
             child: Text(
               '$_counter',
-              style: headline1(
+              style: headline32(
                 textColor: context.colorScheme.onPrimaryContainer,
                 fontWeight: FontWeight.bold,
               ),
@@ -185,13 +185,13 @@ class _IsolateSampleState extends State<IsolateSample> {
             children: [
               Text(
                 'Status / Result',
-                style: bodySmall(fontWeight: FontWeight.bold),
+                style: bodySmall14(fontWeight: FontWeight.bold),
               ),
               Gap.small8,
               Text(
                 _result,
                 textAlign: TextAlign.center,
-                style: bodySmall().copyWith(fontFamily: 'monospace'),
+                style: bodySmall14().copyWith(fontFamily: 'monospace'),
               ),
             ],
           ),
@@ -209,7 +209,7 @@ class _IsolateSampleState extends State<IsolateSample> {
             'final result = await Isolate.run(() {\n'
             '  return heavyComputation();\n'
             '});',
-            style: bodyXSmall().copyWith(fontFamily: 'monospace'),
+            style: bodyXSmall12().copyWith(fontFamily: 'monospace'),
           ),
         ),
       ],

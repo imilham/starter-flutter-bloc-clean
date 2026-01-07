@@ -12,7 +12,7 @@ class StylesSample extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         const SectionHeader.large('Colors'),
-        const Text('Material Color Scheme', style: TextStyle(fontSize: 14)), // or bodySmall()
+        const Text('Material Color Scheme', style: TextStyle(fontSize: 14)), // or bodySmall14()
         Gap.small8,
         Wrap(
           spacing: 12,
@@ -51,50 +51,50 @@ class StylesSample extends StatelessWidget {
         Gap.medium16,
 
         const SectionHeader.small('Headlines'),
-        _TypeSample(style: headline1(), name: 'headline1'),
-        _TypeSample(style: headline2(), name: 'headline2'),
-        _TypeSample(style: headline3(), name: 'headline3'),
-        _TypeSample(style: headline4(), name: 'headline4'),
-        _TypeSample(style: headline5(), name: 'headline5'),
-        _TypeSample(style: headline6(), name: 'headline6'),
+        _TypeSample(style: headline32(), name: 'headline1'),
+        _TypeSample(style: headline24(), name: 'headline2'),
+        _TypeSample(style: headline20(), name: 'headline3'),
+        _TypeSample(style: headline16(), name: 'headline4'),
+        _TypeSample(style: headline14(), name: 'headline5'),
+        _TypeSample(style: headline12(), name: 'headline6'),
 
         const SectionHeader.small('Body'),
-        _TypeSample(style: bodyRegular(), name: 'bodyRegular'),
-        _TypeSample(style: bodySmall(), name: 'bodySmall'),
-        _TypeSample(style: bodyXSmall(), name: 'bodyXSmall'),
+        _TypeSample(style: bodyRegular16(), name: 'bodyRegular'),
+        _TypeSample(style: bodySmall14(), name: 'bodySmall'),
+        _TypeSample(style: bodyXSmall12(), name: 'bodyXSmall'),
 
         const SectionHeader.small('Buttons'),
-        _TypeSample(style: buttonRegular(textColor: context.colorScheme.onSurface), name: 'buttonRegular'),
-        _TypeSample(style: buttonSmall(textColor: context.colorScheme.onSurface), name: 'buttonSmall'),
-        _TypeSample(style: buttonXSmall(textColor: context.colorScheme.onSurface), name: 'buttonXSmall'),
+        _TypeSample(style: buttonRegular16(textColor: context.colorScheme.onSurface), name: 'buttonRegular'),
+        _TypeSample(style: buttonSmall14(textColor: context.colorScheme.onSurface), name: 'buttonSmall'),
+        _TypeSample(style: buttonXSmall12(textColor: context.colorScheme.onSurface), name: 'buttonXSmall'),
 
         const SectionHeader.small('Form'),
-        _TypeSample(style: formLabel(textColor: context.colorScheme.onSurface), name: 'formLabel'),
-        _TypeSample(style: formBody(textColor: context.colorScheme.onSurface), name: 'formBody'),
-        _TypeSample(style: formHint(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint'),
+        _TypeSample(style: formLabel14(textColor: context.colorScheme.onSurface), name: 'formLabel'),
+        _TypeSample(style: formBody16(textColor: context.colorScheme.onSurface), name: 'formBody'),
+        _TypeSample(style: formHint16(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint'),
 
         const SectionHeader.small('AppBar'),
-        _TypeSample(style: appBar(textColor: context.colorScheme.onSurface), name: 'appBar'),
-        _TypeSample(style: appBarDescription(textColor: context.colorScheme.onSurface), name: 'appBarDescription'),
+        _TypeSample(style: appBar16(textColor: context.colorScheme.onSurface), name: 'appBar'),
+        _TypeSample(style: appBarDescription12(textColor: context.colorScheme.onSurface), name: 'appBarDescription'),
 
         const SectionHeader.small('Tabs'),
-        _TypeSample(style: tab3Xs(textColor: context.colorScheme.onSurface), name: 'tab3Xs'),
+        _TypeSample(style: tab10(textColor: context.colorScheme.onSurface), name: 'tab3Xs'),
 
         const Divider(height: 32),
         const SectionHeader.large('Usage Examples'),
         const Text('Passing parameters overrides defaults:'),
         Gap.small8,
         _TypeSample(
-          style: bodyRegular(fontWeight: FontWeight.bold),
-          name: 'bodyRegular(fontWeight: FontWeight.bold)',
+          style: bodyRegular16(fontWeight: FontWeight.bold),
+          name: 'bodyRegular16(fontWeight: FontWeight.bold)',
         ),
         _TypeSample(
-          style: bodyRegular(fontStyle: FontStyle.italic),
-          name: 'bodyRegular(fontStyle: FontStyle.italic)',
+          style: bodyRegular16(fontStyle: FontStyle.italic),
+          name: 'bodyRegular16(fontStyle: FontStyle.italic)',
         ),
         _TypeSample(
-          style: bodyRegular(textColor: context.colorScheme.error),
-          name: 'bodyRegular(textColor: context.colorScheme.error)',
+          style: bodyRegular16(textColor: context.colorScheme.error),
+          name: 'bodyRegular16(textColor: context.colorScheme.error)',
         ),
       ],
     );
@@ -124,7 +124,7 @@ class _ColorChip extends StatelessWidget {
         Gap.extraSmall4,
         Text(
           name,
-          style: tab3Xs(fontWeight: FontWeight.bold, textColor: context.colorScheme.onSurface),
+          style: tab10(fontWeight: FontWeight.bold, textColor: context.colorScheme.onSurface),
         ),
       ],
     );
@@ -150,11 +150,11 @@ class _TypeSample extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: bodyXSmall(textColor: Colors.grey.shade600),
+                  style: bodyXSmall12(textColor: Colors.grey.shade600),
                 ),
                 Text(
                   '${style?.fontSize?.toStringAsFixed(0)}sp',
-                  style: tab3Xs(textColor: Colors.grey.shade400),
+                  style: tab10(textColor: Colors.grey.shade400),
                 ),
               ],
             ),

@@ -67,12 +67,12 @@ class MorePage extends StatelessWidget {
             leading: Icon(item.icon),
             title: Text(
               item.title,
-              style: bodyRegular(),
+              style: bodyRegular16(),
             ),
             subtitle: item.subtitle != null
                 ? Text(
                     item.subtitle!,
-                    style: tab3Xs(),
+                    style: tab10(),
                   )
                 : null,
             onTap: item.onTap,

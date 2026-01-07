@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 ///
 /// This allows for concise styling overrides:
 /// ```dart
-/// style: bodyRegular().bold.setColor(Colors.red)
+/// style: bodyRegular16().bold.setColor(Colors.red)
 /// ```
 extension TextStyleFluentExtension on TextStyle {
   /// Returns a copy of this text style with [FontWeight.bold].
