@@ -75,7 +75,7 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                 ),
                 Gap.medium16,
                 Padding(
-                  padding: AppSpacing.horizontalMd,
+                  padding: AppSpacing.horizontalMd16,
                   child: CommonElevatedButton(
                     text: controller.currentStep == 2 ? 'Explore The App' : 'Continue',
                     isLoading: isLoading,

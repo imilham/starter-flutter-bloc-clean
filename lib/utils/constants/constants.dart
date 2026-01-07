@@ -8,4 +8,5 @@
 library;
 
 export 'durations.dart';
+export 'radius.dart';
 export 'spacing.dart';

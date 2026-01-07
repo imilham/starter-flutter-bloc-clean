@@ -107,7 +107,7 @@ class _TutorialPageState extends State<TutorialPage> {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       Padding(
-                        padding: AppSpacing.horizontalLg,
+                        padding: AppSpacing.horizontalLg24,
                         child: Container(
                           decoration: BoxDecoration(
                             color: context.theme.cardColor,
@@ -121,7 +121,7 @@ class _TutorialPageState extends State<TutorialPage> {
                             ],
                           ),
                           child: Padding(
-                            padding: AppSpacing.allLg,
+                            padding: AppSpacing.allLg24,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -236,7 +236,7 @@ class _TutorialPageState extends State<TutorialPage> {
             Gap.extraLarge32,
             Gap.medium16,
             Padding(
-              padding: AppSpacing.horizontalMd,
+              padding: AppSpacing.horizontalMd16,
               child: ElevatedButton(
                 onPressed: () {
                   GetIt.I<AppStates>().isTutorialShown = true;

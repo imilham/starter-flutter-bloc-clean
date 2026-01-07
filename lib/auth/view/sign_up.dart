@@ -95,42 +95,39 @@ class _SignUpPageState extends State<SignUpPage> {
                     phoneFocusNode: FocusNode(),
                   ),
                   Gap.large24,
-                  Padding(
-                    padding: AppSpacing.horizontalMd,
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        text: 'By continuing, you agree to our ',
-                        style: context.bodyMedium,
-                        children: [
-                          TextSpan(
-                            text: 'Terms and Conditions',
-                            style: context.bodyMedium?.copyWith(
-                              color: context.colorScheme.secondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                // TODO(ishanga): Add Terms and Conditions page
-                              },
+                  RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text: 'By continuing, you agree to our ',
+                      style: context.bodyMedium,
+                      children: [
+                        TextSpan(
+                          text: 'Terms and Conditions',
+                          style: context.bodyMedium?.copyWith(
+                            color: context.colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
-                          TextSpan(
-                            text: 'Privacy Policy',
-                            style: context.bodyMedium?.copyWith(
-                              color: context.colorScheme.secondary,
-                              fontWeight: FontWeight.bold,
-                            ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                // TODO(ishanga): Add Privacy Policy page
-                              },
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // TODO(ishanga): Add Terms and Conditions page
+                            },
+                        ),
+                        const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
+                        TextSpan(
+                          text: 'Privacy Policy',
+                          style: context.bodyMedium?.copyWith(
+                            color: context.colorScheme.secondary,
+                            fontWeight: FontWeight.bold,
                           ),
-                          const TextSpan(text: '.'),
-                        ],
-                      ),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              // TODO(ishanga): Add Privacy Policy page
+                            },
+                        ),
+                        const TextSpan(text: '.'),
+                      ],
                     ),
-                  ),
+                  ).paddingHorizontal16,
                   Gap.large24,
                   CommonElevatedButton(
                     text: 'Verify Account',

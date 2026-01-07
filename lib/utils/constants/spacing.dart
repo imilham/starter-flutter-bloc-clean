@@ -7,8 +7,15 @@ import 'package:gap/gap.dart' as gap_pkg;
 ///
 /// ## Usage
 /// ```dart
-/// const FixedGap(mainAxisExtent: AppSpacing.md)
-/// Padding(padding: AppSpacing.horizontalMd)
+/// // Using size directly
+/// SizedBox(height: AppSpacing.md16)
+///
+/// // Using pre-defined EdgeInsets
+/// Padding(padding: AppSpacing.allMd16)
+/// Padding(padding: AppSpacing.horizontalLg24)
+///
+/// // Using with Gap
+/// Gap(AppSpacing.sm8)
 /// ```
 class AppSpacing {
   AppSpacing._();
@@ -18,67 +25,79 @@ class AppSpacing {
   // ─────────────────────────────────────────────────────────────────────
 
   /// Extra small spacing: 4px
-  static const double xs = 4;
+  static const double xs4 = 4;
 
   /// Small spacing: 8px
-  static const double sm = 8;
+  static const double sm8 = 8;
+
+  /// Medium-small spacing: 12px
+  static const double md12 = 12;
 
   /// Medium spacing: 16px (default)
-  static const double md = 16;
+  static const double md16 = 16;
 
   /// Large spacing: 24px
-  static const double lg = 24;
+  static const double lg24 = 24;
 
   /// Extra large spacing: 32px
-  static const double xl = 32;
+  static const double xl32 = 32;
 
   /// Double extra large spacing: 48px
-  static const double xxl = 48;
+  static const double xxl48 = 48;
 
   // ─────────────────────────────────────────────────────────────────────
   // EDGE INSETS - HORIZONTAL
   // ─────────────────────────────────────────────────────────────────────
 
   /// Horizontal padding: 4px
-  static const horizontalXs = EdgeInsets.symmetric(horizontal: xs);
+  static const horizontalXs4 = EdgeInsets.symmetric(horizontal: xs4);
 
   /// Horizontal padding: 8px
-  static const horizontalSm = EdgeInsets.symmetric(horizontal: sm);
+  static const horizontalSm8 = EdgeInsets.symmetric(horizontal: sm8);
+
+  /// Horizontal padding: 12px
+  static const horizontalMd12 = EdgeInsets.symmetric(horizontal: md12);
 
   /// Horizontal padding: 16px (default)
-  static const horizontalMd = EdgeInsets.symmetric(horizontal: md);
+  static const horizontalMd16 = EdgeInsets.symmetric(horizontal: md16);
 
   /// Horizontal padding: 24px
-  static const horizontalLg = EdgeInsets.symmetric(horizontal: lg);
+  static const horizontalLg24 = EdgeInsets.symmetric(horizontal: lg24);
 
   // ─────────────────────────────────────────────────────────────────────
   // EDGE INSETS - VERTICAL
   // ─────────────────────────────────────────────────────────────────────
 
   /// Vertical padding: 4px
-  static const verticalXs = EdgeInsets.symmetric(vertical: xs);
+  static const verticalXs4 = EdgeInsets.symmetric(vertical: xs4);
 
   /// Vertical padding: 8px
-  static const verticalSm = EdgeInsets.symmetric(vertical: sm);
+  static const verticalSm8 = EdgeInsets.symmetric(vertical: sm8);
+
+  /// Vertical padding: 12px
+  static const verticalMd12 = EdgeInsets.symmetric(vertical: md12);
 
   /// Vertical padding: 16px (default)
-  static const verticalMd = EdgeInsets.symmetric(vertical: md);
+  static const verticalMd16 = EdgeInsets.symmetric(vertical: md16);
 
   /// Vertical padding: 24px
-  static const verticalLg = EdgeInsets.symmetric(vertical: lg);
+  static const verticalLg24 = EdgeInsets.symmetric(vertical: lg24);
 
   // ─────────────────────────────────────────────────────────────────────
   // EDGE INSETS - ALL
   // ─────────────────────────────────────────────────────────────────────
 
   /// All padding: 8px
-  static const allSm = EdgeInsets.all(sm);
+  static const allSm8 = EdgeInsets.all(sm8);
+
+  /// All padding: 12px
+  static const allMd12 = EdgeInsets.all(md12);
 
   /// All padding: 16px (default)
-  static const allMd = EdgeInsets.all(md);
+  static const allMd16 = EdgeInsets.all(md16);
 
   /// All padding: 24px
-  static const allLg = EdgeInsets.all(lg);
+  static const allLg24 = EdgeInsets.all(lg24);
 }
 
 /// Pre-built gap widgets for consistent spacing in layouts.
@@ -91,7 +110,7 @@ class AppSpacing {
 /// Column(
 ///   children: [
 ///     Text('Hello'),
-///     Gap.sm,  // 8px vertical gap
+///     Gap.small8,  // 8px vertical gap
 ///     Text('World'),
 ///   ],
 /// )
@@ -99,7 +118,7 @@ class AppSpacing {
 /// Row(
 ///   children: [
 ///     Icon(Icons.star),
-///     Gap.xs,  // 4px horizontal gap
+///     Gap.extraSmall4,  // 4px horizontal gap
 ///     Text('Starred'),
 ///   ],
 /// )
