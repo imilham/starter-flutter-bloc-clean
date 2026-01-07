@@ -145,32 +145,40 @@ class CommonBaseTextField extends StatelessWidget {
         // Title label
         if (title != null) _buildTitle(theme),
 
-        // Text field
-        TextFormField(
-          controller: controller,
-          obscureText: obscureText,
-          keyboardType: keyboardType,
-          textInputAction: textInputAction,
-          inputFormatters: inputFormatters,
-          validator: validator,
-          onChanged: onChanged,
-          onTap: onTap,
-          onEditingComplete: onEditingComplete,
-          onFieldSubmitted: onFieldSubmitted,
-          autovalidateMode: autovalidateMode,
-          maxLines: obscureText ? 1 : maxLines,
-          minLines: minLines,
-          readOnly: readOnly,
-          enabled: enabled,
-          focusNode: focusNode,
-          autofocus: autofocus,
-          textCapitalization: textCapitalization,
-          decoration: InputDecoration(
-            hintText: hintText,
-            suffixIcon: suffixIcon,
-            prefixIcon: prefixIcon,
-            contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-          ),
+        // Text field attempting to animate the fill color smoothy
+        TweenAnimationBuilder<Color?>(
+          duration: kThemeAnimationDuration,
+          tween: ColorTween(end: theme.inputDecorationTheme.fillColor),
+          builder: (context, animatedColor, child) {
+            return TextFormField(
+              controller: controller,
+              obscureText: obscureText,
+              keyboardType: keyboardType,
+              textInputAction: textInputAction,
+              inputFormatters: inputFormatters,
+              validator: validator,
+              onChanged: onChanged,
+              onTap: onTap,
+              onEditingComplete: onEditingComplete,
+              onFieldSubmitted: onFieldSubmitted,
+              autovalidateMode: autovalidateMode,
+              maxLines: obscureText ? 1 : maxLines,
+              minLines: minLines,
+              readOnly: readOnly,
+              enabled: enabled,
+              focusNode: focusNode,
+              autofocus: autofocus,
+              textCapitalization: textCapitalization,
+              decoration: InputDecoration(
+                hintText: hintText,
+                suffixIcon: suffixIcon,
+                prefixIcon: prefixIcon,
+                contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+                fillColor: animatedColor,
+                filled: true,
+              ),
+            );
+          },
         ),
       ],
     );

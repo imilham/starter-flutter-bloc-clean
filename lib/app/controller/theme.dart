@@ -35,29 +35,38 @@ class ThemeServiceProvider with ChangeNotifier {
   }
 
   /// **Important**: Don't make colors public
-  final Color _primaryColor = const Color(0xFF9381FF);
-  final Color _secondaryColor = const Color(0xFF3A0CA3);
-  final Color _lightSurfaceColor = const Color(0xFFB8B8FF);
-  final Color _darkSurfaceColor = const Color(0xFF023047);
-  final Color _lightBackgroundColor = const Color(0xFFF7F7F7);
-  final Color _darkBackgroundColor = const Color(0xFF1B1B1B);
-  final Color _lightShadowColor = const Color(0xFFE2E8F0);
-  final Color _darkShadowColor = const Color(0xFF0D1117);
+  // Primary: A refined, vibrant Teal
+  final Color _primaryColor = const Color(0xFF00796B); // Teal 700 (Rich Teal)
+  final Color _lightPrimaryColor = const Color(0xFF009688); // Teal 500 (Vibrant for Light UI)
+  final Color _darkPrimaryColor = const Color(0xFF80CBC4); // Teal 200 (Soft for Dark UI)
+
+  // Secondary: Complementary or Deep variant
+  final Color _secondaryColor = const Color(0xFF004D40); // Teal 900
+
+  // Light Theme Colors
+  final Color _lightSurfaceColor = const Color(0xFFFFFFFF); // Pure White Surface
+  final Color _lightBackgroundColor = const Color(0xFFF0F7F6); // Very subtle cool grey/teal tint
+  final Color _lightShadowColor = const Color(0xFFB0BEC5); // Blue Grey 200
+
+  // Dark Theme Colors (Avoid "Black")
+  final Color _darkSurfaceColor = const Color(0xFF1E2625); // Deep Charcoal/Teal Surface (Material-ish)
+  final Color _darkBackgroundColor = const Color(0xFF121515); // Rich Dark, not pure Black
+  final Color _darkShadowColor = const Color(0xFF000000);
 
   ThemeData _lightThemeData() {
     return ThemeData(
       scaffoldBackgroundColor: _lightBackgroundColor,
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
-        primary: _primaryColor,
+        primary: _lightPrimaryColor,
         onPrimary: Colors.white,
         secondary: _secondaryColor,
         onSecondary: Colors.white,
         surface: _lightSurfaceColor,
-        onSurface: _darkSurfaceColor,
+        onSurface: _darkBackgroundColor, // Dark text on light surface
         shadow: _lightShadowColor,
-        outline: const Color(0xFF8D99AE),
-        error: const Color(0XFFEF233C),
+        outline: const Color(0xFF80CBC4), // Teal 200
+        error: const Color(0XFFD32F2F),
       ),
       fontFamily: _fontFamily(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
@@ -71,7 +80,8 @@ class ThemeServiceProvider with ChangeNotifier {
         AppColors(
           shimmerColor: Colors.grey.shade300,
           shimmerBgColor: Colors.grey.shade100,
-          success: const Color(0xFF22C55E), // Green 500
+          success: const Color(0xFF2E7D32), // Green 800
+          exampleColor: const Color(0xFF673AB7), // Deep Purple (Contrast)
         ),
       ],
     );
@@ -83,15 +93,15 @@ class ThemeServiceProvider with ChangeNotifier {
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
         seedColor: _primaryColor,
-        primary: _primaryColor,
-        onPrimary: Colors.white,
-        secondary: _secondaryColor,
+        primary: _darkPrimaryColor,
+        onPrimary: _darkBackgroundColor, // Dark text on light primary
+        secondary: _secondaryColor, // Deep Teal
         onSecondary: Colors.white,
         surface: _darkSurfaceColor,
-        onSurface: _lightSurfaceColor,
+        onSurface: const Color(0xFFE0F2F1), // Soft White text
         shadow: _darkShadowColor,
-        outline: const Color(0xFF8D99AE),
-        error: const Color(0XFFEF233C),
+        outline: const Color(0xFF4DB6AC), // Teal 300
+        error: const Color(0XFFEF9A9A),
       ),
       fontFamily: _fontFamily(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
@@ -103,9 +113,10 @@ class ThemeServiceProvider with ChangeNotifier {
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
       extensions: [
         AppColors(
-          shimmerColor: const Color(0xff07A8FE).withValues(alpha: 0.24),
-          shimmerBgColor: const Color(0xFF3A3A3C),
-          success: const Color(0xFF4ADE80), // Green 400
+          shimmerColor: const Color(0xff80CBC4).withValues(alpha: 0.1),
+          shimmerBgColor: const Color(0xFF263238),
+          success: const Color(0xFF81C784), // Green 300
+          exampleColor: const Color(0xFFFFD54F), // Amber 300 (Pop)
         ),
       ],
     );
@@ -118,10 +129,13 @@ class ThemeServiceProvider with ChangeNotifier {
   ElevatedButtonThemeData _elevatedButtonThemeData() {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.white,
-        backgroundColor: _primaryColor,
+        // Light: White Text on Teal 500. Dark: Dark Text on Teal 200.
+        foregroundColor: _isDark ? _darkBackgroundColor : Colors.white,
+        backgroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         elevation: 0,
-        textStyle: buttonRegular(textColor: Colors.white),
+        textStyle: buttonRegular(
+          textColor: _isDark ? _darkBackgroundColor : Colors.white,
+        ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
@@ -137,10 +151,17 @@ class ThemeServiceProvider with ChangeNotifier {
   OutlinedButtonThemeData _outlinedButtonThemeData() {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: _isDark ? Colors.white : Colors.white,
+        // Light: Teal Text. Dark: Teal Text (Light).
+        // Background is Surface.
+        foregroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         backgroundColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
         elevation: 0,
-        textStyle: buttonRegular(textColor: _isDark ? Colors.white : Colors.white),
+        side: BorderSide(
+          color: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        ),
+        textStyle: buttonRegular(
+          textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
@@ -156,9 +177,11 @@ class ThemeServiceProvider with ChangeNotifier {
   TextButtonThemeData _textButtonThemeData() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: _secondaryColor,
+        foregroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
         elevation: 0,
-        textStyle: buttonSmall(textColor: _secondaryColor),
+        textStyle: buttonSmall(
+          textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        ),
         padding: const EdgeInsets.symmetric(
           vertical: 8,
           horizontal: 12,

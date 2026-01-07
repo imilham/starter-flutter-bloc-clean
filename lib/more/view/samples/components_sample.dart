@@ -73,20 +73,6 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           ],
         ),
         const Divider(height: 32),
-        const SectionHeader.large('Loader'),
-        const Text('Adaptive (Theme Aware)'),
-        const Center(child: CommonCircularLoader()),
-        Gap.small8,
-        const Text('Force Dark Color (Purple)'),
-        const Center(child: CommonCircularLoader.dark()),
-        Gap.small8,
-        const Text('Force Light Color (White) - on Dark Box'),
-        Container(
-          height: 50,
-          color: Colors.black,
-          child: const Center(child: CommonCircularLoader.light()),
-        ),
-        const Divider(height: 32),
         const SectionHeader.large('Carousel'),
         CommonCarousel.images(
           imageUrls: const [

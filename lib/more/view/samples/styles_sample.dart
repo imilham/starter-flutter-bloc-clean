@@ -39,6 +39,10 @@ class StylesSample extends StatelessWidget {
               name: 'Shimmer BG',
               color: context.appColors.shimmerBgColor,
             ),
+            _ColorChip(
+              name: 'Example',
+              color: context.appColors.exampleColor,
+            ),
           ],
         ),
         const Divider(height: 32),
