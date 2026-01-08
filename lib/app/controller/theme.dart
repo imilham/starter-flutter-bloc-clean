@@ -141,7 +141,7 @@ class ThemeServiceProvider with ChangeNotifier {
           horizontal: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: AppRadius.large16,
         ),
         minimumSize: const Size(double.infinity, 48),
       ),
@@ -167,7 +167,7 @@ class ThemeServiceProvider with ChangeNotifier {
           horizontal: 24,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
+          borderRadius: AppRadius.large16,
         ),
         minimumSize: const Size(double.infinity, 48),
       ),
@@ -187,7 +187,7 @@ class ThemeServiceProvider with ChangeNotifier {
           horizontal: 12,
         ),
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: AppRadius.medium12,
         ),
         maximumSize: const Size(double.infinity, 48),
       ),
@@ -197,7 +197,7 @@ class ThemeServiceProvider with ChangeNotifier {
   InputDecorationTheme _inputDecorationTheme() {
     return InputDecorationTheme(
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppRadius.medium12,
         borderSide: BorderSide.none,
       ),
       contentPadding: const EdgeInsets.symmetric(
@@ -214,7 +214,7 @@ class ThemeServiceProvider with ChangeNotifier {
       ),
       floatingLabelBehavior: FloatingLabelBehavior.never,
       enabledBorder: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: AppRadius.medium12,
         borderSide: BorderSide.none,
       ),
     );

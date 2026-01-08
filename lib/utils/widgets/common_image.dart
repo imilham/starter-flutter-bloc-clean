@@ -3,6 +3,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A universal image widget that smartly handles Network, Asset, and SVG images.
 ///
@@ -92,14 +93,11 @@ class CommonImage extends StatelessWidget {
     }
 
     if (_isCircle) {
-      return ClipOval(child: imageContent);
+      return imageContent.clipOval;
     }
 
     if (borderRadius != null) {
-      return ClipRRect(
-        borderRadius: borderRadius!,
-        child: imageContent,
-      );
+      return imageContent.clipRRect(borderRadius!);
     }
 
     return imageContent;

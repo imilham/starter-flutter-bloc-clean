@@ -117,7 +117,7 @@ class _ColorChip extends StatelessWidget {
           height: 60,
           decoration: BoxDecoration(
             color: color,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: AppRadius.medium12,
             border: Border.all(color: Colors.grey.withValues(alpha: 0.2)),
           ),
         ),

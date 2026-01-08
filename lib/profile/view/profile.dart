@@ -124,7 +124,7 @@ class UserDetailItem extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.small8,
         border: Border.all(
           color: context.colorScheme.outline,
         ),

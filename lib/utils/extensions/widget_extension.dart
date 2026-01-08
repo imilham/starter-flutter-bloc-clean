@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:starter/utils/constants/radius.dart';
 import 'package:starter/utils/constants/spacing.dart';
 
 /// Extension to provide convenient padding methods on widgets.
@@ -86,4 +87,119 @@ extension WidgetPaddingExtension on Widget {
   ///
   /// Example: `Text('Hello').padding(AppSpacing.allMd16)`
   Widget padding(EdgeInsetsGeometry insets) => Padding(padding: insets, child: this);
+}
+
+/// Extension to provide convenient border radius (clipping) methods on widgets.
+///
+/// Usage:
+/// ```dart
+/// Container().borderRadiusAll8
+/// Container().borderRadiusTop16
+/// Container().borderRadiusOnly(tl: 8, br: 8)
+/// ```
+extension WidgetBorderRadiusExtension on Widget {
+  // ─────────────────────────────────────────────────────────────────────
+  // ALL CORNERS
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// 4px radius on all corners
+  Widget get borderRadiusAll4 => ClipRRect(borderRadius: AppRadius.extraSmall4, child: this);
+
+  /// 8px radius on all corners
+  Widget get borderRadiusAll8 => ClipRRect(borderRadius: AppRadius.small8, child: this);
+
+  /// 12px radius on all corners
+  Widget get borderRadiusAll12 => ClipRRect(borderRadius: AppRadius.medium12, child: this);
+
+  /// 16px radius on all corners
+  Widget get borderRadiusAll16 => ClipRRect(borderRadius: AppRadius.large16, child: this);
+
+  /// 24px radius on all corners
+  Widget get borderRadiusAll24 => ClipRRect(borderRadius: AppRadius.extraLarge24, child: this);
+
+  /// Pill radius (999px) on all corners
+  Widget get borderRadiusAllPill => ClipRRect(borderRadius: AppRadius.pill999, child: this);
+
+  // ─────────────────────────────────────────────────────────────────────
+  // TOP CORNERS
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// 4px radius on top corners
+  Widget get borderRadiusTop4 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.xs4)),
+        child: this,
+      );
+
+  /// 8px radius on top corners
+  Widget get borderRadiusTop8 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.sm8)),
+        child: this,
+      );
+
+  /// 12px radius on top corners
+  Widget get borderRadiusTop12 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.md12)),
+        child: this,
+      );
+
+  /// 16px radius on top corners
+  Widget get borderRadiusTop16 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.lg16)),
+        child: this,
+      );
+
+  // ─────────────────────────────────────────────────────────────────────
+  // BOTTOM CORNERS
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// 4px radius on bottom corners
+  Widget get borderRadiusBottom4 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.xs4)),
+        child: this,
+      );
+
+  /// 8px radius on bottom corners
+  Widget get borderRadiusBottom8 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.sm8)),
+        child: this,
+      );
+
+  /// 12px radius on bottom corners
+  Widget get borderRadiusBottom12 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.md12)),
+        child: this,
+      );
+
+  /// 16px radius on bottom corners
+  Widget get borderRadiusBottom16 => ClipRRect(
+        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.lg16)),
+        child: this,
+      );
+
+  // ─────────────────────────────────────────────────────────────────────
+  // CUSTOM CORNERS
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// Custom radius on specific corners.
+  ///
+  /// Example: `Container().borderRadiusOnly(tl: 8, br: 8)`
+  Widget borderRadiusOnly({double tl = 0, double tr = 0, double bl = 0, double br = 0}) => ClipRRect(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(tl),
+          topRight: Radius.circular(tr),
+          bottomLeft: Radius.circular(bl),
+          bottomRight: Radius.circular(br),
+        ),
+        child: this,
+      );
+
+  // ─────────────────────────────────────────────────────────────────────
+  // OVAL / CIRCLE
+  // ─────────────────────────────────────────────────────────────────────
+
+  /// Clips the widget into an oval (or circle if the widget is square).
+  Widget get clipOval => ClipOval(child: this);
+
+  /// Clips the widget with a custom border radius.
+  Widget clipRRect(BorderRadius borderRadius) => ClipRRect(borderRadius: borderRadius, child: this);
 }

@@ -65,26 +65,26 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
       ),
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.small8,
       ),
     );
     final focusedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.small8,
       ),
     );
     final submittedPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
         color: context.colorScheme.primary.withValues(alpha: 0.2),
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.small8,
         border: Border.all(color: context.colorScheme.primary, width: 2),
       ),
     );
     final followingPinTheme = defaultPinTheme.copyWith(
       decoration: BoxDecoration(
         color: context.colorScheme.surface,
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: AppRadius.small8,
       ),
     );
     return StreamBuilder<AuthState>(

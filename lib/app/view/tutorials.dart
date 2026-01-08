@@ -106,105 +106,99 @@ class _TutorialPageState extends State<TutorialPage> {
                   return Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Padding(
-                        padding: AppSpacing.horizontalLg24,
-                        child: Container(
-                          decoration: BoxDecoration(
-                            color: context.theme.cardColor,
-                            borderRadius: BorderRadius.circular(16),
-                            boxShadow: [
-                              BoxShadow(
-                                color: context.colorScheme.shadow,
-                                blurRadius: 16,
-                                offset: const Offset(0, 6),
-                              ),
-                            ],
-                          ),
-                          child: Padding(
-                            padding: AppSpacing.allLg24,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ...List.generate(
-                                  (_pages[index]['features'] as List<dynamic>).length,
-                                  (index) => Container(
-                                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                                    margin: const EdgeInsets.only(bottom: 16),
-                                    decoration: BoxDecoration(
-                                      color: context.theme.cardColor,
-                                      borderRadius: BorderRadius.circular(8),
-                                      border: Border.all(
-                                        color: context.colorScheme.primary,
-                                      ),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: context.colorScheme.shadow,
-                                          blurRadius: 8,
-                                          offset: const Offset(0, 4),
-                                        ),
-                                      ],
-                                    ),
-                                    child: Row(
-                                      children: [
-                                        Container(
-                                          decoration: BoxDecoration(
-                                            color: context.theme.primaryColor,
-                                            shape: BoxShape.circle,
-                                          ),
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(12),
-                                            child: Transform.rotate(
-                                              angle: 0.585398,
-                                              child: const Icon(
-                                                Icons.notifications_active_rounded,
-                                                color: Colors.white,
-                                                size: 24,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        Gap.medium16,
-                                        Column(
-                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              (_pages[index]['features'] as List<Map>)[index]['title'].toString(),
-                                              style: bodyRegular16(
-                                                textColor: context.colorScheme.secondary,
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                            Gap.extraSmall4,
-                                            Text(
-                                              (_pages[index]['features'] as List<Map>)[index]['description'].toString(),
-                                              style: bodyRegular16(),
-                                            ),
-                                          ],
-                                        ),
-                                        Gap.medium16,
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                Gap.medium12,
-                                Text(
-                                  _pages[index]['title'].toString(),
-                                  style: headline24(
-                                    textColor: context.colorScheme.secondary,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Gap.medium16,
-                                Text(
-                                  _pages[index]['description'].toString(),
-                                  style: bodyRegular16(),
-                                ),
-                                Gap.large24,
-                              ],
+                      Container(
+                        decoration: BoxDecoration(
+                          color: context.theme.cardColor,
+                          borderRadius: AppRadius.large16,
+                          boxShadow: [
+                            BoxShadow(
+                              color: context.colorScheme.shadow,
+                              blurRadius: 16,
+                              offset: const Offset(0, 6),
                             ),
-                          ),
+                          ],
                         ),
-                      ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ...List.generate(
+                              (_pages[index]['features'] as List<dynamic>).length,
+                              (index) => Container(
+                                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                                margin: const EdgeInsets.only(bottom: 16),
+                                decoration: BoxDecoration(
+                                  color: context.theme.cardColor,
+                                  borderRadius: AppRadius.small8,
+                                  border: Border.all(
+                                    color: context.colorScheme.primary,
+                                  ),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: context.colorScheme.shadow,
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: context.theme.primaryColor,
+                                        shape: BoxShape.circle,
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(12),
+                                        child: Transform.rotate(
+                                          angle: 0.585398,
+                                          child: const Icon(
+                                            Icons.notifications_active_rounded,
+                                            color: Colors.white,
+                                            size: 24,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Gap.medium16,
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          (_pages[index]['features'] as List<Map>)[index]['title'].toString(),
+                                          style: bodyRegular16(
+                                            textColor: context.colorScheme.secondary,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Gap.extraSmall4,
+                                        Text(
+                                          (_pages[index]['features'] as List<Map>)[index]['description'].toString(),
+                                          style: bodyRegular16(),
+                                        ),
+                                      ],
+                                    ),
+                                    Gap.medium16,
+                                  ],
+                                ),
+                              ),
+                            ),
+                            Gap.medium12,
+                            Text(
+                              _pages[index]['title'].toString(),
+                              style: headline24(
+                                textColor: context.colorScheme.secondary,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Gap.medium16,
+                            Text(
+                              _pages[index]['description'].toString(),
+                              style: bodyRegular16(),
+                            ),
+                            Gap.large24,
+                          ],
+                        ).paddingAll24,
+                      ).paddingHorizontal24,
                       Gap.medium16,
                     ],
                   );
@@ -226,7 +220,7 @@ class _TutorialPageState extends State<TutorialPage> {
                       height: 8,
                       decoration: BoxDecoration(
                         color: _currentIndex == index ? context.theme.primaryColor : Colors.grey,
-                        borderRadius: BorderRadius.circular(4),
+                        borderRadius: AppRadius.extraSmall4,
                       ),
                     ),
                   ),
@@ -235,16 +229,13 @@ class _TutorialPageState extends State<TutorialPage> {
             ),
             Gap.extraLarge32,
             Gap.medium16,
-            Padding(
-              padding: AppSpacing.horizontalMd16,
-              child: ElevatedButton(
-                onPressed: () {
-                  GetIt.I<AppStates>().isTutorialShown = true;
-                },
-                child: Text(
-                  _currentIndex == 2 ? 'Get Started' : 'Skip',
-                  style: bodyRegular16(fontWeight: FontWeight.bold),
-                ),
+            ElevatedButton(
+              onPressed: () {
+                GetIt.I<AppStates>().isTutorialShown = true;
+              },
+              child: Text(
+                _currentIndex == 2 ? 'Get Started' : 'Skip',
+                style: bodyRegular16(fontWeight: FontWeight.bold),
               ),
             ),
             const RelativeGap(mainAxisExtent: 0.04),

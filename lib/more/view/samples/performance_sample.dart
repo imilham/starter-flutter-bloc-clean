@@ -32,7 +32,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           padding: const EdgeInsets.all(16),
           decoration: BoxDecoration(
             color: context.colorScheme.surfaceContainerHighest,
-            borderRadius: BorderRadius.circular(12),
+            borderRadius: AppRadius.medium12,
             border: Border.all(color: context.colorScheme.outlineVariant),
           ),
           child: Column(
@@ -81,7 +81,7 @@ class _PerformanceSampleState extends State<PerformanceSample> with SingleTicker
           padding: const EdgeInsets.all(12),
           decoration: BoxDecoration(
             color: Colors.black.withValues(alpha: 0.05),
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: AppRadius.small8,
           ),
           child: Text(
             '// Code Example\n'

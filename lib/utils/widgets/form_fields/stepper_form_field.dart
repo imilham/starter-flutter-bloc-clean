@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:starter/utils/widgets/form_fields/base_text_field.dart';
+import 'package:starter/utils/utils.dart';
 
 /// A specialized numeric input field with increment/decrement buttons.
 ///
@@ -174,7 +174,7 @@ class _StepperFormFieldState extends State<StepperFormField> {
           // Increment button
           InkWell(
             onTap: _increment,
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: AppRadius.extraSmall4,
             child: Icon(
               Icons.expand_less,
               color: _value >= widget.maxValue ? colorScheme.onSurface.withValues(alpha: 0.38) : iconColor,
@@ -185,7 +185,7 @@ class _StepperFormFieldState extends State<StepperFormField> {
           // Decrement button
           InkWell(
             onTap: _decrement,
-            borderRadius: BorderRadius.circular(4),
+            borderRadius: AppRadius.extraSmall4,
             child: Icon(
               Icons.expand_more,
               color: _value <= widget.minValue ? colorScheme.onSurface.withValues(alpha: 0.38) : iconColor,

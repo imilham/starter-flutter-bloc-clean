@@ -8,7 +8,6 @@ class StepOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExtendedColumn(
-      padding: AppSpacing.allMd16,
       children: [
         Text(
           'Step 1: Personal Details',
@@ -52,6 +51,6 @@ class StepOne extends StatelessWidget {
           ),
         ),
       ],
-    );
+    ).paddingAll16;
   }
 }

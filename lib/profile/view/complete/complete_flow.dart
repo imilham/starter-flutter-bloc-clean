@@ -59,7 +59,7 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                   padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                   child: LinearProgressIndicator(
                     value: controller.progress,
-                    borderRadius: BorderRadius.circular(8),
+                    borderRadius: AppRadius.small8,
                     minHeight: 5,
                   ),
                 ),
@@ -74,22 +74,19 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                   ),
                 ),
                 Gap.medium16,
-                Padding(
-                  padding: AppSpacing.horizontalMd16,
-                  child: CommonElevatedButton(
-                    text: controller.currentStep == 2 ? 'Explore The App' : 'Continue',
-                    isLoading: isLoading,
-                    onPressed: () {
-                      if (controller.currentStep == 0) {
-                        controller.onSubmitFirstStep();
-                      } else if (controller.currentStep == 1) {
-                        controller.onSubmitSecondStep();
-                      } else {
-                        controller.onSubmitLastStep();
-                      }
-                    },
-                  ),
-                ),
+                CommonElevatedButton(
+                  text: controller.currentStep == 2 ? 'Explore The App' : 'Continue',
+                  isLoading: isLoading,
+                  onPressed: () {
+                    if (controller.currentStep == 0) {
+                      controller.onSubmitFirstStep();
+                    } else if (controller.currentStep == 1) {
+                      controller.onSubmitSecondStep();
+                    } else {
+                      controller.onSubmitLastStep();
+                    }
+                  },
+                ).paddingHorizontal16,
                 const RelativeGap(mainAxisExtent: 0.05),
               ],
             ),

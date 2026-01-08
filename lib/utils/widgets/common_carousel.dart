@@ -63,15 +63,12 @@ class CommonCarousel extends StatefulWidget {
       indicatorActiveWidth: indicatorActiveWidth,
       indicatorBuilder: indicatorBuilder,
       items: imageUrls.map((url) {
-        return ClipRRect(
-          borderRadius: BorderRadius.circular(16),
-          child: CommonImage(
-            url: url,
-            width: double.infinity,
-            height: double.infinity,
-            fit: fit,
-          ),
-        );
+        return CommonImage(
+          url: url,
+          width: double.infinity,
+          height: double.infinity,
+          fit: fit,
+        ).borderRadiusAll16;
       }).toList(),
     );
   }
