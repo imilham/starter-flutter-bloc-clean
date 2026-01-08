@@ -68,6 +68,7 @@ class ThemeServiceProvider with ChangeNotifier {
         outline: const Color(0xFF80CBC4), // Teal 200
         error: const Color(0XFFD32F2F),
       ),
+      textTheme: _textTheme(),
       fontFamily: _fontFamily(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
       outlinedButtonTheme: _outlinedButtonThemeData(),
@@ -103,6 +104,7 @@ class ThemeServiceProvider with ChangeNotifier {
         outline: const Color(0xFF4DB6AC), // Teal 300
         error: const Color(0XFFEF9A9A),
       ),
+      textTheme: _textTheme(),
       fontFamily: _fontFamily(),
       elevatedButtonTheme: _elevatedButtonThemeData(),
       outlinedButtonTheme: _outlinedButtonThemeData(),
@@ -119,6 +121,35 @@ class ThemeServiceProvider with ChangeNotifier {
           exampleColor: const Color(0xFFFFD54F), // Amber 300 (Pop)
         ),
       ],
+    );
+  }
+
+  TextTheme _textTheme() {
+    return TextTheme(
+      // Display
+      displayLarge: headline32(),
+      displayMedium: headline32(),
+      displaySmall: headline24(),
+
+      // Headline
+      headlineLarge: headline32(),
+      headlineMedium: headline24(),
+      headlineSmall: headline20(),
+
+      // Title
+      titleLarge: headline16(),
+      titleMedium: headline16(), // Subtitle 1
+      titleSmall: headline14(), // Subtitle 2
+
+      // Body
+      bodyLarge: bodyRegular16(),
+      bodyMedium: bodySmall14(), // Default
+      bodySmall: bodyXSmall12(), // Caption
+
+      // Label
+      labelLarge: buttonRegular16(),
+      labelMedium: buttonSmall14(),
+      labelSmall: buttonXSmall12(),
     );
   }
 
@@ -140,7 +171,7 @@ class ThemeServiceProvider with ChangeNotifier {
           vertical: 16,
           horizontal: 24,
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.large16,
         ),
         minimumSize: const Size(double.infinity, 48),
@@ -166,7 +197,7 @@ class ThemeServiceProvider with ChangeNotifier {
           vertical: 16,
           horizontal: 24,
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.large16,
         ),
         minimumSize: const Size(double.infinity, 48),
@@ -186,7 +217,7 @@ class ThemeServiceProvider with ChangeNotifier {
           vertical: 8,
           horizontal: 12,
         ),
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: AppRadius.medium12,
         ),
         maximumSize: const Size(double.infinity, 48),
@@ -196,7 +227,7 @@ class ThemeServiceProvider with ChangeNotifier {
 
   InputDecorationTheme _inputDecorationTheme() {
     return InputDecorationTheme(
-      border: OutlineInputBorder(
+      border: const OutlineInputBorder(
         borderRadius: AppRadius.medium12,
         borderSide: BorderSide.none,
       ),
@@ -213,7 +244,7 @@ class ThemeServiceProvider with ChangeNotifier {
         textColor: _isDark ? Colors.white : Colors.black87,
       ),
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      enabledBorder: OutlineInputBorder(
+      enabledBorder: const OutlineInputBorder(
         borderRadius: AppRadius.medium12,
         borderSide: BorderSide.none,
       ),

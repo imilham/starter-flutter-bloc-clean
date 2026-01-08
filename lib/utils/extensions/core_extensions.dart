@@ -105,6 +105,21 @@ extension DateTimeExtensions on DateTime {
     final yesterday = now.subtract(const Duration(days: 1));
     return year == yesterday.year && month == yesterday.month && day == yesterday.day;
   }
+
+  /// Formats the date with ordinal suffix (e.g., "1st January 2026").
+  ///
+  /// The rest of the date uses 'MMMM yyyy' pattern by default.
+  String get formatWithSuffix {
+    var suffix = 'th';
+    if (day == 1 || day == 21 || day == 31) {
+      suffix = 'st';
+    } else if (day == 2 || day == 22) {
+      suffix = 'nd';
+    } else if (day == 3 || day == 23) {
+      suffix = 'rd';
+    }
+    return '$day$suffix ${DateFormat('MMMM yyyy').format(this)}';
+  }
 }
 
 // -----------------------------------------------------------------------------
@@ -131,5 +146,14 @@ extension DateStringExtensions on String {
     final date = DateTime.tryParse(this);
     if (date == null) return this;
     return DateFormat(pattern, locale).format(date);
+  }
+
+  /// Formats the date string with ordinal suffix (e.g., "1st January 2026").
+  ///
+  /// Returns original string if parsing fails.
+  String get formatWithSuffix {
+    final date = DateTime.tryParse(this);
+    if (date == null) return this;
+    return date.formatWithSuffix;
   }
 }

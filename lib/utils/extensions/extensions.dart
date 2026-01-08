@@ -7,7 +7,9 @@
 /// - [SnackBarExtension] - Easy snackbar display
 library;
 
+export 'async_extension.dart';
 export 'core_extensions.dart';
+export 'layout_extension.dart';
 export 'snackbar_extension.dart';
 export 'text_style_extension.dart';
 export 'theme_extension.dart';

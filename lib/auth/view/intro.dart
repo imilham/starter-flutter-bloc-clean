@@ -42,7 +42,7 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 child: Text(
                   'Sign In',
-                  style: bodyRegular16(fontWeight: FontWeight.bold),
+                  style: bodyRegular16().semiBold,
                 ),
               ),
             ],
