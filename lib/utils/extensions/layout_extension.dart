@@ -23,6 +23,32 @@ extension WidgetLayoutExtension on Widget {
   /// Wraps the widget in an [Align] widget.
   Widget align([AlignmentGeometry alignment = Alignment.center]) => Align(alignment: alignment, child: this);
 
+  /// Wraps the widget in a [Positioned] widget.
+  ///
+  /// Useful when the widget is a child of a [Stack].
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Label').positioned(top: 10, left: 10)
+  /// ```
+  Widget positioned({
+    double? left,
+    double? top,
+    double? right,
+    double? bottom,
+    double? width,
+    double? height,
+  }) =>
+      Positioned(
+        left: left,
+        top: top,
+        right: right,
+        bottom: bottom,
+        width: width,
+        height: height,
+        child: this,
+      );
+
   /// Wraps the widget in a [SafeArea].
   Widget get safeArea => SafeArea(child: this);
 

@@ -263,10 +263,30 @@ class ExtensionsSample extends StatelessWidget {
                 const Icon(Icons.star),
               ].toRow(mainAxisSize: MainAxisSize.min),
             ),
-            const _ExtensionItem(
-              code: '[w1, w2].toStack()',
-              description: 'Convert to Stack',
-            ),
+            // _ExtensionItem(
+            //   code: '[w1, w2].toStack()',
+            //   description: 'Convert to Stack',
+            //   demo: [
+            //     const Icon(
+            //       Icons.star,
+            //       color: Colors.yellow,
+            //       size: 64,
+            //     ),
+            //     const Icon(
+            //       Icons.star,
+            //       color: Colors.red,
+            //       size: 48,
+            //     ).positioned(right: 0, bottom: 0),
+            //     const Icon(
+            //       Icons.star,
+            //       color: Colors.green,
+            //       size: 32,
+            //     ).positioned(left: 0, top: 0),
+            //   ].toStack(
+            //     alignment: Alignment.center,
+            //     fit: StackFit.expand,
+            //   ),
+            // ),
             const _ExtensionItem(
               code: '[w1, w2].toWrap(spacing: 8)',
               description: 'Convert to Wrap',

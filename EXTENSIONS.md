@@ -14,6 +14,7 @@ Quick reference for all available extensions in the StarterIM project.
 | `.flexible` | Wrap in `Flexible` | `widget.flexible` |
 | `.center` | Wrap in `Center` | `widget.center` |
 | `.align()` | Wrap in `Align` | `widget.align(Alignment.topLeft)` |
+| `.positioned()` | Wrap in `Positioned` | `widget.positioned(top: 0, right: 0)` |
 | `.safeArea` | Wrap in `SafeArea` | `widget.safeArea` |
 | `.sizedBox()` | Constrain size | `widget.sizedBox(width: 100)` |
 | `.aspectRatio()` | Aspect ratio | `widget.aspectRatio(ratio: 16/9)` |
