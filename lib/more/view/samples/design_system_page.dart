@@ -11,7 +11,7 @@ class DesignSystemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 6,
+      length: 7,
       child: Scaffold(
         appBar: CommonAppBar(
           title: 'Design System',
@@ -20,6 +20,7 @@ class DesignSystemPage extends StatelessWidget {
             tabAlignment: TabAlignment.start,
             tabs: [
               Tab(text: 'Styles'),
+              Tab(text: 'Extensions'),
               Tab(text: 'Components'),
               Tab(text: 'Shimmer'),
               Tab(text: 'Overlays'),
@@ -42,6 +43,7 @@ class DesignSystemPage extends StatelessWidget {
         body: const TabBarView(
           children: [
             StylesSample(),
+            ExtensionsSample(),
             ComponentsSample(),
             ShimmerSample(),
             OverlaysSample(),

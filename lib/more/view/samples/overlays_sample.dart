@@ -87,6 +87,41 @@ class OverlaysSample extends StatelessWidget {
             );
           },
         ),
+        Gap.large24,
+        const SectionHeader.large('Toasts'),
+        CommonElevatedButton(
+          text: 'Show Toast (Bottom)',
+          onPressed: () {
+            context.showToast('This is a toast message');
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Toast (Top)',
+          onPressed: () {
+            context.showToast('Top Toast', gravity: ToastGravity.top);
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Success Toast',
+          backgroundColor: Colors.green,
+          foregroundColor: Colors.white,
+          onPressed: () {
+            context.showToast(
+              'Operation successful!',
+              backgroundColor: Colors.green,
+              textColor: Colors.white,
+            );
+          },
+        ),
+        Gap.medium16,
+        CommonElevatedButton(
+          text: 'Show Long Toast (3.5s)',
+          onPressed: () {
+            context.showToast('Long Toast Message', length: ToastLength.long);
+          },
+        ),
       ],
     );
   }

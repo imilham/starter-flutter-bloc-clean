@@ -15,3 +15,7 @@ export './pages.dart';
 export './retry.dart';
 export './settings.dart';
 export './widgets/widgets.dart';
+export 'extensions/text_style_extension.dart';
+export 'extensions/theme_extension.dart';
+export 'extensions/toast_extension.dart';
+export 'extensions/widget_extension.dart';
