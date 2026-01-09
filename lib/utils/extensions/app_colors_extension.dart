@@ -20,7 +20,6 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.shimmerColor,
     required this.shimmerBgColor,
     required this.success,
-    required this.exampleColor,
   });
 
   /// The color of the shimmering effect itself.
@@ -32,21 +31,16 @@ class AppColors extends ThemeExtension<AppColors> {
   /// Semantic success color.
   final Color success;
 
-  /// An example color to demonstrate theme switching.
-  final Color exampleColor;
-
   @override
   ThemeExtension<AppColors> copyWith({
     Color? shimmerColor,
     Color? shimmerBgColor,
     Color? success,
-    Color? exampleColor,
   }) {
     return AppColors(
       shimmerColor: shimmerColor ?? this.shimmerColor,
       shimmerBgColor: shimmerBgColor ?? this.shimmerBgColor,
       success: success ?? this.success,
-      exampleColor: exampleColor ?? this.exampleColor,
     );
   }
 
@@ -63,7 +57,6 @@ class AppColors extends ThemeExtension<AppColors> {
       shimmerColor: Color.lerp(shimmerColor, other.shimmerColor, t)!,
       shimmerBgColor: Color.lerp(shimmerBgColor, other.shimmerBgColor, t)!,
       success: Color.lerp(success, other.success, t)!,
-      exampleColor: Color.lerp(exampleColor, other.exampleColor, t)!,
     );
   }
 }

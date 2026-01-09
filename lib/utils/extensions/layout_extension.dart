@@ -21,12 +21,6 @@ extension WidgetLayoutExtension on Widget {
   /// Wraps the widget in an [Align] widget.
   Widget align([AlignmentGeometry alignment = Alignment.center]) => Align(alignment: alignment, child: this);
 
-  /// Wraps the widget in a [SizedBox].
-  Widget sized({double? width, double? height}) => SizedBox(width: width, height: height, child: this);
-
-  /// Wraps the widget in a [SizedBox] with square dimensions.
-  Widget square(double dimension) => SizedBox(width: dimension, height: dimension, child: this);
-
   // ─────────────────────────────────────────────────────────────────────
   // VISIBILITY
   // ─────────────────────────────────────────────────────────────────────
@@ -44,34 +38,6 @@ extension WidgetLayoutExtension on Widget {
   // ─────────────────────────────────────────────────────────────────────
   // INTERACTION
   // ─────────────────────────────────────────────────────────────────────
-
-  /// Wraps the widget in an [InkWell] (with ripple) or [GestureDetector] (without).
-  ///
-  /// Default uses [InkWell] with transparent color for ripple effect.
-  /// Set [useInkWell] to false for simple [GestureDetector].
-  Widget onTap(VoidCallback? onTap, {bool useInkWell = true, BorderRadius? borderRadius}) {
-    if (!useInkWell) {
-      return GestureDetector(onTap: onTap, child: this);
-    }
-    return InkWell(
-      onTap: onTap,
-      borderRadius: borderRadius,
-      child: this,
-    );
-  }
-}
-
-/// Extensions for numerical values to create sizing widgets easily.
-extension NumSizingExtension on num {
-  /// Returns a [SizedBox] with height equal to this number.
-  ///
-  /// Example: `16.height` -> `SizedBox(height: 16)`
-  Widget get height => SizedBox(height: toDouble());
-
-  /// Returns a [SizedBox] with width equal to this number.
-  ///
-  /// Example: `16.width` -> `SizedBox(width: 16)`
-  Widget get width => SizedBox(width: toDouble());
 }
 
 /// Extensions for Lists of Widgets.
@@ -88,8 +54,9 @@ extension WidgetListExtension on List<Widget> {
 
     final List<Widget> result = [];
     for (var i = 0; i < length - 1; i++) {
-      result.add(this[i]);
-      result.add(separator);
+      result
+        ..add(this[i])
+        ..add(separator);
     }
     result.add(last);
     return result;

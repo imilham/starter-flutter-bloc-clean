@@ -59,36 +59,51 @@ TextStyle headline32({Color? textColor, double? letterSpacing = 0.0, double? hei
       fontStyle: fontStyle,
     );
 
-TextStyle headline24({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline28({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+      color: textColor,
+      fontSize: FontSize.xxLarge28.size,
+      height: height,
+      letterSpacing: letterSpacing,
+      fontWeight: fontWeight ?? FontWeight.w700,
+      fontStyle: fontStyle,
+    );
+
+TextStyle headline24({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
       fontSize: FontSize.xLarge24.size,
+      height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline20({Color? textColor, double? letterSpacing = 0.0, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline18({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+      color: textColor,
+      fontSize: FontSize.medium18.size,
+      height: height,
+      letterSpacing: letterSpacing,
+      fontWeight: fontWeight ?? FontWeight.w700,
+      fontStyle: fontStyle,
+    );
+
+TextStyle headline20({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
       color: textColor,
       fontSize: FontSize.large20.size,
+      height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
-TextStyle headline16({Color? textColor, double? letterSpacing = 0.0, TextDecoration? decoration, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
+TextStyle headline16(
+        {Color? textColor, double? letterSpacing = 0.0, double? height, TextDecoration? decoration, FontWeight? fontWeight, FontStyle? fontStyle}) =>
+    _font(
       color: textColor,
       fontSize: FontSize.small16.size,
+      height: height,
       letterSpacing: letterSpacing,
       fontWeight: fontWeight ?? FontWeight.w700,
       decoration: decoration,
-      fontStyle: fontStyle,
-    );
-
-TextStyle headline16LinkText({Color? textColor, double? letterSpacing, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
-      color: textColor,
-      fontSize: FontSize.small16.size,
-      letterSpacing: letterSpacing ?? 0.0,
-      fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
     );
 
@@ -139,38 +154,34 @@ TextStyle bodyXSmall12({Color? textColor, double? letterSpacing = 0.0, double? h
     );
 
 ///Button Styles
-TextStyle buttonRegular16({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonRegular16({Color? textColor, double? letterSpacing = 0.0, double? height, FontStyle? fontStyle}) => _font(
       color: textColor,
       fontSize: FontSize.small16.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
+      fontStyle: fontStyle,
     );
 
-TextStyle buttonSmall14({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonSmall14({Color? textColor, double? letterSpacing = 0.0, double? height, FontStyle? fontStyle}) => _font(
       color: textColor,
       fontSize: FontSize.xSmall14.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
+      fontStyle: fontStyle,
     );
 
-TextStyle buttonXSmall12({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
+TextStyle buttonXSmall12({Color? textColor, double? letterSpacing = 0.0, double? height, FontStyle? fontStyle}) => _font(
       color: textColor,
       fontSize: FontSize.xxSmall12.size,
       height: height,
       letterSpacing: letterSpacing,
       fontWeight: FontWeight.w700,
+      fontStyle: fontStyle,
     );
 
 ///Form Styles
-TextStyle formBody16({Color? textColor, double? letterSpacing = 0.0, double? height}) => _font(
-      color: textColor,
-      fontSize: FontSize.small16.size,
-      height: height,
-      letterSpacing: letterSpacing,
-      fontWeight: FontWeight.w400,
-    );
 
 TextStyle formHint16({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
       color: textColor,
@@ -197,28 +208,13 @@ TextStyle formLabel14({Color? textColor, double? letterSpacing = 0.0, double? he
       fontStyle: fontStyle,
     );
 
-/// AppBar Title Style
-TextStyle appBar16({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight}) => _font(
-      color: textColor,
-      fontSize: FontSize.small16.size,
-      height: height,
-      letterSpacing: letterSpacing,
-      fontWeight: fontWeight ?? FontWeight.w600,
-    );
-
-TextStyle appBarDescription12({Color? textColor, double? letterSpacing = 0.0, double? height, FontWeight? fontWeight, FontStyle? fontStyle}) => _font(
-      color: textColor,
-      fontSize: FontSize.xxSmall12.size,
-      height: height,
-      letterSpacing: letterSpacing,
-      fontWeight: fontWeight ?? FontWeight.w400,
-      fontStyle: fontStyle,
-    );
-
 /// Font size definitions with descriptive names including the actual pixel size
 enum FontSize {
+  xxxLarge48,
   xxLarge32,
+  xxLarge28,
   xLarge24,
+  large22,
   large20,
   medium18,
   small16,
@@ -230,10 +226,16 @@ enum FontSize {
 extension FontSizeExtension on FontSize {
   double get size {
     switch (this) {
+      case FontSize.xxxLarge48:
+        return 48;
       case FontSize.xxLarge32:
         return 32;
+      case FontSize.xxLarge28:
+        return 28;
       case FontSize.xLarge24:
         return 24;
+      case FontSize.large22:
+        return 22;
       case FontSize.large20:
         return 20;
       case FontSize.medium18:

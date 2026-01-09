@@ -124,21 +124,9 @@ extension WidgetBorderRadiusExtension on Widget {
   // TOP CORNERS
   // ─────────────────────────────────────────────────────────────────────
 
-  /// 4px radius on top corners
-  Widget get borderRadiusTop4 => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.xs4)),
-        child: this,
-      );
-
   /// 8px radius on top corners
   Widget get borderRadiusTop8 => ClipRRect(
         borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.sm8)),
-        child: this,
-      );
-
-  /// 12px radius on top corners
-  Widget get borderRadiusTop12 => ClipRRect(
-        borderRadius: const BorderRadius.vertical(top: Radius.circular(AppRadius.md12)),
         child: this,
       );
 
@@ -152,21 +140,9 @@ extension WidgetBorderRadiusExtension on Widget {
   // BOTTOM CORNERS
   // ─────────────────────────────────────────────────────────────────────
 
-  /// 4px radius on bottom corners
-  Widget get borderRadiusBottom4 => ClipRRect(
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.xs4)),
-        child: this,
-      );
-
   /// 8px radius on bottom corners
   Widget get borderRadiusBottom8 => ClipRRect(
         borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.sm8)),
-        child: this,
-      );
-
-  /// 12px radius on bottom corners
-  Widget get borderRadiusBottom12 => ClipRRect(
-        borderRadius: const BorderRadius.vertical(bottom: Radius.circular(AppRadius.md12)),
         child: this,
       );
 

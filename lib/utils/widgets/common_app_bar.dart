@@ -76,7 +76,6 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     if (title is String) {
       titleWidget = Text(
         title as String,
-        style: appBar16(),
       );
     } else if (title is Widget) {
       titleWidget = title as Widget;

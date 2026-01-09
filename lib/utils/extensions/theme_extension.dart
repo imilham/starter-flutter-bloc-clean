@@ -115,40 +115,6 @@ extension ThemeExtension on BuildContext {
   TextStyle? get labelSmall => textTheme.labelSmall;
 
   // ─────────────────────────────────────────────────────────────────────
-  // FONT SIZE SHORTCUTS
-  // ─────────────────────────────────────────────────────────────────────
-
-  /// Returns bodyMedium with size 10.
-  TextStyle? get f10 => bodyMedium?.copyWith(fontSize: 10);
-
-  /// Returns bodyMedium with size 12.
-  TextStyle? get f12 => bodyMedium?.copyWith(fontSize: 12);
-
-  /// Returns bodyMedium with size 14.
-  TextStyle? get f14 => bodyMedium?.copyWith(fontSize: 14);
-
-  /// Returns bodyMedium with size 16.
-  TextStyle? get f16 => bodyMedium?.copyWith(fontSize: 16);
-
-  /// Returns bodyMedium with size 18.
-  TextStyle? get f18 => bodyMedium?.copyWith(fontSize: 18);
-
-  /// Returns bodyMedium with size 20.
-  TextStyle? get f20 => bodyMedium?.copyWith(fontSize: 20);
-
-  /// Returns bodyMedium with size 22.
-  TextStyle? get f22 => bodyMedium?.copyWith(fontSize: 22);
-
-  /// Returns bodyMedium with size 24.
-  TextStyle? get f24 => bodyMedium?.copyWith(fontSize: 24);
-
-  /// Returns bodyMedium with size 28.
-  TextStyle? get f28 => bodyMedium?.copyWith(fontSize: 28);
-
-  /// Returns bodyMedium with size 32.
-  TextStyle? get f32 => bodyMedium?.copyWith(fontSize: 32);
-
-  // ─────────────────────────────────────────────────────────────────────
   // SCREEN SIZE
   // ─────────────────────────────────────────────────────────────────────
 

@@ -39,10 +39,6 @@ class StylesSample extends StatelessWidget {
               name: 'Shimmer BG',
               color: context.appColors.shimmerBgColor,
             ),
-            _ColorChip(
-              name: 'Example',
-              color: context.appColors.exampleColor,
-            ),
           ],
         ),
         const Divider(height: 32),
@@ -70,12 +66,8 @@ class StylesSample extends StatelessWidget {
 
         const SectionHeader.small('Form'),
         _TypeSample(style: formLabel14(textColor: context.colorScheme.onSurface), name: 'formLabel'),
-        _TypeSample(style: formBody16(textColor: context.colorScheme.onSurface), name: 'formBody'),
+        _TypeSample(style: bodyRegular16(textColor: context.colorScheme.onSurface), name: 'formBody (bodyRegular16)'),
         _TypeSample(style: formHint16(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint'),
-
-        const SectionHeader.small('AppBar'),
-        _TypeSample(style: appBar16(textColor: context.colorScheme.onSurface), name: 'appBar'),
-        _TypeSample(style: appBarDescription12(textColor: context.colorScheme.onSurface), name: 'appBarDescription'),
 
         const SectionHeader.small('Tabs'),
         _TypeSample(style: tab10(textColor: context.colorScheme.onSurface), name: 'tab3Xs'),

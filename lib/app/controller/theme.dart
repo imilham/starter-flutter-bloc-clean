@@ -82,7 +82,6 @@ class ThemeServiceProvider with ChangeNotifier {
           shimmerColor: Colors.grey.shade300,
           shimmerBgColor: Colors.grey.shade100,
           success: const Color(0xFF2E7D32), // Green 800
-          exampleColor: const Color(0xFF673AB7), // Deep Purple (Contrast)
         ),
       ],
     );
@@ -118,7 +117,6 @@ class ThemeServiceProvider with ChangeNotifier {
           shimmerColor: const Color(0xff80CBC4).withValues(alpha: 0.1),
           shimmerBgColor: const Color(0xFF263238),
           success: const Color(0xFF81C784), // Green 300
-          exampleColor: const Color(0xFFFFD54F), // Amber 300 (Pop)
         ),
       ],
     );
@@ -259,7 +257,8 @@ class ThemeServiceProvider with ChangeNotifier {
       iconTheme: IconThemeData(
         color: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
-      titleTextStyle: appBar16(
+      titleTextStyle: headline16(
+        fontWeight: FontWeight.w600,
         textColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
       ),
     );
