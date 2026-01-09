@@ -31,13 +31,30 @@ extension WidgetLayoutExtension on Widget {
   ///
   /// Example:
   /// ```dart
-  /// LoadingSpinner().visible(isLoading)
+  /// LoadingSpinner().visible(isVisible: isLoading)
   /// ```
-  Widget visible(bool isVisible) => isVisible ? this : const SizedBox.shrink();
+  Widget visible({required bool isVisible}) {
+    return isVisible ? this : const SizedBox.shrink();
+  }
 
   // ─────────────────────────────────────────────────────────────────────
   // INTERACTION
   // ─────────────────────────────────────────────────────────────────────
+
+  /// Wraps the widget in an [InkWell] (with ripple) or [GestureDetector] (without).
+  ///
+  /// Default uses [InkWell] with transparent color for ripple effect.
+  /// Set [useInkWell] to false for simple [GestureDetector].
+  Widget onTap(VoidCallback? onTap, {bool useInkWell = true, BorderRadius? borderRadius}) {
+    if (!useInkWell) {
+      return GestureDetector(onTap: onTap, child: this);
+    }
+    return InkWell(
+      onTap: onTap,
+      borderRadius: borderRadius,
+      child: this,
+    );
+  }
 }
 
 /// Extensions for Lists of Widgets.
@@ -52,7 +69,7 @@ extension WidgetListExtension on List<Widget> {
     if (isEmpty) return [];
     if (length == 1) return toList();
 
-    final List<Widget> result = [];
+    final result = <Widget>[];
     for (var i = 0; i < length - 1; i++) {
       result
         ..add(this[i])
