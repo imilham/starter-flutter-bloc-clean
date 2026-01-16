@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:check_disposable_email/check_disposable_email.dart' as check_email;
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:starter/auth/auth.dart';
@@ -134,6 +135,15 @@ class _SignUpPageState extends State<SignUpPage> {
                     isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
+                        final isValid = check_email.Disposable.instance.hasValidEmail(_emailController.text);
+                        if (!isValid) {
+                          CommonDialog.alert(
+                            context,
+                            title: 'Invalid Email',
+                            message: 'Please use a valid email address. Disposable emails are not allowed.',
+                          );
+                          return;
+                        }
                         authService.signUp(
                           _emailController.text,
                           _passwordController.text,

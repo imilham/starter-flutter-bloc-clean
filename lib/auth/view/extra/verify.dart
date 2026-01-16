@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:otp_autofill/otp_autofill.dart';
 import 'package:pinput/pinput.dart';
 import 'package:starter/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
@@ -14,7 +16,7 @@ class CodeVerificationPage extends StatefulWidget {
 
 class _CodeVerificationPageState extends State<CodeVerificationPage> {
   final AuthService _authService = GetIt.instance<AuthService>();
-  late final TextEditingController _codeController;
+  late final OTPTextEditController _codeController;
 
   /// Stream subscription for monitoring changes in the authentication state.
   late StreamSubscription<AuthState> _authStateSubscription;
@@ -23,7 +25,23 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
   /// Subscribes to the authentication state changes and calls the [onAuthStateChanged] method.
   @override
   void initState() {
-    _codeController = TextEditingController();
+    _codeController = OTPTextEditController(
+      codeLength: 6,
+      onCodeReceive: (code) {
+        if (mounted) {
+          _authService.verify(code);
+        }
+      },
+    );
+
+    if (Platform.isAndroid) {
+      _codeController.startListenUserConsent(
+        (code) {
+          final exp = RegExp(r'(\d{6})');
+          return exp.stringMatch(code ?? '') ?? '';
+        },
+      );
+    }
     _authStateSubscription = _authService.onAuthStateChanges.listen(onAuthStateChanged);
     super.initState();
   }
@@ -51,6 +69,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
   @override
   void dispose() {
     _authStateSubscription.cancel();
+    _codeController.stopListen();
     _codeController.dispose();
     super.dispose();
   }

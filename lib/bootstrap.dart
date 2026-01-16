@@ -23,6 +23,18 @@ GetIt get getIt => GetIt.instance;
 /// The [environment] parameter specifies the environment in which the application is running.
 /// This function sets up error handling, initializes Flutter bindings, and registers singletons for various services.
 Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnvironment environment}) async {
+
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Material(
+      child: Center(
+        child: Text(
+          'Something went wrong!',  
+          style: bodyRegular16(textColor: Colors.red),        
+        ),
+      ),
+    );
+  };
+
   FlutterError.onError = (details) {
     debugPrintStack(stackTrace: details.stack, label: details.exceptionAsString(), maxFrames: 10);
   };
