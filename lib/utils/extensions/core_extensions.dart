@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:intl/intl.dart';
 
 /// Core extensions for primitive types and common collections.
@@ -53,6 +55,37 @@ extension StringUtils on String {
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+",
     ).hasMatch(this);
   }
+
+  /// Checks if string is a valid password.
+  ///
+  /// Rule: Min 8 characters, at least one letter and one number.
+  bool get isValidPassword {
+    if (isEmpty) return false;
+    final hasLetter = RegExp(r'[a-zA-Z]').hasMatch(this);
+    final hasNumber = RegExp(r'[0-9]').hasMatch(this);
+    return length >= 8 && hasLetter && hasNumber;
+  }
+
+  /// Capitalizes the first letter of every word.
+  String get toTitleCase {
+    if (isEmpty) return this;
+    return split(' ').map((word) => word.capitalize).join(' ');
+  }
+
+  /// Removes all whitespace from the string.
+  String get removeWhitespace => replaceAll(' ', '');
+
+  /// Limits the string to [length] characters and adds "..." if truncated.
+  String limit(int length) {
+    if (this.length <= length) return this;
+    return '${substring(0, length)}...';
+  }
+
+  /// Parses string to int, returns 0 if format is invalid.
+  int get toInt => int.tryParse(this) ?? 0;
+
+  /// Parses string to double, returns 0.0 if format is invalid.
+  double get toDouble => double.tryParse(this) ?? 0.0;
 }
 
 // -----------------------------------------------------------------------------
@@ -76,6 +109,53 @@ extension ListExtensions<T> on List<T>? {
 
   /// Returns true if the list is null or empty.
   bool get isNullOrEmpty => this == null || this!.isEmpty;
+}
+
+extension IterableExtension<T> on Iterable<T> {
+  /// Returns a new list with unique elements.
+  List<T> get unique => toSet().toList();
+
+  /// Returns a random element from the list.
+  T get random => elementAt(Random().nextInt(length));
+
+  /// Groups elements by a key returned by [keySelector].
+  Map<K, List<T>> groupBy<K>(K Function(T) keySelector) {
+    final map = <K, List<T>>{};
+    for (final element in this) {
+      final key = keySelector(element);
+      map.putIfAbsent(key, () => []).add(element);
+    }
+    return map;
+  }
+
+  /// Returns the first element matching [test], or null if none found.
+  T? firstWhereOrNull(bool Function(T) test) {
+    for (final element in this) {
+      if (test(element)) return element;
+    }
+    return null;
+  }
+}
+
+extension ListSortingExtension<T> on List<T> {
+  /// Returns a new list sorted by [selector].
+  List<T> sortedBy(Comparable<dynamic> Function(T) selector, {bool descending = false}) {
+    final list = List<T>.from(this);
+    list.sort((a, b) {
+      final aValue = selector(a);
+      final bValue = selector(b);
+      return descending ? bValue.compareTo(aValue) : aValue.compareTo(bValue);
+    });
+    return list;
+  }
+}
+
+extension NumericIterableExtension on Iterable<num> {
+  /// Returns the sum of all elements.
+  num get sum => fold(0, (a, b) => a + b);
+
+  /// Returns the average of all elements.
+  double get average => isEmpty ? 0 : sum / length;
 }
 
 // -----------------------------------------------------------------------------

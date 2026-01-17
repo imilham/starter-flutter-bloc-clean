@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'dart:ui' as dart_ui;
+import 'package:flutter/material.dart';
 import 'package:starter/utils/constants/radius.dart';
 import 'package:starter/utils/constants/spacing.dart';
 
@@ -87,6 +88,15 @@ extension WidgetPaddingExtension on Widget {
   ///
   /// Example: `Text('Hello').padding(AppSpacing.allMd16)`
   Widget padding(EdgeInsetsGeometry insets) => Padding(padding: insets, child: this);
+
+  /// Padding on all sides with a custom value.
+  Widget paddingAll(double value) => Padding(padding: EdgeInsets.all(value), child: this);
+
+  /// Symmetric padding.
+  Widget paddingSymmetric({double horizontal = 0, double vertical = 0}) => Padding(
+        padding: EdgeInsets.symmetric(horizontal: horizontal, vertical: vertical),
+        child: this,
+      );
 }
 
 /// Extension to provide convenient border radius (clipping) methods on widgets.
@@ -178,4 +188,98 @@ extension WidgetBorderRadiusExtension on Widget {
 
   /// Clips the widget with a custom border radius.
   Widget clipRRect(BorderRadius borderRadius) => ClipRRect(borderRadius: borderRadius, child: this);
+
+  /// Clips the widget with a circular radius of [radius].
+  Widget clipRadius(double radius) => ClipRRect(borderRadius: BorderRadius.circular(radius), child: this);
+}
+
+/// Extension for decorative effects (Background, Border, Shadow, Glassmorphism).
+extension WidgetDecorationExtension on Widget {
+  /// Wraps the widget in a [Card].
+  Widget card({
+    double? elevation,
+    Color? color,
+    ShapeBorder? shape,
+    EdgeInsetsGeometry? margin,
+  }) {
+    return Card(
+      elevation: elevation,
+      color: color,
+      shape: shape,
+      margin: margin,
+      child: this,
+    );
+  }
+
+  /// Adds a background color (wraps in [ColoredBox]).
+  Widget withBackground(Color color) => ColoredBox(color: color, child: this);
+
+  /// Adds a border to the widget (wraps in [Container] with decoration).
+  Widget withBorder({
+    Color color = const Color(0xFF000000),
+    double width = 1.0,
+    BorderRadius? borderRadius,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        border: Border.all(color: color, width: width),
+        borderRadius: borderRadius,
+      ),
+      child: this,
+    );
+  }
+
+  /// Adds a shadow to the widget.
+  Widget withShadow({
+    Color color = const Color(0x33000000),
+    double blurRadius = 10.0,
+    double spreadRadius = 0.0,
+    Offset offset = const Offset(0, 4),
+    BorderRadius? borderRadius,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.white, // Shadow needs a background to cast from usually, or just decoration
+        borderRadius: borderRadius,
+        boxShadow: [
+          BoxShadow(
+            color: color,
+            blurRadius: blurRadius,
+            spreadRadius: spreadRadius,
+            offset: offset,
+          ),
+        ],
+      ),
+      child: this,
+    );
+  }
+
+  /// Applies a glassmorphism effect (blur + semi-transparent overlay).
+  ///
+  /// Note: Requires the widget to be on top of something visible to see the blur.
+  /// Returns a [ClipRRect] -> [BackdropFilter] -> [Container].
+  Widget glassmorphism({
+    double blur = 10.0,
+    double opacity = 0.2,
+    double radius = 0.0,
+    Color color = Colors.white,
+  }) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(radius),
+      child: BackdropFilter(
+        filter: dart_ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur),
+        child: Container(
+          decoration: BoxDecoration(
+            color: color.withOpacity(opacity),
+            borderRadius: BorderRadius.circular(radius),
+            border: Border.all(
+              color: Colors.white.withOpacity(0.2),
+              width: 1.5,
+            ),
+          ),
+          child: this,
+        ),
+      ),
+    );
+  }
 }

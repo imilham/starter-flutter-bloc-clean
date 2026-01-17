@@ -15,6 +15,146 @@ class ExtensionsSample extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       children: [
         // ─────────────────────────────────────────────────────────────────
+        // NUMBER & CURRENCY EXTENSIONS
+        // ─────────────────────────────────────────────────────────────────
+        const SectionHeader.large('Number & Currency Extensions'),
+        const Text('Formatting and layout shortcuts for numbers'),
+        Gap.medium16,
+
+        const _ExtensionCard(
+          title: 'Formatting',
+          children: [
+            _ExtensionItem(
+              code: '1000.toCurrency()',
+              description: 'Currency format',
+              demo: Text('\$1,000.00'), // Simulated result logic is generic
+            ),
+            _ExtensionItem(
+              code: '1500000.compact()',
+              description: 'Compact format',
+              demo: Text('1.5M'),
+            ),
+            _ExtensionItem(
+              code: '0.123.toPercent()',
+              description: 'Percent format',
+              demo: Text('12%'),
+            ),
+          ],
+        ),
+
+        Gap.medium16,
+        _ExtensionCard(
+          title: 'Layout Shortcuts',
+          children: [
+            _ExtensionItem(
+              code: '20.heightBox',
+              description: 'SizedBox(height: 20)',
+              demo: Container(color: Colors.grey.shade300, child: 20.heightBox),
+            ),
+            _ExtensionItem(
+              code: '50.widthBox',
+              description: 'SizedBox(width: 50)',
+              demo: Row(
+                children: [
+                  const Text('|'),
+                  50.widthBox,
+                  const Text('|'),
+                ],
+              ),
+            ),
+          ],
+        ),
+
+        const Divider(height: 32),
+
+        // ─────────────────────────────────────────────────────────────────
+        // COLOR EXTENSIONS
+        // ─────────────────────────────────────────────────────────────────
+        const SectionHeader.large('Color Extensions'),
+        const Text('Manipulation and utility for Colors'),
+        Gap.medium16,
+
+        _ExtensionCard(
+          title: 'Manipulation',
+          children: [
+            _ExtensionItem(
+              code: 'color.darken(0.2)\ncolor.lighten(0.2)',
+              description: 'Adjust lightness',
+              demo: Row(
+                children: [
+                  _ColorBox(context.colorScheme.primary.darken(0.2), 'Darker'),
+                  _ColorBox(context.colorScheme.primary, 'Normal'),
+                  _ColorBox(context.colorScheme.primary.lighten(0.2), 'Lighter'),
+                ],
+              ),
+            ),
+            _ExtensionItem(
+              code: 'color.complementary',
+              description: 'Complementary color',
+              demo: Row(
+                children: [
+                  const _ColorBox(Colors.blue, 'Blue'),
+                  _ColorBox(Colors.blue.complementary, 'Comp'),
+                ],
+              ),
+            ),
+            const _ExtensionItem(
+              code: 'color.toHex()',
+              description: 'Hex string (e.g. #FF0000)',
+            ),
+          ],
+        ),
+
+        const Divider(height: 32),
+
+        // ─────────────────────────────────────────────────────────────────
+        // DECORATION EXTENSIONS
+        // ─────────────────────────────────────────────────────────────────
+        const SectionHeader.large('Decoration Extensions'),
+        const Text('Quick styling shortcuts'),
+        Gap.medium16,
+
+        _ExtensionCard(
+          title: 'Containers & Effects',
+          children: [
+            _ExtensionItem(
+              code: 'widget.card()',
+              description: 'Wrap in Card',
+              demo: const Text('I am in a card').paddingAll16.card(),
+            ),
+            _ExtensionItem(
+              code: 'widget.glassmorphism()',
+              description: 'Glass effect',
+              demo: Container(
+                height: 60,
+                width: 200,
+                decoration: const BoxDecoration(
+                  gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
+                ),
+                child: Center(
+                  child: const Text('Glass')
+                      .paddingAll16
+                      .glassmorphism(opacity: 0.1, blur: 5)
+                      .paddingAll8,
+                ),
+              ),
+            ),
+            _ExtensionItem(
+              code: 'widget.withBorder()',
+              description: 'Add border',
+              demo: const Text('Bordered').paddingAll8.withBorder(color: Colors.red),
+            ),
+            _ExtensionItem(
+              code: 'widget.withShadow()',
+              description: 'Add shadow',
+              demo: const Text('Shadowed').paddingAll8.withBackground(Colors.white).withShadow(),
+            ),
+          ],
+        ),
+
+        const Divider(height: 32),
+
+        // ─────────────────────────────────────────────────────────────────
         // WIDGET LAYOUT EXTENSIONS
         // ─────────────────────────────────────────────────────────────────
         const SectionHeader.large('Widget Layout Extensions'),
@@ -328,12 +468,22 @@ class ExtensionsSample extends StatelessWidget {
         ),
 
         Gap.medium16,
-        const _ExtensionCard(
+        _ExtensionCard(
           title: 'Screen Size',
           children: [
-            _ExtensionItem(code: 'context.screenWidth', description: 'Screen width'),
-            _ExtensionItem(code: 'context.screenHeight', description: 'Screen height'),
-            _ExtensionItem(code: 'context.isLandscape', description: 'Orientation check'),
+            const _ExtensionItem(code: 'context.screenWidth', description: 'Screen width'),
+            const _ExtensionItem(code: 'context.screenHeight', description: 'Screen height'),
+            const _ExtensionItem(code: 'context.isLandscape', description: 'Orientation check'),
+            _ExtensionItem(
+              code: 'context.isDarkMode',
+              description: 'Theme Mode',
+              demo: Builder(builder: (c) => Text('${c.isDarkMode}')),
+            ),
+            _ExtensionItem(
+              code: 'context.isTablet',
+              description: 'Tablet check (>600px)',
+              demo: Builder(builder: (c) => Text('${c.isTablet}')),
+            ),
           ],
         ),
 
@@ -373,12 +523,33 @@ class ExtensionsSample extends StatelessWidget {
         const Text('String, List, DateTime utilities'),
         Gap.medium16,
 
-        const _ExtensionCard(
+        _ExtensionCard(
           title: 'String Extensions',
           children: [
-            _ExtensionItem(code: "nullableString.orEmpty", description: "Null-safe ''"),
-            _ExtensionItem(code: 'str.capitalize', description: 'Capitalize first'),
-            _ExtensionItem(code: 'str.isValidEmail', description: 'Email validation'),
+            const _ExtensionItem(code: "nullableString.orEmpty", description: "Null-safe ''"),
+            const _ExtensionItem(code: 'str.capitalize', description: 'Capitalize first'),
+            const _ExtensionItem(code: 'str.isValidEmail', description: 'Email validation'),
+            _ExtensionItem(
+              code: 'str.isValidPassword',
+              description: 'Password check (min 8, 1 letter, 1 number)',
+              demo: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('pass1 (invalid): ${"pass1".isValidPassword}'),
+                  Text('Password123 (valid): ${"Password123".isValidPassword}'),
+                ],
+              ),
+            ),
+            const _ExtensionItem(
+              code: '"hello world".toTitleCase',
+              description: 'Title Case',
+              demo: Text('Hello World'),
+            ),
+            const _ExtensionItem(
+              code: '"  foo  ".removeWhitespace',
+              description: 'Remove whitespace',
+              demo: Text('foo'),
+            ),
           ],
         ),
 
@@ -655,6 +826,24 @@ class _ExtensionItem extends StatelessWidget {
           ],
         ],
       ),
+    );
+  }
+}
+
+class _ColorBox extends StatelessWidget {
+  const _ColorBox(this.color, this.label);
+  final Color color;
+  final String label;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Container(width: 40, height: 40, color: color),
+        const SizedBox(height: 4),
+        Text(label, style: const TextStyle(fontSize: 10)),
+        const SizedBox(width: 8),
+      ],
     );
   }
 }
