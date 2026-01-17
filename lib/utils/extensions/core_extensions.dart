@@ -112,21 +112,8 @@ extension ListExtensions<T> on List<T>? {
 }
 
 extension IterableExtension<T> on Iterable<T> {
-  /// Returns a new list with unique elements.
-  List<T> get unique => toSet().toList();
-
   /// Returns a random element from the list.
   T get random => elementAt(Random().nextInt(length));
-
-  /// Groups elements by a key returned by [keySelector].
-  Map<K, List<T>> groupBy<K>(K Function(T) keySelector) {
-    final map = <K, List<T>>{};
-    for (final element in this) {
-      final key = keySelector(element);
-      map.putIfAbsent(key, () => []).add(element);
-    }
-    return map;
-  }
 
   /// Returns the first element matching [test], or null if none found.
   T? firstWhereOrNull(bool Function(T) test) {

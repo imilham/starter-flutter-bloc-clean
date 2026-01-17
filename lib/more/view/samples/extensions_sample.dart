@@ -43,28 +43,6 @@ class ExtensionsSample extends StatelessWidget {
         ),
 
         Gap.medium16,
-        _ExtensionCard(
-          title: 'Layout Shortcuts',
-          children: [
-            _ExtensionItem(
-              code: '20.heightBox',
-              description: 'SizedBox(height: 20)',
-              demo: Container(color: Colors.grey.shade300, child: 20.heightBox),
-            ),
-            _ExtensionItem(
-              code: '50.widthBox',
-              description: 'SizedBox(width: 50)',
-              demo: Row(
-                children: [
-                  const Text('|'),
-                  50.widthBox,
-                  const Text('|'),
-                ],
-              ),
-            ),
-          ],
-        ),
-
         const Divider(height: 32),
 
         // ─────────────────────────────────────────────────────────────────

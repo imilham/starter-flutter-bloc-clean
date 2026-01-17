@@ -208,7 +208,8 @@ TextStyle formLabel14({Color? textColor, double? letterSpacing = 0.0, double? he
       fontStyle: fontStyle,
     );
 
-/// Font size definitions with descriptive names including the actual pixel size
+/// Fon
+/// t size definitions with descriptive names including the actual pixel size
 enum FontSize {
   xxxLarge48,
   xxLarge32,
@@ -222,6 +223,7 @@ enum FontSize {
   xxSmall12,
   xxxSmall10,
 }
+
 
 extension FontSizeExtension on FontSize {
   double get size {

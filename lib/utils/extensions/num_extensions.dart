@@ -1,4 +1,3 @@
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 /// Extensions for number formatting and layout shortcuts.
@@ -38,12 +37,6 @@ extension NumExtensions on num {
   String toPercent({String? locale, int decimalDigits = 0}) {
     return NumberFormat.percentPattern(locale).format(this);
   }
-
-  /// Returns a [SizedBox] with this number as height.
-  SizedBox get heightBox => SizedBox(height: toDouble());
-
-  /// Returns a [SizedBox] with this number as width.
-  SizedBox get widthBox => SizedBox(width: toDouble());
 
   /// Returns this value clamped between [min] and [max].
   num clamp(num min, num max) {

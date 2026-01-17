@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:starter/utils/extensions/app_colors_extension.dart';
 import 'package:starter/utils/utils.dart';
 
 /// A service provider class for managing the theme of the application.
@@ -124,30 +123,30 @@ class ThemeServiceProvider with ChangeNotifier {
 
   TextTheme _textTheme() {
     return TextTheme(
-      // Display
-      displayLarge: headline32(),
-      displayMedium: headline32(),
-      displaySmall: headline24(),
+      // Display - Hero text, very large
+      displayLarge: headline32(),  // 32px
+      displayMedium: headline28(), // 28px
+      displaySmall: headline24(),  // 24px
 
-      // Headline
-      headlineLarge: headline32(),
-      headlineMedium: headline24(),
-      headlineSmall: headline20(),
+      // Headline - Section headers
+      headlineLarge: headline24(), // 24px
+      headlineMedium: headline20(), // 20px
+      headlineSmall: headline18(), // 18px
 
-      // Title
-      titleLarge: headline16(),
-      titleMedium: headline16(), // Subtitle 1
-      titleSmall: headline14(), // Subtitle 2
+      // Title - Component titles, app bars
+      titleLarge: headline18(),  // 18px
+      titleMedium: headline16(), // 16px
+      titleSmall: headline14(),  // 14px
 
-      // Body
-      bodyLarge: bodyRegular16(),
-      bodyMedium: bodySmall14(), // Default
-      bodySmall: bodyXSmall12(), // Caption
+      // Body - Main content
+      bodyLarge: bodyRegular16(),  // 16px
+      bodyMedium: bodySmall14(),   // 14px
+      bodySmall: bodyXSmall12(),   // 12px
 
-      // Label
-      labelLarge: buttonRegular16(),
-      labelMedium: buttonSmall14(),
-      labelSmall: buttonXSmall12(),
+      // Label - Buttons, tabs
+      labelLarge: buttonRegular16(),  // 16px
+      labelMedium: buttonSmall14(),   // 14px
+      labelSmall: buttonXSmall12(),   // 12px
     );
   }
 
