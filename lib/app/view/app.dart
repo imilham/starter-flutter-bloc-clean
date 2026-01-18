@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/auth/auth.dart';
+import 'package:starter/l10n/arb/app_localizations.dart';
 import 'package:starter/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -92,6 +93,8 @@ class _StarterAppState extends State<StarterApp> {
             darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
             themeMode: context.watch<ThemeServiceProvider>().themeMode,
             routerConfig: GetIt.instance<AppRouter>().goRouter,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            supportedLocales: AppLocalizations.supportedLocales,
             builder: (context, child) => OverlayUtility(child: child),
           );
         },

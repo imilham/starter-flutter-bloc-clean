@@ -124,7 +124,7 @@ class AppRouter {
                   child: Scaffold(
                     appBar: AppBar(
                       title: Text(
-                        'Chat',
+                        context.l10n.explore,
                         style: headline16(fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -148,7 +148,7 @@ class AppRouter {
                   key: state.pageKey,
                   child: Scaffold(
                     appBar: AppBar(
-                      title: const Text('Explore'),
+                      title: Text(context.l10n.explore),
                     ),
                     body: const Center(
                       child: Text('Explore Page'),

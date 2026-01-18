@@ -47,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
     if (state is AuthFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Sign Up Failed',
+        title: context.l10n.signUpFailed,
         message: state.message,
       );
     }
@@ -71,8 +71,8 @@ class _SignUpPageState extends State<SignUpPage> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: const CommonAppBar(
-              title: 'Sign Up',
+            appBar: CommonAppBar(
+              title: context.l10n.signUp,
             ),
             body: Form(
               key: _formKey,
@@ -80,13 +80,13 @@ class _SignUpPageState extends State<SignUpPage> {
                 children: [
                   const RelativeGap(mainAxisExtent: 0.05),
                   EmailFormField(
-                    title: 'Email',
+                    title: context.l10n.email,
                     controller: _emailController,
                     hintText: 'john@elegantmedia.com.au',
                   ),
                   Gap.medium16,
                   PasswordFormField(
-                    title: 'Password',
+                    title: context.l10n.password,
                     controller: _passwordController,
                     hintText: '*******',
                   ),
@@ -131,7 +131,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ).paddingHorizontal16,
                   Gap.large24,
                   CommonElevatedButton(
-                    text: 'Verify Account',
+                    text: context.l10n.signUp,
                     isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -139,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         if (!isValid) {
                           CommonDialog.alert(
                             context,
-                            title: 'Invalid Email',
+                            title: context.l10n.invalidEmail,
                             message: 'Please use a valid email address. Disposable emails are not allowed.',
                           );
                           return;
@@ -207,7 +207,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        'Already have an account?',
+                        context.l10n.alreadyHaveAccount,
                         style: bodyRegular16(),
                       ),
                       TextButton(
@@ -218,7 +218,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
-                          'Sign In',
+                          context.l10n.signIn,
                           style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),

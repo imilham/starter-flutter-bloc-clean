@@ -26,7 +26,7 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
     if (state is ProfileUpdateFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Error',
+        title: context.l10n.error,
         message: state.message,
       );
     }
@@ -49,7 +49,7 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
           absorbing: isLoading,
           child: Scaffold(
             appBar: CommonAppBar(
-              title: 'Sign Up',
+              title: context.l10n.introSignUp,
               showBackButton: controller.currentStep > 0,
               onBackPress: controller.previousStep,
             ),
@@ -75,7 +75,7 @@ class _CompleteProfileFlowState extends State<CompleteProfileFlow> {
                 ),
                 Gap.medium16,
                 CommonElevatedButton(
-                  text: controller.currentStep == 2 ? 'Explore The App' : 'Continue',
+                  text: controller.currentStep == 2 ? context.l10n.exploreApp : context.l10n.continueAction,
                   isLoading: isLoading,
                   onPressed: () {
                     if (controller.currentStep == 0) {

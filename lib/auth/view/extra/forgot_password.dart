@@ -42,7 +42,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
     if (state is AuthForgotPasswordSubmitFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Request Failed',
+        title: context.l10n.requestFailed,
         message: state.message,
       );
     } else if (state is AuthForgotPasswordSubmitSuccess) {
@@ -70,8 +70,8 @@ class _ForgotPasswordState extends State<ForgotPassword> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: const CommonAppBar(
-              title: 'Forgot Password',
+            appBar: CommonAppBar(
+              title: context.l10n.forgotPassword,
             ),
             body: Builder(
               builder: (context) {
@@ -82,13 +82,13 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                       Gap.extraLarge32,
                       Gap.medium16,
                       Text(
-                        'Please Check Your Email',
+                        context.l10n.checkEmail,
                         textAlign: TextAlign.center,
                         style: headline24(fontWeight: FontWeight.bold),
                       ),
                       Gap.medium16,
                       Text(
-                        'A password reset link has been sent to your dedicated email',
+                        context.l10n.passwordResetSent,
                         textAlign: TextAlign.center,
                         style: bodyRegular16(),
                       ),
@@ -98,7 +98,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "Didn't receive the email?",
+                            context.l10n.didntReceiveEmail,
                             style: bodyRegular16(),
                           ),
                           TextButton(
@@ -108,7 +108,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                               });
                             },
                             child: Text(
-                              'Resend',
+                              context.l10n.resend,
                               style: bodyRegular16(fontWeight: FontWeight.bold),
                             ),
                           ),
@@ -127,18 +127,18 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                         child: AppLogo(aspectRatio: 16 / 9),
                       ),
                       Text(
-                        "Enter your registered email address below and we'll send you a password reset email",
+                        context.l10n.enterEmailReset,
                         style: bodyRegular16(),
                       ),
                       Gap.medium16,
                       EmailFormField(
-                        title: 'Email',
+                        title: context.l10n.email,
                         controller: _emailController,
                         hintText: 'me@example.com',
                       ),
                       Gap.large24,
                       CommonElevatedButton(
-                        text: 'Submit',
+                        text: context.l10n.submit,
                         isLoading: isLoading,
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {

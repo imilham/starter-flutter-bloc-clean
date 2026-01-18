@@ -12,42 +12,42 @@ class MorePage extends StatelessWidget {
 
     final menuItems = [
       MenuItem(
-        title: 'Profile',
+        title: context.l10n.profile,
         icon: Icons.person_outline,
         onTap: () {
           Pages.profile.go(context);
         },
       ),
       MenuItem( 
-        title: 'Settings',
+        title: context.l10n.settings,
         icon: Icons.settings_outlined,
         onTap: () {
           Pages.settings.go(context);
         },
       ),
       MenuItem(
-        title: 'Help & Support',
+        title: context.l10n.helpSupport,
         icon: Icons.help_outline,
         onTap: () {
           // TODO(ilham): Navigate to help page
         },
       ),
       MenuItem(
-        title: 'Design System',
+        title: context.l10n.designSystem,
         icon: Icons.palette_outlined,
         onTap: () {
           Pages.designSystem.push(context);
         },
       ),
       MenuItem(
-        title: 'About',
+        title: context.l10n.about,
         icon: Icons.info_outline,
         onTap: () {
           // TODO(ilham): Navigate to about page
         },
       ),
       MenuItem(
-        title: 'Logout',
+        title: context.l10n.logout,
         icon: Icons.logout,
         onTap: () async {
           await controller.logout(context);
@@ -56,8 +56,8 @@ class MorePage extends StatelessWidget {
     ];
 
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: 'More',
+      appBar: CommonAppBar(
+        title: context.l10n.more,
       ),
       body: ListView.builder(
         itemCount: menuItems.length,

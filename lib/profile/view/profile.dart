@@ -24,8 +24,8 @@ class _MyProfilePageState extends State<MyProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: 'Account',
+      appBar: CommonAppBar(
+        title: context.l10n.account,
       ),
       body: StreamBuilder<ProfileState>(
         stream: _userProfileService.profileStateStream,
@@ -73,12 +73,12 @@ class _MyProfilePageState extends State<MyProfilePage> {
               ),
               Gap.medium16,
               UserDetailItem(
-                title: 'First Name',
+                title: context.l10n.firstName,
                 value: userProfile.firstName,
               ),
               Gap.small8,
               UserDetailItem(
-                title: 'Last Name',
+                title: context.l10n.lastName,
                 value: userProfile.lastName,
               ),
               Gap.small8,
@@ -86,7 +86,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
               ElevatedButton(
                 onPressed: () {},
                 child: Text(
-                  'Edit Profile',
+                  context.l10n.editProfile,
                   style: bodyRegular16(fontWeight: FontWeight.bold),
                 ),
               ),
@@ -94,7 +94,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
               OutlinedButton(
                 onPressed: () {},
                 child: Text(
-                  'Change Password',
+                  context.l10n.changePassword,
                   style: bodyRegular16(fontWeight: FontWeight.bold),
                 ),
               ),

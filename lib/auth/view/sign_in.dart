@@ -43,7 +43,7 @@ class _SignInPageState extends State<SignInPage> {
     if (state is AuthFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Sign In Failed',
+        title: context.l10n.signInFailed,
         message: state.message,
       );
     }
@@ -66,8 +66,8 @@ class _SignInPageState extends State<SignInPage> {
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(
-            appBar: const CommonAppBar(
-              title: 'Sign In',
+            appBar: CommonAppBar(
+              title: context.l10n.signIn,
             ),
             body: Form(
               key: _formKey,
@@ -78,13 +78,13 @@ class _SignInPageState extends State<SignInPage> {
                     child: AppLogo(aspectRatio: 16 / 9),
                   ),
                   EmailFormField(
-                    title: 'Email',
+                    title: context.l10n.email,
                     controller: _emailController,
                     hintText: 'john@elegantmedia.com.au',
                   ),
                   Gap.medium16,
                   PasswordFormField(
-                    title: 'Password',
+                    title: context.l10n.password,
                     controller: _passwordController,
                     hintText: '*******',
                   ),
@@ -97,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
                           Pages.forgotPassword.go(context);
                         },
                         child: Text(
-                          'Forgot Password?',
+                          context.l10n.forgotPassword,
                           style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),
@@ -105,7 +105,7 @@ class _SignInPageState extends State<SignInPage> {
                   ),
                   Gap.medium16,
                   CommonElevatedButton(
-                    text: 'Sign In',
+                    text: context.l10n.signIn,
                     isLoading: isLoading,
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
@@ -113,7 +113,7 @@ class _SignInPageState extends State<SignInPage> {
                         if (!isValid) {
                           CommonDialog.alert(
                             context,
-                            title: 'Invalid Email',
+                            title: context.l10n.invalidEmail,
                             message: 'Please use a valid email address. Disposable emails are not allowed.',
                           );
                           return;
@@ -179,7 +179,7 @@ class _SignInPageState extends State<SignInPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        "Don't have an account?",
+                        context.l10n.dontHaveAccount,
                         style: bodyRegular16(),
                       ),
                       TextButton(
@@ -190,7 +190,7 @@ class _SignInPageState extends State<SignInPage> {
                           padding: EdgeInsets.zero,
                         ),
                         child: Text(
-                          'Sign Up',
+                          context.l10n.signUp,
                           style: bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),

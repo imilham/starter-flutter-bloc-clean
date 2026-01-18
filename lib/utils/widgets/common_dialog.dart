@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:starter/l10n/arb/app_localizations.dart';
 import 'package:starter/utils/utils.dart';
 
 /// A utility class for showing common dialogs.
 ///
 /// ## Usage
 /// ```dart
-/// // Confirmation dialog
+/// Confirmation dialog
 /// final confirmed = await CommonDialog.confirm(
 ///   context,
 ///   title: 'Delete Item',
 ///   message: 'Are you sure you want to delete this item?',
 /// );
 ///
-/// // Alert dialog
+/// Alert dialog
 /// await CommonDialog.alert(
 ///   context,
 ///   title: 'Error',
@@ -32,8 +33,8 @@ class CommonDialog {
     BuildContext context, {
     required String title,
     required String message,
-    String confirmText = 'Yes',
-    String cancelText = 'No',
+    String? confirmText,
+    String? cancelText,
     bool isDangerous = false,
     Color confirmColor = Colors.red,
     Color cancelColor = Colors.blue,
@@ -47,14 +48,14 @@ class CommonDialog {
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
             style: TextButton.styleFrom(foregroundColor: cancelColor),
-            child: Text(cancelText),
+            child: Text(cancelText ?? AppLocalizations.of(context)!.no),
           ),
           TextButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: TextButton.styleFrom(
               foregroundColor: isDangerous ? context.colorScheme.error : confirmColor,
             ),
-            child: Text(confirmText),
+            child: Text(confirmText ?? AppLocalizations.of(context)!.yes),
           ),
         ],
       ),
@@ -72,7 +73,7 @@ class CommonDialog {
     BuildContext context, {
     required String title,
     required String message,
-    String buttonText = 'OK',
+    String? buttonText,
     Color buttonColor = Colors.blue,
   }) async {
     await showDialog<void>(
@@ -85,7 +86,7 @@ class CommonDialog {
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             style: TextButton.styleFrom(foregroundColor: buttonColor),
-            child: Text(buttonText),
+            child: Text(buttonText ?? AppLocalizations.of(context)!.ok),
           ),
         ],
       ),

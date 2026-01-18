@@ -12,6 +12,7 @@ export 'async_extension.dart';
 export 'color_extensions.dart';
 export 'context_extension.dart';
 export 'core_extensions.dart';
+export 'l10n_extension.dart';
 export 'layout_extension.dart';
 export 'num_extensions.dart';
 export 'snackbar_extension.dart';

@@ -22,7 +22,7 @@ class _IntroPageState extends State<IntroPage> {
             onPressed: () {
               Pages.signUp.go(context);
             },
-            text: 'Sign Up',
+            text: context.l10n.introSignUp,
           ),
           const Spacer(),
           Gap.small8,
@@ -30,7 +30,7 @@ class _IntroPageState extends State<IntroPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                'Already have an account?',
+                context.l10n.alreadyHaveAccount,
                 style: bodyRegular16(),
               ),
               TextButton(
@@ -41,7 +41,7 @@ class _IntroPageState extends State<IntroPage> {
                   padding: EdgeInsets.zero,
                 ),
                 child: Text(
-                  'Sign In',
+                  context.l10n.introSignIn,
                   style: bodyRegular16().semiBold,
                 ),
               ),

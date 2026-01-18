@@ -1,0 +1,248 @@
+{
+    "@@locale": "en",
+    "appName": "Starter",
+    "@appName": {
+        "description": "The name of the application"
+    },
+    "signIn": "Sign In",
+    "@signIn": {
+        "description": "Label for sign in button or title"
+    },
+    "signUp": "Sign Up",
+    "@signUp": {
+        "description": "Label for sign up button or title"
+    },
+    "email": "Email",
+    "@email": {
+        "description": "Label for email input"
+    },
+    "password": "Password",
+    "@password": {
+        "description": "Label for password input"
+    },
+    "forgotPassword": "Forgot Password?",
+    "@forgotPassword": {
+        "description": "Text for forgot password link"
+    },
+    "alreadyHaveAccount": "Already have an account?",
+    "@alreadyHaveAccount": {
+        "description": "Prompt for users who already have an account"
+    },
+    "dontHaveAccount": "Don't have an account?",
+    "@dontHaveAccount": {
+        "description": "Prompt for users who don't have an account"
+    },
+    "firstName": "First Name",
+    "@firstName": {
+        "description": "Label for first name input"
+    },
+    "lastName": "Last Name",
+    "@lastName": {
+        "description": "Label for last name input"
+    },
+    "home": "Home",
+    "@home": {
+        "description": "Title for home page"
+    },
+    "explore": "Explore",
+    "@explore": {
+        "description": "Title for explore page"
+    },
+    "settings": "Settings",
+    "@settings": {
+        "description": "Title for settings page"
+    },
+    "profile": "Profile",
+    "@profile": {
+        "description": "Title for profile page"
+    },
+    "more": "More",
+    "@more": {
+        "description": "Title for more page"
+    },
+    "logout": "Logout",
+    "@logout": {
+        "description": "Label for logout action"
+    },
+    "cancel": "Cancel",
+    "@cancel": {
+        "description": "Label for cancel action"
+    },
+    "ok": "OK",
+    "@ok": {
+        "description": "Label for OK action"
+    },
+    "error": "Error",
+    "@error": {
+        "description": "Generic error title"
+    },
+    "success": "Success",
+    "@success": {
+        "description": "Generic success title"
+    },
+    "signInFailed": "Sign In Failed",
+    "@signInFailed": {
+        "description": "Error message when sign in fails"
+    },
+    "signUpFailed": "Sign Up Failed",
+    "@signUpFailed": {
+        "description": "Error message when sign up fails"
+    },
+    "invalidEmail": "Invalid Email",
+    "@invalidEmail": {
+        "description": "Error message for invalid email format"
+    },
+    "designSystem": "Design System",
+    "@designSystem": {
+        "description": "Title for design system page"
+    },
+    "helpSupport": "Help & Support",
+    "@helpSupport": {
+        "description": "Title for help and support page"
+    },
+    "about": "About",
+    "@about": {
+        "description": "Title for about page"
+    },
+    "account": "Account",
+    "@account": {
+        "description": "Title for account page"
+    },
+    "editProfile": "Edit Profile",
+    "@editProfile": {
+        "description": "Label for edit profile button"
+    },
+    "changePassword": "Change Password",
+    "@changePassword": {
+        "description": "Label for change password button"
+    },
+    "yes": "Yes",
+    "@yes": {
+        "description": "Label for yes action"
+    },
+    "no": "No",
+    "@no": {
+        "description": "Label for no action"
+    },
+    "homeContent": "Home Content",
+    "@homeContent": {
+        "description": "Content placeholder for home page"
+    },
+    "introSignIn": "Sign In",
+    "@introSignIn": {
+        "description": "Sign In button on intro page"
+    },
+    "introSignUp": "Sign Up",
+    "@introSignUp": {
+        "description": "Sign Up button on intro page"
+    },
+    "requestFailed": "Request Failed",
+    "@requestFailed": {
+        "description": "Error title when request fails"
+    },
+    "checkEmail": "Please Check Your Email",
+    "@checkEmail": {
+        "description": "Title for email check instruction"
+    },
+    "passwordResetSent": "A password reset link has been sent to your dedicated email",
+    "@passwordResetSent": {
+        "description": "Message confirming password reset link sent"
+    },
+    "didntReceiveEmail": "Didn't receive the email?",
+    "@didntReceiveEmail": {
+        "description": "Question for missing email"
+    },
+    "resend": "Resend",
+    "@resend": {
+        "description": "Label for resend action"
+    },
+    "enterEmailReset": "Enter your registered email address below and we'll send you a password reset email",
+    "@enterEmailReset": {
+        "description": "Instruction for password reset"
+    },
+    "submit": "Submit",
+    "@submit": {
+        "description": "Label for submit action"
+    },
+    "verification": "Verification",
+    "@verification": {
+        "description": "Title for verification page"
+    },
+    "logOut": "Log Out",
+    "@logOut": {
+        "description": "Label for logout action"
+    },
+    "enterVerificationCode": "Please enter your verification code",
+    "@enterVerificationCode": {
+        "description": "Instruction to enter code"
+    },
+    "verificationCodeSent": "The verification code has been sent to sample@mail.com",
+    "@verificationCodeSent": {
+        "description": "Message confirming code sent"
+    },
+    "resendCode": "Resend the Code",
+    "@resendCode": {
+        "description": "Label for resend code action"
+    },
+    "or": "Or",
+    "@or": {
+        "description": "Divider text"
+    },
+    "sendCodeMobile": "Send the verification code to your mobile number?",
+    "@sendCodeMobile": {
+        "description": "Question to send code to mobile"
+    },
+    "sendCode": "Send the code",
+    "@sendCode": {
+        "description": "Label for send code action"
+    },
+    "didntReceiveCode": "Didn't receive the verification code?",
+    "@didntReceiveCode": {
+        "description": "Question for missing code"
+    },
+    "step1Title": "Step 1: Personal Details",
+    "@step1Title": {
+        "description": "Title for step 1 of profile completion"
+    },
+    "formContent": "Form content goes here",
+    "@formContent": {
+        "description": "Placeholder for form content"
+    },
+    "agreeTo": "By continuing, you agree to our ",
+    "@agreeTo": {
+        "description": "Terms agreement prefix"
+    },
+    "termsOfService": "Terms of Service",
+    "@termsOfService": {
+        "description": "Link text for terms"
+    },
+    "and": " and ",
+    "@and": {
+        "description": "Conjunction text"
+    },
+    "privacyPolicy": "Privacy Policy",
+    "@privacyPolicy": {
+        "description": "Link text for privacy policy"
+    },
+    "exploreApp": "Explore The App",
+    "@exploreApp": {
+        "description": "Label for explore app action"
+    },
+    "continueAction": "Continue",
+    "@continueAction": {
+        "description": "Label for continue action"
+    },
+    "myExampleTextOne": "My Example Text One",
+    "@myExampleTextOne": {
+        "description": "Label for the example text one"
+    },
+    "myExampleTextTwo": "My Example Text Two",
+    "@myExampleTextTwo": {
+        "description": "Label for the example text two"
+    },
+    "myExampleTextThree": "My Example Text Three",
+    "@myExampleTextThree": {
+        "description": "Label for the example text three"
+    }
+
+}

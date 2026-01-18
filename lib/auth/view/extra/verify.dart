@@ -54,13 +54,13 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
     if (state is AuthCodeVerificationFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Error',
+        title: context.l10n.error,
         message: state.message,
       );
     } else if (state is AuthCodeResendFailed && mounted) {
       await CommonDialog.alert(
         context,
-        title: 'Error',
+        title: context.l10n.error,
         message: state.message,
       );
     }
@@ -114,7 +114,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
           absorbing: isLoading,
           child: Scaffold(
             appBar: CommonAppBar(
-              title: 'Verification',
+              title: context.l10n.verification,
               actions: [
                 TextButton(
                   onPressed: () async {
@@ -124,7 +124,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     foregroundColor: context.colorScheme.error,
                   ),
                   child: Text(
-                    'Log Out',
+                    context.l10n.logOut,
                     style: bodyRegular16(),
                   ),
                 ),
@@ -135,13 +135,13 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
               children: [
                 const RelativeGap(mainAxisExtent: 0.05),
                 Text(
-                  'Please enter your verification code',
+                  context.l10n.enterVerificationCode,
                   textAlign: TextAlign.center,
                   style: headline24(),
                 ),
                 Gap.medium16,
                 Text(
-                  'The verification code has been sent to sample@mail.com',
+                  context.l10n.verificationCodeSent,
                   textAlign: TextAlign.center,
                   style: bodyRegular16(),
                 ),
@@ -161,7 +161,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Gap.extraLarge32,
                 Gap.medium16,
                 CommonElevatedButton(
-                  text: 'Sign In',
+                  text: context.l10n.introSignIn,
                   isLoading: isLoading,
                   onPressed: () async {
                     if (_codeController.text.isNotEmpty) {
@@ -172,7 +172,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 Gap.medium16,
                 const Spacer(),
                 Text(
-                  "Didn't receive the verification code?",
+                  context.l10n.didntReceiveCode,
                   textAlign: TextAlign.center,
                   style: bodyRegular16(),
                 ),
@@ -180,19 +180,19 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 TextButton(
                   onPressed: _authService.resendVerificationCode,
                   child: Text(
-                    'Resend the Code',
+                    context.l10n.resendCode,
                     style: bodyRegular16(fontWeight: FontWeight.bold),
                   ),
                 ),
                 Gap.medium16,
                 Text(
-                  'Or',
+                  context.l10n.or,
                   textAlign: TextAlign.center,
                   style: bodyRegular16(),
                 ),
                 Gap.medium16,
                 Text(
-                  'Send the verification code to your mobile number?',
+                  context.l10n.sendCodeMobile,
                   textAlign: TextAlign.center,
                   style: bodyRegular16(),
                 ),
@@ -200,7 +200,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                 TextButton(
                   onPressed: () {},
                   child: Text(
-                    'Send the code',
+                    context.l10n.sendCode,
                     style: bodyRegular16(fontWeight: FontWeight.bold),
                   ),
                 ),

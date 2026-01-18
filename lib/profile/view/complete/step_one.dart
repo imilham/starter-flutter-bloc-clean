@@ -10,13 +10,13 @@ class StepOne extends StatelessWidget {
     return ExtendedColumn(
       children: [
         Text(
-          'Step 1: Personal Details',
+          context.l10n.step1Title,
           style: headline20(fontWeight: FontWeight.bold),
         ),
         Gap.medium16,
         Center(
           child: Text(
-            'Form content goes here',
+            context.l10n.formContent,
             style: bodyRegular16(),
           ),
         ),
@@ -24,11 +24,11 @@ class StepOne extends StatelessWidget {
           TextSpan(
             children: [
               TextSpan(
-                text: 'By continuing, you agree to our ',
+                text: context.l10n.agreeTo,
                 style: bodyXSmall12(),
               ),
               TextSpan(
-                text: 'Terms of Service',
+                text: context.l10n.termsOfService,
                 style: bodyXSmall12(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.primary,
@@ -36,11 +36,11 @@ class StepOne extends StatelessWidget {
                 recognizer: TapGestureRecognizer()..onTap = () {},
               ),
               TextSpan(
-                text: ' and ',
+                text: context.l10n.and,
                 style: bodyXSmall12(),
               ),
               TextSpan(
-                text: 'Privacy Policy',
+                text: context.l10n.privacyPolicy,
                 style: bodyXSmall12(
                   fontWeight: FontWeight.bold,
                   textColor: context.colorScheme.primary,

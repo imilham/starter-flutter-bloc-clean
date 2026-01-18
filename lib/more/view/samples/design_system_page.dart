@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/more/view/samples/localization_sample.dart';
 import 'package:starter/more/view/samples/samples.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -11,7 +12,7 @@ class DesignSystemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 7,
+      length: 8,
       child: Scaffold(
         appBar: CommonAppBar(
           title: 'Design System',
@@ -26,6 +27,7 @@ class DesignSystemPage extends StatelessWidget {
               Tab(text: 'Overlays'),
               Tab(text: 'Performance'),
               Tab(text: 'Concurrency'),
+              Tab(text: 'Localization'),
             ],
           ),
           actions: [
@@ -49,6 +51,7 @@ class DesignSystemPage extends StatelessWidget {
             OverlaysSample(),
             PerformanceSample(),
             IsolateSample(),
+            LocalizationSample(),
           ],
         ),
       ),

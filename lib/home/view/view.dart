@@ -7,12 +7,12 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const CommonAppBar(
-        title: 'Home',
+      appBar: CommonAppBar(
+        title: context.l10n.home,
       ),
       body: Center(
         child: Text(
-          'Home Content',
+          context.l10n.homeContent,
           style: bodyRegular16(fontWeight: FontWeight.bold),
         ),
       ),
