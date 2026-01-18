@@ -27,7 +27,7 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: '1000.toCurrency()',
               description: 'Currency format',
-              demo: Text('\$1,000.00'), // Simulated result logic is generic
+              demo: Text(r'$1,000.00'), // Simulated result logic is generic
             ),
             _ExtensionItem(
               code: '1500000.compact()',
@@ -504,7 +504,7 @@ class ExtensionsSample extends StatelessWidget {
         _ExtensionCard(
           title: 'String Extensions',
           children: [
-            const _ExtensionItem(code: "nullableString.orEmpty", description: "Null-safe ''"),
+            const _ExtensionItem(code: 'nullableString.orEmpty', description: "Null-safe ''"),
             const _ExtensionItem(code: 'str.capitalize', description: 'Capitalize first'),
             const _ExtensionItem(code: 'str.isValidEmail', description: 'Email validation'),
             _ExtensionItem(

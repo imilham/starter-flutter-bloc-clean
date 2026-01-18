@@ -61,8 +61,8 @@ extension StringUtils on String {
   /// Rule: Min 8 characters, at least one letter and one number.
   bool get isValidPassword {
     if (isEmpty) return false;
-    final hasLetter = RegExp(r'[a-zA-Z]').hasMatch(this);
-    final hasNumber = RegExp(r'[0-9]').hasMatch(this);
+    final hasLetter = RegExp('[a-zA-Z]').hasMatch(this);
+    final hasNumber = RegExp('[0-9]').hasMatch(this);
     return length >= 8 && hasLetter && hasNumber;
   }
 
