@@ -18,7 +18,7 @@ class MorePage extends StatelessWidget {
           Pages.profile.go(context);
         },
       ),
-      MenuItem(
+      MenuItem( 
         title: 'Settings',
         icon: Icons.settings_outlined,
         onTap: () {

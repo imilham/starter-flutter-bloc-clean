@@ -12,27 +12,12 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: const CommonAppBar(
+    return const Scaffold(
+      appBar: CommonAppBar(
         title: 'Settings',
       ),
       body: Center(
-        child: Column(
-          children: [
-            Gap.medium16,
-            Text(
-              'Settings Page',
-              style: bodyRegular16(),
-            ),
-            Gap.medium16,
-            // theme toggle switch
-            Consumer<ThemeServiceProvider>(
-              builder: (context, themeProvider, child) => Switch(
-                value: themeProvider.isDark,
-                onChanged: (value) => themeProvider.toggleTheme(),
-              ),
-            ),
-          ],
+        child: Column(          
         ),
       ),
     );
