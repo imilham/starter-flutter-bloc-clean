@@ -84,7 +84,7 @@ class CommonAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       title: titleWidget,
       centerTitle: centerTitle,
-      automaticallyImplyLeading: showBackButton,
+      automaticallyImplyLeading: false,
       leading: leading ??
           (showBackButton && context.canPop()
               ? IconButton(
