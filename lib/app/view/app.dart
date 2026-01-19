@@ -88,7 +88,7 @@ class _StarterAppState extends State<StarterApp> {
       child: Builder(
         builder: (context) {
           return MaterialApp.router(
-            title: 'Starter App',
+            onGenerateTitle: (context) => context.l10n.appName,
             theme: context.watch<ThemeServiceProvider>().lightTheme,
             darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
             themeMode: context.watch<ThemeServiceProvider>().themeMode,

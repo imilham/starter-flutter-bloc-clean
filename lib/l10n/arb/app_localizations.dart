@@ -456,6 +456,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'My Example Text Three'**
   String get myExampleTextThree;
+
+  /// Error message for disposable email
+  ///
+  /// In en, this message translates to:
+  /// **'Please use a valid email address. Disposable emails are not allowed.'**
+  String get disposableEmailError;
+
+  /// Text between auth separators
+  ///
+  /// In en, this message translates to:
+  /// **'Or continue with'**
+  String get orContinueWith;
+
+  /// Hint text for email input
+  ///
+  /// In en, this message translates to:
+  /// **'Enter email'**
+  String get enterEmailHint;
+
+  /// Error when email is empty
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter your email'**
+  String get errorEnterEmail;
+
+  /// Error when email format is invalid
+  ///
+  /// In en, this message translates to:
+  /// **'Please enter a valid email'**
+  String get errorInvalidEmailAddress;
+
+  /// Text connecting terms and privacy policy
+  ///
+  /// In en, this message translates to:
+  /// **' Terms and Conditions and confirm you have read our '**
+  String get termsAndPrivacyConfirm;
+
+  /// Generic error message
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong!'**
+  String get genericError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

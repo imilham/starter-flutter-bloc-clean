@@ -97,13 +97,12 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                   Gap.large24,
                   RichText(
-                    textAlign: TextAlign.center,
                     text: TextSpan(
-                      text: 'By continuing, you agree to our ',
+                      text: context.l10n.agreeTo,
                       style: context.bodyMedium,
                       children: [
                         TextSpan(
-                          text: 'Terms and Conditions',
+                          text: context.l10n.termsOfService,
                           style: context.bodyMedium?.copyWith(
                             color: context.colorScheme.secondary,
                             fontWeight: FontWeight.bold,
@@ -113,9 +112,9 @@ class _SignUpPageState extends State<SignUpPage> {
                               // TODO(ishanga): Add Terms and Conditions page
                             },
                         ),
-                        const TextSpan(text: ' Terms and Conditions and confirm you have read our '),
+                        TextSpan(text: context.l10n.termsAndPrivacyConfirm),
                         TextSpan(
-                          text: 'Privacy Policy',
+                          text: context.l10n.privacyPolicy,
                           style: context.bodyMedium?.copyWith(
                             color: context.colorScheme.secondary,
                             fontWeight: FontWeight.bold,
@@ -140,7 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           CommonDialog.alert(
                             context,
                             title: context.l10n.invalidEmail,
-                            message: 'Please use a valid email address. Disposable emails are not allowed.',
+                            message: context.l10n.disposableEmailError,
                           );
                           return;
                         }
@@ -158,7 +157,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     width: double.infinity,
                     child: Center(
                       child: Text(
-                        'Or continue with',
+                        context.l10n.orContinueWith,
                         style: bodyRegular16(),
                       ),
                     ),

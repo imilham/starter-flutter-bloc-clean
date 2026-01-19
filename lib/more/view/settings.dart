@@ -11,9 +11,9 @@ class SettingsPage extends StatefulWidget {
 class _SettingsPageState extends State<SettingsPage> {
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       appBar: CommonAppBar(
-        title: 'Settings',
+        title: context.l10n.settings,
       ),
       body: Center(
         child: Column(          

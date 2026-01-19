@@ -27,9 +27,13 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Material(
       child: Center(
-        child: Text(
-          'Something went wrong!',  
-          style: bodyRegular16(textColor: Colors.red),        
+        child: Builder(
+          builder: (context) {
+            return Text(
+              context.l10n.genericError,
+              style: bodyRegular16(textColor: Colors.red),
+            );
+          },
         ),
       ),
     );

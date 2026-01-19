@@ -243,6 +243,33 @@
     "myExampleTextThree": "My Example Text Three",
     "@myExampleTextThree": {
         "description": "Label for the example text three"
+    },
+    "disposableEmailError": "Please use a valid email address. Disposable emails are not allowed.",
+    "@disposableEmailError": {
+        "description": "Error message for disposable email"
+    },
+    "orContinueWith": "Or continue with",
+    "@orContinueWith": {
+        "description": "Text between auth separators"
+    },
+    "enterEmailHint": "Enter email",
+    "@enterEmailHint": {
+        "description": "Hint text for email input"
+    },
+    "errorEnterEmail": "Please enter your email",
+    "@errorEnterEmail": {
+        "description": "Error when email is empty"
+    },
+    "errorInvalidEmailAddress": "Please enter a valid email",
+    "@errorInvalidEmailAddress": {
+        "description": "Error when email format is invalid"
+    },
+    "termsAndPrivacyConfirm": " Terms and Conditions and confirm you have read our ",
+    "@termsAndPrivacyConfirm": {
+        "description": "Text connecting terms and privacy policy"
+    },
+    "genericError": "Something went wrong!",
+    "@genericError": {
+        "description": "Generic error message"
     }
-
 }

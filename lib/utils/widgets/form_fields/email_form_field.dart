@@ -1,6 +1,7 @@
 // ignore_for_file: comment_references
 
 import 'package:flutter/material.dart';
+import 'package:starter/utils/utils.dart';
 import 'package:starter/utils/widgets/form_fields/base_text_field.dart';
 
 /// A specialized text field for email input with built-in validation.
@@ -34,7 +35,7 @@ class EmailFormField extends StatelessWidget {
   /// Creates an email form field.
   const EmailFormField({
     required this.controller,
-    this.hintText = 'Enter email',
+    this.hintText,
     super.key,
     this.title,
     this.validator,
@@ -52,7 +53,7 @@ class EmailFormField extends StatelessWidget {
   final TextEditingController controller;
 
   /// Hint text displayed when empty.
-  final String hintText;
+  final String? hintText;
 
   /// Optional label above the field.
   final String? title;
@@ -87,9 +88,9 @@ class EmailFormField extends StatelessWidget {
   final bool autofocus;
 
   /// Default email format validator.
-  String? _defaultValidator(String? value) {
+  String? _defaultValidator(BuildContext context, String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your email';
+      return context.l10n.errorEnterEmail;
     }
 
     // Basic email regex pattern
@@ -98,7 +99,7 @@ class EmailFormField extends StatelessWidget {
     );
 
     if (!emailRegex.hasMatch(value)) {
-      return 'Please enter a valid email';
+      return context.l10n.errorInvalidEmailAddress;
     }
 
     return null;
@@ -108,9 +109,9 @@ class EmailFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return CommonBaseTextField(
       controller: controller,
-      hintText: hintText,
+      hintText: hintText ?? context.l10n.enterEmailHint,
       title: title,
-      validator: validator ?? _defaultValidator,
+      validator: validator ?? (value) => _defaultValidator(context, value),
       onChanged: onChanged,
       autovalidateMode: autovalidateMode,
       textInputAction: textInputAction ?? TextInputAction.next,

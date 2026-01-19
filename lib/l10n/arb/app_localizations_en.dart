@@ -190,4 +190,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get myExampleTextThree => 'My Example Text Three';
+
+  @override
+  String get disposableEmailError => 'Please use a valid email address. Disposable emails are not allowed.';
+
+  @override
+  String get orContinueWith => 'Or continue with';
+
+  @override
+  String get enterEmailHint => 'Enter email';
+
+  @override
+  String get errorEnterEmail => 'Please enter your email';
+
+  @override
+  String get errorInvalidEmailAddress => 'Please enter a valid email';
+
+  @override
+  String get termsAndPrivacyConfirm => ' Terms and Conditions and confirm you have read our ';
+
+  @override
+  String get genericError => 'Something went wrong!';
 }
