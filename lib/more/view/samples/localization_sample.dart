@@ -52,6 +52,56 @@ class LocalizationSample extends StatelessWidget {
           keyName: 'myExampleTextThree',
           value: context.l10n.myExampleTextThree,
         ),
+        Gap.extraLarge32,
+        const Divider(),
+        Gap.extraLarge32,
+        Text(
+          'Adding a New Language',
+          style: context.textTheme.headlineLarge,
+        ),
+        const Text(
+          'Follow these steps to add a new language (e.g. Spanish):',
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        const _StepItem(
+          step: '1',
+          title: 'Create ARB File',
+          description: 'Create a new file lib/l10n/arb/app_es.arb.',
+        ),
+        Gap.medium16,
+        const _StepItem(
+          step: '2',
+          title: 'Translate',
+          description: 'Copy content from app_en.arb and translate values.',
+        ),
+        Gap.medium16,
+        const _StepItem(
+          step: '3',
+          title: 'Generate',
+          description: 'Run "flutter gen-l10n" to generate the new delegate.',
+        ),
+        Gap.extraLarge32,
+        const Divider(),
+        Gap.extraLarge32,
+        Text(
+          'Changing the Language',
+          style: context.textTheme.headlineLarge,
+        ),
+        const Text(
+          'The app automatically detects and uses the system language. To change the language, go to your device settings and change the language preference.',
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
+        Gap.extraLarge32,
+        const Divider(),
+        Gap.extraLarge32,
+        Text(
+          'How it Works',
+          style: context.textTheme.headlineLarge,
+        ),
+        const Text(
+          'The MaterialApp is configured with `localizationsDelegates` and `supportedLocales` from the generated `AppLocalizations` class. This ensures that the correct translation is loaded based on the device\'s locale setting.',
+          style: TextStyle(fontWeight: FontWeight.w500),
+        ),
       ],
     );
   }
