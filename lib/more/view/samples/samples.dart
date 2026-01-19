@@ -4,5 +4,6 @@ export 'extensions_sample.dart';
 export 'isolate_sample.dart';
 export 'overlays_sample.dart';
 export 'performance_sample.dart';
+export 'sample_section.dart';
 export 'shimmer_sample.dart';
 export 'styles_sample.dart';
