@@ -1,3 +1,4 @@
+export 'biometric_sample.dart';
 export 'components_sample.dart';
 export 'design_system_page.dart';
 export 'extensions_sample.dart';

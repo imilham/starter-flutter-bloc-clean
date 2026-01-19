@@ -276,6 +276,7 @@ class AuthService extends AuthRepository {
           },
           cancellationToken: cancellationToken,
         );
+        
 
         // If the retry was successful, we get the user profile from the result
         final response = result.value;
