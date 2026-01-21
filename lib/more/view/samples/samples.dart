@@ -1,10 +1,13 @@
 export 'biometric_sample.dart';
 export 'components_sample.dart';
+export 'deep_link_guide.dart';
 export 'design_system_page.dart';
 export 'extensions_sample.dart';
 export 'isolate_sample.dart';
 export 'overlays_sample.dart';
+export 'pdf_guide.dart';
 export 'performance_sample.dart';
 export 'sample_section.dart';
+export 'share_guide.dart';
 export 'shimmer_sample.dart';
 export 'styles_sample.dart';

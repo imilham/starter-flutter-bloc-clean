@@ -12,7 +12,7 @@ class DesignSystemPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 9,
+      length: 12,
       child: Scaffold(
         appBar: CommonAppBar(
           title: 'Design System',
@@ -29,6 +29,9 @@ class DesignSystemPage extends StatelessWidget {
               Tab(text: 'Concurrency'),
               Tab(text: 'Biometrics'),
               Tab(text: 'Localization'),
+              Tab(text: 'PDF Generation'),
+              Tab(text: 'App Sharing'),
+              Tab(text: 'Deep Links'),
             ],
           ),
           actions: [
@@ -54,6 +57,9 @@ class DesignSystemPage extends StatelessWidget {
             IsolateSample(),
             BiometricSample(),
             LocalizationSample(),
+            PdfGuide(),
+            ShareGuide(),
+            DeepLinkGuide(),
           ],
         ),
       ),

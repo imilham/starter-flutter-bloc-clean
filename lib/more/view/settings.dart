@@ -15,7 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
       appBar: CommonAppBar(
         title: context.l10n.settings,
       ),
-      body: Center(
+      body: const Center(
         child: Column(          
         ),
       ),

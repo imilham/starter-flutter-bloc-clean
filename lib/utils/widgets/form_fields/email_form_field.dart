@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
-import 'package:starter/utils/widgets/form_fields/base_text_field.dart';
 
 /// A specialized text field for email input with built-in validation.
 ///
