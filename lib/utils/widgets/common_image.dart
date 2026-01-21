@@ -132,6 +132,9 @@ class CommonImage extends StatelessWidget {
       height: height,
       fit: fit,
       color: color,
+      // Memory Hygiene: Only decode what's needed for the display slot
+      memCacheWidth: width != null && width! > 0 && width != double.infinity ? width!.toInt() : null,
+      memCacheHeight: height != null && height! > 0 && height != double.infinity ? height!.toInt() : null,
       placeholder: (context, url) => placeholder ?? _defaultPlaceholder(colorScheme),
       errorWidget: (context, url, error) => errorWidget ?? _defaultError(colorScheme),
     );
@@ -144,6 +147,9 @@ class CommonImage extends StatelessWidget {
       height: height,
       fit: fit,
       color: color,
+      // Memory Hygiene: Only decode what's needed for the display slot
+      cacheWidth: width != null && width! > 0 && width != double.infinity ? width!.toInt() : null,
+      cacheHeight: height != null && height! > 0 && height != double.infinity ? height!.toInt() : null,
       errorBuilder: (context, error, stackTrace) => errorWidget ?? _defaultError(colorScheme),
     );
   }

@@ -66,7 +66,7 @@ class CommonCarousel extends StatefulWidget {
         return CommonImage(
           url: url,
           width: double.infinity,
-          height: double.infinity,
+          height: height,
           fit: fit,
         ).borderRadiusAll16;
       }).toList(),
