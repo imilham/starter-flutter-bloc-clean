@@ -68,7 +68,7 @@ class CommonCarousel extends StatefulWidget {
           width: double.infinity,
           height: height,
           fit: fit,
-        ).borderRadiusAll16;
+        ).clipRadius16;
       }).toList(),
     );
   }

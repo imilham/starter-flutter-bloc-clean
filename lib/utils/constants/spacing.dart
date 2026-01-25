@@ -64,6 +64,9 @@ class AppSpacing {
   /// Horizontal padding: 24px
   static const horizontalLg24 = EdgeInsets.symmetric(horizontal: lg24);
 
+  /// Horizontal padding: 32px
+  static const horizontalXl32 = EdgeInsets.symmetric(horizontal: xl32);
+
   // ─────────────────────────────────────────────────────────────────────
   // EDGE INSETS - VERTICAL
   // ─────────────────────────────────────────────────────────────────────
@@ -146,4 +149,13 @@ class Gap {
 
   /// 32px gap
   static const extraLarge32 = gap_pkg.Gap(32);
+
+  /// 40px gap
+  static const doubleLarge40 = gap_pkg.Gap(40);
+
+  /// 48px gap
+  static const doubleExtraLarge48 = gap_pkg.Gap(48);
+
+ // 50px gap
+  static const huge50 = gap_pkg.Gap(50);
 }

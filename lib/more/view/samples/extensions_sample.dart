@@ -337,16 +337,16 @@ class ExtensionsSample extends StatelessWidget {
           title: 'All Corners',
           children: [
             _ExtensionItem(
-              code: 'widget.borderRadiusAll8',
+              code: 'widget.clipRadius8',
               description: '8px all corners',
               demo: Container(
                 width: 60,
                 height: 60,
                 color: context.colorScheme.secondary,
-              ).borderRadiusAll8,
+              ).clipRadius8,
             ),
-            const _ExtensionItem(code: 'widget.borderRadiusAll16', description: '16px all corners'),
-            const _ExtensionItem(code: 'widget.borderRadiusAllPill', description: 'Pill shape'),
+            const _ExtensionItem(code: 'widget.clipRadius16', description: '16px all corners'),
+            const _ExtensionItem(code: 'widget.clipRadius(999)', description: 'Pill shape'),
             const _ExtensionItem(code: 'widget.clipOval', description: 'Circle/oval'),
           ],
         ),

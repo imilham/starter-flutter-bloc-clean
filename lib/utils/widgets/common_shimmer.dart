@@ -37,12 +37,11 @@ class CommonShimmer extends StatelessWidget {
 
   /// Creates a circular shimmer.
   const CommonShimmer.circle({
-    required double radius,
+    required this.radius,
     super.key,
     this.margin,
   })  : width = radius * 2,
         height = radius * 2,
-        radius = radius,
         isCircle = true,
         child = null;
 

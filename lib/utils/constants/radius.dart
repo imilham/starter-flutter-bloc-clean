@@ -32,6 +32,9 @@ class AppRadius {
   /// Extra large radius: 24px
   static const double xl24 = 24;
 
+  /// Extra extra large radius: 32px
+  static const double xxl32 = 32;
+
   /// Full/pill radius: 999px
   static const double full999 = 999;
 

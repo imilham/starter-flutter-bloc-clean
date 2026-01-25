@@ -97,7 +97,7 @@ class CommonImage extends StatelessWidget {
     }
 
     if (borderRadius != null) {
-      return imageContent.clipRRect(borderRadius!);
+      return ClipRRect(borderRadius: borderRadius!, child: imageContent);
     }
 
     return imageContent;

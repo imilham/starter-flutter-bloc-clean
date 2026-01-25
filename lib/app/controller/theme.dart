@@ -1,6 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
+import 'package:google_fonts/google_fonts.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -34,37 +36,36 @@ class ThemeServiceProvider with ChangeNotifier {
   }
 
   /// **Important**: Don't make colors public
-  // Primary: A refined, vibrant Teal
-  final Color _primaryColor = const Color(0xFF00796B); // Teal 700 (Rich Teal)
-  final Color _lightPrimaryColor = const Color(0xFF009688); // Teal 500 (Vibrant for Light UI)
-  final Color _darkPrimaryColor = const Color(0xFF80CBC4); // Teal 200 (Soft for Dark UI)
+  final Color _primaryColor = const Color(0xFF127592);
+  final Color _secondaryColor = const Color(0xFF7FD0D3);
+  final Color _tertiaryColor = const Color(0xFFFFCB4D);
+  final Color _lightSurfaceColor = const Color(0xFFB8B8FF);
+  final Color _darkSurfaceColor = const Color(0xFF023047);
+  final Color _lightBackgroundColor = const Color(0xFFF7F7F7);
+  final Color _darkBackgroundColor = const Color.fromARGB(255, 0, 0, 0);
+  final Color _lightShadowColor = const Color(0xFFE2E8F0);
+  final Color _darkShadowColor = const Color(0xFF0D1117);
 
-  // Secondary: Complementary or Deep variant
-  final Color _secondaryColor = const Color(0xFF004D40); // Teal 900
-
-  // Light Theme Colors
-  final Color _lightSurfaceColor = const Color(0xFFFFFFFF); // Pure White Surface
-  final Color _lightBackgroundColor = const Color(0xFFF0F7F6); // Very subtle cool grey/teal tint
-  final Color _lightShadowColor = const Color(0xFFB0BEC5); // Blue Grey 200
-
-  // Dark Theme Colors (Avoid "Black")
-  final Color _darkSurfaceColor = const Color(0xFF1E2625); // Deep Charcoal/Teal Surface (Material-ish)
-  final Color _darkBackgroundColor = const Color(0xFF121515); // Rich Dark, not pure Black
-  final Color _darkShadowColor = const Color(0xFF000000);
-
+  /// 
+  final Color _bottomNavbarColor = const Color(0xffF1FCFD);
+  final Color _pinkColor = const Color(0xffEA7085);
+  final Color _coreTextColor = const Color(0xff464646);
+  
   ThemeData _lightThemeData() {
     return ThemeData(
       scaffoldBackgroundColor: _lightBackgroundColor,
       colorScheme: ColorScheme.fromSeed(
         seedColor: _primaryColor,
-        primary: _lightPrimaryColor,
+        primary: _primaryColor,
         onPrimary: Colors.white,
         secondary: _secondaryColor,
         onSecondary: Colors.white,
+        tertiary: _tertiaryColor,
+        onTertiary: Colors.white,
         surface: _lightSurfaceColor,
-        onSurface: _darkBackgroundColor, // Dark text on light surface
+        onSurface: _darkBackgroundColor,
         shadow: _lightShadowColor,
-        outline: const Color(0xFF80CBC4), // Teal 200
+        outline: const Color(0xFF90A4AE),
         error: const Color(0XFFD32F2F),
       ),
       textTheme: _textTheme(),
@@ -76,11 +77,22 @@ class ThemeServiceProvider with ChangeNotifier {
       appBarTheme: _appBarTheme(),
       iconTheme: _iconThemeData(),
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
+       tabBarTheme: TabBarThemeData(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.grey.shade400,
+      ),
       extensions: [
         AppColors(
           shimmerColor: Colors.grey.shade300,
           shimmerBgColor: Colors.grey.shade100,
-          success: const Color(0xFF2E7D32), // Green 800
+          success: const Color(0xFF2E7D32),
+          bottomNavbarColor: _bottomNavbarColor,
+          bottomNavbarSelectedColor: const Color(0xffFBE5E9),
+          pink: _pinkColor,
+          coreTextColor: _coreTextColor,  
+          black400:const Color(0xff969696),
+          deemphasizedText: const Color(0xff878787),
+          
         ),
       ],
     );
@@ -92,14 +104,16 @@ class ThemeServiceProvider with ChangeNotifier {
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
         seedColor: _primaryColor,
-        primary: _darkPrimaryColor,
-        onPrimary: _darkBackgroundColor, // Dark text on light primary
-        secondary: _secondaryColor, // Deep Teal
+        primary: _primaryColor,
+        onPrimary: Colors.white,
+        secondary: _secondaryColor,
         onSecondary: Colors.white,
+        tertiary: _tertiaryColor,
+        onTertiary: Colors.white,
         surface: _darkSurfaceColor,
-        onSurface: const Color(0xFFE0F2F1), // Soft White text
+        onSurface: const Color(0xFFE0F2F1),
         shadow: _darkShadowColor,
-        outline: const Color(0xFF4DB6AC), // Teal 300
+        outline: const Color(0xFF90A4AE),
         error: const Color(0XFFEF9A9A),
       ),
       textTheme: _textTheme(),
@@ -111,65 +125,76 @@ class ThemeServiceProvider with ChangeNotifier {
       appBarTheme: _appBarTheme(),
       iconTheme: _iconThemeData(),
       bottomNavigationBarTheme: _bottomNavigationBarThemeData(),
+      tabBarTheme: TabBarThemeData(
+        labelColor: Colors.white,
+        unselectedLabelColor: Colors.grey.shade400,
+      ),
       extensions: [
         AppColors(
           shimmerColor: const Color(0xff80CBC4).withValues(alpha: 0.1),
           shimmerBgColor: const Color(0xFF263238),
-          success: const Color(0xFF81C784), // Green 300
+          success: const Color(0xFF81C784),
+          bottomNavbarColor: const Color(0xFF1A1A1A),
+          bottomNavbarSelectedColor: const Color(0xffFBE5E9),
+          pink: _pinkColor,
+          coreTextColor: Colors.red,
+          black400:const Color(0xff969696),  
+          deemphasizedText: const Color(0xff878787),
         ),
       ],
     );
   }
 
-  TextTheme _textTheme() {
+  TextTheme _textTheme() {    
     return TextTheme(
       // Display - Hero text, very large
-      displayLarge: headline32(),  // 32px
-      displayMedium: headline28(), // 28px
-      displaySmall: headline24(),  // 24px
+      displayLarge: GoogleFonts.platypi(fontSize: 32, fontWeight: FontWeight.w700,),
+      displayMedium: GoogleFonts.platypi(fontSize: 28, fontWeight: FontWeight.w700, ),
+      displaySmall: GoogleFonts.platypi(fontSize: 24, fontWeight: FontWeight.w700, ),
 
       // Headline - Section headers
-      headlineLarge: headline24(), // 24px
-      headlineMedium: headline20(), // 20px
-      headlineSmall: headline18(), // 18px
+      headlineLarge: GoogleFonts.platypi(fontSize: 24, fontWeight: FontWeight.w700, ),
+      headlineMedium: GoogleFonts.platypi(fontSize: 20, fontWeight: FontWeight.w700, ),
+      headlineSmall: GoogleFonts.platypi(fontSize: 18, fontWeight: FontWeight.w700, ),
 
       // Title - Component titles, app bars
-      titleLarge: headline18(),  // 18px
-      titleMedium: headline16(), // 16px
-      titleSmall: headline14(),  // 14px
+      titleLarge: GoogleFonts.platypi(fontSize: 18, fontWeight: FontWeight.w700, ),
+      titleMedium: GoogleFonts.platypi(fontSize: 16, fontWeight: FontWeight.w700, ),
+      titleSmall: GoogleFonts.platypi(fontSize: 14, fontWeight: FontWeight.w700, ),
 
       // Body - Main content
-      bodyLarge: bodyRegular16(),  // 16px
-      bodyMedium: bodySmall14(),   // 14px
-      bodySmall: bodyXSmall12(),   // 12px
+      bodyLarge: GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.w500, color: _coreTextColor, height: 1.25),
+      bodyMedium: GoogleFonts.notoSans(fontSize: 14, fontWeight: FontWeight.w500, color: _coreTextColor, height: 1.714, ),
+      bodySmall: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.w900, color: _coreTextColor,  height: 1,),
 
       // Label - Buttons, tabs
-      labelLarge: buttonRegular16(),  // 16px
-      labelMedium: buttonSmall14(),   // 14px
-      labelSmall: buttonXSmall12(),   // 12px
+      labelLarge: GoogleFonts.notoSans(fontSize: 16, fontWeight: FontWeight.w700,),
+      labelMedium: GoogleFonts.platypi(fontSize: 14, fontWeight: FontWeight.w600, height: 1.714),
+      labelSmall: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.w700,),
     );
   }
 
   String? _fontFamily() {
-    return appFontFamily;
+    return GoogleFonts.notoSans().fontFamily;
   }
 
   ElevatedButtonThemeData _elevatedButtonThemeData() {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        // Light: White Text on Teal 500. Dark: Dark Text on Teal 200.
-        foregroundColor: _isDark ? _darkBackgroundColor : Colors.white,
-        backgroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        foregroundColor: Colors.white,
+        backgroundColor: _primaryColor,
         elevation: 0,
-        textStyle: buttonRegular16(
-          textColor: _isDark ? _darkBackgroundColor : Colors.white,
+        textStyle: GoogleFonts.platypi(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: _isDark ? _darkBackgroundColor : Colors.white,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
           horizontal: 24,
         ),
         shape: const RoundedRectangleBorder(
-          borderRadius: AppRadius.large16,
+          borderRadius: AppRadius.medium12,
         ),
         minimumSize: const Size(double.infinity, 48),
       ),
@@ -179,16 +204,16 @@ class ThemeServiceProvider with ChangeNotifier {
   OutlinedButtonThemeData _outlinedButtonThemeData() {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        // Light: Teal Text. Dark: Teal Text (Light).
-        // Background is Surface.
-        foregroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        foregroundColor: _primaryColor,
         backgroundColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
         elevation: 0,
         side: BorderSide(
-          color: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+          color: _primaryColor,
         ),
-        textStyle: buttonRegular16(
-          textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        textStyle: GoogleFonts.notoSans(
+          fontSize: 16,
+          fontWeight: FontWeight.w700,
+          color: _primaryColor,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -205,10 +230,12 @@ class ThemeServiceProvider with ChangeNotifier {
   TextButtonThemeData _textButtonThemeData() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        foregroundColor: _primaryColor,
         elevation: 0,
-        textStyle: buttonSmall14(
-          textColor: _isDark ? _darkPrimaryColor : _lightPrimaryColor,
+        textStyle: GoogleFonts.platypi(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
+          color: _primaryColor,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 8,
@@ -224,41 +251,79 @@ class ThemeServiceProvider with ChangeNotifier {
 
   InputDecorationTheme _inputDecorationTheme() {
     return InputDecorationTheme(
-      border: const OutlineInputBorder(
-        borderRadius: AppRadius.medium12,
-        borderSide: BorderSide.none,
+      border: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Color(0xff262D2E), // Default border color
+          // width: 1,
+        ),
       ),
-      contentPadding: const EdgeInsets.symmetric(
-        vertical: 8,
-        horizontal: 16,
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Color(0xffC6DEE0), // Border color when the field is enabled
+          // width: 1.5,
+        ),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Color(0xffC6DEE0), // Border color when the field is focused
+          // width: 2.0,
+        ),
+      ),
+      errorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Colors.red, // Border color when validation fails
+          // width: 1.5,
+        ),
+      ),
+      focusedErrorBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Colors.red, // Border color when focused but has an error
+          // width: 2,
+        ),
+      ),
+      contentPadding: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      disabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: const BorderSide(
+          color: Color(0xff262D2E), // Default border color
+          // width: 1,
+        ),
       ),
       filled: true,
-      fillColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
-      hintStyle: formHint16(
-        textColor: _isDark ? Colors.white70 : Colors.black54,
+      fillColor: _isDark ? _darkSurfaceColor : Colors.white,
+      hintStyle: GoogleFonts.notoSans(
+        fontSize: 14,
+        fontWeight: FontWeight.w500,
+        height: 1.286,        
+        color: _isDark ? _lightBackgroundColor : _coreTextColor,
       ),
-      labelStyle: formLabel14(
-        textColor: _isDark ? Colors.white : Colors.black87,
-      ),
+      labelStyle: const TextStyle(color: Colors.white),
       floatingLabelBehavior: FloatingLabelBehavior.never,
-      enabledBorder: const OutlineInputBorder(
-        borderRadius: AppRadius.medium12,
-        borderSide: BorderSide.none,
-      ),
     );
   }
 
   AppBarTheme _appBarTheme() {
     return AppBarTheme(
       foregroundColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
-      backgroundColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
-      elevation: 0,
+      backgroundColor: _isDark ? _darkSurfaceColor : _primaryColor,
+      centerTitle: Platform.isIOS,      
       iconTheme: IconThemeData(
-        color: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
+        color: _isDark ? _lightBackgroundColor : _lightBackgroundColor,
       ),
-      titleTextStyle: headline16(
-        fontWeight: FontWeight.w600,
-        textColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
+      titleTextStyle: GoogleFonts.platypi(
+        fontSize: 16,
+        fontWeight: FontWeight.w700,
+        color: _isDark ? _lightBackgroundColor : _lightBackgroundColor,
+      ), 
+      shape: const RoundedRectangleBorder(    
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(16),
+        ),
       ),
     );
   }
@@ -271,14 +336,12 @@ class ThemeServiceProvider with ChangeNotifier {
 
   BottomNavigationBarThemeData _bottomNavigationBarThemeData() {
     return BottomNavigationBarThemeData(
-      backgroundColor: _isDark ? _darkSurfaceColor : _lightSurfaceColor,
+      backgroundColor: _isDark ?  _bottomNavbarColor : _bottomNavbarColor,
       type: BottomNavigationBarType.fixed,
       elevation: 16,
-      selectedItemColor: _secondaryColor,
-      unselectedItemColor: _isDark ? _lightBackgroundColor : _darkBackgroundColor,
-      showUnselectedLabels: true,
-      selectedLabelStyle: tab10(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: tab10(),
+      selectedItemColor: _pinkColor,
+      unselectedItemColor: _isDark ? _lightBackgroundColor : const Color(0xff969696),
+      showUnselectedLabels: true,      
     );
   }
 
