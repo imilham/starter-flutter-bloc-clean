@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter/bootstrap.dart';
 import 'package:starter/features/auth/domain/domain.dart';
+import 'package:starter/utils/utils.dart';
 
 part 'sign_up_state.dart';
 
@@ -16,12 +18,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   /// Attempts to register with the provided credentials.
   Future<void> signUp({
     required String email,
-    required String password,
-    required String deviceId,
-    required String deviceType,
+    required String password,    
     String? devicePushToken,
   }) async {
     emit(const SignUpLoading());
+
+  final deviceId = await getIt<AppSettings>().getDeviceId();
+  final deviceType = getIt<AppSettings>().getDevicePlatform();
 
     final result = await _registerUseCase(
       RegisterParams(

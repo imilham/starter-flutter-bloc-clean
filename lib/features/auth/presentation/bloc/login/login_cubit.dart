@@ -1,6 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter/bootstrap.dart';
 import 'package:starter/features/auth/domain/domain.dart';
+import 'package:starter/utils/utils.dart';
 
 part 'login_state.dart';
 
@@ -16,12 +18,13 @@ class LoginCubit extends Cubit<LoginState> {
   /// Attempts to log in with the provided credentials.
   Future<void> login({
     required String email,
-    required String password,
-    required String deviceId,
-    required String deviceType,
+    required String password,    
     String? devicePushToken,
   }) async {
     emit(const LoginLoading());
+
+    final deviceId = await getIt<AppSettings>().getDeviceId();
+    final deviceType = getIt<AppSettings>().getDevicePlatform();
 
     final result = await _loginUseCase(
       LoginParams(

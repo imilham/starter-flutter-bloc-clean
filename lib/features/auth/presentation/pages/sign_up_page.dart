@@ -130,14 +130,10 @@ class _SignUpPageState extends State<SignUpPage> {
                             );
                             return;
                           }
-                          final deviceId = await getIt<AppSettings>().getDeviceId();
-                          final deviceType = getIt<AppSettings>().getDevicePlatform();
                           if (!context.mounted) return;
                           await context.read<SignUpCubit>().signUp(
                                 email: _emailController.text,
                                 password: _passwordController.text,
-                                deviceId: deviceId,
-                                deviceType: deviceType,
                               );
                         }
                       },
