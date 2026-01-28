@@ -6,7 +6,6 @@ import 'package:starter/utils/constants/spacing.dart';
 
 /// 🚀 Widget Extensions - Gold Standard Implementation
 ///
-/// Optimized for the deaf and dumb community app with:
 /// - 2x faster margins using Padding instead of Container
 /// - High-performance DecoratedBox instead of ClipRRect for styling
 /// - Professional gesture handling with accessibility support
@@ -246,25 +245,46 @@ extension WidgetBoxExtension on Widget {
   Widget box({
     Color? color,
     double? radius,
+    BorderRadiusGeometry? borderRadius,
     BoxBorder? border,
     List<BoxShadow>? shadow,
+    double? width,
+    double? height,
     EdgeInsetsGeometry? padding,
     EdgeInsetsGeometry? margin,
+    bool useRepaintBoundary = false,
   }) {
+    Widget result = Padding(
+      padding: padding ?? EdgeInsets.zero,
+      child: this,
+    );
+
+    // If flagged, isolate the paint of the child from the box
+    if (useRepaintBoundary) {
+      result = RepaintBoundary(child: result);
+    }
+
+    Widget decorated = DecoratedBox(
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: borderRadius ?? (radius != null ? BorderRadius.circular(radius) : null),
+        border: border,
+        boxShadow: shadow,
+      ),
+      child: result,
+    );
+
+    if (width != null || height != null) {
+      decorated = SizedBox(
+        width: width,
+        height: height,
+        child: decorated,
+      );
+    }
+
     return Padding(
       padding: margin ?? EdgeInsets.zero,
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: radius != null ? BorderRadius.circular(radius) : null,
-          border: border,
-          boxShadow: shadow,
-        ),
-        child: Padding(
-          padding: padding ?? EdgeInsets.zero,
-          child: this,
-        ),
-      ),
+      child: decorated,
     );
   }
 
@@ -486,10 +506,10 @@ extension WidgetDecorationExtension on Widget {
         filter: dart_ui.ImageFilter.blur(sigmaX: blur, sigmaY: blur),
         child: Container(
           decoration: BoxDecoration(
-            color: color.withOpacity(opacity),
+            color: color.withValues(alpha: opacity),
             borderRadius: BorderRadius.circular(radius),
             border: Border.all(
-              color: Colors.white.withOpacity(0.2),
+              color: Colors.white.withValues(alpha:0.2),
               width: 1.5,
             ),
           ),
@@ -519,7 +539,7 @@ extension WidgetDecorationExtension on Widget {
 
 /// 🤲 Specific Gesture Overlay Extensions
 /// 
-/// Specialized for deaf and dumb community app with hand-tracking capabilities.
+/// Specialized for   community app with hand-tracking capabilities.
 extension WidgetGestureOverlayExtension on Widget {
   /// Creates a gesture tracking overlay for hand-tracking points
   /// Perfect for drawing gesture recognition points over the camera feed
@@ -633,7 +653,7 @@ class _GesturePointsPainter extends CustomPainter {
 extension WidgetGestureExtension on Widget {
   /// Smart gesture handling with automatic InkWell for accessibility.
   /// 
-  /// For deaf and dumb community app, visual feedback is crucial.
+  /// For   community app, visual feedback is crucial.
   /// Uses InkWell by default for professional ripple effects.
   /// 
   /// Usage:

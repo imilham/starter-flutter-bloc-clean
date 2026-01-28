@@ -18,4 +18,5 @@ export './widgets/widgets.dart';
 export 'extensions/text_style_extension.dart';
 export 'extensions/theme_extension.dart';
 export 'extensions/toast_extension.dart';
+export 'extensions/overlay_extension.dart';
 export 'extensions/widget_extension.dart';
