@@ -57,7 +57,7 @@ class _SplashPageState extends State<SplashPage> {
                       SizedBox(
                         width: 24,
                         height: 24,
-                        child: CircularProgressIndicator(),
+                        child: CommonCircularLoader(),
                       ),
                     ],
                   );

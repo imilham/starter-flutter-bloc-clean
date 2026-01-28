@@ -1,8 +1,5 @@
 import 'package:starter/core/core.dart';
-import 'package:starter/features/auth/data/datasources/datasources.dart';
-import 'package:starter/features/auth/data/models/models.dart';
-import 'package:starter/features/auth/domain/entities/entities.dart';
-import 'package:starter/features/auth/domain/repositories/repositories.dart';
+import 'package:starter/features/auth/auth.dart';
 
 /// Implementation of [IAuthRepository].
 ///

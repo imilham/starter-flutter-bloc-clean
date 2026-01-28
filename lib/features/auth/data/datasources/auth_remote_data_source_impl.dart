@@ -1,5 +1,4 @@
-import 'package:starter/features/auth/data/datasources/datasources.dart';
-import 'package:starter/features/auth/data/models/models.dart';
+import 'package:starter/features/auth/auth.dart';
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override

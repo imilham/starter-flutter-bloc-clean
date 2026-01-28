@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 import 'package:starter/core/core.dart';
-import 'package:starter/features/auth/domain/repositories/repositories.dart';
+import 'package:starter/features/auth/auth.dart';
 
 /// Use case for sending a forgot password request.
 class ForgotPasswordUseCase implements UseCase<void, ForgotPasswordParams> {
