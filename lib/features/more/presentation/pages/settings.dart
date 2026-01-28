@@ -16,8 +16,7 @@ class _SettingsPageState extends State<SettingsPage> {
         title: context.l10n.settings,
       ),
       body: const Center(
-        child: Column(          
-        ),
+        child: Column(),
       ),
     );
   }

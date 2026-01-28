@@ -12,7 +12,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     await Future<void>.delayed(const Duration(seconds: 2));
     if (email == 'user@example.com' && password == 'password') {
-       return AuthSessionModel(
+      return AuthSessionModel(
         accessToken: 'mock_token',
         userId: '1',
         createdAt: DateTime.now(),
@@ -20,11 +20,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       );
     }
     // For now always return success for dev
-     return AuthSessionModel(
-        accessToken: 'mock_token',
-        userId: '1',
-        createdAt: DateTime.now(),
-      );
+    return AuthSessionModel(
+      accessToken: 'mock_token',
+      userId: '1',
+      createdAt: DateTime.now(),
+    );
   }
 
   @override
@@ -51,7 +51,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<AuthSessionModel> verifyEmail({required String code, required String token}) async {
     await Future<void>.delayed(const Duration(seconds: 1));
-     return AuthSessionModel(
+    return AuthSessionModel(
       accessToken: 'mock_token_verified',
       userId: '1',
       createdAt: DateTime.now(),

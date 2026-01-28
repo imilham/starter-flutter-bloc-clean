@@ -82,7 +82,7 @@ class DeepLinkGuide extends StatelessWidget {
             ),
           ],
         ),
-         const SampleSection(
+        const SampleSection(
           title: 'Flutter Setup',
           icon: Icons.flutter_dash,
           children: [
@@ -115,7 +115,7 @@ final router = GoRouter(
               description: 'Run this command in your terminal.',
               code: 'adb shell am start -W -a android.intent.action.VIEW -d "customscheme://details/123" com.example.starter',
             ),
-             _StepItem(
+            _StepItem(
               step: '5',
               title: 'Test on iOS',
               description: 'Run this command in your terminal.',
@@ -159,7 +159,7 @@ class _InfoBanner extends StatelessWidget {
                   ),
                 ),
                 Gap.small8,
-                  Text(
+                Text(
                   'This feature requires native configuration. Follow the steps below to enable it in your app.',
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,

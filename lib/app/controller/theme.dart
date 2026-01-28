@@ -38,7 +38,7 @@ class ThemeServiceProvider with ChangeNotifier {
   final Color _bottomNavbarColor = const Color(0xffF1FCFD);
   final Color _pinkColor = const Color(0xffEA7085);
   final Color _coreTextColor = const Color(0xff464646);
-  
+
   ThemeData _lightThemeData() {
     return ThemeData(
       useMaterial3: true,
@@ -136,7 +136,7 @@ class ThemeServiceProvider with ChangeNotifier {
     );
   }
 
-  TextTheme _textTheme(Color color) {    
+  TextTheme _textTheme(Color color) {
     return TextTheme(
       displayLarge: GoogleFonts.platypi(fontSize: 32, fontWeight: FontWeight.w700, color: color),
       displayMedium: GoogleFonts.platypi(fontSize: 28, fontWeight: FontWeight.w700, color: color),
@@ -239,13 +239,13 @@ class ThemeServiceProvider with ChangeNotifier {
     return AppBarTheme(
       foregroundColor: Colors.white,
       backgroundColor: _isDark ? _darkSurfaceColor : _primaryColor,
-      centerTitle: Platform.isIOS,      
+      centerTitle: Platform.isIOS,
       iconTheme: const IconThemeData(color: Colors.white),
       titleTextStyle: GoogleFonts.platypi(
         fontSize: 16,
         fontWeight: FontWeight.w700,
         color: Colors.white,
-      ),       
+      ),
     );
   }
 
@@ -262,7 +262,7 @@ class ThemeServiceProvider with ChangeNotifier {
       elevation: 16,
       selectedItemColor: _pinkColor,
       unselectedItemColor: _isDark ? Colors.white60 : const Color(0xff969696),
-      showUnselectedLabels: true,      
+      showUnselectedLabels: true,
       selectedLabelStyle: GoogleFonts.notoSans(fontSize: 12, fontWeight: FontWeight.bold),
       unselectedLabelStyle: GoogleFonts.notoSans(fontSize: 12),
     );

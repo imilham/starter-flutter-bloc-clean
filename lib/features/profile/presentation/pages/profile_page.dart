@@ -33,15 +33,13 @@ class _MyProfilePageState extends State<MyProfilePage> {
               child: CircularProgressIndicator(),
             );
           }
-          
+
           if (state is ProfileError) {
-             return Center(child: Text(state.message));
+            return Center(child: Text(state.message));
           }
 
           if (state is ProfileLoaded || state is ProfileUpdateSuccess) {
-            final userProfile = (state is ProfileLoaded) 
-                ? state.profile 
-                : (state as ProfileUpdateSuccess).profile;
+            final userProfile = (state is ProfileLoaded) ? state.profile : (state as ProfileUpdateSuccess).profile;
 
             return ExtendedColumn(
               children: [
@@ -109,7 +107,7 @@ class _MyProfilePageState extends State<MyProfilePage> {
               ],
             );
           }
-          
+
           return const SizedBox.shrink();
         },
       ),

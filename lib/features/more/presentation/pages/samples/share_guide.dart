@@ -46,7 +46,7 @@ class ShareGuide extends StatelessWidget {
 dependencies:
   share_plus: ^9.0.0''',
             ),
-             _StepItem(
+            _StepItem(
               step: '2',
               title: 'Import Package',
               description: 'Import the package in your dart file.',
@@ -117,7 +117,7 @@ class _InfoBanner extends StatelessWidget {
                   ),
                 ),
                 Gap.small8,
-                  Text(
+                Text(
                   'This is a lightweight guide to avoid adding heavy dependencies to the starter kit. Follow the steps below to implement it yourself.',
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,

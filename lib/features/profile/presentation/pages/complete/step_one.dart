@@ -9,7 +9,7 @@ class StepOne extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cubit = context.read<ProfileCompletionCubit>();
-    
+
     return Form(
       key: cubit.stepOneFormKey,
       child: ExtendedColumn(

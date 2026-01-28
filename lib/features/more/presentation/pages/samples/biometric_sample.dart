@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 
-
 class BiometricSample extends StatelessWidget {
   const BiometricSample({super.key});
 
@@ -56,17 +55,17 @@ class BiometricSample extends StatelessWidget {
             ),
           ],
         ),
-        
+
         const SampleSection(
           title: 'Implementation',
           icon: Icons.code,
           children: [
-             _StepItem(
+            _StepItem(
               step: '4',
               title: 'Controller',
               description: 'Use `BiometricController` to wrap `LocalAuthentication` logic explicitly.',
             ),
-             _StepItem(
+            _StepItem(
               step: '5',
               title: 'Authenticate',
               description: 'Call `authenticate()` with a localized reason string.',
@@ -77,7 +76,6 @@ class BiometricSample extends StatelessWidget {
     );
   }
 }
-
 
 class _InfoBanner extends StatelessWidget {
   const _InfoBanner();
@@ -110,7 +108,7 @@ class _InfoBanner extends StatelessWidget {
                   ),
                 ),
                 Gap.small8,
-                  Text(
+                Text(
                   'This is a guide only. For the full implementation and live demo, please check the `biometric` branch.',
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,

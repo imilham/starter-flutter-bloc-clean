@@ -22,7 +22,6 @@ GetIt get getIt => GetIt.instance;
 /// The [environment] parameter specifies the environment in which the application is running.
 /// This function sets up error handling, initializes Flutter bindings, and registers singletons for various services.
 Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnvironment environment}) async {
-
   ErrorWidget.builder = (FlutterErrorDetails details) {
     return Material(
       child: Center(
@@ -111,18 +110,18 @@ Future<void> setup({required AppEnvironment environment}) async {
     ..registerSingleton<ProfileRemoteDataSource>(ProfileRemoteDataSourceImpl())
     ..registerSingletonWithDependencies<IProfileRepository>(
       () => ProfileRepositoryImpl(
-        remoteDataSource: getIt<ProfileRemoteDataSource>(), 
+        remoteDataSource: getIt<ProfileRemoteDataSource>(),
       ),
       dependsOn: [IAuthRepository],
     )
     ..registerFactory<UpdateProfileUseCase>(
-       () => UpdateProfileUseCase(getIt<IProfileRepository>()),
+      () => UpdateProfileUseCase(getIt<IProfileRepository>()),
     )
     ..registerFactory<GetProfileUseCase>(
-       () => GetProfileUseCase(getIt<IProfileRepository>()),
+      () => GetProfileUseCase(getIt<IProfileRepository>()),
     )
     ..registerFactory<DeleteProfileUseCase>(
-       () => DeleteProfileUseCase(getIt<IProfileRepository>()),
+      () => DeleteProfileUseCase(getIt<IProfileRepository>()),
     )
     ..registerFactory<ProfileBloc>(
       () => ProfileBloc(
@@ -131,7 +130,6 @@ Future<void> setup({required AppEnvironment environment}) async {
         deleteProfileUseCase: getIt<DeleteProfileUseCase>(),
       ),
     );
-
 
   await getIt.allReady();
 }

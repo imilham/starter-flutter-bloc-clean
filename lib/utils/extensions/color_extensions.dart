@@ -55,7 +55,7 @@ extension ColorExtensions on Color {
     for (var i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
     }
-    
+
     for (final strength in strengths) {
       final ds = 0.5 - strength;
       swatch[(strength * 1000).round()] = Color.fromRGBO(

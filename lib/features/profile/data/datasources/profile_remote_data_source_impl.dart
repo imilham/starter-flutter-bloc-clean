@@ -14,12 +14,12 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
 
   @override
   Future<UserProfileModel> updateProfile({required String firstName, required String lastName}) async {
-     await Future<void>.delayed(const Duration(seconds: 1));
-     return UserProfileModel(
-       uuid: '1',
-       firstName: firstName,
-       lastName: lastName,
-     );
+    await Future<void>.delayed(const Duration(seconds: 1));
+    return UserProfileModel(
+      uuid: '1',
+      firstName: firstName,
+      lastName: lastName,
+    );
   }
 
   @override

@@ -46,7 +46,7 @@ class ProfileCompletionCubit extends Cubit<ProfileCompletionState> {
 
   Future<void> submitStepTwo() async {
     if (stepTwoFormKey.currentState?.validate() ?? false) {
-       nextStep();
+      nextStep();
     } else {
       emit(state.copyWith(status: ProfileCompletionStatus.failure, errorMessage: 'Please fill in all fields'));
       emit(state.copyWith(status: ProfileCompletionStatus.initial));
@@ -55,7 +55,7 @@ class ProfileCompletionCubit extends Cubit<ProfileCompletionState> {
 
   Future<void> submitLastStep() async {
     emit(state.copyWith(status: ProfileCompletionStatus.loading));
-    
+
     final result = await _updateProfileUseCase(
       UpdateProfileParams(
         firstName: firstNameController.text,
@@ -69,10 +69,12 @@ class ProfileCompletionCubit extends Cubit<ProfileCompletionState> {
         emit(state.copyWith(status: ProfileCompletionStatus.success));
       },
       onFailure: (failure) {
-        emit(state.copyWith(
-          status: ProfileCompletionStatus.failure, 
-          errorMessage: failure.message,
-        ),);
+        emit(
+          state.copyWith(
+            status: ProfileCompletionStatus.failure,
+            errorMessage: failure.message,
+          ),
+        );
       },
     );
   }

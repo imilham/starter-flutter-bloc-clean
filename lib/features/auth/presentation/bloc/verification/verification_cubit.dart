@@ -14,7 +14,7 @@ class VerificationCubit extends Cubit<VerificationState> {
     required String token, // In real app this comes from previous step, for mock we might not need it valid
   }) async {
     emit(const VerificationLoading());
-    
+
     final result = await _verifyEmailUseCase(
       VerifyEmailParams(code: code, token: token),
     );

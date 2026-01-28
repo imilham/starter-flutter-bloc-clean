@@ -9,7 +9,8 @@ import 'package:starter/features/auth/domain/repositories/repositories.dart';
 /// This coordinates between remote and local data sources.
 class AuthRepositoryImpl implements IAuthRepository {
   AuthRepositoryImpl({
-    required this.localDataSource, this.remoteDataSource,
+    required this.localDataSource,
+    this.remoteDataSource,
   });
 
   final AuthRemoteDataSource? remoteDataSource;

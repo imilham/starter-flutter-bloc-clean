@@ -32,14 +32,14 @@ class _CompleteProfileFlowView extends StatelessWidget {
             message: state.errorMessage!,
           );
         } else if (state.status == ProfileCompletionStatus.success) {
-           // Navigate away or show success message, typically handled by auth state change
-           // but we can add specific logic here if needed.
+          // Navigate away or show success message, typically handled by auth state change
+          // but we can add specific logic here if needed.
         }
       },
       builder: (context, state) {
         final cubit = context.read<ProfileCompletionCubit>();
         final isLoading = state.status == ProfileCompletionStatus.loading;
-        
+
         return AbsorbPointer(
           absorbing: isLoading,
           child: Scaffold(

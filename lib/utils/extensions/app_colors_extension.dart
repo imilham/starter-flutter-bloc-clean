@@ -46,20 +46,20 @@ class AppColors extends ThemeExtension<AppColors> {
 
   /// Semantic success color.
   final Color success;
-  
+
   /// Bottom navigation bar background color.
   final Color bottomNavbarColor;
 
   /// Bottom navigation bar selected background color.
   final Color bottomNavbarSelectedColor;
-  
+
   /// Primary pink/accent color.
   final Color pink;
-  
+
   /// Core text color for the app.
   final Color coreTextColor;
-  
-  /// black 400 text color  
+
+  /// black 400 text color
   final Color black400;
 
   /// deemphasizedText color
@@ -82,10 +82,10 @@ class AppColors extends ThemeExtension<AppColors> {
       shimmerBgColor: shimmerBgColor ?? this.shimmerBgColor,
       success: success ?? this.success,
       bottomNavbarColor: bottomNavbarColor ?? this.bottomNavbarColor,
-      bottomNavbarSelectedColor:  bottomNavbarSelectedColor ?? this.bottomNavbarSelectedColor,
+      bottomNavbarSelectedColor: bottomNavbarSelectedColor ?? this.bottomNavbarSelectedColor,
       pink: pink ?? this.pink,
       coreTextColor: coreTextColor ?? this.coreTextColor,
-      black400: black400 ?? this.black400,    
+      black400: black400 ?? this.black400,
       deemphasizedText: deemphasizedText ?? this.deemphasizedText,
     );
   }

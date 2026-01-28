@@ -95,8 +95,14 @@ TextStyle headline20({Color? textColor, double? letterSpacing = 0.0, double? hei
       fontStyle: fontStyle,
     );
 
-TextStyle headline16(
-        {Color? textColor, double? letterSpacing = 0.0, double? height, TextDecoration? decoration, FontWeight? fontWeight, FontStyle? fontStyle,}) =>
+TextStyle headline16({
+  Color? textColor,
+  double? letterSpacing = 0.0,
+  double? height,
+  TextDecoration? decoration,
+  FontWeight? fontWeight,
+  FontStyle? fontStyle,
+}) =>
     _font(
       color: textColor,
       fontSize: FontSize.small16.size,
@@ -223,7 +229,6 @@ enum FontSize {
   xxSmall12,
   xxxSmall10,
 }
-
 
 extension FontSizeExtension on FontSize {
   double get size {

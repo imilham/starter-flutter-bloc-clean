@@ -156,6 +156,6 @@ class Gap {
   /// 48px gap
   static const doubleExtraLarge48 = gap_pkg.Gap(48);
 
- // 50px gap
+  // 50px gap
   static const huge50 = gap_pkg.Gap(50);
 }

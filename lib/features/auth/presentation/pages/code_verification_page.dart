@@ -26,7 +26,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
       codeLength: 6,
       onCodeReceive: (code) {
         if (mounted) {
-           // Optional: Auto-verify on receive
+          // Optional: Auto-verify on receive
         }
       },
     );
@@ -44,8 +44,9 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
 
   @override
   void dispose() {
-    _codeController..stopListen()
-    ..dispose();
+    _codeController
+      ..stopListen()
+      ..dispose();
     super.dispose();
   }
 
@@ -61,7 +62,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
       ),
       child: BlocConsumer<VerificationCubit, VerificationState>(
         listener: (context, state) {
-           if (state is VerificationSuccess) {
+          if (state is VerificationSuccess) {
             getIt<AuthBloc>().add(AuthLoginRequested(state.session));
           } else if (state is VerificationFailure) {
             CommonDialog.alert(
@@ -73,7 +74,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
         },
         builder: (context, state) {
           final isLoading = state is VerificationLoading;
-          
+
           final defaultPinTheme = PinTheme(
             width: 50,
             height: 50,
@@ -159,9 +160,9 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     onPressed: () {
                       if (_codeController.text.isNotEmpty) {
                         context.read<VerificationCubit>().verifyEmail(
-                          code: _codeController.text,
-                          token: 'mock_token',
-                        );
+                              code: _codeController.text,
+                              token: 'mock_token',
+                            );
                       }
                     },
                   ),

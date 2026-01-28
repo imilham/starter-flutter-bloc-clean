@@ -3,7 +3,10 @@ import 'package:starter/utils/utils.dart';
 
 class SampleSection extends StatelessWidget {
   const SampleSection({
-    required this.title, required this.icon, required this.children, super.key,
+    required this.title,
+    required this.icon,
+    required this.children,
+    super.key,
     this.isExpanded = false,
   });
 

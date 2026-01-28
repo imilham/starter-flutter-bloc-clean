@@ -214,7 +214,7 @@ extension TextStyleExtension on BuildContext {
   }
 
   /// body small 10 --- custom addition
-    TextStyle bodyXSsmall10({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration}) {
+  TextStyle bodyXSsmall10({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration}) {
     assert(_textTheme.bodySmall != null, 'Theme bodySmall must be defined');
     return _textTheme.bodySmall!.copyWith(
       fontSize: 12,

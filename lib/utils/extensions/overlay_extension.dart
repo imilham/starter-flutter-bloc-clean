@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 
 /// 💎 Premium Overlay Extension
-/// 
+///
 /// Uses [LayerLink] and [CompositedTransformTarget] to create high-performance
 /// floating UI elements that stick to their targets at the engine level.
-/// 
+///
 /// Zero lag. Hardware-synced.
 extension WidgetOverlayExtension on Widget {
   /// Wraps this widget in an [AnchoredOverlay] to show a floating element
   /// that physically tracks this widget using [LayerLink].
-  /// 
+  ///
   /// [overlayBuilder] builds the floating content.
   /// [anchor] defines how the overlay aligns with the target.
   Widget anchored({
@@ -115,29 +115,47 @@ class AnchoredOverlayState extends State<AnchoredOverlay> {
 
   Alignment _getTargetAlignment(OverlayAnchor anchor) {
     switch (anchor) {
-      case OverlayAnchor.topCenter: return Alignment.topCenter;
-      case OverlayAnchor.bottomCenter: return Alignment.bottomCenter;
-      case OverlayAnchor.center: return Alignment.center;
-      case OverlayAnchor.topLeft: return Alignment.topLeft;
-      case OverlayAnchor.topRight: return Alignment.topRight;
-      case OverlayAnchor.bottomLeft: return Alignment.bottomLeft;
-      case OverlayAnchor.bottomRight: return Alignment.bottomRight;
-      case OverlayAnchor.leftCenter: return Alignment.centerLeft;
-      case OverlayAnchor.rightCenter: return Alignment.centerRight;
+      case OverlayAnchor.topCenter:
+        return Alignment.topCenter;
+      case OverlayAnchor.bottomCenter:
+        return Alignment.bottomCenter;
+      case OverlayAnchor.center:
+        return Alignment.center;
+      case OverlayAnchor.topLeft:
+        return Alignment.topLeft;
+      case OverlayAnchor.topRight:
+        return Alignment.topRight;
+      case OverlayAnchor.bottomLeft:
+        return Alignment.bottomLeft;
+      case OverlayAnchor.bottomRight:
+        return Alignment.bottomRight;
+      case OverlayAnchor.leftCenter:
+        return Alignment.centerLeft;
+      case OverlayAnchor.rightCenter:
+        return Alignment.centerRight;
     }
   }
 
   Alignment _getFollowerAlignment(OverlayAnchor anchor) {
     switch (anchor) {
-      case OverlayAnchor.topCenter: return Alignment.bottomCenter;
-      case OverlayAnchor.bottomCenter: return Alignment.topCenter;
-      case OverlayAnchor.center: return Alignment.center;
-      case OverlayAnchor.topLeft: return Alignment.bottomLeft;
-      case OverlayAnchor.topRight: return Alignment.bottomRight;
-      case OverlayAnchor.bottomLeft: return Alignment.topLeft;
-      case OverlayAnchor.bottomRight: return Alignment.topRight;
-      case OverlayAnchor.leftCenter: return Alignment.centerRight;
-      case OverlayAnchor.rightCenter: return Alignment.centerLeft;
+      case OverlayAnchor.topCenter:
+        return Alignment.bottomCenter;
+      case OverlayAnchor.bottomCenter:
+        return Alignment.topCenter;
+      case OverlayAnchor.center:
+        return Alignment.center;
+      case OverlayAnchor.topLeft:
+        return Alignment.bottomLeft;
+      case OverlayAnchor.topRight:
+        return Alignment.bottomRight;
+      case OverlayAnchor.bottomLeft:
+        return Alignment.topLeft;
+      case OverlayAnchor.bottomRight:
+        return Alignment.topRight;
+      case OverlayAnchor.leftCenter:
+        return Alignment.centerRight;
+      case OverlayAnchor.rightCenter:
+        return Alignment.centerLeft;
     }
   }
 }

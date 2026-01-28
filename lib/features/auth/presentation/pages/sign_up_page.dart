@@ -20,7 +20,6 @@ class _SignUpPageState extends State<SignUpPage> {
   late final TextEditingController _passwordController;
   late final TextEditingController _phoneController;
 
-
   @override
   void initState() {
     _emailController = TextEditingController(text: 'john@elegantmedia.com.au');

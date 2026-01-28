@@ -187,4 +187,3 @@ class _TypeSample extends StatelessWidget {
     );
   }
 }
-

@@ -27,7 +27,6 @@ class _StarterAppState extends State<StarterApp> {
 
   /// A stream subscription for handling ProfileState changes.
 
-
   @override
   void initState() {
     /// Subscribes to changes in the Hive box containing sessions and listens for authentication state changes.

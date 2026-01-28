@@ -110,10 +110,7 @@ class ExtensionsSample extends StatelessWidget {
                   gradient: LinearGradient(colors: [Colors.blue, Colors.purple]),
                 ),
                 child: Center(
-                  child: const Text('Glass')
-                      .paddingAll16
-                      .glassmorphism(opacity: 0.1, blur: 5)
-                      .paddingAll8,
+                  child: const Text('Glass').paddingAll16.glassmorphism(opacity: 0.1, blur: 5).paddingAll8,
                 ),
               ),
             ),

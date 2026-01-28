@@ -20,8 +20,7 @@ abstract interface class AuthLocalDataSource {
 
 /// Implementation of [AuthLocalDataSource] using Hive.
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
-  AuthLocalDataSourceImpl()
-      : box = Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey);
+  AuthLocalDataSourceImpl() : box = Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey);
 
   final Box<String> box;
   static const _sessionKey = 'session';

@@ -14,7 +14,7 @@ import 'package:starter/utils/constants/spacing.dart';
 ///
 /// 📏 CHAINING ORDER (follow for best results):
 /// 1. Style (Text styles/Colors)
-/// 2. Internal Padding (.paddingAll16)  
+/// 2. Internal Padding (.paddingAll16)
 /// 3. Decoration (.box() or .withBackground)
 /// 4. Gesture (.onTap)
 /// 5. External Margin (.marginAll8)
@@ -80,7 +80,6 @@ extension WidgetPaddingExtension on Widget {
 
   /// 32px horizontal padding
   Widget get paddingHorizontal32 => Padding(padding: AppSpacing.horizontalXl32, child: this);
-  
 
   // ─────────────────────────────────────────────────────────────────────
   // VERTICAL
@@ -129,7 +128,7 @@ extension WidgetPaddingExtension on Widget {
 }
 
 /// Extension to provide convenient margin methods on widgets.
-/// 
+///
 /// Margin adds space OUTSIDE the widget boundary, unlike padding which
 /// adds space INSIDE. These methods wrap the widget in Container with margin.
 ///
@@ -224,15 +223,15 @@ extension WidgetMarginExtension on Widget {
 }
 
 /// 🚀 GOLD STANDARD: Smart Box Extension
-/// 
+///
 /// This is significantly faster than ClipRRect + Container combinations.
 /// Uses DecoratedBox which is optimized for painting background, border, and radius in one pass.
 /// Perfect for chat bubbles, profile cards, and gesture overlay elements.
 extension WidgetBoxExtension on Widget {
   /// Cheaper than ClipRRect. Paints background, border, and radius in one pass.
-  /// 
+  ///
   /// Ideal for chat bubbles and camera overlay elements.
-  /// 
+  ///
   /// Usage:
   /// ```dart
   /// Text('Hello').box(
@@ -311,7 +310,7 @@ extension WidgetBoxExtension on Widget {
 }
 
 /// Extension to provide high-performance border radius methods on widgets.
-/// 
+///
 /// 🚀 Uses DecoratedBox decoration (fast) instead of ClipRRect (expensive) for most cases.
 /// Only use ClipRRect for images/video that need physical edge cutting.
 ///
@@ -366,7 +365,7 @@ extension WidgetBorderRadiusExtension on Widget {
   /// 4px radius using fast decoration
   Widget get radius4 => withRadius(AppRadius.xs4);
 
-  /// 8px radius using fast decoration  
+  /// 8px radius using fast decoration
   Widget get radius8 => withRadius(AppRadius.sm8);
 
   /// 12px radius using fast decoration
@@ -385,7 +384,7 @@ extension WidgetBorderRadiusExtension on Widget {
   // ⚠️ EXPENSIVE CLIPPING APPROACH (Use ONLY for Images/Video/Camera)
   // ─────────────────────────────────────────────────────────────────────
 
-  /// Only use these when you physically need to cut the edges of a child 
+  /// Only use these when you physically need to cut the edges of a child
   /// (like a NetworkImage, CameraPreview, or video content).
   Widget clipRadius(double radius) => ClipRRect(
         borderRadius: BorderRadius.circular(radius),
@@ -398,7 +397,8 @@ extension WidgetBorderRadiusExtension on Widget {
     double topRight = 0,
     double bottomLeft = 0,
     double bottomRight = 0,
-  }) => ClipRRect(
+  }) =>
+      ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(topLeft),
           topRight: Radius.circular(topRight),
@@ -478,7 +478,7 @@ extension WidgetDecorationExtension on Widget {
         color: Colors.white, // Shadow needs a background to cast from usually, or just decoration
         borderRadius: borderRadius,
         boxShadow: [
-            BoxShadow(
+          BoxShadow(
             color: color,
             blurRadius: blurRadius,
             spreadRadius: spreadRadius,
@@ -509,7 +509,7 @@ extension WidgetDecorationExtension on Widget {
             color: color.withValues(alpha: opacity),
             borderRadius: BorderRadius.circular(radius),
             border: Border.all(
-              color: Colors.white.withValues(alpha:0.2),
+              color: Colors.white.withValues(alpha: 0.2),
               width: 1.5,
             ),
           ),
@@ -538,12 +538,12 @@ extension WidgetDecorationExtension on Widget {
 }
 
 /// 🤲 Specific Gesture Overlay Extensions
-/// 
+///
 /// Specialized for   community app with hand-tracking capabilities.
 extension WidgetGestureOverlayExtension on Widget {
   /// Creates a gesture tracking overlay for hand-tracking points
   /// Perfect for drawing gesture recognition points over the camera feed
-  /// 
+  ///
   /// Usage:
   /// ```dart
   /// cameraFeed.gestureOverlay(
@@ -606,7 +606,6 @@ extension WidgetGestureOverlayExtension on Widget {
 
 /// Custom painter for gesture tracking points
 class _GesturePointsPainter extends CustomPainter {
-
   _GesturePointsPainter({
     required this.points,
     required this.pointColor,
@@ -648,14 +647,14 @@ class _GesturePointsPainter extends CustomPainter {
 }
 
 /// 🎯 Professional Gesture Handling
-/// 
+///
 /// Optimized for accessibility and professional feedback.
 extension WidgetGestureExtension on Widget {
   /// Smart gesture handling with automatic InkWell for accessibility.
-  /// 
+  ///
   /// For   community app, visual feedback is crucial.
   /// Uses InkWell by default for professional ripple effects.
-  /// 
+  ///
   /// Usage:
   /// ```dart
   /// profileCard.onTap(() => navigateToProfile())
@@ -669,7 +668,7 @@ extension WidgetGestureExtension on Widget {
     BorderRadius? borderRadius,
   }) {
     if (action == null) return this;
-    
+
     if (useInkWell) {
       return Material(
         color: Colors.transparent,
@@ -682,7 +681,7 @@ extension WidgetGestureExtension on Widget {
         ),
       );
     }
-    
+
     return GestureDetector(onTap: action, child: this);
   }
 
@@ -693,7 +692,7 @@ extension WidgetGestureExtension on Widget {
     Color? splashColor,
   }) {
     if (action == null) return this;
-    
+
     if (useInkWell) {
       return Material(
         color: Colors.transparent,
@@ -704,7 +703,7 @@ extension WidgetGestureExtension on Widget {
         ),
       );
     }
-    
+
     return GestureDetector(onLongPress: action, child: this);
   }
 
@@ -717,7 +716,7 @@ extension WidgetGestureExtension on Widget {
     BorderRadius? borderRadius,
   }) {
     if (onTap == null && onLongPress == null) return this;
-    
+
     if (useInkWell) {
       return Material(
         color: Colors.transparent,
@@ -730,7 +729,7 @@ extension WidgetGestureExtension on Widget {
         ),
       );
     }
-    
+
     return GestureDetector(
       onTap: onTap,
       onLongPress: onLongPress,
@@ -742,10 +741,10 @@ extension WidgetGestureExtension on Widget {
 /// Extension for scrollable and interaction utilities.
 extension WidgetScrollableExtension on Widget {
   /// Converts this widget into a scrollable list with separators between items.
-  /// 
+  ///
   /// ⚡ Performance optimized for chat and profile lists.
   /// Uses ListView.separated for better memory management with large lists.
-  /// 
+  ///
   /// Usage:
   /// ```dart
   /// messageWidget.toScrollableList(
@@ -768,7 +767,7 @@ extension WidgetScrollableExtension on Widget {
         children: [this],
       );
     }
-    
+
     return ListView.separated(
       scrollDirection: scrollDirection,
       padding: padding,
