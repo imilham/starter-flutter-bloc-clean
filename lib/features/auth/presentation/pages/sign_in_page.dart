@@ -106,7 +106,7 @@ class _SignInPageState extends State<SignInPage> {
                               message: 'Please use a valid email address. Disposable emails are not allowed.',
                             );
                             return;
-                          }                          
+                          }
                           if (!context.mounted) return;
                           await context.read<LoginCubit>().login(
                                 email: _emailController.text,

@@ -18,7 +18,7 @@ class LoginCubit extends Cubit<LoginState> {
   /// Attempts to log in with the provided credentials.
   Future<void> login({
     required String email,
-    required String password,    
+    required String password,
     String? devicePushToken,
   }) async {
     emit(const LoginLoading());

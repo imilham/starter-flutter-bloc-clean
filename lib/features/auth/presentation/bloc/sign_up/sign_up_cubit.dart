@@ -18,13 +18,13 @@ class SignUpCubit extends Cubit<SignUpState> {
   /// Attempts to register with the provided credentials.
   Future<void> signUp({
     required String email,
-    required String password,    
+    required String password,
     String? devicePushToken,
   }) async {
     emit(const SignUpLoading());
 
-  final deviceId = await getIt<AppSettings>().getDeviceId();
-  final deviceType = getIt<AppSettings>().getDevicePlatform();
+    final deviceId = await getIt<AppSettings>().getDeviceId();
+    final deviceType = getIt<AppSettings>().getDevicePlatform();
 
     final result = await _registerUseCase(
       RegisterParams(
