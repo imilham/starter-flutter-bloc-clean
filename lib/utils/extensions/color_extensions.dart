@@ -21,7 +21,7 @@ extension ColorExtensions on Color {
   ///
   /// [includeAlpha] - whether to include the alpha channel.
   String toHex({bool includeHash = true, bool includeAlpha = true}) {
-    var hex = value.toRadixString(16).toUpperCase().padLeft(8, '0');
+    var hex = toARGB32().toRadixString(16).toUpperCase().padLeft(8, '0');
     if (!includeAlpha) {
       hex = hex.substring(2);
     }
@@ -47,10 +47,10 @@ extension ColorExtensions on Color {
   MaterialColor toMaterialColor() {
     final strengths = <double>[.05];
     final swatch = <int, Color>{};
-    // Use red, green, blue (0-255 integer values)
-    final r = red;
-    final g = green;
-    final b = blue;
+    // Use red, green, blue (convert from 0-1 double to 0-255 int)
+    final r = (this.r * 255).round();
+    final g = (this.g * 255).round();
+    final b = (this.b * 255).round();
 
     for (var i = 1; i < 10; i++) {
       strengths.add(0.1 * i);
@@ -65,7 +65,7 @@ extension ColorExtensions on Color {
         1,
       );
     }
-    return MaterialColor(value, swatch);
+    return MaterialColor(toARGB32(), swatch);
   }
 
   /// Smoothly interpolates to [other] color by [t].

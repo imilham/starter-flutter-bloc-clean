@@ -271,5 +271,13 @@
     "genericError": "Something went wrong!",
     "@genericError": {
         "description": "Generic error message"
+    },
+    "firstNameRequired": "First name is required",
+    "@firstNameRequired": {
+        "description": "Error message when first name is missing"
+    },
+    "lastNameRequired": "Last name is required",
+    "@lastNameRequired": {
+        "description": "Error message when last name is missing"
     }
 }

@@ -80,7 +80,7 @@ void main() {
 
   group('Widget Gesture Extension', () {
      testWidgets('onTap triggers callback', (tester) async {
-       bool tapped = false;
+       var tapped = false;
        await tester.pumpWidget(
          Directionality(
            textDirection: TextDirection.ltr,

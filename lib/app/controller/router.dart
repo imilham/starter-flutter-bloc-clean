@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/auth/auth.dart';
-import 'package:starter/home/home.dart';
-import 'package:starter/more/more.dart';
-import 'package:starter/profile/profile.dart';
+import 'package:starter/features/auth/auth.dart';
+import 'package:starter/features/home/home.dart';
+import 'package:starter/features/more/more.dart';
+import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
 final GlobalKey<NavigatorState> _rootNavigatorKey = GlobalKey<NavigatorState>();
@@ -55,7 +56,7 @@ class AppRouter {
                 name: Pages.forgotPassword.toPathName(),
                 pageBuilder: (context, state) => MaterialPage(
                   key: state.pageKey,
-                  child: const ForgotPassword(),
+                  child: const ForgotPasswordPage(),
                 ),
               ),
             ],
@@ -91,12 +92,7 @@ class AppRouter {
         name: Pages.completeAccount.toPathName(),
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child: ChangeNotifierProvider(
-            create: (context) => ProfileCompleteController(
-              currentProfile: GetIt.instance<UserProfileService>().userProfile,
-            ),
-            child: const CompleteProfileFlow(),
-          ),
+          child: const CompleteProfileFlow(),
         ),
       ),
       StatefulShellRoute.indexedStack(
@@ -174,7 +170,10 @@ class AppRouter {
                     parentNavigatorKey: _rootNavigatorKey,
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
-                      child: const MyProfilePage(),
+                      child: BlocProvider(
+                        create: (context) => GetIt.instance<ProfileBloc>(),
+                        child: const MyProfilePage(),
+                      ),
                     ),
                   ),
                   GoRoute(

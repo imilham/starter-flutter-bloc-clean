@@ -3,11 +3,12 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/auth/auth.dart';
+import 'package:starter/features/auth/auth.dart';
+
 import 'package:starter/l10n/arb/app_localizations.dart';
-import 'package:starter/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
 class StarterApp extends StatefulWidget {
@@ -25,7 +26,7 @@ class _StarterAppState extends State<StarterApp> {
   late StreamSubscription<BoxEvent> _authStateSubscription;
 
   /// A stream subscription for handling ProfileState changes.
-  late StreamSubscription<ProfileState> _profileStateSubscription;
+
 
   @override
   void initState() {
@@ -33,12 +34,6 @@ class _StarterAppState extends State<StarterApp> {
     ///
     /// The [onAuthStateChanged] callback function will be called whenever there is a change in the authentication state.
     _authStateSubscription = Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey).watch().listen(onAuthStateChanged);
-
-    _profileStateSubscription = GetIt.instance<UserProfileService>().profileStateStream.listen((event) async {
-      if (event is ProfileDeleted) {
-        await GetIt.instance<AuthService>().onUserProfileDeleted();
-      }
-    });
 
     /// Listens to changes in the theme mode provided by the [_themeServiceProvider].
     /// If the theme mode is set to [ThemeMode.dark], it sets the system UI overlay style to dark.
@@ -63,7 +58,7 @@ class _StarterAppState extends State<StarterApp> {
   void onAuthStateChanged(BoxEvent event) {
     log('onAuthStateChanged: ${event.value}', name: 'StarterAppState');
     if (event.value != null && event.value is String) {
-      _appStates.currentSession = Session.fromJson(jsonDecode(event.value as String) as Map<String, dynamic>);
+      _appStates.currentSession = AuthSessionModel.fromJson(jsonDecode(event.value as String) as Map<String, dynamic>);
     } else {
       _appStates
         ..currentSession = null
@@ -74,7 +69,7 @@ class _StarterAppState extends State<StarterApp> {
   @override
   void dispose() {
     _authStateSubscription.cancel();
-    _profileStateSubscription.cancel();
+
     super.dispose();
   }
 
@@ -84,6 +79,7 @@ class _StarterAppState extends State<StarterApp> {
       providers: [
         Provider(create: (_) => GetIt.instance<AppSettings>()),
         ChangeNotifierProvider(create: (_) => GetIt.instance<ThemeServiceProvider>()),
+        BlocProvider.value(value: GetIt.instance<AuthBloc>()),
       ],
       child: Builder(
         builder: (context) {

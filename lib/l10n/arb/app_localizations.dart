@@ -498,6 +498,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Something went wrong!'**
   String get genericError;
+
+  /// Error message when first name is missing
+  ///
+  /// In en, this message translates to:
+  /// **'First name is required'**
+  String get firstNameRequired;
+
+  /// Error message when last name is missing
+  ///
+  /// In en, this message translates to:
+  /// **'Last name is required'**
+  String get lastNameRequired;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

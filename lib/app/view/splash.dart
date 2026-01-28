@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/auth/auth.dart';
+import 'package:starter/bootstrap.dart';
+import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
 class SplashPage extends StatefulWidget {
@@ -25,13 +27,12 @@ class _SplashPageState extends State<SplashPage> {
     // TODO(ishanga): Remove the delay after actual API calls are implemented.
     // This is just to simulate a loading state.
     await Future.delayed(const Duration(seconds: 2), () {});
-    await GetIt.instance<AppStates>().onAppStart();
-    try {
-      await GetIt.instance<AuthService>().refreshSession();
-    } catch (_) {
-      return;
-    }
-    GetIt.instance<AppStates>().isInitialized = true;
+    await getIt<AppStates>().onAppStart();
+
+    // Check for stored session
+    getIt<AuthBloc>().add(const AuthCheckRequested());
+
+    getIt<AppStates>().isInitialized = true;
   }
 
   @override
@@ -46,104 +47,20 @@ class _SplashPageState extends State<SplashPage> {
               child: AppLogo(aspectRatio: 1.5),
             ),
             Gap.medium16,
-            StreamBuilder(
-              stream: GetIt.instance<AuthService>().onAuthStateChanges,
-              builder: (context, snapshot) {
-                final state = snapshot.data;
+            BlocBuilder<AuthBloc, AuthState>(
+              bloc: getIt<AuthBloc>(),
+              builder: (context, state) {
                 if (state is AuthLoading) {
-                  if (state is AuthRetrying) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(),
-                        ),
-                        Gap.medium16,
-                        Text(
-                          state.message,
-                          textAlign: TextAlign.center,
-                          style: bodyRegular16(textColor: context.colorScheme.error),
-                        ),
-                        Builder(
-                          builder: (context) {
-                            if (state.lastError == null || state.lastError!.isEmpty) {
-                              return const SizedBox.shrink();
-                            }
-                            return Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                              child: Text(
-                                state.lastError ?? '',
-                                textAlign: TextAlign.center,
-                                maxLines: 3,
-                                overflow: TextOverflow.ellipsis,
-                                style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
-                              ),
-                            );
-                          },
-                        ),
-                        Builder(
-                          builder: (context) {
-                            if (state.retryCount != null && state.retryCount! > 0) {
-                              return Text(
-                                'Attempt ${state.retryCount!} of ${state.maxRetries}',
-                                style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
-                              );
-                            }
-                            return const SizedBox.shrink();
-                          },
-                        ),
-                        Gap.extraLarge32,
-                        Gap.medium16,
-                        Builder(
-                          builder: (context) {
-                            if (state.cancellationToken == null) {
-                              return const SizedBox.shrink();
-                            }
-                            if (state.retryCount != null && state.retryCount! >= 3) {
-                              return FilledButton.icon(
-                                onPressed: () {
-                                  state.cancellationToken?.cancel();
-                                },
-                                style: TextButton.styleFrom(
-                                  foregroundColor: Colors.red,
-                                  backgroundColor: Colors.white,
-                                  side: const BorderSide(color: Colors.red),
-                                ),
-                                icon: const Icon(Icons.cancel),
-                                label: Text(
-                                  'Cancel & Logout',
-                                  style: bodyRegular16(),
-                                ),
-                              );
-                            }
-                            return const SizedBox.shrink();
-                          },
-                        ),
-                      ],
-                    );
-                  }
-                  if (state is AuthRetryingFailed) {
-                    return Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          state.message,
-                          textAlign: TextAlign.center,
-                          style: bodyRegular16(textColor: context.colorScheme.error),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                          child: Text(
-                            'Try again later or contact support if the issue persists.',
-                            textAlign: TextAlign.center,
-                            style: tab10(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)),
-                          ),
-                        ),
-                      ],
-                    );
-                  }
+                  return const Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      SizedBox(
+                        width: 24,
+                        height: 24,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ],
+                  );
                 }
                 return const SizedBox.shrink();
               },

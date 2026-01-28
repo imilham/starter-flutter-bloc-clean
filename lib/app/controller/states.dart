@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:hive/hive.dart';
-import 'package:starter/auth/auth.dart';
+import 'package:starter/features/auth/auth.dart';
 
 /// A class that represents the application states.
 /// It provides getters and setters for various state variables.
@@ -12,13 +12,13 @@ class AppStates with ChangeNotifier {
   /// The prefix for the home route.
   final String homePrefix = '/shell';
 
-  Session? _currentSession;
+  AuthSession? _currentSession;
 
   /// Returns true if the user is logged in, false otherwise.
   bool get isLogin => _currentSession != null;
-  Session? get currentSession => _currentSession;
+  AuthSession? get currentSession => _currentSession;
 
-  set currentSession(Session? value) {
+  set currentSession(AuthSession? value) {
     _currentSession = value;
     notifyListeners();
   }

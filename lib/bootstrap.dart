@@ -5,9 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/auth/auth.dart';
-import 'package:starter/more/more.dart';
-import 'package:starter/profile/profile.dart';
+import 'package:starter/features/auth/auth.dart';
+import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
 /// Returns the instance of the GetIt service locator.
@@ -61,11 +60,46 @@ Future<void> setup({required AppEnvironment environment}) async {
       await Hive.openBox<bool>('states');
       return AppStates();
     })
-    ..registerSingletonAsync<AuthService>(() async {
+    // Auth Feature - BLoC and dependencies
+    ..registerSingletonAsync<AuthLocalDataSource>(() async {
       await Hive.openBox<String>(getIt<AppSettings>().sessionSecretKey);
-      return AuthService();
+      return AuthLocalDataSourceImpl();
     })
-    ..registerSingletonWithDependencies<UserProfileService>(UserProfileService.new, dependsOn: [AuthService])
+    ..registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl())
+    ..registerSingletonWithDependencies<IAuthRepository>(
+      () => AuthRepositoryImpl(
+        localDataSource: getIt<AuthLocalDataSource>(),
+        remoteDataSource: getIt<AuthRemoteDataSource>(),
+      ),
+      dependsOn: [AuthLocalDataSource],
+    )
+    ..registerSingletonWithDependencies<GetStoredSessionUseCase>(
+      () => GetStoredSessionUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerSingletonWithDependencies<LogoutUseCase>(
+      () => LogoutUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerSingletonWithDependencies<LoginUseCase>(
+      () => LoginUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerSingletonWithDependencies<RegisterUseCase>(
+      () => RegisterUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerSingletonWithDependencies<VerifyEmailUseCase>(
+      () => VerifyEmailUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerSingletonWithDependencies<AuthBloc>(
+      () => AuthBloc(
+        getStoredSessionUseCase: getIt<GetStoredSessionUseCase>(),
+        logoutUseCase: getIt<LogoutUseCase>(),
+      ),
+      dependsOn: [GetStoredSessionUseCase, LogoutUseCase],
+    )
     ..registerSingletonWithDependencies(AppRouter.new, dependsOn: [AppStates])
     ..registerSingletonAsync<ThemeServiceProvider>(() async {
       await Hive.openBox<bool>('themeMode');
@@ -73,7 +107,31 @@ Future<void> setup({required AppEnvironment environment}) async {
       ThemeServiceProvider.setSystemUIOverlayStyle(isDark: isDark);
       return ThemeServiceProvider(isDark: isDark);
     })
-    ..registerSingletonWithDependencies<MoreController>(MoreController.new, dependsOn: [AuthService]);
+    // Profile Feature
+    ..registerSingleton<ProfileRemoteDataSource>(ProfileRemoteDataSourceImpl())
+    ..registerSingletonWithDependencies<IProfileRepository>(
+      () => ProfileRepositoryImpl(
+        remoteDataSource: getIt<ProfileRemoteDataSource>(), 
+      ),
+      dependsOn: [IAuthRepository],
+    )
+    ..registerFactory<UpdateProfileUseCase>(
+       () => UpdateProfileUseCase(getIt<IProfileRepository>()),
+    )
+    ..registerFactory<GetProfileUseCase>(
+       () => GetProfileUseCase(getIt<IProfileRepository>()),
+    )
+    ..registerFactory<DeleteProfileUseCase>(
+       () => DeleteProfileUseCase(getIt<IProfileRepository>()),
+    )
+    ..registerFactory<ProfileBloc>(
+      () => ProfileBloc(
+        getProfileUseCase: getIt<GetProfileUseCase>(),
+        updateProfileUseCase: getIt<UpdateProfileUseCase>(),
+        deleteProfileUseCase: getIt<DeleteProfileUseCase>(),
+      ),
+    );
+
 
   await getIt.allReady();
 }

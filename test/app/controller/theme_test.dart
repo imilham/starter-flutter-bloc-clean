@@ -31,9 +31,9 @@ void main() {
     });
 
     test('toggleTheme switches mode and saves to Hive', () async {
-      final themeService = ThemeServiceProvider();
+      final themeService = ThemeServiceProvider()
 
-      themeService.toggleTheme();
+      ..toggleTheme();
       expect(themeService.isDark, true);
       expect(themeService.themeMode, ThemeMode.dark);
 
@@ -75,12 +75,12 @@ void main() {
 
     test('ThemeServiceProvider notifies listeners on toggle', () {
       final themeService = ThemeServiceProvider();
-      bool notified = false;
-      themeService.addListener(() {
+      var notified = false;
+      themeService..addListener(() {
         notified = true;
-      });
+      })
 
-      themeService.toggleTheme();
+      ..toggleTheme();
       expect(notified, true);
     });
   });
