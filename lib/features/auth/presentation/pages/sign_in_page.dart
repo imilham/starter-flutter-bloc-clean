@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:check_disposable_email/check_disposable_email.dart' as check_email;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -129,6 +131,7 @@ class _SignInPageState extends State<SignInPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if (getIt<AppSettings>().isIOS)
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,
@@ -139,7 +142,7 @@ class _SignInPageState extends State<SignInPage> {
                             onPressed: () {},
                           ),
                         ),
-                        Gap.medium16,
+                        Gap.medium16,                        
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,

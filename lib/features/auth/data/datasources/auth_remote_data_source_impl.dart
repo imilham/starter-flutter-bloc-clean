@@ -1,5 +1,7 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:developer';
+
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -185,12 +187,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       await apiClient.post('/logout');
     } on DioException catch (e) {
       // Don't throw on logout errors - we still want to clear local session
-      // ignore: avoid_print
-      print('Remote logout failed: ${e.message}');
+      log('Remote logout failed: ${e.message}', name: 'AuthRemoteDataSource');
     } catch (e) {
       // Don't throw on logout errors - we still want to clear local session
-      // ignore: avoid_print
-      print('Remote logout failed: $e');
+      log('Remote logout failed: $e', name: 'AuthRemoteDataSource');
     }    
   }
 

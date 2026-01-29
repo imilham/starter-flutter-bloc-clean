@@ -153,6 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
+                        if (getIt<AppSettings>().isIOS)
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,
@@ -163,7 +164,7 @@ class _SignUpPageState extends State<SignUpPage> {
                             onPressed: () {},
                           ),
                         ),
-                        Gap.medium16,
+                        Gap.medium16,                        
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,

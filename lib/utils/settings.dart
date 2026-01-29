@@ -99,23 +99,19 @@ class AppSettings {
     }
   }
 
+  bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
+  bool get isIOS => defaultTargetPlatform == TargetPlatform.iOS;
+  bool get isWeb => kIsWeb;
+
   /// Returns the device platform as a string.
   /// If the platform is Android, it returns 'ANDROID'.
   /// If the platform is iOS, it returns 'IOS'.
   /// If the platform is unknown or an error occurs, it returns 'UNKNOWN'.
   String getDevicePlatform() {
-    try {
-      if (defaultTargetPlatform == TargetPlatform.android) {
-        return 'ANDROID';
-      } else if (defaultTargetPlatform == TargetPlatform.iOS) {
-        return 'IOS';
-      } else {
-        return 'UNKNOWN';
-      }
-    } catch (e) {
-      log('Error getting device Platform: $e');
-      return 'UNKNOWN';
-    }
+    if (isAndroid) return 'android';
+    if (isIOS) return 'ios';
+    if (isWeb) return 'web';
+    return 'unknown';
   }
 
   /// Retrieves the device ID asynchronously.
