@@ -6,6 +6,8 @@ class UserProfileModel extends UserProfile {
     required super.uuid,
     required super.firstName,
     required super.lastName,
+    super.phoneNumber,
+    super.dateOfBirth,
     super.isEmailVerified,
     super.isProfileCompleted,
   });
@@ -16,6 +18,10 @@ class UserProfileModel extends UserProfile {
       uuid: json['uuid'] as String? ?? '',
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
+      phoneNumber: json['phone_number'] as String?,
+      dateOfBirth: json['date_of_birth'] != null 
+          ? DateTime.tryParse(json['date_of_birth'] as String)
+          : null,
       isEmailVerified: (json['is_email_verified'] ?? false) as bool,
       isProfileCompleted: (json['is_profile_completed'] ?? false) as bool,
     );
@@ -27,6 +33,8 @@ class UserProfileModel extends UserProfile {
       uuid: entity.uuid,
       firstName: entity.firstName,
       lastName: entity.lastName,
+      phoneNumber: entity.phoneNumber,
+      dateOfBirth: entity.dateOfBirth,
       isEmailVerified: entity.isEmailVerified,
       isProfileCompleted: entity.isProfileCompleted,
     );
@@ -38,6 +46,8 @@ class UserProfileModel extends UserProfile {
       'uuid': uuid,
       'firstName': firstName,
       'lastName': lastName,
+      if (phoneNumber != null) 'phone_number': phoneNumber,
+      if (dateOfBirth != null) 'date_of_birth': dateOfBirth!.toIso8601String(),
       'is_email_verified': isEmailVerified,
       'is_profile_completed': isProfileCompleted,
     };

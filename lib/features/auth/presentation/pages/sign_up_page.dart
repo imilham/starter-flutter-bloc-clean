@@ -49,8 +49,8 @@ class _SignUpPageState extends State<SignUpPage> {
               message: state.message,
             );
           } else if (state is SignUpSuccess) {
-            // Notify global auth bloc of successful registration
-            getIt<AuthBloc>().add(AuthLoginRequested(state.session));
+            // Notify global auth bloc that session was established
+            getIt<AuthBloc>().add(AuthSessionEstablished(state.session));
           }
         },
         builder: (context, state) {

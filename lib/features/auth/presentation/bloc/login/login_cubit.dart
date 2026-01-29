@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/bootstrap.dart';
-import 'package:starter/features/auth/domain/domain.dart';
+import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
 part 'login_state.dart';

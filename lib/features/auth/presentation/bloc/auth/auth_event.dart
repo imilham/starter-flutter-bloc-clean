@@ -13,9 +13,9 @@ final class AuthCheckRequested extends AuthEvent {
   const AuthCheckRequested();
 }
 
-/// User logged in successfully.
-final class AuthLoginRequested extends AuthEvent {
-  const AuthLoginRequested(this.session);
+/// Notifies that a session was established (after successful login/signup/verification).
+final class AuthSessionEstablished extends AuthEvent {
+  const AuthSessionEstablished(this.session);
 
   final AuthSession session;
 

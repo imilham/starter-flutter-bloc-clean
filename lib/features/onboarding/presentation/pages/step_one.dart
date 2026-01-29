@@ -1,6 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:starter/features/profile/profile.dart';
+import 'package:starter/features/onboarding/onboarding.dart';
 import 'package:starter/utils/utils.dart';
 
 class StepOne extends StatelessWidget {
@@ -8,7 +8,7 @@ class StepOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final cubit = context.read<ProfileCompletionCubit>();
+    final cubit = context.read<OnboardingCubit>();
 
     return Form(
       key: cubit.stepOneFormKey,

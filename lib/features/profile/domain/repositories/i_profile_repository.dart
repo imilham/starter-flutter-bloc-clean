@@ -10,6 +10,8 @@ abstract interface class IProfileRepository {
   Future<Result<UserProfile>> updateProfile({
     required String firstName,
     required String lastName,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
   });
 
   /// Deletes the user account.

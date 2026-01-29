@@ -46,8 +46,8 @@ class _SignInPageState extends State<SignInPage> {
               message: state.message,
             );
           } else if (state is LoginSuccess) {
-            // Notify global auth bloc of successful login
-            getIt<AuthBloc>().add(AuthLoginRequested(state.session));
+            // Notify global auth bloc that session was established
+            getIt<AuthBloc>().add(AuthSessionEstablished(state.session));
           }
         },
         builder: (context, state) {

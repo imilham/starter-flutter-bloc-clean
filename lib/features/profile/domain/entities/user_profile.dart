@@ -6,6 +6,8 @@ class UserProfile extends Equatable {
     required this.uuid,
     required this.firstName,
     required this.lastName,
+    this.phoneNumber,
+    this.dateOfBirth,
     this.isEmailVerified = false,
     this.isProfileCompleted = false,
   });
@@ -13,6 +15,8 @@ class UserProfile extends Equatable {
   final String uuid;
   final String firstName;
   final String lastName;
+  final String? phoneNumber;
+  final DateTime? dateOfBirth;
   final bool isEmailVerified;
   final bool isProfileCompleted;
 
@@ -24,6 +28,8 @@ class UserProfile extends Equatable {
     String? uuid,
     String? firstName,
     String? lastName,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
     bool? isEmailVerified,
     bool? isProfileCompleted,
   }) {
@@ -31,6 +37,8 @@ class UserProfile extends Equatable {
       uuid: uuid ?? this.uuid,
       firstName: firstName ?? this.firstName,
       lastName: lastName ?? this.lastName,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      dateOfBirth: dateOfBirth ?? this.dateOfBirth,
       isEmailVerified: isEmailVerified ?? this.isEmailVerified,
       isProfileCompleted: isProfileCompleted ?? this.isProfileCompleted,
     );
@@ -41,6 +49,8 @@ class UserProfile extends Equatable {
         uuid,
         firstName,
         lastName,
+        phoneNumber,
+        dateOfBirth,
         isEmailVerified,
         isProfileCompleted,
       ];

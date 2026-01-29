@@ -1,2 +1,2 @@
-export 'complete/complete.dart';
+// Profile pages exports
 export 'profile_page.dart';

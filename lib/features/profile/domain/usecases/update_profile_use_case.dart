@@ -12,6 +12,8 @@ class UpdateProfileUseCase implements UseCase<UserProfile, UpdateProfileParams> 
     return _repository.updateProfile(
       firstName: params.firstName,
       lastName: params.lastName,
+      phoneNumber: params.phoneNumber,
+      dateOfBirth: params.dateOfBirth,
     );
   }
 }
@@ -21,8 +23,12 @@ class UpdateProfileParams {
   const UpdateProfileParams({
     required this.firstName,
     required this.lastName,
+    this.phoneNumber,
+    this.dateOfBirth,
   });
 
   final String firstName;
   final String lastName;
+  final String? phoneNumber;
+  final DateTime? dateOfBirth;
 }

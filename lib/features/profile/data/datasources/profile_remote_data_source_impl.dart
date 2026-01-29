@@ -13,12 +13,20 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<UserProfileModel> updateProfile({required String firstName, required String lastName}) async {
+  Future<UserProfileModel> updateProfile({
+    required String firstName,
+    required String lastName,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
+  }) async {
     await Future<void>.delayed(const Duration(seconds: 1));
     return UserProfileModel(
       uuid: '1',
       firstName: firstName,
       lastName: lastName,
+      phoneNumber: phoneNumber,
+      dateOfBirth: dateOfBirth,
+      isProfileCompleted: true, // Mark profile as completed
     );
   }
 

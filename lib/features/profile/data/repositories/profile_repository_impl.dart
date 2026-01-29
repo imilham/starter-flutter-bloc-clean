@@ -28,6 +28,8 @@ class ProfileRepositoryImpl implements IProfileRepository {
   Future<Result<UserProfile>> updateProfile({
     required String firstName,
     required String lastName,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
   }) async {
     final remote = remoteDataSource;
     if (remote == null) {
@@ -37,6 +39,8 @@ class ProfileRepositoryImpl implements IProfileRepository {
       final result = await remote.updateProfile(
         firstName: firstName,
         lastName: lastName,
+        phoneNumber: phoneNumber,
+        dateOfBirth: dateOfBirth,
       );
       return Result.success(result);
     } on Exception catch (e) {

@@ -18,7 +18,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
         _logoutUseCase = logoutUseCase,
         super(const AuthInitial()) {
     on<AuthCheckRequested>(_onAuthCheckRequested);
-    on<AuthLoginRequested>(_onAuthLoginRequested);
+    on<AuthSessionEstablished>(_onSessionEstablished);
     on<AuthLogoutRequested>(_onAuthLogoutRequested);
   }
 
@@ -45,8 +45,8 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     );
   }
 
-  void _onAuthLoginRequested(
-    AuthLoginRequested event,
+  void _onSessionEstablished(
+    AuthSessionEstablished event,
     Emitter<AuthState> emit,
   ) {
     emit(AuthAuthenticated(event.session));

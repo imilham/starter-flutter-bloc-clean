@@ -217,4 +217,16 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lastNameRequired => 'Last name is required';
+
+  @override
+  String get step2Title => 'Almost there!';
+
+  @override
+  String get phoneNumberOptional => 'Phone Number (Optional)';
+
+  @override
+  String get dateOfBirth => 'Date of Birth';
+
+  @override
+  String get completeProfile => 'Complete Profile';
 }

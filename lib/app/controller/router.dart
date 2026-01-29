@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/features/home/home.dart';
 import 'package:starter/features/more/more.dart';
+import 'package:starter/features/onboarding/onboarding.dart';
 import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -92,7 +94,7 @@ class AppRouter {
         name: Pages.completeAccount.toPathName(),
         pageBuilder: (context, state) => MaterialPage(
           key: state.pageKey,
-          child: const CompleteProfileFlow(),
+          child: const OnboardingFlow(),
         ),
       ),
       StatefulShellRoute.indexedStack(
@@ -240,7 +242,7 @@ class AppRouter {
     if (!_appStates.isInitialized) return RouterAuthState.notInitialized;
     if (!_appStates.isLogin) return RouterAuthState.notLoggedIn;
     if (!_appStates.isCodeVerified) return RouterAuthState.notVerified;
-    if (!_appStates.isAccountCompleted) return RouterAuthState.notCompleted;
+    // if (!_appStates.isAccountCompleted) return RouterAuthState.notCompleted;
     return RouterAuthState.authenticated;
   }
 }

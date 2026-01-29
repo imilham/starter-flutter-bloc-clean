@@ -510,6 +510,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Last name is required'**
   String get lastNameRequired;
+
+  /// Title for step 2 of profile completion
+  ///
+  /// In en, this message translates to:
+  /// **'Almost there!'**
+  String get step2Title;
+
+  /// Hint text for optional phone number input
+  ///
+  /// In en, this message translates to:
+  /// **'Phone Number (Optional)'**
+  String get phoneNumberOptional;
+
+  /// Label for date of birth input
+  ///
+  /// In en, this message translates to:
+  /// **'Date of Birth'**
+  String get dateOfBirth;
+
+  /// Label for complete profile button
+  ///
+  /// In en, this message translates to:
+  /// **'Complete Profile'**
+  String get completeProfile;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

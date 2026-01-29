@@ -6,6 +6,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/features/auth/auth.dart';
+import 'package:starter/features/onboarding/onboarding.dart';
 import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -59,12 +60,22 @@ Future<void> setup({required AppEnvironment environment}) async {
       await Hive.openBox<bool>('states');
       return AppStates();
     })
+    // Network - API Client with Smart AuthInterceptor
+    // Automatically adds auth tokens to all endpoints except public ones
+    ..registerLazySingleton<ApiClient>(() => ApiClient(
+      interceptors: [
+        AuthInterceptor(), // Auto-adds tokens, skips login/register/forgot-password
+      ],
+    ))
     // Auth Feature - BLoC and dependencies
     ..registerSingletonAsync<AuthLocalDataSource>(() async {
       await Hive.openBox<String>(getIt<AppSettings>().sessionSecretKey);
       return AuthLocalDataSourceImpl();
     })
-    ..registerSingleton<AuthRemoteDataSource>(AuthRemoteDataSourceImpl())
+    // TODO: API-Implementation-2 - AuthRemoteDataSource now uses ApiClient
+    ..registerSingleton<AuthRemoteDataSource>(
+      AuthRemoteDataSourceImpl(apiClient: getIt<ApiClient>()),
+    )
     ..registerSingletonWithDependencies<IAuthRepository>(
       () => AuthRepositoryImpl(
         localDataSource: getIt<AuthLocalDataSource>(),
@@ -107,6 +118,7 @@ Future<void> setup({required AppEnvironment environment}) async {
       return ThemeServiceProvider(isDark: isDark);
     })
     // Profile Feature
+    // TODO: Profile remote data source will also need ApiClient when implemented
     ..registerSingleton<ProfileRemoteDataSource>(ProfileRemoteDataSourceImpl())
     ..registerSingletonWithDependencies<IProfileRepository>(
       () => ProfileRepositoryImpl(
@@ -129,6 +141,13 @@ Future<void> setup({required AppEnvironment environment}) async {
         updateProfileUseCase: getIt<UpdateProfileUseCase>(),
         deleteProfileUseCase: getIt<DeleteProfileUseCase>(),
       ),
+    )
+    // Onboarding Feature - Separate from Profile
+    ..registerLazySingleton<IOnboardingRepository>(
+      () => OnboardingRepositoryImpl(getIt<IProfileRepository>()),
+    )
+    ..registerFactory<CompleteOnboardingUseCase>(
+      () => CompleteOnboardingUseCase(getIt<IOnboardingRepository>()),
     );
 
   await getIt.allReady();

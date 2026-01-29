@@ -12,6 +12,7 @@
         "recase",
         "Resends",
         "rxdart",
-        "unfocus"
+        "unfocus",
+        "usecase"
     ]
 }

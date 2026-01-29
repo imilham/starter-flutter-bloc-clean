@@ -9,6 +9,8 @@ abstract interface class ProfileRemoteDataSource {
   Future<UserProfileModel> updateProfile({
     required String firstName,
     required String lastName,
+    String? phoneNumber,
+    DateTime? dateOfBirth,
   });
 
   /// Deletes the user account via API.

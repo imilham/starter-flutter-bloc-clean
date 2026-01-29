@@ -279,5 +279,21 @@
     "lastNameRequired": "Last name is required",
     "@lastNameRequired": {
         "description": "Error message when last name is missing"
+    },
+    "step2Title": "Almost there!",
+    "@step2Title": {
+        "description": "Title for step 2 of profile completion"
+    },
+    "phoneNumberOptional": "Phone Number (Optional)",
+    "@phoneNumberOptional": {
+        "description": "Hint text for optional phone number input"
+    },
+    "dateOfBirth": "Date of Birth",
+    "@dateOfBirth": {
+        "description": "Label for date of birth input"
+    },
+    "completeProfile": "Complete Profile",
+    "@completeProfile": {
+        "description": "Label for complete profile button"
     }
 }

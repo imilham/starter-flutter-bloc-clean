@@ -63,7 +63,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
       child: BlocConsumer<VerificationCubit, VerificationState>(
         listener: (context, state) {
           if (state is VerificationSuccess) {
-            getIt<AuthBloc>().add(AuthLoginRequested(state.session));
+            getIt<AuthBloc>().add(AuthSessionEstablished(state.session));
           } else if (state is VerificationFailure) {
             CommonDialog.alert(
               context,
