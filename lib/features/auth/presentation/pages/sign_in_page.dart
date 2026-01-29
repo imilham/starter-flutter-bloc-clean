@@ -21,8 +21,8 @@ class _SignInPageState extends State<SignInPage> {
 
   @override
   void initState() {
-    _emailController = TextEditingController(text: 'john@elegantmedia.com.au');
-    _passwordController = TextEditingController(text: '*******2222');
+    _emailController = TextEditingController(text: 'im.ilhamk@gmail.com');
+    _passwordController = TextEditingController(text: 'test1234.');
     super.initState();
   }
 

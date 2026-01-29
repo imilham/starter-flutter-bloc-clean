@@ -160,12 +160,22 @@ class AuthRepositoryImpl implements IAuthRepository {
 
     try {
       // This call validates the token and returns fresh profile data
-      final result = await remote.getProfile();
+      final profileResult = await remote.getProfile();
       
-      // 3. Save updated session to local storage
-      await localDataSource.saveSession(result);
+      // 3. Preserve the original access token (profile API doesn't return it)
+      // Similar to old syncPreserveAccessToken pattern
+      final updatedSession = AuthSessionModel(
+        userId: profileResult.userId.isNotEmpty ? profileResult.userId : storedSession.userId,
+        accessToken: storedSession.accessToken, // PRESERVE original token!
+        createdAt: profileResult.createdAt,
+        isEmailVerified: profileResult.isEmailVerified,
+        isProfileCompleted: profileResult.isProfileCompleted,
+      );
       
-      return Result.success(result);
+      // 4. Save updated session to local storage
+      await localDataSource.saveSession(updatedSession);
+      
+      return Result.success(updatedSession);
     } on Exception catch (e) {
       // Session invalid - could be 401 or network error
       return Result.failure(ServerFailure(e.toString()));

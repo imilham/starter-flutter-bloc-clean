@@ -32,21 +32,21 @@ class AppSettings {
 
   // TODO(api-implementation): Step 1: Setup Base URL and Keys
   final _baseUrl = const AppSettingValue<String>(
-    developmentValue: 'https://api-dev.example.com',
-    productionValue: 'https://api.example.com',
-    stagingValue: 'https://api-staging.example.com',
+    developmentValue: 'https://xtracked.sandbox28.preview.cx/api/v1',
+    productionValue: 'https://xtracked.sandbox28.preview.cx/api/v1',
+    stagingValue: 'https://xtracked.sandbox28.preview.cx/api/v1',
   );
 
   final _apiKey = const AppSettingValue<String>(
-    developmentValue: '',
-    productionValue: '',
-    stagingValue: '',
+    developmentValue: 'MUbOz3nSSQiwhaGOkGjoH13w8M27Yb62eJlK6il9IM0=',
+    productionValue: 'MUbOz3nSSQiwhaGOkGjoH13w8M27Yb62eJlK6il9IM0=',
+    stagingValue: 'MUbOz3nSSQiwhaGOkGjoH13w8M27Yb62eJlK6il9IM0=',
   );
 
   final _sessionSecretKey = const AppSettingValue<String>(
-    developmentValue: '',
-    productionValue: '',
-    stagingValue: '',
+    developmentValue: 'auth_session_box',
+    productionValue: 'auth_session_box',
+    stagingValue: 'auth_session_box',
   );
 
   final _countryCodes = const AppSettingValue<List<String>>(

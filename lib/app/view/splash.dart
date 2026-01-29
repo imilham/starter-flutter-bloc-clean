@@ -39,8 +39,14 @@ class _SplashPageState extends State<SplashPage> {
 
     await getIt<AppStates>().onAppStart();
 
-    // Trigger session refresh (fetches profile from API to validate session)
-    getIt<AuthBloc>().add(const AuthRefreshRequested());
+    final authBloc = getIt<AuthBloc>()
+      // Trigger session refresh (fetches profile from API to validate session)
+      ..add(const AuthRefreshRequested());
+
+    // Wait for auth state to settle (not Loading/Initial)
+    await authBloc.stream.firstWhere(
+      (state) => state is AuthAuthenticated || state is AuthUnauthenticated,
+    );
 
     getIt<AppStates>().isInitialized = true;
   }
@@ -60,18 +66,18 @@ class _SplashPageState extends State<SplashPage> {
             BlocBuilder<AuthBloc, AuthState>(
               bloc: getIt<AuthBloc>(),
               builder: (context, state) {
-                if (state is AuthLoading) {
-                  return const Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(),
-                      ),
-                    ],
-                  );
-                }
+                // if (state is AuthLoading) {
+                //   return const Column(
+                //     mainAxisSize: MainAxisSize.min,
+                //     children: [
+                //       SizedBox(
+                //         width: 24,
+                //         height: 24,
+                //         child: CircularProgressIndicator(),
+                //       ),
+                //     ],
+                //   );
+                // }
                 return const SizedBox.shrink();
               },
             ),

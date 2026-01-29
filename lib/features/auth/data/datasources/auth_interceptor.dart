@@ -15,17 +15,23 @@ class AuthInterceptor extends Interceptor {
 
   final bool rejectIfNoSession;
 
-  // Lazy getter to avoid accessing Hive box before it's opened
-  Box<String> get _storage => Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey);
+  /// Safely gets the Hive box, returns null if not yet opened
+  Box<String>? get _storage {
+    final boxName = GetIt.instance<AppSettings>().sessionSecretKey;
+    if (!Hive.isBoxOpen(boxName)) {
+      return null;
+    }
+    return Hive.box<String>(boxName);
+  }
 
   // ============================================================================
   // Public endpoints that don't require authentication
   // Add new public endpoints here as your API grows
   // ============================================================================
   final List<String> _publicEndpoints = [
-    '/auth/login',
-    '/auth/register',
-    '/auth/forgot-password',
+    '/login',
+    '/register',
+    '/forgot-password',
   ];
 
   /// Checks if the given path is a public endpoint
@@ -35,7 +41,10 @@ class AuthInterceptor extends Interceptor {
 
   /// Retrieves the current user session from Hive storage
   Future<AuthSession?> getCurrentSession() async {
-    final session = _storage.get('session');
+    final storage = _storage;
+    if (storage == null) return null;
+    
+    final session = storage.get('session');
     if (session == null) return null;
     return AuthSessionModel.fromJson(jsonDecode(session) as Map<String, dynamic>);
   }

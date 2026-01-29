@@ -13,13 +13,20 @@ class AuthSessionModel extends AuthSession {
   });
 
   /// Creates an AuthSessionModel from JSON.
+  /// 
+  /// API Response Fields (from backend):
+  /// - `id` → userId
+  /// - `access_token` → accessToken
+  /// - `created_at` → createdAt
+  /// - `is_verified` → isEmailVerified
+  /// - `profile_completed` → isProfileCompleted
   factory AuthSessionModel.fromJson(Map<String, dynamic> json) {
     return AuthSessionModel(
-      userId: (json['id'] ?? '') as String,
+      userId: (json['id'] ?? json['user_id'] ?? '') as String,
       accessToken: (json['access_token'] ?? '') as String,
       createdAt: DateTime.tryParse((json['created_at'] ?? '') as String) ?? DateTime.now(),
-      isEmailVerified: (json['is_email_verified'] ?? false) as bool,
-      isProfileCompleted: (json['is_profile_completed'] ?? false) as bool,
+      isEmailVerified: (json['is_verified'] ?? json['is_email_verified'] ?? false) as bool,
+      isProfileCompleted: (json['profile_completed'] ?? json['is_profile_completed'] ?? false) as bool,
     );
   }
 
@@ -35,13 +42,14 @@ class AuthSessionModel extends AuthSession {
   }
 
   /// Converts the model to JSON.
+  /// Uses the same field names as the API for consistency.
   Map<String, dynamic> toJson() {
     return {
       'id': userId,
       'access_token': accessToken,
       'created_at': createdAt.toIso8601String(),
-      'is_email_verified': isEmailVerified,
-      'is_profile_completed': isProfileCompleted,
+      'is_verified': isEmailVerified,
+      'profile_completed': isProfileCompleted,
     };
   }
 }
