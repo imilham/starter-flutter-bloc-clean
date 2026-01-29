@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
 
-// TODO: remove-samples-im
+// TODO(developer): remove-samples-im
 
 class ShimmerSample extends StatelessWidget {
   const ShimmerSample({super.key});

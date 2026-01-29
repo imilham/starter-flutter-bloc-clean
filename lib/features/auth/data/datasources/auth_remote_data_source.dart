@@ -36,4 +36,7 @@ abstract interface class AuthRemoteDataSource {
 
   /// Sends a forgot password request.
   Future<void> forgotPassword({required String email});
+
+  /// Fetches the current user's profile.
+  Future<AuthSessionModel> getProfile();
 }

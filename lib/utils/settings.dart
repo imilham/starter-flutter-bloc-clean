@@ -30,10 +30,11 @@ class AppSettings {
   bool get isProduction => _environment == AppEnvironment.production;
   bool get isStaging => _environment == AppEnvironment.staging;
 
+  // TODO(api-implementation): Step 1: Setup Base URL and Keys
   final _baseUrl = const AppSettingValue<String>(
-    developmentValue: '',
-    productionValue: '',
-    stagingValue: '',
+    developmentValue: 'https://api-dev.example.com',
+    productionValue: 'https://api.example.com',
+    stagingValue: 'https://api-staging.example.com',
   );
 
   final _apiKey = const AppSettingValue<String>(

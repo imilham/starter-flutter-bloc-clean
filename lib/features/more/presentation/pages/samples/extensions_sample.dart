@@ -3,7 +3,7 @@ import 'dart:math' show pi;
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
 
-// TODO: remove-samples-im
+// TODO(developer): remove-samples-im
 
 /// Sample page showcasing all available extensions in the app.
 class ExtensionsSample extends StatelessWidget {

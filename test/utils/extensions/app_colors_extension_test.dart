@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:starter/utils/extensions/app_colors_extension.dart';
@@ -35,7 +34,7 @@ void main() {
 
       // ignore: invalid_use_of_protected_member
       final lerped = appColors.lerp(otherColors, 0.5) as AppColors;
-      
+
       expect(lerped.shimmerColor, Color.lerp(appColors.shimmerColor, Colors.black, 0.5));
       expect(lerped.shimmerBgColor, appColors.shimmerBgColor);
     });

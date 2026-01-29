@@ -16,10 +16,68 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiClient apiClient;
 
   // ==========================================================================
-  // TODO: API-Implementation-2: LOGIN API
+  // TODO(api-implementation): Step 2: GET PROFILE API
+  // ==========================================================================
+  // ENDPOINT: GET /user/profile
+  //
+  // TO IMPLEMENT:
+  // 1. Uncomment the API call code below
+  // 2. Comment out the dummy response
+  // 3. Verify backend response structure
+  // ==========================================================================
+  @override
+  Future<AuthSessionModel> getProfile() async {
+    try {
+      // TODO(api-implementation): Step 2: GET PROFILE API
+      
+      /*
+      // Real API Call
+      final response = await apiClient.get('/user/profile');
+      */
+
+      // Mock Data Pattern (aligned with ApiResponse structure)
+      final data = {
+        'result': true, // ApiResponse uses 'result'
+        'message': 'User profile fetched successfully',
+        'payload': {    // ApiSuccessResponse uses 'payload'
+          'user_id': 'user_123',
+          'access_token': 'mock_token_${DateTime.now().millisecondsSinceEpoch}',
+          'created_at': DateTime.now().toIso8601String(),
+          'is_email_verified': true,
+          'is_profile_completed': true,
+        },
+      };
+
+      // Wrap in Dio Response to simulate real network flow
+      final response = Response<dynamic>(
+        requestOptions: RequestOptions(path: '/user/profile'), 
+        data: data,
+        statusCode: 200,
+      );
+
+      // Verify using standard ApiResponse parser
+      final apiResponse = ApiResponse.fromJson(response.data as Map<String, dynamic>);
+      
+      if (apiResponse.isFailure) {
+        throw ApiError(message: apiResponse.message);
+      }
+      
+      // Extract payload
+      final payload = apiResponse.data as Map<String, dynamic>;
+      
+      return AuthSessionModel.fromJson(payload);
+    } on DioException catch (e) {
+      return onError(e);
+    } catch (e) {
+      throw ApiError(message: 'Failed to fetch profile: $e');
+    }
+  }
+
+  // ==========================================================================
+  // TODO(api-implementation): Step 3: LOGIN API
   // ==========================================================================
   // ENDPOINT: POST /auth/login
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Comment out the dummy response
@@ -33,7 +91,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String deviceType,
     String? devicePushToken,
   }) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       final response = await apiClient.post(
@@ -65,10 +123,10 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   // ==========================================================================
-  // TODO: API-Implementation-3: REGISTER/SIGNUP API
+  // TODO(api-implementation): Step 4: REGISTER/SIGNUP API
   // ==========================================================================
   // ENDPOINT: POST /auth/register
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Comment out the dummy response
@@ -82,7 +140,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String deviceType,
     String? devicePushToken,
   }) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       final response = await apiClient.post(
@@ -109,24 +167,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       accessToken: 'mock_token_${DateTime.now().millisecondsSinceEpoch}',
       userId: 'user_${DateTime.now().millisecondsSinceEpoch}',
       createdAt: DateTime.now(),
-      isEmailVerified: false,
-      isProfileCompleted: false,
     );
   }
 
   // ==========================================================================
-  // TODO: API-Implementation-4: LOGOUT API
+  // TODO(api-implementation): Step 5: LOGOUT API
   // ==========================================================================
   // ENDPOINT: POST /auth/logout
   // NOTE: AuthInterceptor automatically adds token
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Remove the dummy delay
   // ==========================================================================
   @override
   Future<void> logout({required String token}) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       await apiClient.post('/auth/logout');
@@ -146,11 +202,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   // ==========================================================================
-  // TODO: API-Implementation-5: VERIFY EMAIL API
+  // TODO(api-implementation): Step 6: VERIFY EMAIL API
   // ==========================================================================
   // ENDPOINT: POST /auth/verify-email
   // NOTE: AuthInterceptor automatically adds token
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Comment out the dummy response
@@ -161,7 +217,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String code,
     required String token,
   }) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       final response = await apiClient.post(
@@ -185,23 +241,22 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       userId: 'user_123',
       createdAt: DateTime.now(),
       isEmailVerified: true,
-      isProfileCompleted: false,
     );
   }
 
   // ==========================================================================
-  // TODO: API-Implementation-6: RESEND VERIFICATION CODE API
+  // TODO(api-implementation): Step 7: RESEND VERIFICATION CODE API
   // ==========================================================================
   // ENDPOINT: POST /auth/resend-verification
   // NOTE: AuthInterceptor automatically adds token
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Remove the dummy delay
   // ==========================================================================
   @override
   Future<void> resendVerificationCode({required String token}) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       await apiClient.post('/auth/resend-verification');
@@ -217,17 +272,17 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   // ==========================================================================
-  // TODO: API-Implementation-7: FORGOT PASSWORD API
+  // TODO(api-implementation): Step 8: FORGOT PASSWORD API
   // ==========================================================================
   // ENDPOINT: POST /auth/forgot-password
-  // 
+  //
   // TO IMPLEMENT:
   // 1. Uncomment the API call code below
   // 2. Remove the dummy delay
   // ==========================================================================
   @override
   Future<void> forgotPassword({required String email}) async {
-    // TODO: Uncomment when backend is ready
+    // TODO(developer): Uncomment when backend is ready
     /*
     try {
       await apiClient.post(
@@ -252,12 +307,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 // IMPLEMENTATION GUIDE
 // ============================================================================
 // When your backend is ready:
-// 
+//
 // 1. Uncomment the API call code in each method
 // 2. Comment out or remove the dummy response/delay
 // 3. Test each endpoint individually
 // 4. Verify response structure matches AuthSessionModel
-// 
+//
 // Expected backend response format:
 // {
 //   "access_token": "string",
@@ -269,12 +324,12 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 // 1. Find the method (use TODO: API-Implementation-X comments)
 // 2. Locate these two lines:
 //    return AuthSessionModel.fromJson(dummyResponse);
-//    // return AuthSessionModel.fromJson(response.data as Map<String, dynamic>);
-// 
-// 3. Comment the first line, uncomment the second:
-//    // return AuthSessionModel.fromJson(dummyResponse);
 //    return AuthSessionModel.fromJson(response.data as Map<String, dynamic>);
-// 
+//
+// 3. Comment the first line, uncomment the second:
+//    return AuthSessionModel.fromJson(dummyResponse);
+//    return AuthSessionModel.fromJson(response.data as Map<String, dynamic>);
+//
 // 4. Test with real backend
 // 5. Done! ✅
 // ============================================================================
@@ -283,7 +338,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 // Expected Backend Response Format
 // ============================================================================
 // All auth endpoints should return JSON matching this structure:
-// 
+//
 // {
 //   "access_token": "string",      // JWT token
 //   "user_id": "string",            // Unique user identifier
@@ -291,7 +346,6 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 //   "is_email_verified": boolean,   // Email verified status
 //   "is_profile_completed": boolean // Profile completion status
 // }
-// 
+//
 // Update AuthSessionModel.fromJson() if your backend uses different field names
 // ============================================================================
-

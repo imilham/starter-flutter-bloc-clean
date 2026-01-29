@@ -3,7 +3,7 @@ import 'package:starter/app/app.dart';
 import 'package:starter/features/more/presentation/pages/samples/samples.dart';
 import 'package:starter/utils/utils.dart';
 
-// TODO: remove-samples-im
+// TODO(developer): remove-samples-im
 
 class DesignSystemPage extends StatelessWidget {
   const DesignSystemPage({super.key});

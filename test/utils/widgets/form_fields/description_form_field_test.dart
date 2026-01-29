@@ -81,10 +81,12 @@ void main() {
     });
 
     testWidgets('widget is created with correct maxLength', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        maxLength: 100,
-        showCounter: true,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          maxLength: 100,
+          showCounter: true,
+        ),
+      );
 
       final widgetFinder = find.byType(DescriptionFormField);
       final widget = tester.widget<DescriptionFormField>(widgetFinder);
@@ -92,9 +94,11 @@ void main() {
     });
 
     testWidgets('validates with custom validator', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        validator: (value) => value?.isEmpty ?? true ? 'Description is required' : null,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          validator: (value) => value?.isEmpty ?? true ? 'Description is required' : null,
+        ),
+      );
 
       final widgetFinder = find.byType(DescriptionFormField);
       final widget = tester.widget<DescriptionFormField>(widgetFinder);
@@ -119,9 +123,11 @@ void main() {
     });
 
     testWidgets('shows character counter when maxLength is set', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        maxLength: 100,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          maxLength: 100,
+        ),
+      );
 
       await tester.enterText(find.byType(TextFormField), 'Hello');
       await tester.pump();

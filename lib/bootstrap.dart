@@ -62,17 +62,18 @@ Future<void> setup({required AppEnvironment environment}) async {
     })
     // Network - API Client with Smart AuthInterceptor
     // Automatically adds auth tokens to all endpoints except public ones
-    ..registerLazySingleton<ApiClient>(() => ApiClient(
-      interceptors: [
-        AuthInterceptor(), // Auto-adds tokens, skips login/register/forgot-password
-      ],
-    ))
+    ..registerLazySingleton<ApiClient>(
+      () => ApiClient(
+        interceptors: [
+          AuthInterceptor(), // Auto-adds tokens, skips login/register/forgot-password
+        ],
+      ),
+    )
     // Auth Feature - BLoC and dependencies
     ..registerSingletonAsync<AuthLocalDataSource>(() async {
       await Hive.openBox<String>(getIt<AppSettings>().sessionSecretKey);
       return AuthLocalDataSourceImpl();
-    })
-    // TODO: API-Implementation-2 - AuthRemoteDataSource now uses ApiClient
+    })    
     ..registerSingleton<AuthRemoteDataSource>(
       AuthRemoteDataSourceImpl(apiClient: getIt<ApiClient>()),
     )
@@ -103,12 +104,17 @@ Future<void> setup({required AppEnvironment environment}) async {
       () => VerifyEmailUseCase(getIt<IAuthRepository>()),
       dependsOn: [IAuthRepository],
     )
+    ..registerSingletonWithDependencies<RefreshSessionUseCase>(
+      () => RefreshSessionUseCase(getIt<IAuthRepository>()),
+      dependsOn: [IAuthRepository],
+    )
     ..registerSingletonWithDependencies<AuthBloc>(
       () => AuthBloc(
         getStoredSessionUseCase: getIt<GetStoredSessionUseCase>(),
         logoutUseCase: getIt<LogoutUseCase>(),
+        refreshSessionUseCase: getIt<RefreshSessionUseCase>(),
       ),
-      dependsOn: [GetStoredSessionUseCase, LogoutUseCase],
+      dependsOn: [GetStoredSessionUseCase, LogoutUseCase, RefreshSessionUseCase],
     )
     ..registerSingletonWithDependencies(AppRouter.new, dependsOn: [AppStates])
     ..registerSingletonAsync<ThemeServiceProvider>(() async {
@@ -118,7 +124,7 @@ Future<void> setup({required AppEnvironment environment}) async {
       return ThemeServiceProvider(isDark: isDark);
     })
     // Profile Feature
-    // TODO: Profile remote data source will also need ApiClient when implemented
+    // TODO(developer): Profile remote data source will also need ApiClient when implemented
     ..registerSingleton<ProfileRemoteDataSource>(ProfileRemoteDataSourceImpl())
     ..registerSingletonWithDependencies<IProfileRepository>(
       () => ProfileRepositoryImpl(

@@ -1,3 +1,4 @@
+// ignore_for_file: one_member_abstracts
 import 'package:starter/core/usecases/result.dart';
 
 /// Abstract base class for all use cases.

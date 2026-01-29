@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:starter/utils/extensions/widget_extension.dart';
@@ -66,32 +65,32 @@ void main() {
 
       final decoratedBox = tester.widget<DecoratedBox>(decoratedBoxFinder);
       final decoration = decoratedBox.decoration as BoxDecoration;
-      
+
       expect(decoration.color, Colors.red);
       expect(decoration.borderRadius, BorderRadius.circular(10));
     });
   });
-  
+
   group('Widget Visibility Extension', () {
-     // Assuming there might be visibility extensions, if not, skip.
-     // Checking file... there is no visibility extension in the previous view_file output.
-     // There are gesture extensions though.
+    // Assuming there might be visibility extensions, if not, skip.
+    // Checking file... there is no visibility extension in the previous view_file output.
+    // There are gesture extensions though.
   });
 
   group('Widget Gesture Extension', () {
-     testWidgets('onTap triggers callback', (tester) async {
-       var tapped = false;
-       await tester.pumpWidget(
-         Directionality(
-           textDirection: TextDirection.ltr,
-           child: const Text('Tap Me').onTap(() {
-             tapped = true;
-           }),
-         ),
-       );
+    testWidgets('onTap triggers callback', (tester) async {
+      var tapped = false;
+      await tester.pumpWidget(
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: const Text('Tap Me').onTap(() {
+            tapped = true;
+          }),
+        ),
+      );
 
-       await tester.tap(find.text('Tap Me'));
-       expect(tapped, true);
-     });
+      await tester.tap(find.text('Tap Me'));
+      expect(tapped, true);
+    });
   });
 }

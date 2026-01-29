@@ -47,4 +47,8 @@ abstract interface class IAuthRepository {
 
   /// Deletes the stored session.
   Future<void> deleteSession();
+
+  /// Refreshes the session by fetching the latest profile from API.
+  /// Returns updated session on success, or failure if session invalid.
+  Future<Result<AuthSession>> refreshSession();
 }

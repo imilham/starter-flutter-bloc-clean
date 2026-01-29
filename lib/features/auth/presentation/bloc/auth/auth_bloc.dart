@@ -14,16 +14,20 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc({
     required GetStoredSessionUseCase getStoredSessionUseCase,
     required LogoutUseCase logoutUseCase,
+    required RefreshSessionUseCase refreshSessionUseCase,
   })  : _getStoredSessionUseCase = getStoredSessionUseCase,
         _logoutUseCase = logoutUseCase,
+        _refreshSessionUseCase = refreshSessionUseCase,
         super(const AuthInitial()) {
     on<AuthCheckRequested>(_onAuthCheckRequested);
     on<AuthSessionEstablished>(_onSessionEstablished);
     on<AuthLogoutRequested>(_onAuthLogoutRequested);
+    on<AuthRefreshRequested>(_onAuthRefreshRequested);
   }
 
   final GetStoredSessionUseCase _getStoredSessionUseCase;
   final LogoutUseCase _logoutUseCase;
+  final RefreshSessionUseCase _refreshSessionUseCase;
 
   Future<void> _onAuthCheckRequested(
     AuthCheckRequested event,
@@ -61,5 +65,19 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _logoutUseCase(LogoutParams(token: currentState.session.accessToken));
     }
     emit(const AuthUnauthenticated());
+  }
+
+  Future<void> _onAuthRefreshRequested(
+    AuthRefreshRequested event,
+    Emitter<AuthState> emit,
+  ) async {
+    emit(const AuthLoading());
+
+    final result = await _refreshSessionUseCase(const NoParams());
+
+    result.fold(
+      onSuccess: (session) => emit(AuthAuthenticated(session)),
+      onFailure: (_) => emit(const AuthUnauthenticated()),
+    );
   }
 }

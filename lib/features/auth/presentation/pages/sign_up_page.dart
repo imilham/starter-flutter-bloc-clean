@@ -121,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       isLoading: isLoading,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
-                          final isValid = check_email.Disposable.instance.hasValidEmail(_emailController.text);                          
+                          final isValid = check_email.Disposable.instance.hasValidEmail(_emailController.text);
                           if (!isValid) {
                             await CommonDialog.alert(
                               context,

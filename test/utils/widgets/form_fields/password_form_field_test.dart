@@ -85,14 +85,16 @@ void main() {
     });
 
     testWidgets('validates password with custom validator', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        validator: (value) {
-          if (value == null || value.length < 8) {
-            return 'Password must be at least 8 characters';
-          }
-          return null;
-        },
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          validator: (value) {
+            if (value == null || value.length < 8) {
+              return 'Password must be at least 8 characters';
+            }
+            return null;
+          },
+        ),
+      );
 
       final textField = tester.widget<TextFormField>(find.byType(TextFormField));
       expect(textField.validator?.call('short'), 'Password must be at least 8 characters');

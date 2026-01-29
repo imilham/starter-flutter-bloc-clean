@@ -19,9 +19,7 @@ class UserProfileModel extends UserProfile {
       firstName: json['firstName'] as String? ?? '',
       lastName: json['lastName'] as String? ?? '',
       phoneNumber: json['phone_number'] as String?,
-      dateOfBirth: json['date_of_birth'] != null 
-          ? DateTime.tryParse(json['date_of_birth'] as String)
-          : null,
+      dateOfBirth: json['date_of_birth'] != null ? DateTime.tryParse(json['date_of_birth'] as String) : null,
       isEmailVerified: (json['is_email_verified'] ?? false) as bool,
       isProfileCompleted: (json['is_profile_completed'] ?? false) as bool,
     );

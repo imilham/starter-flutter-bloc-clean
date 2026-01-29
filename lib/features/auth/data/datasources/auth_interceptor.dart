@@ -14,7 +14,7 @@ class AuthInterceptor extends Interceptor {
   AuthInterceptor({this.rejectIfNoSession = false});
 
   final bool rejectIfNoSession;
-  
+
   // Lazy getter to avoid accessing Hive box before it's opened
   Box<String> get _storage => Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey);
 
@@ -49,7 +49,7 @@ class AuthInterceptor extends Interceptor {
 
     // For protected endpoints, add authentication token
     final session = await getCurrentSession();
-    
+
     if (session == null && rejectIfNoSession) {
       handler.reject(
         DioException(
@@ -61,7 +61,7 @@ class AuthInterceptor extends Interceptor {
       // Add token to request headers
       options.headers['x-access-token'] = session.accessToken;
     }
-    
+
     super.onRequest(options, handler);
   }
 }

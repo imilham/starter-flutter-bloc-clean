@@ -27,3 +27,8 @@ final class AuthSessionEstablished extends AuthEvent {
 final class AuthLogoutRequested extends AuthEvent {
   const AuthLogoutRequested();
 }
+
+/// Refresh session by fetching latest profile from API.
+final class AuthRefreshRequested extends AuthEvent {
+  const AuthRefreshRequested();
+}

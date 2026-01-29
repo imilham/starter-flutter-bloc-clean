@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/bootstrap.dart';
-import 'package:starter/features/onboarding/onboarding.dart';
+import 'package:starter/features/onboarding/domain/domain.dart';
+import 'package:starter/features/onboarding/presentation/bloc/onboarding_cubit.dart';
+import 'package:starter/features/onboarding/presentation/pages/step_one.dart';
+import 'package:starter/features/onboarding/presentation/pages/step_two.dart';
 import 'package:starter/utils/utils.dart';
 
 class OnboardingFlow extends StatelessWidget {

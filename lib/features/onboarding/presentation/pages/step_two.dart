@@ -64,7 +64,7 @@ class StepTwo extends StatelessWidget {
   }
 
   Future<void> _selectDate(BuildContext context, OnboardingCubit cubit) async {
-    final DateTime? picked = await showDatePicker(
+    final picked = await showDatePicker(
       context: context,
       initialDate: DateTime.now().subtract(const Duration(days: 365 * 18)), // 18 years ago
       firstDate: DateTime(1900),

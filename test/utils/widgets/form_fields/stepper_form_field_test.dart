@@ -123,9 +123,11 @@ void main() {
     testWidgets('calls onChanged callback when value changes', (tester) async {
       int? changedValue;
 
-      await tester.pumpWidget(buildTestWidget(
-        onChanged: (value) => changedValue = value,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          onChanged: (value) => changedValue = value,
+        ),
+      );
 
       await tester.tap(find.byIcon(Icons.expand_less));
       await tester.pump();

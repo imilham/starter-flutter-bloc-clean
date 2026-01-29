@@ -3,7 +3,7 @@ import 'dart:isolate';
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
 
-// TODO: remove-samples-im
+// TODO(developer): remove-samples-im
 
 class IsolateSample extends StatefulWidget {
   const IsolateSample({super.key});

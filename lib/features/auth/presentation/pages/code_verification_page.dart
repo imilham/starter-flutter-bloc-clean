@@ -9,7 +9,7 @@ import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
 /// Code verification page - placeholder for BLoC migration.
-/// TODO: Implement VerificationCubit when needed.
+// TODO(developer): Implement VerificationCubit when needed.
 class CodeVerificationPage extends StatefulWidget {
   const CodeVerificationPage({super.key});
 
@@ -176,7 +176,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   Gap.extraSmall4,
                   TextButton(
                     onPressed: () {
-                      // TODO: Implement resend with Cubit
+                      // TODO(developer): Implement resend with Cubit
                     },
                     child: Text(
                       context.l10n.resendCode,

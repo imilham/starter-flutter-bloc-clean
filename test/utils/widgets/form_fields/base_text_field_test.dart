@@ -71,17 +71,21 @@ void main() {
     });
 
     testWidgets('displays suffix icon when provided', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        suffixIcon: const Icon(Icons.search, key: Key('suffix')),
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          suffixIcon: const Icon(Icons.search, key: Key('suffix')),
+        ),
+      );
 
       expect(find.byKey(const Key('suffix')), findsOneWidget);
     });
 
     testWidgets('displays prefix icon when provided', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        prefixIcon: const Icon(Icons.email, key: Key('prefix')),
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          prefixIcon: const Icon(Icons.email, key: Key('prefix')),
+        ),
+      );
 
       expect(find.byKey(const Key('prefix')), findsOneWidget);
     });
@@ -97,9 +101,11 @@ void main() {
     });
 
     testWidgets('validates input with validator', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          validator: (value) => value?.isEmpty ?? true ? 'Required field' : null,
+        ),
+      );
 
       // Trigger validation
       await tester.enterText(find.byType(TextFormField), '');

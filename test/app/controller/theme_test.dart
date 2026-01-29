@@ -1,4 +1,3 @@
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -31,9 +30,7 @@ void main() {
     });
 
     test('toggleTheme switches mode and saves to Hive', () async {
-      final themeService = ThemeServiceProvider()
-
-      ..toggleTheme();
+      final themeService = ThemeServiceProvider()..toggleTheme();
       expect(themeService.isDark, true);
       expect(themeService.themeMode, ThemeMode.dark);
 
@@ -76,11 +73,11 @@ void main() {
     test('ThemeServiceProvider notifies listeners on toggle', () {
       final themeService = ThemeServiceProvider();
       var notified = false;
-      themeService..addListener(() {
-        notified = true;
-      })
-
-      ..toggleTheme();
+      themeService
+        ..addListener(() {
+          notified = true;
+        })
+        ..toggleTheme();
       expect(notified, true);
     });
   });

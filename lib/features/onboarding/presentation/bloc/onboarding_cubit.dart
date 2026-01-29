@@ -22,12 +22,12 @@ class OnboardingCubit extends Cubit<OnboardingState> {
   final firstNameController = TextEditingController();
   final lastNameController = TextEditingController();
   final stepOneFormKey = GlobalKey<FormState>();
-  
+
   // Step 2 controllers
   final phoneNumberController = TextEditingController();
   final dateOfBirthController = TextEditingController();
   final stepTwoFormKey = GlobalKey<FormState>();
-  
+
   DateTime? _selectedDateOfBirth;
 
   void nextStep() {

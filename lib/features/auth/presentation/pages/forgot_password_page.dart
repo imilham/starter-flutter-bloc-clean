@@ -3,7 +3,7 @@ import 'package:starter/app/app.dart';
 import 'package:starter/utils/utils.dart';
 
 /// Forgot password page - placeholder for BLoC migration.
-/// TODO: Implement ForgotPasswordCubit when needed.
+// TODO(developer): Implement ForgotPasswordCubit when needed.
 class ForgotPasswordPage extends StatefulWidget {
   const ForgotPasswordPage({super.key});
 
@@ -32,7 +32,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Future<void> _submitForgotPassword() async {
     if (_formKey.currentState!.validate()) {
       setState(() => _isLoading = true);
-      // TODO: Implement with ForgotPasswordCubit
+      // TODO(developer): Implement with ForgotPasswordCubit
       await Future<void>.delayed(const Duration(seconds: 2));
       if (mounted) {
         setState(() {

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 
-// TODO: remove-samples-im
+// TODO(developer): remove-samples-im
 
 class ComponentsSample extends StatefulWidget {
   const ComponentsSample({super.key});

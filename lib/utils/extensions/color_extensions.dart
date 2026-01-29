@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 extension ColorExtensions on Color {
   /// Darkens the color by [amount] (0.0 to 1.0).
   Color darken([double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
+    assert(amount >= 0 && amount <= 1, 'Amount must be between 0 and 1');
     final hsl = HSLColor.fromColor(this);
     final hslDark = hsl.withLightness((hsl.lightness - amount).clamp(0.0, 1.0));
     return hslDark.toColor();
@@ -11,7 +11,7 @@ extension ColorExtensions on Color {
 
   /// Lightens the color by [amount] (0.0 to 1.0).
   Color lighten([double amount = .1]) {
-    assert(amount >= 0 && amount <= 1);
+    assert(amount >= 0 && amount <= 1, 'Amount must be between 0 and 1');
     final hsl = HSLColor.fromColor(this);
     final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
     return hslLight.toColor();
@@ -40,7 +40,7 @@ extension ColorExtensions on Color {
     return hsl.withHue(hue).toColor();
   }
 
-  /// Shortcut for [withOpacity].
+  /// Shortcut for [withValues].
   Color opacity(double opacity) => withValues(alpha: opacity);
 
   /// Returns a MaterialColor swatch from this color.

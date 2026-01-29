@@ -90,10 +90,12 @@ void main() {
     });
 
     testWidgets('respects maxPhoneLength', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        maxPhoneLength: 5,
-        minPhoneLength: 3,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          maxPhoneLength: 5,
+          minPhoneLength: 3,
+        ),
+      );
 
       await tester.enterText(find.byType(TextFormField), '1234567890');
       await tester.pump();
@@ -102,14 +104,16 @@ void main() {
     });
 
     testWidgets('uses custom validator', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        phoneNumberValidator: (value) {
-          if (value == null || value.length < 10) {
-            return 'Phone must be at least 10 digits';
-          }
-          return null;
-        },
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          phoneNumberValidator: (value) {
+            if (value == null || value.length < 10) {
+              return 'Phone must be at least 10 digits';
+            }
+            return null;
+          },
+        ),
+      );
 
       final widgetFinder = find.byType(PhoneFormField);
       final widget = tester.widget<PhoneFormField>(widgetFinder);
@@ -123,9 +127,11 @@ void main() {
     testWidgets('calls onChanged callback', (tester) async {
       String? changedValue;
 
-      await tester.pumpWidget(buildTestWidget(
-        onChanged: (value) => changedValue = value,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          onChanged: (value) => changedValue = value,
+        ),
+      );
 
       await tester.enterText(find.byType(TextFormField), '12345');
       await tester.pump();
@@ -153,13 +159,15 @@ void main() {
     });
 
     testWidgets('widget accepts all configuration parameters', (tester) async {
-      await tester.pumpWidget(buildTestWidget(
-        title: 'Contact',
-        initialCountryCode: '+44',
-        phoneNumberHintText: 'Custom hint',
-        maxPhoneLength: 11,
-        minPhoneLength: 8,
-      ),);
+      await tester.pumpWidget(
+        buildTestWidget(
+          title: 'Contact',
+          initialCountryCode: '+44',
+          phoneNumberHintText: 'Custom hint',
+          maxPhoneLength: 11,
+          minPhoneLength: 8,
+        ),
+      );
 
       final widgetFinder = find.byType(PhoneFormField);
       final widget = tester.widget<PhoneFormField>(widgetFinder);

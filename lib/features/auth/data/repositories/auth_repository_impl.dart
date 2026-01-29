@@ -143,4 +143,32 @@ class AuthRepositoryImpl implements IAuthRepository {
   Future<void> deleteSession() async {
     await localDataSource.deleteSession();
   }
+
+  @override
+  Future<Result<AuthSession>> refreshSession() async {
+    // 1. Check for stored session
+    final storedSession = await localDataSource.getSession();
+    if (storedSession == null) {
+      return const Result.failure(ServerFailure('No session found'));
+    }
+
+    // 2. Fetch latest profile from API
+    final remote = remoteDataSource;
+    if (remote == null) {
+      return const Result.failure(ServerFailure('Remote data source not configured'));
+    }
+
+    try {
+      // This call validates the token and returns fresh profile data
+      final result = await remote.getProfile();
+      
+      // 3. Save updated session to local storage
+      await localDataSource.saveSession(result);
+      
+      return Result.success(result);
+    } on Exception catch (e) {
+      // Session invalid - could be 401 or network error
+      return Result.failure(ServerFailure(e.toString()));
+    }
+  }
 }
