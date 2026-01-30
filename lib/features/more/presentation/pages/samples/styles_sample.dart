@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:starter/app/app.dart';
 import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -55,6 +56,72 @@ class StylesSample extends StatelessWidget {
                 _ColorChip(
                   name: 'Shimmer BG',
                   color: context.appColors.shimmerBgColor,
+                ),
+              ],
+            ),
+            Gap.large24,
+            const Text('Comparison: Interpolated vs Snapped', style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
+            Gap.small8,
+            const Text('Toggle theme to see the difference below:', style: TextStyle(fontSize: 12)),
+            Gap.small8,
+            Row(
+              children: [
+                Column(
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: context.appColors.themeLerpColor,
+                          borderRadius: AppRadius.medium12,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withValues(alpha: 0.1),
+                              blurRadius: 10,
+                              spreadRadius: 2,
+                            ),
+                          ],
+                        ),
+                        child: const Center(
+                          child: Text(
+                            '',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                          ),
+                        ),
+                      ),                    
+                    Gap.small8,
+                    const Text('Extension / lerp()', style: TextStyle(fontSize: 12)),
+                  ],
+                ),
+                Gap.large24,
+                Column(
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        color: context.watch<ThemeServiceProvider>().demoSnapColor,
+                        borderRadius: AppRadius.medium12,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withValues(alpha: 0.1),
+                            blurRadius: 10,
+                            spreadRadius: 2,
+                          ),
+                        ],
+                      ),
+                      child: const Center(
+                        child: Text(
+                          '',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                        ),
+                      ),
+                    ),
+                    Gap.small8,
+                    const Text('Direct Getter', style: TextStyle(fontSize: 12)),
+                  ],
                 ),
               ],
             ),

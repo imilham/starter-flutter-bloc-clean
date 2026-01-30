@@ -13,6 +13,7 @@ void main() {
     coreTextColor: Color(0xff464646),
     black400: Color(0xff969696),
     deemphasizedText: Color(0xff878787),
+    themeLerpColor: Color(0xffFF5722),
   );
 
   group('AppColors Extension', () {

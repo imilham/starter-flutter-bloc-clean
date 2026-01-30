@@ -23,6 +23,9 @@ class ThemeServiceProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  /// **DEMO ONLY**: Direct getter for color (Snaps on theme change)
+  Color get demoSnapColor => _isDark ? const Color(0xff07A8FE) : const Color(0xffFF5722);
+
   /// **Important**: Don't make colors public
   // --- YOUR COLORS ---
   final Color _primaryColor = const Color(0xFF127592);
@@ -82,6 +85,7 @@ class ThemeServiceProvider with ChangeNotifier {
           coreTextColor: _coreTextColor,
           black400: const Color(0xff969696),
           deemphasizedText: const Color(0xff878787),
+          themeLerpColor: const Color(0xffFF5722),
         ),
       ],
     );
@@ -131,6 +135,7 @@ class ThemeServiceProvider with ChangeNotifier {
           coreTextColor: Colors.white,
           black400: const Color(0xff969696),
           deemphasizedText: const Color(0xff878787),
+          themeLerpColor: const Color(0xff07A8FE),
         ),
       ],
     );

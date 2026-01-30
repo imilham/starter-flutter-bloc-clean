@@ -36,7 +36,11 @@ class AppColors extends ThemeExtension<AppColors> {
     required this.coreTextColor,
     required this.black400,
     required this.deemphasizedText,
+    required this.themeLerpColor,
   });
+
+  /// Color for demonstration of theme lerping.
+  final Color themeLerpColor;
 
   /// The color of the shimmering effect itself.
   final Color shimmerColor;
@@ -76,6 +80,7 @@ class AppColors extends ThemeExtension<AppColors> {
     Color? bottomNavbarSelectedColor,
     Color? black400,
     Color? deemphasizedText,
+    Color? themeLerpColor,
   }) {
     return AppColors(
       shimmerColor: shimmerColor ?? this.shimmerColor,
@@ -87,6 +92,7 @@ class AppColors extends ThemeExtension<AppColors> {
       coreTextColor: coreTextColor ?? this.coreTextColor,
       black400: black400 ?? this.black400,
       deemphasizedText: deemphasizedText ?? this.deemphasizedText,
+      themeLerpColor: themeLerpColor ?? this.themeLerpColor,
     );
   }
 
@@ -109,6 +115,7 @@ class AppColors extends ThemeExtension<AppColors> {
       coreTextColor: Color.lerp(coreTextColor, other.coreTextColor, t)!,
       black400: Color.lerp(black400, other.black400, t)!,
       deemphasizedText: Color.lerp(deemphasizedText, other.deemphasizedText, t)!,
+      themeLerpColor: Color.lerp(themeLerpColor, other.themeLerpColor, t)!,
     );
   }
 }
