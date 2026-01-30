@@ -1,6 +1,3 @@
-import 'dart:convert';
-
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -15,14 +12,9 @@ class AuthInterceptor extends Interceptor {
 
   final bool rejectIfNoSession;
 
-  /// Safely gets the Hive box, returns null if not yet opened
-  Box<String>? get _storage {
-    final boxName = GetIt.instance<AppSettings>().sessionSecretKey;
-    if (!Hive.isBoxOpen(boxName)) {
-      return null;
-    }
-    return Hive.box<String>(boxName);
-  }
+  /// Lazily retrieve AuthLocalDataSource to avoid circular dependency issues
+  /// during DI initialization (Network Module initializes before Auth Module).
+  AuthLocalDataSource get _authLocalDataSource => GetIt.instance<AuthLocalDataSource>();
 
   // ============================================================================
   // Public endpoints that don't require authentication
@@ -39,14 +31,9 @@ class AuthInterceptor extends Interceptor {
     return _publicEndpoints.any((endpoint) => path.contains(endpoint));
   }
 
-  /// Retrieves the current user session from Hive storage
-  Future<AuthSession?> getCurrentSession() async {
-    final storage = _storage;
-    if (storage == null) return null;
-    
-    final session = storage.get('session');
-    if (session == null) return null;
-    return AuthSessionModel.fromJson(jsonDecode(session) as Map<String, dynamic>);
+  /// Retrieves the current user session
+  Future<AuthSessionModel?> getCurrentSession() async {
+    return _authLocalDataSource.getSession();
   }
 
   @override

@@ -148,7 +148,7 @@ class CommonBaseTextField extends StatelessWidget {
         // Text field attempting to animate the fill color smoothy
         TweenAnimationBuilder<Color?>(
           duration: kThemeAnimationDuration,
-          tween: ColorTween(end: theme.inputDecorationTheme.fillColor),
+          tween: ColorTween(end: theme.inputDecorationTheme.fillColor ?? Colors.transparent),
           builder: (context, animatedColor, child) {
             return TextFormField(
               controller: controller,

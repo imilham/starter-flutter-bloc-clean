@@ -1,10 +1,5 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:hive/hive.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/features/auth/auth.dart';
 
@@ -22,18 +17,10 @@ class _StarterAppState extends State<StarterApp> {
   final AppStates _appStates = GetIt.instance<AppStates>();
   final ThemeServiceProvider _themeServiceProvider = GetIt.instance<ThemeServiceProvider>();
 
-  /// A stream subscription for handling BoxEvent changes related to authentication state.
-  late StreamSubscription<BoxEvent> _authStateSubscription;
-
   /// A stream subscription for handling ProfileState changes.
 
   @override
   void initState() {
-    /// Subscribes to changes in the Hive box containing sessions and listens for authentication state changes.
-    ///
-    /// The [onAuthStateChanged] callback function will be called whenever there is a change in the authentication state.
-    _authStateSubscription = Hive.box<String>(GetIt.instance<AppSettings>().sessionSecretKey).watch().listen(onAuthStateChanged);
-
     /// Listens to changes in the theme mode provided by the [_themeServiceProvider].
     /// If the theme mode is set to [ThemeMode.dark], it sets the system UI overlay style to dark.
     /// Otherwise, it sets the system UI overlay style to the default.
@@ -44,31 +31,15 @@ class _StarterAppState extends State<StarterApp> {
         ThemeServiceProvider.setSystemUIOverlayStyle();
       }
     });
+    
+    // Trigger initial auth check
+    GetIt.instance<AuthBloc>().add(const AuthCheckRequested());
+    
     super.initState();
-  }
-
-  /// Callback function that is triggered when the authentication state changes.
-  ///
-  /// It updates the current session in the app state based on the provided [event].
-  /// If the [event] value is not null, it sets the current session to the value of the event.
-  /// If the [event] value is null, it resets the app state to the initial state by setting the current session to null and isInitialized to false.
-  ///
-  /// **Note**: In the future, we'll also use this function to clear saved user cache related data from other services.
-  void onAuthStateChanged(BoxEvent event) {
-    log('onAuthStateChanged: ${event.value}', name: 'StarterAppState');
-    if (event.value != null && event.value is String) {
-      _appStates.currentSession = AuthSessionModel.fromJson(jsonDecode(event.value as String) as Map<String, dynamic>);
-    } else {
-      _appStates
-        ..currentSession = null
-        ..isInitialized = false; // Reset the app state to initial state when the user logs out
-    }
   }
 
   @override
   void dispose() {
-    _authStateSubscription.cancel();
-
     super.dispose();
   }
 
@@ -80,19 +51,31 @@ class _StarterAppState extends State<StarterApp> {
         ChangeNotifierProvider(create: (_) => GetIt.instance<ThemeServiceProvider>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
       ],
-      child: Builder(
-        builder: (context) {
-          return MaterialApp.router(
-            onGenerateTitle: (context) => context.l10n.appName,
-            theme: context.watch<ThemeServiceProvider>().lightTheme,
-            darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
-            themeMode: context.watch<ThemeServiceProvider>().themeMode,
-            routerConfig: GetIt.instance<AppRouter>().goRouter,
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
-            builder: (context, child) => OverlayUtility(child: child),
-          );
+      child: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is AuthAuthenticated) {
+            _appStates.currentSession = state.session;
+            _appStates.isInitialized = true;
+          } else if (state is AuthUnauthenticated) {
+            _appStates.currentSession = null;
+            _appStates.isInitialized = false;
+          }
         },
+        child: Builder(
+          builder: (context) {
+            return MaterialApp.router(
+              onGenerateTitle: (context) => context.l10n.appName,
+              theme: context.watch<ThemeServiceProvider>().lightTheme,
+              darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
+              themeMode: context.watch<ThemeServiceProvider>().themeMode,
+              routerConfig: GetIt.instance<AppRouter>().goRouter,
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              builder: (context, child) => OverlayUtility(child: child),
+              // showPerformanceOverlay: true,
+            );
+          },
+        ),
       ),
     );
   }

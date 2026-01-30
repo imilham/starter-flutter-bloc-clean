@@ -139,7 +139,7 @@ void main() {
       controller.text = '5';
       await tester.pumpWidget(buildTestWidget(enabled: false));
 
-      await tester.tap(find.byIcon(Icons.expand_less));
+      await tester.tap(find.byIcon(Icons.expand_less), warnIfMissed: false);
       await tester.pump();
 
       // Value should not change

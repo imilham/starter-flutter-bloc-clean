@@ -26,9 +26,11 @@ class AppRouter {
   GoRouter get goRouter => _goRouter;
 
   late final GoRouter _goRouter = GoRouter(
+    /// Refresh the router when the app state changes.
     refreshListenable: _appStates,
     initialLocation: '${_appStates.homePrefix}/${Pages.home.toPath(isSubRoute: true)}',
     navigatorKey: _rootNavigatorKey,
+    /// Enable debug logging for diagnostics.
     debugLogDiagnostics: true,
     routes: [
       GoRoute(
