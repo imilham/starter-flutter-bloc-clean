@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/core/storage/storage.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -13,6 +14,7 @@ extension CoreInjection on GetIt {
     // App Settings & States
     this
       ..registerSingleton<AppSettings>(AppSettings(environment))
+      ..registerSingleton<SecureStorage>(SecureStorageImpl())
       ..registerSingletonAsync<AppStates>(() async {
         await Hive.openBox<bool>('states');
         return AppStates();
