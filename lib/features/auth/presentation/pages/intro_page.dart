@@ -31,7 +31,7 @@ class _IntroPageState extends State<IntroPage> {
             children: [
               Text(
                 context.l10n.alreadyHaveAccount,
-                style: bodyRegular16(),
+                style: context.bodyRegular16(),
               ),
               TextButton(
                 onPressed: () {
@@ -42,7 +42,7 @@ class _IntroPageState extends State<IntroPage> {
                 ),
                 child: Text(
                   context.l10n.introSignIn,
-                  style: bodyRegular16().semiBold,
+                  style: context.bodyRegular16().semiBold,
                 ),
               ),
             ],

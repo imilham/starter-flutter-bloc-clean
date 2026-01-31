@@ -30,7 +30,6 @@ class AppSettings {
   bool get isProduction => _environment == AppEnvironment.production;
   bool get isStaging => _environment == AppEnvironment.staging;
 
-  // TODO(api-implementation): Step 1: Setup Base URL and Keys
   final _baseUrl = const AppSettingValue<String>(
     developmentValue: 'https://xtracked.sandbox28.preview.cx/api/v1',
     productionValue: 'https://xtracked.sandbox28.preview.cx/api/v1',
@@ -99,19 +98,23 @@ class AppSettings {
     }
   }
 
-  bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
-  bool get isIOS => defaultTargetPlatform == TargetPlatform.iOS;
-  bool get isWeb => kIsWeb;
-
   /// Returns the device platform as a string.
   /// If the platform is Android, it returns 'ANDROID'.
   /// If the platform is iOS, it returns 'IOS'.
   /// If the platform is unknown or an error occurs, it returns 'UNKNOWN'.
   String getDevicePlatform() {
-    if (isAndroid) return 'android';
-    if (isIOS) return 'ios';
-    if (isWeb) return 'web';
-    return 'unknown';
+    try {
+      if (defaultTargetPlatform == TargetPlatform.android) {
+        return 'ANDROID';
+      } else if (defaultTargetPlatform == TargetPlatform.iOS) {
+        return 'IOS';
+      } else {
+        return 'UNKNOWN';
+      }
+    } catch (e) {
+      log('Error getting device Platform: $e');
+      return 'UNKNOWN';
+    }
   }
 
   /// Retrieves the device ID asynchronously.

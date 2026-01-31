@@ -15,7 +15,7 @@ class StepTwo extends StatelessWidget {
         children: [
           Text(
             context.l10n.step2Title,
-            style: headline20(fontWeight: FontWeight.bold),
+            style: context.headline20(fontWeight: FontWeight.bold),
           ),
           Gap.medium16,
           CommonBaseTextField(
@@ -53,7 +53,7 @@ class StepTwo extends StatelessWidget {
           Center(
             child: Text(
               'Complete your profile to continue',
-              style: bodyRegular16(),
+              style: context.bodyRegular16(),
               textAlign: TextAlign.center,
             ),
           ),

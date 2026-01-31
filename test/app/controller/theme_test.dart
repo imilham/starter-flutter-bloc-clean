@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hive/hive.dart';
-import 'package:starter/app/controller/theme.dart';
+import 'package:starter/app/theme/theme_service.dart';
 
 void main() {
   setUpAll(() {

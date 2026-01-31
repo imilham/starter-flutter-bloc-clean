@@ -165,15 +165,15 @@ class _TutorialPageState extends State<TutorialPage> {
                                       children: [
                                         Text(
                                           (_pages[index]['features'] as List<Map>)[index]['title'].toString(),
-                                          style: bodyRegular16(
-                                            textColor: context.colorScheme.secondary,
+                                          style: context.bodyRegular16(
+                                            color: context.colorScheme.secondary,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                         Gap.extraSmall4,
                                         Text(
                                           (_pages[index]['features'] as List<Map>)[index]['description'].toString(),
-                                          style: bodyRegular16(),
+                                          style: context.bodyRegular16(),
                                         ),
                                       ],
                                     ),
@@ -185,15 +185,15 @@ class _TutorialPageState extends State<TutorialPage> {
                             Gap.medium12,
                             Text(
                               _pages[index]['title'].toString(),
-                              style: headline24(
-                                textColor: context.colorScheme.secondary,
+                              style: context.headline24(
+                                color: context.colorScheme.secondary,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                             Gap.medium16,
                             Text(
                               _pages[index]['description'].toString(),
-                              style: bodyRegular16(),
+                              style: context.bodyRegular16(),
                             ),
                             Gap.large24,
                           ],
@@ -235,7 +235,7 @@ class _TutorialPageState extends State<TutorialPage> {
               },
               child: Text(
                 _currentIndex == 2 ? 'Get Started' : 'Skip',
-                style: bodyRegular16(fontWeight: FontWeight.bold),
+                style: context.bodyRegular16(fontWeight: FontWeight.bold),
               ),
             ),
             const RelativeGap(mainAxisExtent: 0.04),

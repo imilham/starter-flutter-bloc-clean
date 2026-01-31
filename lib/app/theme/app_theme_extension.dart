@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/utils/extensions/app_colors_extension.dart';
+import 'package:starter/app/theme/theme.dart';
 
 /// Extension on [BuildContext] for easy access to theme properties.
 ///
@@ -8,14 +8,14 @@ import 'package:starter/utils/extensions/app_colors_extension.dart';
 ///
 /// ## Text Style Usage
 /// ```dart
-/// // Instead of:
+/// Instead of:
 /// Text('Hello', style: Theme.of(context).textTheme.bodyMedium)
 ///
-/// // You can write:
-/// Text('Hello', style: context.bodyMedium)
+/// You can write:
+/// Text('Hello', style: context.bodyMedium14())
 ///
-/// // With overrides:
-/// Text('Hello', style: context.bodyMedium?.copyWith(
+/// With overrides:
+/// Text('Hello', style: context.bodyMedium14(
 ///   color: context.colorScheme.error,
 ///   fontWeight: FontWeight.bold,
 /// ))
@@ -23,10 +23,9 @@ import 'package:starter/utils/extensions/app_colors_extension.dart';
 ///
 /// ## Color Usage
 /// ```dart
-/// // Instead of:
 /// color: Theme.of(context).colorScheme.primary
 ///
-/// // You can write:
+/// You can write:
 /// color: context.colorScheme.primary
 /// ```
 ///
@@ -48,6 +47,8 @@ extension ThemeExtension on BuildContext {
 
   /// Access to custom [AppColors].
   AppColors get appColors => theme.extension<AppColors>()!;
+
+
 
   // ─────────────────────────────────────────────────────────────────────
   // SCREEN SIZE

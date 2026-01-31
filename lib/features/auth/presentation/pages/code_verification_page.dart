@@ -78,7 +78,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
           final defaultPinTheme = PinTheme(
             width: 50,
             height: 50,
-            textStyle: context.titleLarge?.copyWith(
+            textStyle: context.headline18().copyWith(
               color: context.colorScheme.onSurface,
             ),
             decoration: BoxDecoration(
@@ -119,7 +119,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     ),
                     child: Text(
                       context.l10n.logOut,
-                      style: bodyRegular16(),
+                      style: context.bodyRegular16(),
                     ),
                   ),
                 ],
@@ -131,13 +131,13 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   Text(
                     context.l10n.enterVerificationCode,
                     textAlign: TextAlign.center,
-                    style: headline24(),
+                    style: context.headline24(),
                   ),
                   Gap.medium16,
                   Text(
                     context.l10n.verificationCodeSent,
                     textAlign: TextAlign.center,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.extraLarge32,
                   Gap.medium16,
@@ -171,7 +171,7 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   Text(
                     context.l10n.didntReceiveCode,
                     textAlign: TextAlign.center,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.extraSmall4,
                   TextButton(
@@ -180,27 +180,27 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                     },
                     child: Text(
                       context.l10n.resendCode,
-                      style: bodyRegular16(fontWeight: FontWeight.bold),
+                      style: context.bodyRegular16(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Gap.medium16,
                   Text(
                     context.l10n.or,
                     textAlign: TextAlign.center,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.medium16,
                   Text(
                     context.l10n.sendCodeMobile,
                     textAlign: TextAlign.center,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.extraSmall4,
                   TextButton(
                     onPressed: () {},
                     child: Text(
                       context.l10n.sendCode,
-                      style: bodyRegular16(fontWeight: FontWeight.bold),
+                      style: context.bodyRegular16(fontWeight: FontWeight.bold),
                     ),
                   ),
                   const RelativeGap(mainAxisExtent: 0.02),

@@ -30,12 +30,12 @@ class _ComponentsSampleState extends State<ComponentsSample> {
       children: [
         Text(
           'UI Components',
-          style: context.textTheme.headlineMedium,
+          style: context.headline20(),
         ),
         Gap.small8,
         Text(
           'Reusable widgets and form elements.',
-          style: context.textTheme.bodyMedium?.copyWith(
+          style: context.bodyMedium14(
             color: context.colorScheme.onSurfaceVariant,
           ),
         ),
@@ -133,7 +133,7 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           children: [
             Text(
               'Original: 06/01/2026',
-              style: bodyRegular16(
+              style: context.bodyRegular16(
                 fontWeight: FontWeight.w200,
                 fontStyle: FontStyle.italic,
               ),
@@ -141,17 +141,17 @@ class _ComponentsSampleState extends State<ComponentsSample> {
             Gap.small8,
             Text(
               date.format('dd MMM yyyy'),
-              style: headline20(textColor: context.colorScheme.primary),
+              style: context.headline20(color: context.colorScheme.primary),
             ),
             Gap.large24,
             Text(
               'String Date Parsing & Formatting:',
-              style: bodySmall14(fontWeight: FontWeight.bold),
+              style: context.bodyMedium14(fontWeight: FontWeight.bold),
             ),
             Gap.small8,
             Text(
               '2026-01-06T12:00:00'.formatDate('MMMM dd, yyyy'),
-              style: bodyRegular16(textColor: context.colorScheme.primary),
+              style: context.bodyRegular16(color: context.colorScheme.primary),
             ),
           ],
         ),

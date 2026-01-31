@@ -563,17 +563,17 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'style.bold',
               description: 'FontWeight.bold',
-              demo: Text('Bold', style: context.bodyMedium?.copyWith().bold),
+              demo: Text('Bold', style: context.bodyMedium14().bold),
             ),
             _ExtensionItem(
               code: 'style.italic',
               description: 'FontStyle.italic',
-              demo: Text('Italic', style: context.bodyMedium?.copyWith().italic),
+              demo: Text('Italic', style: context.bodyMedium14().italic),
             ),
             _ExtensionItem(
               code: 'style.underline',
               description: 'TextDecoration.underline',
-              demo: Text('Underline', style: context.bodyMedium?.copyWith().underline),
+              demo: Text('Underline', style: context.bodyMedium14().underline),
             ),
             const _ExtensionItem(
               code: 'style.setColor(Colors.red)',
@@ -597,27 +597,27 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'headline32()',
               description: '32sp Bold',
-              demo: Text('Headline 32', style: headline32()),
+              demo: Text('Headline 32', style: context.headline32()),
             ),
             _ExtensionItem(
               code: 'headline24()',
               description: '24sp Bold',
-              demo: Text('Headline 24', style: headline24()),
+              demo: Text('Headline 24', style: context.headline24()),
             ),
             _ExtensionItem(
               code: 'headline20()',
               description: '20sp Bold',
-              demo: Text('Headline 20', style: headline20()),
+              demo: Text('Headline 20', style: context.headline20()),
             ),
             _ExtensionItem(
               code: 'headline16()',
               description: '16sp Bold',
-              demo: Text('Headline 16', style: headline16()),
+              demo: Text('Headline 16', style: context.headline16()),
             ),
             _ExtensionItem(
               code: 'headline14()',
               description: '14sp Bold',
-              demo: Text('Headline 14', style: headline14()),
+              demo: Text('Headline 14', style: context.headline14()),
             ),
           ],
         ),
@@ -629,17 +629,17 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'bodyRegular16()',
               description: '16sp Regular',
-              demo: Text('Body Regular 16', style: bodyRegular16()),
+              demo: Text('Body Regular 16', style: context.bodyRegular16()),
             ),
             _ExtensionItem(
-              code: 'bodySmall14()',
+              code: 'bodyMedium14()',
               description: '14sp Medium',
-              demo: Text('Body Small 14', style: bodySmall14()),
+              demo: Text('Body Medium 14', style: context.bodyMedium14()),
             ),
             _ExtensionItem(
               code: 'bodyXSmall12()',
               description: '12sp Regular',
-              demo: Text('Body XSmall 12', style: bodyXSmall12()),
+              demo: Text('Body XSmall 12', style: context.bodyXSmall12()),
             ),
           ],
         ),
@@ -651,17 +651,17 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'buttonRegular16()',
               description: '16sp Bold',
-              demo: Text('Button Regular', style: buttonRegular16()),
+              demo: Text('Button Regular', style: context.buttonRegular16()),
             ),
             _ExtensionItem(
               code: 'buttonSmall14()',
               description: '14sp Bold',
-              demo: Text('Button Small', style: buttonSmall14()),
+              demo: Text('Button Small', style: context.buttonSmall14()),
             ),
             _ExtensionItem(
               code: 'buttonXSmall12()',
               description: '12sp Bold',
-              demo: Text('Button XSmall', style: buttonXSmall12()),
+              demo: Text('Button XSmall', style: context.buttonXSmall12()),
             ),
           ],
         ),
@@ -673,17 +673,17 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'formLabel14()',
               description: '14sp Medium',
-              demo: Text('Form Label', style: formLabel14()),
+              demo: Text('Form Label', style: context.formLabel14()),
             ),
             _ExtensionItem(
               code: 'formHint16()',
               description: '16sp Medium',
-              demo: Text('Form Hint', style: formHint16()),
+              demo: Text('Form Hint', style: context.formHint16()),
             ),
             _ExtensionItem(
               code: 'tab10()',
               description: '10sp Medium',
-              demo: Text('Tab Text', style: tab10()),
+              demo: Text('Tab Text', style: context.tab10()),
             ),
           ],
         ),
@@ -695,17 +695,17 @@ class ExtensionsSample extends StatelessWidget {
             _ExtensionItem(
               code: 'bodyRegular16(fontWeight: FontWeight.bold)',
               description: 'Override weight',
-              demo: Text('Bold Body', style: bodyRegular16(fontWeight: FontWeight.bold)),
+              demo: Text('Bold Body', style: context.bodyRegular16(fontWeight: FontWeight.bold)),
             ),
             _ExtensionItem(
               code: 'bodyRegular16(textColor: Colors.red)',
               description: 'Override color',
-              demo: Text('Colored Body', style: bodyRegular16(textColor: Colors.red)),
+              demo: Text('Colored Body', style: context.bodyRegular16(color: Colors.red)),
             ),
             _ExtensionItem(
               code: 'bodyRegular16(fontStyle: FontStyle.italic)',
               description: 'Italic style',
-              demo: Text('Italic Body', style: bodyRegular16(fontStyle: FontStyle.italic)),
+              demo: Text('Italic Body', style: context.bodyRegular16(fontStyle: FontStyle.italic)),
             ),
           ],
         ),
@@ -730,7 +730,7 @@ class _ExtensionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(title, style: context.titleMedium?.copyWith(fontWeight: FontWeight.bold)),
+            Text(title, style: context.headline16(fontWeight: FontWeight.bold)),
             Gap.small8,
             ...children,
           ],
@@ -771,7 +771,7 @@ class _ExtensionItem extends StatelessWidget {
                   ),
                   child: Text(
                     code,
-                    style: context.bodySmall?.copyWith(
+                    style: context.bodyXSmall12().copyWith(
                       fontFamily: 'monospace',
                       fontSize: 11,
                     ),
@@ -783,7 +783,7 @@ class _ExtensionItem extends StatelessWidget {
                 flex: 2,
                 child: Text(
                   description,
-                  style: context.bodySmall?.copyWith(color: Colors.grey),
+                  style: context.bodyXSmall12(color: Colors.grey),
                 ),
               ),
             ],

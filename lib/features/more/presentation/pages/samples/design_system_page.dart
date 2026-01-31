@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:starter/app/app.dart';
 import 'package:starter/features/more/presentation/pages/samples/samples.dart';
 import 'package:starter/utils/utils.dart';
 

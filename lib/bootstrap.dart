@@ -22,7 +22,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
           builder: (context) {
             return Text(
               context.l10n.genericError,
-              style: bodyRegular16(textColor: Colors.red),
+              style: context.bodyRegular16(color: Colors.red),
             );
           },
         ),

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/features/auth/auth.dart';
 
-import 'package:starter/l10n/arb/app_localizations.dart';
+import 'package:starter/l10n/gen/app_localizations.dart';
 import 'package:starter/utils/utils.dart';
 
 class StarterApp extends StatefulWidget {
@@ -48,6 +48,7 @@ class _StarterAppState extends State<StarterApp> {
     return MultiProvider(
       providers: [
         Provider(create: (_) => GetIt.instance<AppSettings>()),
+        ChangeNotifierProvider.value(value: GetIt.instance<AppStates>()),
         ChangeNotifierProvider(create: (_) => GetIt.instance<ThemeServiceProvider>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
       ],

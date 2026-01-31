@@ -87,7 +87,7 @@ class _SignInPageState extends State<SignInPage> {
                           },
                           child: Text(
                             context.l10n.forgotPassword,
-                            style: bodyRegular16(fontWeight: FontWeight.bold),
+                            style: context.bodyRegular16(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ),
@@ -121,7 +121,7 @@ class _SignInPageState extends State<SignInPage> {
                       child: Center(
                         child: Text(
                           'Or continue with',
-                          style: bodyRegular16(),
+                          style: context.bodyRegular16(),
                         ),
                       ),
                     ),
@@ -129,7 +129,7 @@ class _SignInPageState extends State<SignInPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (getIt<AppSettings>().isIOS)
+                        if (Theme.of(context).platform == TargetPlatform.iOS)
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,
@@ -171,7 +171,7 @@ class _SignInPageState extends State<SignInPage> {
                       children: [
                         Text(
                           context.l10n.dontHaveAccount,
-                          style: bodyRegular16(),
+                          style: context.bodyRegular16(),
                         ),
                         TextButton(
                           onPressed: () {
@@ -182,7 +182,7 @@ class _SignInPageState extends State<SignInPage> {
                           ),
                           child: Text(
                             context.l10n.signUp,
-                            style: bodyRegular16(fontWeight: FontWeight.bold),
+                            style: context.bodyRegular16(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],

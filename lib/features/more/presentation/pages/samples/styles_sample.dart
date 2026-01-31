@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:starter/app/app.dart';
 import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -15,12 +14,12 @@ class StylesSample extends StatelessWidget {
       children: [
         Text(
           'App Styles',
-          style: context.textTheme.headlineMedium,
+          style: context.headline32(),
         ),
         Gap.small8,
         Text(
           'Core design tokens and typography.',
-          style: context.textTheme.bodyMedium?.copyWith(
+          style: context.bodyMedium14(
             color: context.colorScheme.onSurfaceVariant,
           ),
         ),
@@ -132,30 +131,30 @@ class StylesSample extends StatelessWidget {
           icon: Icons.text_fields,
           children: [
             const SectionHeader.small('Headlines'),
-            _TypeSample(style: headline32(), name: 'headline32()'),
-            _TypeSample(style: headline24(), name: 'headline24()'),
-            _TypeSample(style: headline20(), name: 'headline20()'),
-            _TypeSample(style: headline16(), name: 'headline16()'),
-            _TypeSample(style: headline14(), name: 'headline14()'),
-            _TypeSample(style: headline12(), name: 'headline12()'),
+            _TypeSample(style: context.headline32(), name: 'headline32()'),
+            _TypeSample(style: context.headline24(), name: 'headline24()'),
+            _TypeSample(style: context.headline20(), name: 'headline20()'),
+            _TypeSample(style: context.headline16(), name: 'headline16()'),
+            _TypeSample(style: context.headline14(), name: 'headline14()'),
+            _TypeSample(style: context.headline12(), name: 'headline12()'),
             Gap.medium16,
             const SectionHeader.small('Body'),
-            _TypeSample(style: bodyRegular16(), name: 'bodyRegular16()'),
-            _TypeSample(style: bodySmall14(), name: 'bodySmall14()'),
-            _TypeSample(style: bodyXSmall12(), name: 'bodyXSmall12()'),
+            _TypeSample(style: context.bodyRegular16(), name: 'bodyRegular16()'),
+            _TypeSample(style: context.bodyMedium14(), name: 'bodyMedium14()'),
+            _TypeSample(style: context.bodyXSmall12(), name: 'bodyXSmall12()'),
             Gap.medium16,
             const SectionHeader.small('Buttons'),
-            _TypeSample(style: buttonRegular16(textColor: context.colorScheme.onSurface), name: 'buttonRegular16()'),
-            _TypeSample(style: buttonSmall14(textColor: context.colorScheme.onSurface), name: 'buttonSmall14()'),
-            _TypeSample(style: buttonXSmall12(textColor: context.colorScheme.onSurface), name: 'buttonXSmall12()'),
+            _TypeSample(style: context.buttonRegular16(color: context.colorScheme.onSurface), name: 'buttonRegular16()'),
+            _TypeSample(style: context.buttonSmall14(color: context.colorScheme.onSurface), name: 'buttonSmall14()'),
+            _TypeSample(style: context.buttonXSmall12(color: context.colorScheme.onSurface), name: 'buttonXSmall12()'),
             Gap.medium16,
             const SectionHeader.small('Form'),
-            _TypeSample(style: formLabel14(textColor: context.colorScheme.onSurface), name: 'formLabel14()'),
-            _TypeSample(style: bodyRegular16(textColor: context.colorScheme.onSurface), name: 'formBody (bodyRegular16)'),
-            _TypeSample(style: formHint16(textColor: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint16()'),
+            _TypeSample(style: context.formLabel14(color: context.colorScheme.onSurface), name: 'formLabel14()'),
+            _TypeSample(style: context.bodyRegular16(color: context.colorScheme.onSurface), name: 'formBody (bodyRegular16)'),
+            _TypeSample(style: context.formHint16(color: context.colorScheme.onSurface.withValues(alpha: 0.5)), name: 'formHint16()'),
             Gap.medium16,
             const SectionHeader.small('Tabs'),
-            _TypeSample(style: tab10(textColor: context.colorScheme.onSurface), name: 'tab10()'),
+            _TypeSample(style: context.tab10(color: context.colorScheme.onSurface), name: 'tab10()'),
           ],
         ),
         SampleSection(
@@ -165,16 +164,16 @@ class StylesSample extends StatelessWidget {
             const Text('Passing parameters overrides defaults:'),
             Gap.small8,
             _TypeSample(
-              style: bodyRegular16(fontWeight: FontWeight.bold),
+              style: context.bodyRegular16(fontWeight: FontWeight.bold),
               name: 'bodyRegular16(fontWeight: FontWeight.bold)',
             ),
             _TypeSample(
-              style: bodyRegular16(fontStyle: FontStyle.italic),
+              style: context.bodyRegular16(fontStyle: FontStyle.italic),
               name: 'bodyRegular16(fontStyle: FontStyle.italic)',
             ),
             _TypeSample(
-              style: bodyRegular16(textColor: context.colorScheme.error),
-              name: 'bodyRegular16(textColor: context.colorScheme.error)',
+              style: context.bodyRegular16(color: context.colorScheme.error),
+              name: 'bodyRegular16(color: context.colorScheme.error)',
             ),
           ],
         ),
@@ -206,7 +205,7 @@ class _ColorChip extends StatelessWidget {
         Gap.extraSmall4,
         Text(
           name,
-          style: tab10(fontWeight: FontWeight.bold, textColor: context.colorScheme.onSurface),
+          style: context.tab10(fontWeight: FontWeight.bold, color: context.colorScheme.onSurface),
         ),
       ],
     );
@@ -232,11 +231,11 @@ class _TypeSample extends StatelessWidget {
               children: [
                 Text(
                   name,
-                  style: bodyXSmall12(textColor: Colors.grey.shade600),
+                  style: context.bodyXSmall12(color: Colors.grey.shade600),
                 ),
                 Text(
                   '${style?.fontSize?.toStringAsFixed(0)}sp',
-                  style: tab10(textColor: Colors.grey.shade400),
+                  style: context.tab10(color: Colors.grey.shade400),
                 ),
               ],
             ),

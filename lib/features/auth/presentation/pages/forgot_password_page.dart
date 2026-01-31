@@ -62,13 +62,13 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   Text(
                     context.l10n.checkEmail,
                     textAlign: TextAlign.center,
-                    style: headline24(fontWeight: FontWeight.bold),
+                    style: context.headline24(fontWeight: FontWeight.bold),
                   ),
                   Gap.medium16,
                   Text(
                     context.l10n.passwordResetSent,
                     textAlign: TextAlign.center,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.extraLarge32,
                   Gap.medium16,
@@ -77,7 +77,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     children: [
                       Text(
                         context.l10n.didntReceiveEmail,
-                        style: bodyRegular16(),
+                        style: context.bodyRegular16(),
                       ),
                       TextButton(
                         onPressed: () {
@@ -87,7 +87,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         },
                         child: Text(
                           context.l10n.resend,
-                          style: bodyRegular16(fontWeight: FontWeight.bold),
+                          style: context.bodyRegular16(fontWeight: FontWeight.bold),
                         ),
                       ),
                     ],
@@ -106,7 +106,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   ),
                   Text(
                     context.l10n.enterEmailReset,
-                    style: bodyRegular16(),
+                    style: context.bodyRegular16(),
                   ),
                   Gap.medium16,
                   EmailFormField(

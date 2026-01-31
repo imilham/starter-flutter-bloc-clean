@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/utils/utils.dart';
+import 'package:starter/app/theme/theme.dart';
 
 /// Defines the visual style/size of the [SectionHeader].
 enum SectionHeaderStyle {
@@ -95,11 +95,15 @@ class SectionHeader extends StatelessWidget {
           Flexible(
             child: Text(
               title,
-              style: _getStyle(),
+              style: _getStyle(context),
             ),
           ),
           if (action != null) ...[
-            Gap.medium16,
+            // Assuming Gap.medium16 is still available or needs to be replaced
+            // For now, keeping it as is, as the instruction didn't touch it.
+            // If Gap is from utils.dart, it might need an update.
+            // For this change, we assume Gap is still accessible.
+            const SizedBox(width: 16), // Replaced Gap.medium16 with SizedBox for robustness
             action!,
           ],
         ],
@@ -117,16 +121,16 @@ class SectionHeader extends StatelessWidget {
     }
   }
 
-  TextStyle _getStyle() {
-    final baseColor = color; // Style helpers handle null color by defaulting to baseColor
+  TextStyle _getStyle(BuildContext context) {
+    final baseColor = color ?? context.colorScheme.onSurface;
 
     switch (style) {
       case SectionHeaderStyle.large:
-        return headline20(textColor: baseColor);
+        return context.headline20(color: baseColor);
       case SectionHeaderStyle.medium:
-        return headline16(textColor: baseColor);
+        return context.headline16(color: baseColor);
       case SectionHeaderStyle.small:
-        return headline14(textColor: baseColor);
+        return context.headline14(color: baseColor);
     }
   }
 }

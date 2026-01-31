@@ -3,7 +3,6 @@
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:starter/utils/utils.dart';
 
 /// A specialized form field for phone number input with country code picker.
@@ -290,9 +289,8 @@ class _PhoneFormFieldState extends State<PhoneFormField> {
               Expanded(
                 child: Text(
                   _countryCode,
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.normal,
+                  style: context.bodyRegular16(
+                    fontWeight: FontWeight.w400,
                     color: widget.enabled ? colorScheme.onSurface : colorScheme.onSurface.withValues(alpha: 0.38),
                   ),
                   overflow: TextOverflow.ellipsis,

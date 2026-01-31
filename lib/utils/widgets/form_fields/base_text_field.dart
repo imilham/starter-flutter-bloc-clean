@@ -146,11 +146,7 @@ class CommonBaseTextField extends StatelessWidget {
         if (title != null) _buildTitle(theme),
 
         // Text field attempting to animate the fill color smoothy
-        TweenAnimationBuilder<Color?>(
-          duration: kThemeAnimationDuration,
-          tween: ColorTween(end: theme.inputDecorationTheme.fillColor ?? Colors.transparent),
-          builder: (context, animatedColor, child) {
-            return TextFormField(
+            TextFormField(
               controller: controller,
               obscureText: obscureText,
               keyboardType: keyboardType,
@@ -174,12 +170,10 @@ class CommonBaseTextField extends StatelessWidget {
                 suffixIcon: suffixIcon,
                 prefixIcon: prefixIcon,
                 contentPadding: contentPadding ?? const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-                fillColor: animatedColor,
+                fillColor: theme.inputDecorationTheme.fillColor,
                 filled: true,
               ),
-            );
-          },
-        ),
+            ),
       ],
     );
   }

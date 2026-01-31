@@ -125,13 +125,13 @@ class AppRouter {
                     appBar: AppBar(
                       title: Text(
                         context.l10n.explore,
-                        style: headline16(fontWeight: FontWeight.bold),
+                        style: context.headline16(),
                       ),
                     ),
                     body: Center(
                       child: Text(
                         'Chat Page',
-                        style: bodyRegular16(),
+                        style: context.bodyRegular16(),
                       ),
                     ),
                   ),

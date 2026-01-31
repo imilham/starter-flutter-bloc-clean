@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/utils/utils.dart';
+import 'package:starter/app/theme/theme.dart';
 
 enum ToastLength { short, long }
 
@@ -131,9 +131,8 @@ class _ToastWidgetState extends State<_ToastWidget> with SingleTickerProviderSta
           ),
           child: Text(
             widget.message,
-            style: TextStyle(
+            style: context.bodyMedium14(
               color: widget.textColor,
-              fontSize: 14,
               fontWeight: FontWeight.w500,
             ),
             textAlign: TextAlign.center,

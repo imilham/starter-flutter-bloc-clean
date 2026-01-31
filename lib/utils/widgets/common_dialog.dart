@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:starter/l10n/arb/app_localizations.dart';
-import 'package:starter/utils/utils.dart';
+import 'package:starter/app/app.dart';
+
+import 'package:starter/l10n/gen/app_localizations.dart';
 
 /// A utility class for showing common dialogs.
 ///

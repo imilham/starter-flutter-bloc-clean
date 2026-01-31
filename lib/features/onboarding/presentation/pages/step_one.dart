@@ -16,7 +16,7 @@ class StepOne extends StatelessWidget {
         children: [
           Text(
             context.l10n.step1Title,
-            style: headline20(fontWeight: FontWeight.bold),
+            style: context.headline20(fontWeight: FontWeight.bold),
           ),
           Gap.medium16,
           CommonBaseTextField(
@@ -44,7 +44,7 @@ class StepOne extends StatelessWidget {
           Center(
             child: Text(
               context.l10n.formContent,
-              style: bodyRegular16(),
+              style: context.bodyRegular16(),
             ),
           ),
           const Spacer(),
@@ -53,25 +53,25 @@ class StepOne extends StatelessWidget {
               children: [
                 TextSpan(
                   text: context.l10n.agreeTo,
-                  style: bodyXSmall12(),
+                  style: context.bodyXSmall12(),
                 ),
                 TextSpan(
                   text: context.l10n.termsOfService,
-                  style: bodyXSmall12(
+                  style: context.bodyXSmall12(
                     fontWeight: FontWeight.bold,
-                    textColor: context.colorScheme.primary,
+                    color: context.colorScheme.primary,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = () {},
                 ),
                 TextSpan(
                   text: context.l10n.and,
-                  style: bodyXSmall12(),
+                  style: context.bodyXSmall12(),
                 ),
                 TextSpan(
                   text: context.l10n.privacyPolicy,
-                  style: bodyXSmall12(
+                  style: context.bodyXSmall12(
                     fontWeight: FontWeight.bold,
-                    textColor: context.colorScheme.primary,
+                    color: context.colorScheme.primary,
                   ),
                   recognizer: TapGestureRecognizer()..onTap = () {},
                 ),

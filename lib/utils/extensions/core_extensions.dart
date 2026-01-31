@@ -128,11 +128,11 @@ extension ListSortingExtension<T> on List<T> {
   /// Returns a new list sorted by [selector].
   List<T> sortedBy(Comparable<dynamic> Function(T) selector, {bool descending = false}) {
     final list = List<T>.from(this)
-      ..sort((a, b) {
-        final aValue = selector(a);
-        final bValue = selector(b);
-        return descending ? bValue.compareTo(aValue) : aValue.compareTo(bValue);
-      });
+    ..sort((a, b) {
+      final aValue = selector(a);
+      final bValue = selector(b);
+      return descending ? bValue.compareTo(aValue) : aValue.compareTo(bValue);
+    });
     return list;
   }
 }

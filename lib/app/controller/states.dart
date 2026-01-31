@@ -67,4 +67,31 @@ class AppStates with ChangeNotifier {
     _isTutorialShown = _storage.get('isTutorialShown') ?? false;
     notifyListeners();
   }
+
+  //////////////////////////////////////////////////////////////////////////////
+  /// [Global Loading Overlay]
+  //////////////////////////////////////////////////////////////////////////////
+
+  bool _isLoaderVisible = false;
+
+  /// Returns true if the global loading overlay is visible.
+  bool get isLoaderVisible => _isLoaderVisible;
+
+  /// Shows the global loading overlay.
+  /// Call this before async operations to block user interaction.
+  void showLoader() {
+    if (!_isLoaderVisible) {
+      _isLoaderVisible = true;
+      notifyListeners();
+    }
+  }
+
+  /// Hides the global loading overlay.
+  /// Always call this in a finally block to ensure the loader is hidden.
+  void hideLoader() {
+    if (_isLoaderVisible) {
+      _isLoaderVisible = false;
+      notifyListeners();
+    }
+  }
 }

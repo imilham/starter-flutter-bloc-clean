@@ -14,12 +14,12 @@ class OverlaysSample extends StatelessWidget {
       children: [
         Text(
           'System Overlays',
-          style: context.textTheme.headlineMedium,
+          style: context.headline20(),
         ),
         Gap.small8,
         Text(
           'Dialogs, sheets, and notifications.',
-          style: context.textTheme.bodyMedium?.copyWith(
+          style: context.bodyMedium14(
             color: context.colorScheme.onSurfaceVariant,
           ),
         ),
@@ -66,7 +66,7 @@ class OverlaysSample extends StatelessWidget {
                   child: Container(
                     height: 200,
                     alignment: Alignment.center,
-                    child: Text('Sheet Content Goes Here', style: bodyRegular16()),
+                    child: Text('Sheet Content Goes Here', style: context.bodyRegular16()),
                   ),
                 );
               },
@@ -102,7 +102,7 @@ class OverlaysSample extends StatelessWidget {
                       Expanded(
                         child: Text(
                           'You earned 50 points!',
-                          style: bodySmall14(textColor: Colors.white),
+                          style: context.bodyMedium14(color: Colors.white),
                         ),
                       ),
                       Gap.small8,

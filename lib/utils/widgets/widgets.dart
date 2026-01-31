@@ -1,4 +1,5 @@
 export './adaptive_loader.dart';
+export './app_loader.dart';
 export './buttons/buttons.dart';
 export './common_app_bar.dart';
 export './common_bottom_sheet.dart';

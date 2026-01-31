@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
-import 'package:starter/utils/utils.dart';
+
+import 'package:starter/app/theme/theme.dart';
 
 /// A theme-aware shimmer widget for loading states.
 ///

@@ -86,11 +86,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     RichText(
                       text: TextSpan(
                         text: context.l10n.agreeTo,
-                        style: context.bodyMedium,
+                        style: context.bodyMedium14(),
                         children: [
                           TextSpan(
                             text: context.l10n.termsOfService,
-                            style: context.bodyMedium?.copyWith(
+                            style: context.bodyMedium14().copyWith(
                               color: context.colorScheme.secondary,
                               fontWeight: FontWeight.bold,
                             ),
@@ -102,7 +102,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           TextSpan(text: context.l10n.termsAndPrivacyConfirm),
                           TextSpan(
                             text: context.l10n.privacyPolicy,
-                            style: context.bodyMedium?.copyWith(
+                            style: context.bodyMedium14().copyWith(
                               color: context.colorScheme.secondary,
                               fontWeight: FontWeight.bold,
                             ),
@@ -145,7 +145,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: Center(
                         child: Text(
                           context.l10n.orContinueWith,
-                          style: bodyRegular16(),
+                          style: context.bodyRegular16(),
                         ),
                       ),
                     ),
@@ -153,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        if (getIt<AppSettings>().isIOS)
+                        if (Theme.of(context).platform == TargetPlatform.iOS)
                         Container(
                           decoration: BoxDecoration(
                             color: context.colorScheme.surface,
@@ -195,7 +195,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       children: [
                         Text(
                           context.l10n.alreadyHaveAccount,
-                          style: bodyRegular16(),
+                          style: context.bodyRegular16(),
                         ),
                         TextButton(
                           onPressed: () {
@@ -206,7 +206,7 @@ class _SignUpPageState extends State<SignUpPage> {
                           ),
                           child: Text(
                             context.l10n.signIn,
-                            style: bodyRegular16(fontWeight: FontWeight.bold),
+                            style: context.bodyRegular16(fontWeight: FontWeight.bold),
                           ),
                         ),
                       ],
