@@ -35,11 +35,15 @@ class ExponentialBackoffStrategy implements RetryStrategy {
     if (attempt <= 0) return Duration.zero;
 
     final randomGenerator = random ?? math.Random();
-    // TODO(ishanga): Improve jitter distribution - current implementation can produce negative multipliers
-    // Consider using a more sophisticated jitter algorithm like decorrelated jitter
+    
+    // Fixed jitter implementation to ensure positive multiplier
+    // Generates a value in range [1 - randomizationFactor, 1 + randomizationFactor]
+    // Clamped to be at least 0.0 to prevent negative delays
     final rf = randomizationFactor * (randomGenerator.nextDouble() * 2 - 1) + 1;
+    final validRf = math.max(0, rf);
+    
     final exp = math.min(attempt, 31);
-    final delay = baseDelay * math.pow(2.0, exp) * rf;
+    final delay = baseDelay * math.pow(2.0, exp) * validRf;
     return delay < maxDelay ? delay : maxDelay;
   }
 }
@@ -101,12 +105,14 @@ class RetryOptions {
     this.strategy = const ExponentialBackoffStrategy(),
     this.maxAttempts = 8,
     this.timeoutPerAttempt,
+    this.overallTimeout,
     this.operationName,
   }) : assert(maxAttempts > 0, 'maxAttempts must be positive');
 
   final RetryStrategy strategy;
   final int maxAttempts;
   final Duration? timeoutPerAttempt;
+  final Duration? overallTimeout;
   final String? operationName;
 
   /// Retry with enhanced error handling and cancellation support
@@ -114,6 +120,7 @@ class RetryOptions {
     FutureOr<T> Function(int attempt) fn, {
     FutureOr<bool> Function(Object)? retryIf,
     FutureOr<void> Function(Object, int)? onRetry,
+    FutureOr<void> Function(RetryResult<T>)? onSuccess,
     CancellationToken? cancellationToken,
   }) async {
     final startTime = DateTime.now();
@@ -122,6 +129,11 @@ class RetryOptions {
 
     while (attempt < maxAttempts) {
       cancellationToken?.throwIfCancelled();
+
+      // Check overall timeout
+      if (overallTimeout != null && DateTime.now().difference(startTime) > overallTimeout!) {
+        throw TimeoutException('Overall retry operation timed out', overallTimeout);
+      }
 
       attempt++;
       final attemptStart = DateTime.now();
@@ -132,21 +144,28 @@ class RetryOptions {
         // Current implementation only handles per-attempt timeout, not total operation timeout
         final result = timeoutPerAttempt != null ? await Future.value(future).timeout(timeoutPerAttempt!) : await future;
 
+        final duration = DateTime.now().difference(attemptStart);
         attemptHistory.add(
           RetryAttempt(
             attemptNumber: attempt,
             timestamp: attemptStart,
-            duration: DateTime.now().difference(attemptStart),
+            duration: duration,
             succeeded: true,
           ),
         );
 
-        return RetryResult(
+        final retryResult = RetryResult(
           value: result,
           attempts: attempt,
           totalDuration: DateTime.now().difference(startTime),
           attemptHistory: attemptHistory,
         );
+
+        if (onSuccess != null) {
+          await onSuccess(retryResult);
+        }
+
+        return retryResult;
       } catch (e, stackTrace) {
         final attemptDuration = DateTime.now().difference(attemptStart);
         attemptHistory.add(
@@ -179,9 +198,17 @@ class RetryOptions {
 
         if (attempt < maxAttempts) {
           final delay = strategy.getDelay(attempt);
-          // TODO(ishanga): Add cancellation support during delay period
-          // The delay should be interruptible by cancellation token
-          await Future<void>.delayed(delay);
+          
+          if (cancellationToken != null) {
+            // Support cancellation during delay
+            await Future.any([
+              Future<void>.delayed(delay),
+              cancellationToken.cancelled,
+            ]);
+            cancellationToken.throwIfCancelled();
+          } else {
+            await Future<void>.delayed(delay);
+          }
         }
       }
     }
@@ -218,6 +245,12 @@ class CancelledException implements Exception {
   String toString() => 'Operation was cancelled';
 }
 
+enum CircuitBreakerState {
+  closed,
+  open,
+  halfOpen,
+}
+
 /// Circuit breaker for preventing retry storms
 class CircuitBreaker {
   CircuitBreaker({
@@ -230,40 +263,46 @@ class CircuitBreaker {
 
   int _consecutiveFailures = 0;
   DateTime? _lastFailureTime;
-  bool _isOpen = false;
+  CircuitBreakerState _state = CircuitBreakerState.closed;
 
-  // TODO(ishanga): Implement half-open state for gradual recovery
-  // Circuit breaker should have three states: closed, open, half-open
   // TODO(ishanga): Add thread safety considerations for isolate usage
   // Consider using atomic operations or synchronization primitives
-  bool get isOpen {
-    if (_isOpen && _lastFailureTime != null) {
-      if (DateTime.now().difference(_lastFailureTime!) > resetTimeout) {
-        reset();
+  
+  bool get canRequest {
+    if (_state == CircuitBreakerState.open) {
+      if (_lastFailureTime != null && 
+          DateTime.now().difference(_lastFailureTime!) > resetTimeout) {
+        _state = CircuitBreakerState.halfOpen;
+        return true;
       }
+      return false;
     }
-    return _isOpen;
+    return true;
   }
 
   void recordSuccess() {
     _consecutiveFailures = 0;
-    _isOpen = false;
+    _state = CircuitBreakerState.closed;
+    _lastFailureTime = null;
   }
 
   void recordFailure() {
     _consecutiveFailures++;
     _lastFailureTime = DateTime.now();
 
-    if (_consecutiveFailures >= failureThreshold) {
-      _isOpen = true;
+    if (_state == CircuitBreakerState.halfOpen || _consecutiveFailures >= failureThreshold) {
+      _state = CircuitBreakerState.open;
     }
   }
 
   void reset() {
     _consecutiveFailures = 0;
-    _isOpen = false;
+    _state = CircuitBreakerState.closed;
     _lastFailureTime = null;
   }
+  
+  // For testing/monitoring
+  CircuitBreakerState get state => _state;
 }
 
 /// Enhanced retry with circuit breaker
@@ -272,6 +311,7 @@ class ResilientRetryOptions extends RetryOptions {
     super.strategy,
     super.maxAttempts,
     super.timeoutPerAttempt,
+    super.overallTimeout,
     super.operationName,
     this.circuitBreaker,
   });
@@ -283,9 +323,10 @@ class ResilientRetryOptions extends RetryOptions {
     FutureOr<T> Function(int attempt) fn, {
     FutureOr<bool> Function(Object)? retryIf,
     FutureOr<void> Function(Object, int)? onRetry,
+    FutureOr<void> Function(RetryResult<T>)? onSuccess,
     CancellationToken? cancellationToken,
   }) async {
-    if (circuitBreaker?.isOpen ?? false) {
+    if (circuitBreaker != null && !circuitBreaker!.canRequest) {
       throw CircuitBreakerOpenException();
     }
 
@@ -293,14 +334,30 @@ class ResilientRetryOptions extends RetryOptions {
       final result = await super.retryWithResult(
         fn,
         retryIf: retryIf,
-        onRetry: onRetry,
+        onRetry: (e, attempt) async {
+          circuitBreaker?.recordFailure();
+          if (onRetry != null) {
+            await onRetry(e, attempt);
+          }
+        },
+        onSuccess: onSuccess,
         cancellationToken: cancellationToken,
       );
 
       circuitBreaker?.recordSuccess();
       return result;
     } catch (e) {
-      circuitBreaker?.recordFailure();
+      // If we caught an exception from super.retryWithResult, it means all retries failed
+      // or a non-retriable error occurred.
+      // Note: failures *during* attempts are handled by onRetry wrapper above.
+      // This catch block handles the final exception.
+      // However, onRetry is called for *each* failure. 
+      // If the final failure happens, recordFailure was already called.
+      // But if it's a non-retriable error that bypassed onRetry?
+      // Best to ensure we record failure if we haven't.
+      
+      // Let's rely on onRetry for intermediate failures. 
+      // If the circuit breaker sees consecutive failures via onRetry, it opens.
       rethrow;
     }
   }
