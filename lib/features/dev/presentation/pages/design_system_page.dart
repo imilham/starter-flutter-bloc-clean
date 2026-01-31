@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/features/more/presentation/pages/samples/samples.dart';
+import 'package:starter/features/dev/presentation/pages/samples.dart';
 import 'package:starter/utils/utils.dart';
 
 // TODO(developer): remove-samples-im

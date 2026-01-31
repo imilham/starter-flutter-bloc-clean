@@ -525,7 +525,7 @@ extension WidgetDecorationExtension on Widget {
   Widget mirrored() {
     return Transform(
       alignment: Alignment.center,
-      transform: Matrix4.diagonal3Values(-1.0, 1.0, 1.0),
+      transform: Matrix4.diagonal3Values(-1, 1, 1),
       child: this,
     );
   }

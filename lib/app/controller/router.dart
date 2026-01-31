@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
 import 'package:starter/features/auth/auth.dart';
+import 'package:starter/features/dev/dev.dart';
 import 'package:starter/features/home/home.dart';
 import 'package:starter/features/more/more.dart';
 import 'package:starter/features/onboarding/onboarding.dart';
@@ -200,9 +201,10 @@ class AppRouter {
                   ),
                 ],
               ),
-            ],
-          ),
+          
         ],
+      ),
+    ],
       ),
     ],
     redirect: (context, state) {
@@ -237,7 +239,8 @@ class AppRouter {
 
       return null;
     },
-  );
+    );
+    
 
   // Helper method to determine current auth state
   RouterAuthState _determineAuthState() {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter/features/auth/auth.dart';
+
 import 'package:starter/utils/utils.dart';
 
 class MenuItem {
@@ -50,6 +51,7 @@ class MorePage extends StatelessWidget {
           Pages.designSystem.push(context);
         },
       ),
+
       MenuItem(
         title: context.l10n.about,
         icon: Icons.info_outline,

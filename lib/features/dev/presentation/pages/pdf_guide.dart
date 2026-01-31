@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
+import 'package:starter/features/dev/presentation/pages/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 import 'package:url_launcher/url_launcher.dart';
 

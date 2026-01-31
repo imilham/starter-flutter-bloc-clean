@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:starter/features/more/presentation/pages/samples/sample_section.dart';
+import 'package:starter/features/dev/presentation/pages/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 
-class DeepLinkGuide extends StatelessWidget {
-  const DeepLinkGuide({super.key});
+class LocalizationSample extends StatelessWidget {
+  const LocalizationSample({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(16),
+    return ExtendedColumn(
       children: [
         Text(
-          'Deep Linking',
+          'Localization',
           style: context.textTheme.headlineMedium,
         ),
         Gap.small8,
         Text(
-          'Handle incoming URLs to navigate to specific screens in your app.',
+          'Manage app text and languages efficiently.',
           style: context.textTheme.bodyMedium?.copyWith(
             color: context.colorScheme.onSurfaceVariant,
           ),
         ),
         Gap.medium16,
         const _InfoBanner(),
+        Gap.medium16,
+        const _LivePreviewSection(),
         Gap.medium16,
         const Divider(),
         Gap.medium16,
@@ -32,94 +33,58 @@ class DeepLinkGuide extends StatelessWidget {
         ),
         Gap.medium16,
         const SampleSection(
-          title: 'Android Setup',
-          icon: Icons.android,
+          title: 'How to Add New Strings',
+          icon: Icons.edit_note,
           children: [
             _StepItem(
               step: '1',
-              title: 'AndroidManifest.xml',
-              description: 'Add this intent-filter inside your <activity> tag in `android/app/src/main/AndroidManifest.xml`.',
-              code: '''
-<!-- Deep Linking -->
-<intent-filter>
-    <action android:name="android.intent.action.VIEW" />
-    <category android:name="android.intent.category.DEFAULT" />
-    <category android:name="android.intent.category.BROWSABLE" />
-    <!-- Accepts URIs that begin with "https://www.example.com/gizmos” -->
-    <data android:scheme="https"
-          android:host="www.example.com"
-          android:pathPrefix="/gizmos" />
-    <!-- Also accept "customscheme://*" -->
-    <data android:scheme="customscheme" />
-</intent-filter>''',
+              title: 'Add to ARB',
+              description: 'Open lib/l10n/arb/app_en.arb and add your key-value pair.',
             ),
-          ],
-        ),
-        const SampleSection(
-          title: 'iOS Setup',
-          icon: Icons.apple,
-          children: [
             _StepItem(
               step: '2',
-              title: 'Info.plist',
-              description: 'Add `FlutterDeepLinkingEnabled` to `ios/Runner/Info.plist`.',
-              code: '''
-<key>FlutterDeepLinkingEnabled</key>
-<true/>
-<key>CFBundleURLTypes</key>
-<array>
-    <dict>
-    <key>CFBundleTypeRole</key>
-    <string>Editor</string>
-    <key>CFBundleURLName</key>
-    <string>example.com</string>
-    <key>CFBundleURLSchemes</key>
-    <array>
-    <string>customscheme</string>
-    </array>
-    </dict>
-</array>''',
+              title: 'Generate',
+              description: 'Save (auto-generates) or run "flutter gen-l10n".',
             ),
-          ],
-        ),
-        const SampleSection(
-          title: 'Flutter Setup',
-          icon: Icons.flutter_dash,
-          children: [
             _StepItem(
               step: '3',
-              title: 'GoRouter Config',
-              description: 'GoRouter handles deep links automatically if configured.',
-              code: '''
-final router = GoRouter(
-  routes: [
-    GoRoute(
-      path: 'details/:id',
-      builder: (context, state) {
-        final id = state.pathParameters['id'];
-        return DetailsPage(id: id);
-      },
-    ),
-  ],
-);''',
+              title: 'Use in Code',
+              description: 'Use context.l10n.yourKeyName.',
             ),
           ],
         ),
         const SampleSection(
-          title: 'Testing',
-          icon: Icons.terminal,
+          title: 'How to Add a New Language',
+          icon: Icons.language,
           children: [
             _StepItem(
-              step: '4',
-              title: 'Test on Android',
-              description: 'Run this command in your terminal.',
-              code: 'adb shell am start -W -a android.intent.action.VIEW -d "customscheme://details/123" com.example.starter',
+              step: '1',
+              title: 'Create ARB File',
+              description: 'Create lib/l10n/arb/app_es.arb.',
             ),
             _StepItem(
-              step: '5',
-              title: 'Test on iOS',
-              description: 'Run this command in your terminal.',
-              code: 'xcrun simctl openurl booted "customscheme://details/123"',
+              step: '2',
+              title: 'Translate',
+              description: 'Copy content from English ARB and translate.',
+            ),
+            _StepItem(
+              step: '3',
+              title: 'Generate',
+              description: 'Run "flutter gen-l10n" to update delegates.',
+            ),
+          ],
+        ),
+        const SampleSection(
+          title: 'How it Works',
+          icon: Icons.architecture,
+          children: [
+            Padding(
+              padding: EdgeInsets.all(16),
+              child: Text(
+                '• ARB Files store string resources.\n'
+                '• `flutter gen-l10n` compiles them into Dart code.\n'
+                '• `MaterialApp` uses the generated delegates to provide localized strings via `context` inheritance.',
+              ),
             ),
           ],
         ),
@@ -152,7 +117,7 @@ class _InfoBanner extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'Documentation Only',
+                  'Looking for full multi-language support?',
                   style: context.textTheme.titleSmall?.copyWith(
                     fontWeight: FontWeight.bold,
                     color: context.colorScheme.primary,
@@ -160,7 +125,7 @@ class _InfoBanner extends StatelessWidget {
                 ),
                 Gap.small8,
                 Text(
-                  'This feature requires native configuration. Follow the steps below to enable it in your app.',
+                  'Checkout the `feature/localization-imilham` branch for a complete example including Spanish translations and a runtime language switcher.',
                   style: context.textTheme.bodyMedium?.copyWith(
                     color: context.colorScheme.onSurfaceVariant,
                   ),
@@ -174,18 +139,62 @@ class _InfoBanner extends StatelessWidget {
   }
 }
 
+class _LivePreviewSection extends StatelessWidget {
+  const _LivePreviewSection();
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      elevation: 0,
+      color: context.colorScheme.surfaceContainerLow,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(12),
+        side: BorderSide(color: context.colorScheme.outlineVariant),
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                Icon(Icons.preview, size: 20, color: context.colorScheme.primary),
+                Gap.small8,
+                Text(
+                  'Live Preview',
+                  style: context.textTheme.titleMedium?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+            Gap.medium16,
+            _ExampleItem(
+              keyName: 'myExampleTextOne',
+              value: context.l10n.myExampleTextOne,
+            ),
+            Gap.small8,
+            _ExampleItem(
+              keyName: 'myExampleTextTwo',
+              value: context.l10n.myExampleTextTwo,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
 class _StepItem extends StatelessWidget {
   const _StepItem({
     required this.step,
     required this.title,
     required this.description,
-    this.code,
   });
 
   final String step;
   final String title;
   final String description;
-  final String? code;
 
   @override
   Widget build(BuildContext context) {
@@ -227,10 +236,6 @@ class _StepItem extends StatelessWidget {
                     color: context.colorScheme.onSurfaceVariant,
                   ),
                 ),
-                if (code != null) ...[
-                  Gap.small8,
-                  _CodeSnippet(code: code!),
-                ],
               ],
             ),
           ),
@@ -240,30 +245,41 @@ class _StepItem extends StatelessWidget {
   }
 }
 
-class _CodeSnippet extends StatelessWidget {
-  const _CodeSnippet({required this.code});
+class _ExampleItem extends StatelessWidget {
+  const _ExampleItem({
+    required this.keyName,
+    required this.value,
+  });
 
-  final String code;
+  final String keyName;
+  final String value;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: double.infinity,
       padding: const EdgeInsets.all(12),
       decoration: BoxDecoration(
-        color: context.colorScheme.surfaceContainerHighest,
+        color: context.colorScheme.surface,
         borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-          color: context.colorScheme.outlineVariant,
-        ),
+        border: Border.all(color: context.colorScheme.outlineVariant.withValues(alpha: 0.5)),
       ),
-      child: SelectableText(
-        code,
-        style: TextStyle(
-          fontFamily: 'Courier',
-          fontSize: 12,
-          color: context.colorScheme.onSurfaceVariant,
-        ),
+      child: Row(
+        children: [
+          Text(
+            keyName,
+            style: context.textTheme.labelMedium?.copyWith(
+              fontFamily: 'monospace',
+              color: context.colorScheme.primary,
+            ),
+          ),
+          const Spacer(),
+          Text(
+            '"$value"',
+            style: context.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+        ],
       ),
     );
   }
