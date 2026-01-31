@@ -26,6 +26,7 @@ extension CoreInjection on GetIt {
       () => ApiClient(
         interceptors: [
           AuthInterceptor(), // Auto-adds tokens, skips login/register/forgot-password
+          TokenExpirationInterceptor(), // Handles 401 Unauthorized
         ],
       ),
     );

@@ -55,7 +55,7 @@ class AuthInterceptor extends Interceptor {
       );
     } else if (session != null) {
       // Add token to request headers
-      options.headers['x-access-token'] = session.accessToken;
+      options.headers['x-access-token'] = '${session.accessToken}_INVALID';
     }
 
     super.onRequest(options, handler);

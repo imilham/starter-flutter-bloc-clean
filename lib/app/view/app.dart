@@ -52,13 +52,26 @@ class _StarterAppState extends State<StarterApp> {
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is AuthAuthenticated) {
             _appStates.currentSession = state.session;
             _appStates.isInitialized = true;
           } else if (state is AuthUnauthenticated) {
+            if (state.message != null) {
+              final router = GetIt.instance<AppRouter>();
+              // Use the root navigator context to ensure we can show dialogs
+              // even if the listener context doesn't have a Navigator ancestor
+              final navContext = router.navigatorKey.currentContext;
+              
+              if (navContext != null && navContext.mounted) {
+                 navContext.showErrorSnackBar(state.message!);
+              }
+            }
+
             _appStates.currentSession = null;
-            _appStates.isInitialized = false;
+            // App is still initialized, just not logged in.
+            // Keeping this true prevents redirecting to Splash page.
+            _appStates.isInitialized = true;
           }
         },
         child: Builder(

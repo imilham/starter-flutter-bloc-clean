@@ -25,7 +25,12 @@ final class AuthSessionEstablished extends AuthEvent {
 
 /// User logged out.
 final class AuthLogoutRequested extends AuthEvent {
-  const AuthLogoutRequested();
+  const AuthLogoutRequested({this.message});
+
+  final String? message;
+
+  @override
+  List<Object?> get props => [message];
 }
 
 /// Refresh session by fetching latest profile from API.

@@ -229,4 +229,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get completeProfile => 'Complete Profile';
+
+  @override
+  String get sessionExpired => 'Session Expired';
 }

@@ -534,6 +534,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Complete Profile'**
   String get completeProfile;
+
+  /// Error title when session expires
+  ///
+  /// In en, this message translates to:
+  /// **'Session Expired'**
+  String get sessionExpired;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

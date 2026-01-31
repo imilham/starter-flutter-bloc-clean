@@ -295,5 +295,9 @@
     "completeProfile": "Complete Profile",
     "@completeProfile": {
         "description": "Label for complete profile button"
+    },
+    "sessionExpired": "Session Expired",
+    "@sessionExpired": {
+        "description": "Error title when session expires"
     }
 }

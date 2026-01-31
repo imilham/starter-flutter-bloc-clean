@@ -30,5 +30,10 @@ final class AuthAuthenticated extends AuthState {
 
 /// User is not authenticated.
 final class AuthUnauthenticated extends AuthState {
-  const AuthUnauthenticated();
+  const AuthUnauthenticated({this.message});
+
+  final String? message;
+
+  @override
+  List<Object?> get props => [message];
 }

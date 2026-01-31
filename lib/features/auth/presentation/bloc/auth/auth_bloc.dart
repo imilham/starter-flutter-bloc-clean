@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/core/core.dart';
 import 'package:starter/features/auth/domain/domain.dart';
@@ -60,11 +61,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     AuthLogoutRequested event,
     Emitter<AuthState> emit,
   ) async {
+    debugPrint('🚨 AuthBloc: _onAuthLogoutRequested received. Message: ${event.message}');
     final currentState = state;
+    // We don't care if the API logout fails (e.g. 401/405), we just want to clear local state.
+    // So we invoke the use case but don't wait for the result to dictate our state.
     if (currentState is AuthAuthenticated) {
-      await _logoutUseCase(LogoutParams(token: currentState.session.accessToken));
+      try {
+        await _logoutUseCase(LogoutParams(token: currentState.session.accessToken));
+      } catch (_) {
+        // Ignore API logout errors
+      }
     }
-    emit(const AuthUnauthenticated());
+    emit(AuthUnauthenticated(message: event.message));
   }
 
   Future<void> _onAuthRefreshRequested(

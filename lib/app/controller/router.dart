@@ -24,6 +24,7 @@ class AppRouter {
   final AppStates _appStates = GetIt.instance<AppStates>();
 
   GoRouter get goRouter => _goRouter;
+  GlobalKey<NavigatorState> get navigatorKey => _rootNavigatorKey;
 
   late final GoRouter _goRouter = GoRouter(
     /// Refresh the router when the app state changes.
