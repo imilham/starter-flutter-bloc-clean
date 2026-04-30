@@ -647,8 +647,12 @@ class CodeGenerator {
           
           if (_writtenFiles.contains(modelPath)) continue;
 
+          final props = _extractRequestProperties(op);
+          final hasFileType = props.any((p) => p.dartType == 'File');
+
           final buffer = StringBuffer();
           buffer.writeln(_fileHeader('Request Model: $modelName'));
+          if (hasFileType) buffer.writeln("import 'dart:io';");
           buffer.writeln("import 'package:freezed_annotation/freezed_annotation.dart';");
           buffer.writeln();
           buffer.writeln("part '${fileName}_model.freezed.dart';");
@@ -657,18 +661,19 @@ class CodeGenerator {
           buffer.writeln('@freezed');
           buffer.writeln('class $modelName with _\$$modelName {');
           buffer.writeln('  const factory $modelName({');
-          
-          final props = _extractRequestProperties(op);
+
           for (final p in props) {
             buffer.writeln("    @JsonKey(name: '${p.name}') ${p.dartType}? ${p.dartName},");
           }
-          
+
           buffer.writeln('  }) = _$modelName;');
           buffer.writeln();
           buffer.writeln('  factory $modelName.fromJson(Map<String, dynamic> json) => _\$${modelName}FromJson(json);');
           buffer.writeln('}');
-          
+
           _writeFile(modelPath, buffer.toString());
+          // Register so datasources/repositories/usecases can import this model
+          _modelImportPaths[modelName] = '$_genPkg/features/$group/data/models/${fileName}_model.dart';
           print('   📄 Request Model: $modelName → $modelPath');
         }
       }
@@ -682,11 +687,18 @@ class CodeGenerator {
     final abstractPath = '$libDir/features/$group/data/datasources/${fileBase}_remote_data_source.dart';
     final implPath = '$libDir/features/$group/data/datasources/${fileBase}_remote_data_source_impl.dart';
 
-    // Collect feature-specific model imports.
+    // Collect feature-specific model imports (response models + request models).
     final modelImports = <String>{};
     for (final op in ops) {
+      // Response model
       final ref = op.successResponseRef;
       if (ref != null && _modelImportPaths.containsKey(ref)) modelImports.add(_modelImportPaths[ref]!);
+      // Request model
+      if (op.formParams.isNotEmpty || op.parameters.any((p) => p.location == 'body')) {
+        final reqModelName = '${_operationToRequestModelName(op)}Model';
+        final reqPath = _modelImportPaths[reqModelName];
+        if (reqPath != null) modelImports.add(reqPath);
+      }
     }
 
     // ── Abstract definition ──
@@ -805,7 +817,23 @@ class CodeGenerator {
       buffer.writeln();
     }
 
-    _writeFile('$libDir/utils/network/endpoints.dart', buffer.toString());
+    // Endpoints belong in the main utils network folder, not inside lib/gen
+    const endpointsPath = 'lib/utils/network/endpoints.dart';
+    _writeFile(endpointsPath, buffer.toString());
+    print('   📡 Endpoints → $endpointsPath');
+
+    // Auto-add export to network.dart barrel if missing
+    if (!dryRun) {
+      final networkBarrel = File('lib/utils/network/network.dart');
+      if (networkBarrel.existsSync()) {
+        final existing = networkBarrel.readAsStringSync();
+        const exportLine = "export './endpoints.dart';";
+        if (!existing.contains(exportLine)) {
+          networkBarrel.writeAsStringSync('$existing$exportLine\n');
+          print('   ✅ Added endpoints export to lib/utils/network/network.dart');
+        }
+      }
+    }
   }
 
   // ── Domain Layer ─────────────────────────────────────────────────────────────
@@ -904,14 +932,25 @@ class CodeGenerator {
     buffer.writeln("import '$_pkg/core/core.dart';");
     buffer.writeln();
 
-    // Import entities
-    final importedEntities = <String>{};
+    // Import entities used in return types
+    final importedSymbols = <String>{};
     for (final op in ops) {
       final entityType = _modelTypeToEntityType(_determineReturnType(op, responseDefs, forModel: false));
-      if (entityType != null && !importedEntities.contains(entityType)) {
-        final fileName = _camelToSnake(entityType);
-        buffer.writeln("import '$_genPkg/features/$group/domain/entities/$fileName.dart';");
-        importedEntities.add(entityType);
+      if (entityType != null && !importedSymbols.contains(entityType)) {
+        buffer.writeln("import '$_genPkg/features/$group/domain/entities/${_camelToSnake(entityType)}.dart';");
+        importedSymbols.add(entityType);
+      }
+    }
+
+    // Import request models used in method params
+    for (final op in ops) {
+      if (op.formParams.isNotEmpty || op.parameters.any((p) => p.location == 'body')) {
+        final reqModelName = '${_operationToRequestModelName(op)}Model';
+        final importPath = _modelImportPaths[reqModelName];
+        if (importPath != null && !importedSymbols.contains(reqModelName)) {
+          buffer.writeln("import '$importPath';");
+          importedSymbols.add(reqModelName);
+        }
       }
     }
 
@@ -950,6 +989,24 @@ class CodeGenerator {
     buffer.writeln("import 'package:dartz/dartz.dart';");
     buffer.writeln("import '$_pkg/core/core.dart';");
     buffer.writeln("import '$_genPkg/features/$group/domain/repositories/${repoFileBase}_repository.dart';");
+
+    // Import entity for the return type
+    final entityNameForImport = (() {
+      if (returnType == 'bool' || returnType == 'dynamic' || returnType == 'String') return null;
+      if (returnType.startsWith('List<')) return RegExp(r'List<(\w+)>').firstMatch(returnType)?.group(1);
+      return returnType;
+    })();
+    if (entityNameForImport != null) {
+      buffer.writeln("import '$_genPkg/features/$group/domain/entities/${_camelToSnake(entityNameForImport)}.dart';");
+    }
+
+    // Import request model if params use one
+    if (hasParams && (op.formParams.isNotEmpty || op.parameters.any((p) => p.location == 'body'))) {
+      final reqModelName = '${_operationToRequestModelName(op)}Model';
+      final importPath = _modelImportPaths[reqModelName];
+      if (importPath != null) buffer.writeln("import '$importPath';");
+    }
+
     buffer.writeln();
 
     if (hasParams) {
@@ -1044,11 +1101,9 @@ class CodeGenerator {
       print('   📋 Barrel: $barrelPath');
     }
 
-    // Top-level gen.dart
+    // Top-level gen.dart — endpoints are in utils/utils.dart, not here
     final genBarrel = StringBuffer();
     genBarrel.writeln(_fileHeader('Top-level gen barrel — import this in your features'));
-    genBarrel.writeln("export 'utils/network/endpoints.dart';");
-    genBarrel.writeln();
     for (final e in topLevelExports) {
       genBarrel.writeln(e);
     }
