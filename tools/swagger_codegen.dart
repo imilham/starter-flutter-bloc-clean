@@ -60,9 +60,17 @@ void main(List<String> args) async {
 
   // 1. Configuration
   final dryRun = args.contains('--dry-run');
+  final clean = args.contains('--clean');
 
   print('🚀 Starting Clean Architecture Swagger Code Generator...');
   if (dryRun) print('🔔 DRY RUN MODE: No files will be modified.');
+  if (clean && !dryRun) {
+    final genDir = Directory('lib/gen');
+    if (genDir.existsSync()) {
+      genDir.deleteSync(recursive: true);
+      print('🧹 Cleaned lib/gen/');
+    }
+  }
 
   // 2. Initial Setup
   final packageName = _readPackageName();
@@ -466,9 +474,16 @@ class CodeGenerator {
   final SwaggerSpec swagger;
   final bool dryRun;
   final String packageName;
-  final String libDir = 'lib';
+
+  /// All generated code lands in lib/gen — the generator NEVER touches
+  /// lib/features/<group>/presentation/ which is hand-written UI code.
+  final String libDir = 'lib/gen';
 
   String get _pkg => 'package:$packageName';
+
+  /// Package import prefix that points into the generated output folder.
+  String get _genPkg => 'package:$packageName/gen';
+
   final Map<String, String> _modelImportPaths = {};
   late final Map<String, String> _definitionToGroup;
   final Set<String> _writtenFiles = {};
@@ -481,7 +496,7 @@ class CodeGenerator {
       for (final methodEntry in pathEntry.value.entries) {
         final op = methodEntry.value;
         final firstSegment = path.split('/').where((s) => s.isNotEmpty).firstOrNull;
-        
+
         String group = 'common';
         if (firstSegment != null && pathSegmentGroupsMapping.containsKey(firstSegment)) {
           group = pathSegmentGroupsMapping[firstSegment]!.first;
@@ -490,12 +505,12 @@ class CodeGenerator {
         } else if (firstSegment != null) {
           group = _camelToSnake(firstSegment);
         }
-        
+
         groupOps.putIfAbsent(group, () => []).add(op);
       }
     }
 
-    // 2. Separate models and computation
+    // 2. Separate models and response wrappers
     final modelDefs = <String, SwaggerDefinition>{};
     final responseDefs = <String, SwaggerDefinition>{};
     for (final entry in swagger.definitions.entries) {
@@ -507,24 +522,34 @@ class CodeGenerator {
     }
     _definitionToGroup = _computeDefinitionGroups(modelDefs, responseDefs, groupOps);
 
-    // 3. Generate Models (in lib/features/<group>/data/models/)
+    // 3. Generate Data layer — Models
     print('\n── 📦 Models ──────────────────────────────────────────────');
     _generateAllModels(modelDefs, groupOps, responseDefs);
 
-    // 4. Generate DataSources (in lib/features/<group>/data/datasources/)
+    // 4. Generate Data layer — DataSources
     print('\n── 📡 DataSources ──────────────────────────────────────────');
     for (final entry in groupOps.entries) {
-      final group = entry.key;
-      final ops = entry.value;
-      if (skipGroups.contains(group)) continue;
-      _generateDataSource(group, ops, responseDefs);
+      if (skipGroups.contains(entry.key)) continue;
+      _generateDataSource(entry.key, entry.value, responseDefs);
     }
 
-    // 5. Generate Endpoints file
+    // 5. Generate Domain layer — Entities, Repository interfaces, UseCases
+    print('\n── 🏛  Domain Layer ─────────────────────────────────────────');
+    for (final entry in groupOps.entries) {
+      if (skipGroups.contains(entry.key)) continue;
+      _generateDomainLayer(entry.key, entry.value, responseDefs, modelDefs);
+    }
+
+    // 6. Generate Endpoints file
     _generateEndpointsFile(groupOps);
 
+    // 7. Generate barrel exports
+    print('\n── 📋 Barrels ──────────────────────────────────────────────');
+    _generateBarrels(groupOps);
+
     print('\n═══════════════════════════════════════════════════════════');
-    print(' ✅ Code generation complete!');
+    print(' ✅ Code generation complete! → lib/gen/');
+    print(' 💡 lib/features/*/presentation/ was not touched.');
     print('═══════════════════════════════════════════════════════════');
   }
 
@@ -606,7 +631,7 @@ class CodeGenerator {
       buffer.writeln('}');
       
       _writeFile(modelPath, buffer.toString());
-      _modelImportPaths[name] = '$_pkg/features/$group/data/models/${fileName}_model.dart';
+      _modelImportPaths[name] = '$_genPkg/features/$group/data/models/${fileName}_model.dart';
       print('   📄 Model: $modelName → $modelPath');
     }
 
@@ -687,7 +712,7 @@ class CodeGenerator {
     final implBuffer = StringBuffer()
       ..writeln(_fileHeader('DataSource Impl: ${className}Impl'))
       ..writeln("import '$_pkg/utils/utils.dart';")
-      ..writeln("import '${_pkg.replaceAll('package:', 'package:')}/features/$group/data/datasources/${fileBase}_remote_data_source.dart';");
+      ..writeln("import '$_genPkg/features/$group/data/datasources/${fileBase}_remote_data_source.dart';");
     for (final imp in modelImports) {
       implBuffer.writeln("import '$imp';");
     }
@@ -768,7 +793,7 @@ class CodeGenerator {
     buffer.writeln('  const Endpoints._();');
     buffer.writeln('}');
     buffer.writeln();
-    
+
     for (final entry in groupOps.entries) {
       final group = entry.key;
       final ops = entry.value;
@@ -779,17 +804,302 @@ class CodeGenerator {
       buffer.writeln('}');
       buffer.writeln();
     }
-    
+
     _writeFile('$libDir/utils/network/endpoints.dart', buffer.toString());
+  }
+
+  // ── Domain Layer ─────────────────────────────────────────────────────────────
+
+  /// Generates the full domain layer for [group]:
+  ///   domain/entities/        — plain Equatable classes (no JSON)
+  ///   domain/repositories/    — abstract repository interface
+  ///   domain/usecases/        — one thin UseCase class per operation
+  void _generateDomainLayer(
+    String group,
+    List<SwaggerOperation> ops,
+    Map<String, SwaggerDefinition> responseDefs,
+    Map<String, SwaggerDefinition> modelDefs,
+  ) {
+    final pascal = _pascalCase(group);
+
+    // Collect entity names this group needs
+    final entityNames = <String>{};
+    for (final op in ops) {
+      final returnType = _determineReturnType(op, responseDefs, forModel: false);
+      final entityType = _modelTypeToEntityType(returnType);
+      if (entityType != null) entityNames.add(entityType);
+    }
+
+    // 1. Entities
+    for (final entityName in entityNames) {
+      _generateEntity(group, entityName, modelDefs);
+    }
+
+    // 2. Repository interface
+    _generateRepositoryInterface(group, ops, responseDefs);
+
+    // 3. UseCases — one per operation
+    for (final op in ops) {
+      _generateUseCase(group, op, responseDefs);
+    }
+
+    print('   🏛  Domain: $pascal (${entityNames.length} entities, ${ops.length} usecases)');
+  }
+
+  void _generateEntity(String group, String entityName, Map<String, SwaggerDefinition> modelDefs) {
+    final fileName = _camelToSnake(entityName);
+    final path = '$libDir/features/$group/domain/entities/$fileName.dart';
+    final defName = entityName; // e.g. 'Product'
+    final def = modelDefs[defName];
+
+    final buffer = StringBuffer();
+    buffer.writeln(_fileHeader('Entity: $entityName'));
+    buffer.writeln("import 'package:equatable/equatable.dart';");
+    buffer.writeln();
+    buffer.writeln('class $entityName extends Equatable {');
+    buffer.writeln('  const $entityName({');
+
+    if (def != null) {
+      for (final prop in def.properties.values) {
+        buffer.writeln('    this.${prop.dartName},');
+      }
+    }
+
+    buffer.writeln('  });');
+    buffer.writeln();
+
+    if (def != null) {
+      for (final prop in def.properties.values) {
+        final type = _entityFieldType(prop);
+        buffer.writeln('  final $type? ${prop.dartName};');
+      }
+    }
+
+    buffer.writeln();
+    buffer.writeln('  @override');
+    buffer.writeln('  List<Object?> get props => [');
+    if (def != null) {
+      for (final prop in def.properties.values) {
+        buffer.writeln('    ${prop.dartName},');
+      }
+    }
+    buffer.writeln('  ];');
+    buffer.writeln('}');
+
+    _writeFile(path, buffer.toString());
+  }
+
+  void _generateRepositoryInterface(
+    String group,
+    List<SwaggerOperation> ops,
+    Map<String, SwaggerDefinition> responseDefs,
+  ) {
+    final pascal = _pascalCase(group);
+    final fileBase = _camelToSnake(group);
+    final path = '$libDir/features/$group/domain/repositories/${fileBase}_repository.dart';
+
+    final buffer = StringBuffer();
+    buffer.writeln(_fileHeader('Repository interface: ${pascal}Repository'));
+    buffer.writeln("import 'package:dartz/dartz.dart';");
+    buffer.writeln("import '$_pkg/core/core.dart';");
+    buffer.writeln();
+
+    // Import entities
+    final importedEntities = <String>{};
+    for (final op in ops) {
+      final entityType = _modelTypeToEntityType(_determineReturnType(op, responseDefs, forModel: false));
+      if (entityType != null && !importedEntities.contains(entityType)) {
+        final fileName = _camelToSnake(entityType);
+        buffer.writeln("import '$_genPkg/features/$group/domain/entities/$fileName.dart';");
+        importedEntities.add(entityType);
+      }
+    }
+
+    buffer.writeln();
+    buffer.writeln('abstract class ${pascal}Repository {');
+    for (final op in ops) {
+      final methodName = _sanitizeMethodName(_operationToMethodName(op));
+      final returnType = _entityReturnType(op, responseDefs);
+      final params = _buildMethodParams(op);
+      buffer.writeln('  Future<Either<Failure, $returnType>> $methodName(${params.join(', ')});');
+    }
+    buffer.writeln('}');
+
+    _writeFile(path, buffer.toString());
+  }
+
+  void _generateUseCase(
+    String group,
+    SwaggerOperation op,
+    Map<String, SwaggerDefinition> responseDefs,
+  ) {
+    final methodName = _sanitizeMethodName(_operationToMethodName(op));
+    final useCaseName = '${_pascalCase(methodName)}UseCase';
+    final fileBase = _camelToSnake(methodName);
+    final path = '$libDir/features/$group/domain/usecases/$fileBase\_use_case.dart';
+    final repoInterface = '${_pascalCase(group)}Repository';
+    final repoFileBase = _camelToSnake(group);
+    final returnType = _entityReturnType(op, responseDefs);
+
+    final params = _buildMethodParams(op);
+    final hasParams = params.isNotEmpty;
+    final paramsClass = '${_pascalCase(methodName)}Params';
+
+    final buffer = StringBuffer();
+    buffer.writeln(_fileHeader('UseCase: $useCaseName'));
+    buffer.writeln("import 'package:dartz/dartz.dart';");
+    buffer.writeln("import '$_pkg/core/core.dart';");
+    buffer.writeln("import '$_genPkg/features/$group/domain/repositories/${repoFileBase}_repository.dart';");
+    buffer.writeln();
+
+    if (hasParams) {
+      buffer.writeln('class $paramsClass {');
+      buffer.writeln('  const $paramsClass({');
+      for (final p in params) {
+        // p is like "String? email" — extract name
+        final parts = p.trim().split(' ');
+        final paramName = parts.last;
+        buffer.writeln('    required this.$paramName,');
+      }
+      buffer.writeln('  });');
+      buffer.writeln();
+      for (final p in params) {
+        buffer.writeln('  final $p;');
+      }
+      buffer.writeln('}');
+      buffer.writeln();
+    }
+
+    buffer.writeln('class $useCaseName {');
+    buffer.writeln('  const $useCaseName(this._repository);');
+    buffer.writeln('  final $repoInterface _repository;');
+    buffer.writeln();
+    if (hasParams) {
+      buffer.writeln('  Future<Either<Failure, $returnType>> call($paramsClass params) =>');
+      final callArgs = params.map((p) {
+        final paramName = p.trim().split(' ').last;
+        return 'params.$paramName';
+      }).join(', ');
+      buffer.writeln('      _repository.$methodName($callArgs);');
+    } else {
+      buffer.writeln('  Future<Either<Failure, $returnType>> call() =>');
+      buffer.writeln('      _repository.$methodName();');
+    }
+    buffer.writeln('}');
+
+    _writeFile(path, buffer.toString());
+  }
+
+  // ── Barrels ──────────────────────────────────────────────────────────────────
+
+  /// Generates per-feature and top-level barrel files so the presentation layer
+  /// can import one line: `import 'package:app/gen/features/products/products.dart'`
+  void _generateBarrels(Map<String, List<SwaggerOperation>> groupOps) {
+    final topLevelExports = <String>[];
+
+    for (final group in groupOps.keys) {
+      if (skipGroups.contains(group)) continue;
+      final fileBase = _camelToSnake(group);
+      final barrelPath = '$libDir/features/$group/$fileBase.dart';
+      final buffer = StringBuffer();
+      buffer.writeln(_fileHeader('Barrel: $group'));
+
+      // Data — models
+      buffer.writeln("// Data layer");
+      final modelDir = Directory('$libDir/features/$group/data/models');
+      if (!dryRun && modelDir.existsSync()) {
+        for (final f in modelDir.listSync().whereType<File>()) {
+          if (f.path.endsWith('.dart') && !f.path.contains('.freezed') && !f.path.contains('.g.dart')) {
+            final name = f.uri.pathSegments.last;
+            buffer.writeln("export 'data/models/$name';");
+          }
+        }
+      } else {
+        buffer.writeln("// export 'data/models/<name>_model.dart';");
+      }
+
+      // Data — datasources
+      buffer.writeln("// DataSources");
+      buffer.writeln("export 'data/datasources/${fileBase}_remote_data_source.dart';");
+
+      // Domain — entities
+      buffer.writeln("// Domain layer");
+      final entityDir = Directory('$libDir/features/$group/domain/entities');
+      if (!dryRun && entityDir.existsSync()) {
+        for (final f in entityDir.listSync().whereType<File>()) {
+          if (f.path.endsWith('.dart')) {
+            final name = f.uri.pathSegments.last;
+            buffer.writeln("export 'domain/entities/$name';");
+          }
+        }
+      } else {
+        buffer.writeln("// export 'domain/entities/<name>.dart';");
+      }
+
+      buffer.writeln("export 'domain/repositories/${fileBase}_repository.dart';");
+      buffer.writeln("// export 'domain/usecases/<operation>_use_case.dart';");
+
+      _writeFile(barrelPath, buffer.toString());
+      topLevelExports.add("export 'features/$group/$fileBase.dart';");
+      print('   📋 Barrel: $barrelPath');
+    }
+
+    // Top-level gen.dart
+    final genBarrel = StringBuffer();
+    genBarrel.writeln(_fileHeader('Top-level gen barrel — import this in your features'));
+    genBarrel.writeln("export 'utils/network/endpoints.dart';");
+    genBarrel.writeln();
+    for (final e in topLevelExports) {
+      genBarrel.writeln(e);
+    }
+    _writeFile('$libDir/gen.dart', genBarrel.toString());
+    print('   📋 Top-level barrel: $libDir/gen.dart');
+  }
+
+  // ── Type helpers ─────────────────────────────────────────────────────────────
+
+  /// Converts a Model type string to its entity equivalent.
+  /// e.g. `ProductModel` → `Product`, `List<ProductModel>` → `Product` (just the name)
+  String? _modelTypeToEntityType(String modelType) {
+    if (modelType == 'bool' || modelType == 'dynamic' || modelType == 'String') return null;
+    if (modelType.endsWith('Model')) return modelType.replaceFirst(RegExp(r'Model$'), '');
+    final listMatch = RegExp(r'List<(\w+)Model>').firstMatch(modelType);
+    if (listMatch != null) return listMatch.group(1);
+    return null;
+  }
+
+  /// Entity return type for repository / usecase signatures.
+  String _entityReturnType(SwaggerOperation op, Map<String, SwaggerDefinition> responseDefs) {
+    final modelType = _determineReturnType(op, responseDefs, forModel: true);
+    if (modelType == 'bool') return 'bool';
+    if (modelType.endsWith('Model')) return modelType.replaceFirst(RegExp(r'Model$'), '');
+    if (modelType.startsWith('List<') && modelType.endsWith('Model>')) {
+      return modelType.replaceFirst(RegExp(r'Model>$'), '>');
+    }
+    return modelType;
+  }
+
+  /// Dart type for an entity field (no Model suffix, no JSON).
+  String _entityFieldType(SwaggerProperty prop) {
+    if (prop.ref != null) return definitionRenames[prop.ref!] ?? prop.ref!;
+    if (prop.type == 'array' && prop.itemsRef != null) {
+      return 'List<${definitionRenames[prop.itemsRef!] ?? prop.itemsRef!}>';
+    }
+    return prop.dartType;
   }
 
   // --- Support Helpers ---
 
   void _writeFile(String path, String content) {
+    final normalised = path.replaceAll(r'\', '/');
+    _writtenFiles.add(normalised);
+    if (dryRun) {
+      print('   [dry-run] would write → $normalised');
+      return;
+    }
     final file = File(path);
     file.parent.createSync(recursive: true);
     file.writeAsStringSync(content);
-    _writtenFiles.add(path.replaceAll(r'\', '/'));
   }
 
   // ... (String utils, parsing helpers, etc. truncated for brevity but would be full implementation)
