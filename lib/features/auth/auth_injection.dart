@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
@@ -11,7 +12,10 @@ extension AuthInjection on GetIt {
   Future<void> registerAuthFeature() async {
     // Data Sources
     registerSingletonAsync<AuthLocalDataSource>(() async {
-      await Hive.openBox<String>(get<AppSettings>().sessionSecretKey);
+      await Hive.openBox<String>(
+        get<AppSettings>().sessionSecretKey,
+        encryptionCipher: get<HiveAesCipher>(),
+      );
       return AuthLocalDataSourceImpl();
     });
 

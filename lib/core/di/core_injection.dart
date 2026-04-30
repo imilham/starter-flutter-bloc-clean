@@ -10,10 +10,14 @@ import 'package:starter/utils/utils.dart';
 /// theme provider, and router.
 extension CoreInjection on GetIt {
   /// Registers all core application dependencies.
-  Future<void> registerCoreServices({required AppEnvironment environment}) async {
+  Future<void> registerCoreServices({
+    required AppEnvironment environment,
+    required HiveAesCipher hiveCipher,
+  }) async {
     // App Settings & States
     this
       ..registerSingleton<AppSettings>(AppSettings(environment))
+      ..registerSingleton<HiveAesCipher>(hiveCipher)
       ..registerSingleton<SecureStorage>(SecureStorageImpl())
       ..registerSingletonAsync<AppStates>(() async {
         await Hive.openBox<bool>('states');

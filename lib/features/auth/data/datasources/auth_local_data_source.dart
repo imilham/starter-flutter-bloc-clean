@@ -88,7 +88,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
       } else {
         // Attempt to open if not open (best effort)
         if (await Hive.boxExists(_hiveKey)) {
-           final box = await Hive.openBox<String>(_hiveKey);
+           final box = await Hive.openBox<String>(
+             _hiveKey,
+             encryptionCipher: GetIt.instance<HiveAesCipher>(),
+           );
            final sessionJson = box.get(_legacyHiveKey);
            if (sessionJson != null) {
              await _storage.write(_sessionKey, sessionJson);

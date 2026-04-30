@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:starter/core/di/injection_container.dart';
 import 'package:starter/utils/utils.dart';
@@ -36,7 +37,19 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
-  await hiveInit();
-  await setup(environment: environment);
+  await loadEnvFile(environment);
+  final hiveCipher = await hiveInit();
+  await setup(environment: environment, hiveCipher: hiveCipher);
   runApp(await builder());
+}
+
+/// Loads the `.env` file that matches the current [environment].
+Future<void> loadEnvFile(AppEnvironment environment) async {
+  final envFile = switch (environment) {
+    AppEnvironment.development => 'env/.env.development',
+    AppEnvironment.production => 'env/.env.production',
+    AppEnvironment.staging => 'env/.env.staging',
+  };
+
+  await dotenv.load(fileName: envFile);
 }
