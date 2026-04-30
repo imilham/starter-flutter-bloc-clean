@@ -4,4 +4,5 @@
 library core;
 
 export 'error/error.dart';
+export 'pagination/pagination.dart';
 export 'usecases/usecases.dart';
