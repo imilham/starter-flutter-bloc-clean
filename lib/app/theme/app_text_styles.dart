@@ -23,6 +23,9 @@ extension TextStyleFluentExtension on TextStyle {
   /// Returns a copy of this text style with [FontWeight.w300].
   TextStyle get light => copyWith(fontWeight: FontWeight.w300);
 
+  /// Returns a copy of this text style with [FontWeight.w200].
+  TextStyle get extraLight => copyWith(fontWeight: FontWeight.w200);
+
   /// Returns a copy of this text style with [FontStyle.italic].
   TextStyle get italic => copyWith(fontStyle: FontStyle.italic);
 
@@ -343,6 +346,95 @@ extension TextStyleExtension on BuildContext {
       letterSpacing: letterSpacing,
       height: height,
       fontWeight: fontWeight,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      fontFamily: fontFamily,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+  }
+
+  // Selected tab label - bold variant of [tab10].
+  TextStyle tabSelected10({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration, String? fontFamily, List<Shadow>? shadows, Color? decorationColor, TextDecorationStyle? decorationStyle}) {
+    assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
+    return _textTheme.labelSmall!.copyWith(
+      fontSize: 10,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontWeight: fontWeight ?? FontWeight.w700,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      fontFamily: fontFamily,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+  }
+
+  // Unselected tab label - regular variant of [tab10].
+  TextStyle tabUnselected10({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration, String? fontFamily, List<Shadow>? shadows, Color? decorationColor, TextDecorationStyle? decorationStyle}) {
+    assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
+    return _textTheme.labelSmall!.copyWith(
+      fontSize: 10,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontWeight: fontWeight ?? FontWeight.w400,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      fontFamily: fontFamily,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+  }
+
+  // Navigation Bar Styles - 16px label-style text for app bars.
+  TextStyle navBarTitle16({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration, String? fontFamily, List<Shadow>? shadows, Color? decorationColor, TextDecorationStyle? decorationStyle}) {
+    assert(_textTheme.titleMedium != null, 'Theme titleMedium must be defined');
+    return _textTheme.titleMedium!.copyWith(
+      fontSize: 16,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontWeight: fontWeight ?? FontWeight.w500,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      fontFamily: fontFamily,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+  }
+
+  TextStyle navBarAction16({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration, String? fontFamily, List<Shadow>? shadows, Color? decorationColor, TextDecorationStyle? decorationStyle}) {
+    assert(_textTheme.titleMedium != null, 'Theme titleMedium must be defined');
+    return _textTheme.titleMedium!.copyWith(
+      fontSize: 16,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontWeight: fontWeight ?? FontWeight.w400,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      fontFamily: fontFamily,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+  }
+
+  // Alert dialog button label (bold, 14px).
+  TextStyle alertDialogButton14({Color? color, double? letterSpacing, double? height, FontWeight? fontWeight, FontStyle? fontStyle, TextDecoration? decoration, String? fontFamily, List<Shadow>? shadows, Color? decorationColor, TextDecorationStyle? decorationStyle}) {
+    assert(_textTheme.labelMedium != null, 'Theme labelMedium must be defined');
+    return _textTheme.labelMedium!.copyWith(
+      fontSize: 14,
+      color: color,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontWeight: fontWeight ?? FontWeight.w700,
       fontStyle: fontStyle,
       decoration: decoration,
       fontFamily: fontFamily,
