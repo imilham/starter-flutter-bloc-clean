@@ -47,66 +47,120 @@ enum FontSize {
   final double size;
 }
 
+/// Font families used throughout the application.
+///
+/// Centralizing font references here means swapping a font is a one-line
+/// change, and adding a 3rd font later is just one new case.
+///
+/// Example:
+/// ```dart
+/// FontFamily.heading.style(fontSize: FontSize.xl.size, fontWeight: FontWeight.w700)
+/// ```
+enum FontFamily {
+  /// Display/heading font — hero text, headlines, titles, app bars.
+  heading,
+
+  /// Body/UI font — body text, buttons, labels, form hints.
+  body,
+}
+
+extension FontFamilyExtension on FontFamily {
+  /// Resolves this enum case to a [TextStyle] from Google Fonts.
+  TextStyle style({
+    double? fontSize,
+    FontWeight? fontWeight,
+    Color? color,
+    double? height,
+  }) {
+    switch (this) {
+      case FontFamily.heading:
+        return GoogleFonts.platypi(
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          color: color,
+          height: height,
+        );
+      case FontFamily.body:
+        return GoogleFonts.notoSans(
+          fontSize: fontSize,
+          fontWeight: fontWeight,
+          color: color,
+          height: height,
+        );
+    }
+  }
+
+  /// The resolved font family name string — useful for [ThemeData.fontFamily].
+  String? get familyName {
+    switch (this) {
+      case FontFamily.heading:
+        return GoogleFonts.platypi().fontFamily;
+      case FontFamily.body:
+        return GoogleFonts.notoSans().fontFamily;
+    }
+  }
+}
+
 class AppTypography {
   // Private constant for the default text color used in body styles
   static TextTheme textTheme(Color textColor) {
     return TextTheme(
       // Display - Hero text, very large
-      displayLarge: GoogleFonts.platypi(
+      displayLarge: FontFamily.heading.style(
         fontSize: FontSize.display1.size,
         fontWeight: FontWeight.w700,
       ),
-      displayMedium: GoogleFonts.platypi(
+      displayMedium: FontFamily.heading.style(
         fontSize: FontSize.display2.size,
         fontWeight: FontWeight.w700,
       ),
-      displaySmall: GoogleFonts.platypi(
+      displaySmall: FontFamily.heading.style(
         fontSize: FontSize.xxxl.size,
         fontWeight: FontWeight.w700,
       ),
 
       // Headline - Section headers
-      headlineLarge: GoogleFonts.platypi(
+      headlineLarge: FontFamily.heading.style(
         fontSize: FontSize.xxxl.size,
         fontWeight: FontWeight.w600,
       ),
-      headlineMedium: GoogleFonts.platypi(
+      headlineMedium: FontFamily.heading.style(
         fontSize: FontSize.xl.size,
         fontWeight: FontWeight.w600,
       ),
-      headlineSmall: GoogleFonts.platypi(
+      headlineSmall: FontFamily.heading.style(
         fontSize: FontSize.lg.size,
         fontWeight: FontWeight.w600,
       ),
 
       // Title - Component titles, app bars
-      titleLarge: GoogleFonts.platypi(
+      titleLarge: FontFamily.heading.style(
         fontSize: FontSize.lg.size,
         fontWeight: FontWeight.w600,
       ),
-      titleMedium: GoogleFonts.platypi(
+      titleMedium: FontFamily.heading.style(
         fontSize: FontSize.md.size,
         fontWeight: FontWeight.w600,
       ),
-      titleSmall: GoogleFonts.platypi(
+      titleSmall: FontFamily.heading.style(
         fontSize: FontSize.s.size,
         fontWeight: FontWeight.w600,
       ),
 
       // Body - Main content
-      bodyLarge: GoogleFonts.notoSans(
+      bodyLarge: FontFamily.body.style(
         fontSize: FontSize.md.size,
         fontWeight: FontWeight.w400,
         color: textColor,
         height: 1.25,
       ),
-      bodyMedium: GoogleFonts.notoSans(
+      bodyMedium: FontFamily.body.style(
         fontSize: FontSize.s.size,
         fontWeight: FontWeight.w400,
         color: textColor,
         height: 1.714,
       ),
-      bodySmall: GoogleFonts.notoSans(
+      bodySmall: FontFamily.body.style(
         fontSize: FontSize.xs.size,
         fontWeight: FontWeight.w500,
         color: textColor,
@@ -114,21 +168,21 @@ class AppTypography {
       ),
 
       // Label - Buttons, tabs
-      labelLarge: GoogleFonts.notoSans(
+      labelLarge: FontFamily.body.style(
         fontSize: FontSize.md.size,
         fontWeight: FontWeight.w600,
       ),
-      labelMedium: GoogleFonts.notoSans(
+      labelMedium: FontFamily.body.style(
         fontSize: FontSize.s.size,
         fontWeight: FontWeight.w600,
         height: 1.714,
       ),
-      labelSmall: GoogleFonts.notoSans(
+      labelSmall: FontFamily.body.style(
         fontSize: FontSize.xs.size,
         fontWeight: FontWeight.w600,
       ),
     );
   }
 
-  static String? get fontFamily => GoogleFonts.notoSans().fontFamily;
+  static String? get fontFamily => FontFamily.body.familyName;
 }
