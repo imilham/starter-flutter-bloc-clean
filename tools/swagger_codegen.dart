@@ -77,11 +77,12 @@ void main(List<String> args) async {
   print('📦 Package: $packageName');
 
   // 3. Fetch Spec
+  final urlArg = args.where((a) => a.startsWith('http')).firstOrNull;
   String jsonContent;
   try {
-    if (args.isNotEmpty && args.first.startsWith('http')) {
-      print('🌐 Fetching spec from ${args.first}...');
-      jsonContent = await _fetchSwaggerSpec(args.first);
+    if (urlArg != null) {
+      print('🌐 Fetching spec from $urlArg...');
+      jsonContent = await _fetchSwaggerSpec(urlArg);
     } else if (File('swagger.json').existsSync()) {
       print('📂 Reading local swagger.json...');
       jsonContent = File('swagger.json').readAsStringSync();
@@ -721,6 +722,8 @@ class CodeGenerator {
     print('   📄 DataSource: $className → $abstractPath');
 
     // ── Concrete implementation ──
+    // utils/utils.dart covers: ApiClient, ApiResponse, DioException, FormData,
+    // onError, ApiError, and all *Endpoints classes (via network/endpoints.dart)
     final implBuffer = StringBuffer()
       ..writeln(_fileHeader('DataSource Impl: ${className}Impl'))
       ..writeln("import '$_pkg/utils/utils.dart';")
@@ -850,10 +853,12 @@ class CodeGenerator {
   ) {
     final pascal = _pascalCase(group);
 
-    // Collect entity names this group needs
+    // Collect entity names this group needs.
+    // forModel:true gives 'XxxModel' / 'List<XxxModel>' which
+    // _modelTypeToEntityType() needs to detect and strip the 'Model' suffix.
     final entityNames = <String>{};
     for (final op in ops) {
-      final returnType = _determineReturnType(op, responseDefs, forModel: false);
+      final returnType = _determineReturnType(op, responseDefs, forModel: true);
       final entityType = _modelTypeToEntityType(returnType);
       if (entityType != null) entityNames.add(entityType);
     }
@@ -932,10 +937,11 @@ class CodeGenerator {
     buffer.writeln("import '$_pkg/core/core.dart';");
     buffer.writeln();
 
-    // Import entities used in return types
+    // Import entities used in return types.
+    // forModel:true so _modelTypeToEntityType() can strip the 'Model' suffix.
     final importedSymbols = <String>{};
     for (final op in ops) {
-      final entityType = _modelTypeToEntityType(_determineReturnType(op, responseDefs, forModel: false));
+      final entityType = _modelTypeToEntityType(_determineReturnType(op, responseDefs, forModel: true));
       if (entityType != null && !importedSymbols.contains(entityType)) {
         buffer.writeln("import '$_genPkg/features/$group/domain/entities/${_camelToSnake(entityType)}.dart';");
         importedSymbols.add(entityType);
