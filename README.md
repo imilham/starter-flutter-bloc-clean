@@ -7,6 +7,8 @@
 
 Welcome to the `feature/starter-clean-bloc` branch. This branch serves as a robust foundation for Flutter applications using **Clean Architecture** principles combined with **BLoC** for state management.
 
+📚 **New project?** Check out the [Quick Setup Guide](docs/project_setup_guide.md) to bootstrap your app.
+
 ---
 
 ## 🏛 Architecture & How it Works
