@@ -128,3 +128,44 @@ Keep the `build/symbols/` folder — you need it to symbolicate crash reports.
 2. Fill in your keystore credentials
 3. Uncomment the signing config block in `android/app/build.gradle.kts`
 4. **Never commit** `keystore.properties` or `.jks` files to version control
+
+---
+
+## 🚀 Renaming for a New Project
+
+When moving this boilerplate to a new project (e.g., `com.client.newapp`), follow these steps rather than using automated renaming tools, as they may miss flavor configurations.
+
+### 1. Global Search & Replace
+Search for `em.starter.app` and replace it everywhere with your new base bundle ID (e.g., `com.client.newapp`). This covers:
+- `android/app/build.gradle.kts`
+- `ios/Flutter/live.xcconfig`
+- `ios/Flutter/sandbox.xcconfig` (will become `com.client.newapp.sandbox`)
+
+### 2. Update Android Namespace
+In `android/app/build.gradle.kts`, ensure the `namespace` matches your new package name:
+```kotlin
+android {
+    namespace = "com.client.newapp"
+    ...
+}
+```
+
+### 3. Update Directory Structure (Android)
+Move your `MainActivity.kt` to the new package directory:
+- Old: `android/app/src/main/kotlin/em/starter/app/MainActivity.kt`
+- New: `android/app/src/main/kotlin/com/client/newapp/MainActivity.kt`
+*(Ensure the `package` line inside the file is updated too)*
+
+### 4. App Names
+Update the `BUNDLE_DISPLAY_NAME` in:
+- `ios/Flutter/sandbox.xcconfig`
+- `ios/Flutter/live.xcconfig`
+- And `resValue("string", "app_name", "...")` in `android/app/build.gradle.kts`
+
+### 5. Firebase
+Regenerate your `google-services.json` and `GoogleService-Info.plist` files for the new bundle IDs and update the placeholder files in:
+- `android/app/src/sandbox/`
+- `android/app/src/live/`
+- `ios/config/sandbox/`
+- `ios/config/live/`
+

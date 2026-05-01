@@ -39,7 +39,8 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await loadEnvFile(environment);
-  await Firebase.initializeApp();
+  /// todo - uncomment if using Firebase services
+  // await Firebase.initializeApp();
   final hiveCipher = await hiveInit();
   await setup(environment: environment, hiveCipher: hiveCipher);
   runApp(await builder());
