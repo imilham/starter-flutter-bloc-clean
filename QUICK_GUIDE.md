@@ -42,3 +42,25 @@ sl.registerFactory(() => MyBloc(useCase: sl()));
 - **Build Runner**: `flutter pub run build_runner build --delete-conflicting-outputs`
 - **Linting**: `flutter analyze`
 - **Testing**: `flutter test`
+
+## 🔒 Release Build (Obfuscated)
+
+Always use obfuscation for release builds to protect your Dart source:
+
+```bash
+# Android
+flutter build apk --obfuscate --split-debug-info=build/symbols
+flutter build appbundle --obfuscate --split-debug-info=build/symbols
+
+# iOS
+flutter build ipa --obfuscate --split-debug-info=build/symbols
+```
+
+Keep the `build/symbols/` folder — you need it to symbolicate crash reports.
+
+## 🔑 Release Signing (Android)
+
+1. Copy `android/keystore.properties.example` → `android/keystore.properties`
+2. Fill in your keystore credentials
+3. Uncomment the signing config block in `android/app/build.gradle.kts`
+4. **Never commit** `keystore.properties` or `.jks` files to version control
