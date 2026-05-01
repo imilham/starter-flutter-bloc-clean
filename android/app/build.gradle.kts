@@ -3,6 +3,8 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
+    // Firebase — uncomment after adding google-services.json per flavor
+    // id("com.google.gms.google-services")
 }
 
 // ─── Release Signing (uncomment when ready) ───
@@ -33,14 +35,31 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
         applicationId = "em.starter.app"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
+    }
+
+    // ─── Flavors ───
+    // Two flavors: sandbox (dev/staging) and live (production).
+    // Each gets its own applicationId suffix, app name, and Firebase config.
+    //
+    // Usage:
+    //   flutter run --flavor sandbox -t lib/main_development.dart
+    //   flutter run --flavor live    -t lib/main_production.dart
+    flavorDimensions += "environment"
+    productFlavors {
+        create("sandbox") {
+            dimension = "environment"
+            applicationIdSuffix = ".sandbox"
+            resValue("string", "app_name", "App Sandbox")
+        }
+        create("live") {
+            dimension = "environment"
+            resValue("string", "app_name", "App")
+        }
     }
 
     buildTypes {

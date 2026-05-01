@@ -1,38 +1,26 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.3.0",
   "configurations": [
     {
-      "name": "Launch development",
+      "name": "Development (Sandbox)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_development.dart",
-      "args": [
-        "--target",
-        "lib/main_development.dart"
-      ]
+      "args": ["--flavor", "sandbox"]
     },
     {
-      "name": "Launch staging",
+      "name": "Staging (Sandbox)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_staging.dart",
-      "args": [
-        "--target",
-        "lib/main_staging.dart"
-      ]
+      "args": ["--flavor", "sandbox"]
     },
     {
-      "name": "Launch production",
+      "name": "Production (Live)",
       "request": "launch",
       "type": "dart",
       "program": "lib/main_production.dart",
-      "args": [
-        "--target",
-        "lib/main_production.dart"
-      ]
+      "args": ["--flavor", "live"]
     }
   ]
 }

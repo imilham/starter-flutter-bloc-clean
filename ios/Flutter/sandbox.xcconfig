@@ -1,0 +1,4 @@
+// Sandbox flavor configuration
+// Used by development and staging builds
+PRODUCT_BUNDLE_IDENTIFIER = em.starter.app.sandbox
+BUNDLE_DISPLAY_NAME = App Sandbox

@@ -1,0 +1,6 @@
+PLACEHOLDER — Replace with your real sandbox GoogleService-Info.plist from Firebase Console.
+
+Steps:
+1. Go to Firebase Console → Project Settings → Add iOS app
+2. Use bundle ID: em.starter.app.sandbox
+3. Download GoogleService-Info.plist and replace this file

@@ -1,0 +1,29 @@
+{
+  "_README": "PLACEHOLDER — Replace with your real sandbox Firebase config.",
+  "_instructions": [
+    "1. Go to Firebase Console → Project Settings → Add Android app",
+    "2. Use package name: em.starter.app.sandbox",
+    "3. Download google-services.json and replace this file"
+  ],
+  "project_info": {
+    "project_number": "000000000000",
+    "project_id": "your-sandbox-project-id",
+    "storage_bucket": "your-sandbox-project-id.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:000000000000:android:0000000000000000000000",
+        "android_client_info": {
+          "package_name": "em.starter.app.sandbox"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "REPLACE_WITH_REAL_API_KEY"
+        }
+      ]
+    }
+  ],
+  "configuration_version": "1"
+}

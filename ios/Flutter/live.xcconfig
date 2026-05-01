@@ -1,0 +1,3 @@
+// Live (production) flavor configuration
+PRODUCT_BUNDLE_IDENTIFIER = em.starter.app
+BUNDLE_DISPLAY_NAME = App

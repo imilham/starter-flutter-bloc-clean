@@ -43,17 +43,81 @@ sl.registerFactory(() => MyBloc(useCase: sl()));
 - **Linting**: `flutter analyze`
 - **Testing**: `flutter test`
 
+## 🎯 Flavors (sandbox / live)
+
+Two flavors separate sandbox (dev/staging) from production (live):
+
+| Flavor    | Bundle ID                  | App Name      | Usage                          |
+|-----------|----------------------------|---------------|--------------------------------|
+| `sandbox` | `em.starter.app.sandbox`   | App Sandbox   | Development & Staging          |
+| `live`    | `em.starter.app`           | App           | Production                     |
+
+### Run commands
+
+```bash
+# Development on sandbox
+flutter run --flavor sandbox -t lib/main_development.dart
+
+# Staging on sandbox
+flutter run --flavor sandbox -t lib/main_staging.dart
+
+# Production on live
+flutter run --flavor live -t lib/main_production.dart
+```
+
+### Build commands
+
+```bash
+# Android APK (sandbox)
+flutter build apk --flavor sandbox -t lib/main_development.dart
+
+# Android App Bundle (live, release)
+flutter build appbundle --flavor live -t lib/main_production.dart --obfuscate --split-debug-info=build/symbols
+
+# iOS (live, release)
+flutter build ipa --flavor live -t lib/main_production.dart --obfuscate --split-debug-info=build/symbols
+```
+
+### Firebase setup
+
+1. Create two Firebase projects (or two apps in one project)
+2. **Android**: Replace placeholder `google-services.json` in:
+   - `android/app/src/sandbox/google-services.json`
+   - `android/app/src/live/google-services.json`
+3. **iOS**: Replace placeholder `GoogleService-Info.plist` in:
+   - `ios/config/sandbox/GoogleService-Info.plist`
+   - `ios/config/live/GoogleService-Info.plist`
+4. **Android**: Uncomment the `google-services` plugin lines in:
+   - `android/settings.gradle.kts`
+   - `android/app/build.gradle.kts`
+
+### iOS flavor setup
+
+Before building for iOS, set the active flavor:
+
+```bash
+# Set sandbox flavor
+bash ios/scripts/set_flavor.sh sandbox
+
+# Set live flavor
+bash ios/scripts/set_flavor.sh live
+```
+
+Add `ios/scripts/copy_firebase_config.sh` as a Run Script build phase in Xcode
+(Runner target, before "Copy Bundle Resources") to auto-copy the correct
+GoogleService-Info.plist at build time.
+
 ## 🔒 Release Build (Obfuscated)
 
-Always use obfuscation for release builds to protect your Dart source:
+Always use obfuscation + flavor for release builds:
 
 ```bash
 # Android
-flutter build apk --obfuscate --split-debug-info=build/symbols
-flutter build appbundle --obfuscate --split-debug-info=build/symbols
+flutter build apk --flavor live -t lib/main_production.dart --obfuscate --split-debug-info=build/symbols
+flutter build appbundle --flavor live -t lib/main_production.dart --obfuscate --split-debug-info=build/symbols
 
 # iOS
-flutter build ipa --obfuscate --split-debug-info=build/symbols
+flutter build ipa --flavor live -t lib/main_production.dart --obfuscate --split-debug-info=build/symbols
 ```
 
 Keep the `build/symbols/` folder — you need it to symbolicate crash reports.

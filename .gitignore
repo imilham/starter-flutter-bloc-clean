@@ -47,3 +47,9 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Flavor-generated config (created by ios/scripts/set_flavor.sh)
+ios/Flutter/flavor.xcconfig
+
+# Firebase configs contain API keys — add real ones locally, never commit
+ios/Runner/GoogleService-Info.plist
