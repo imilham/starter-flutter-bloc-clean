@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/app/controller/app_cubit.dart';
-import 'package:starter/app/controller/app_state.dart';
 import 'package:starter/utils/utils.dart';
 
 /// A global loading overlay widget that wraps the entire app.

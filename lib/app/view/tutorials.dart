@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/app/controller/app_cubit.dart';
 import 'package:starter/utils/utils.dart';
 
 class TutorialPage extends StatefulWidget {

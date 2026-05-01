@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
-import 'package:starter/app/controller/app_cubit.dart';
-import 'package:starter/app/controller/router_notifier.dart';
 import 'package:starter/bootstrap.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/features/dev/dev.dart';

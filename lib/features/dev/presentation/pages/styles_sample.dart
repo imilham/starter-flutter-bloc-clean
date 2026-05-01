@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:starter/app/theme/theme_cubit.dart';
 import 'package:starter/features/dev/presentation/pages/sample_section.dart';
 import 'package:starter/utils/utils.dart';
 

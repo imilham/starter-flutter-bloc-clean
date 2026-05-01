@@ -3,7 +3,6 @@ import 'package:starter/app/app.dart';
 import 'package:starter/core/storage/storage.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
-import 'package:starter/app/controller/router_notifier.dart';
 
 /// Extension on GetIt to register core application services.
 ///

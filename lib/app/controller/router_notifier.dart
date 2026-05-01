@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/foundation.dart';
+import 'package:go_router/go_router.dart' show GoRouter;
 import 'package:starter/app/controller/app_cubit.dart';
 import 'package:starter/app/controller/app_state.dart';
+import 'package:starter/utils/utils.dart' show GoRouter;
 
 /// Bridges [AppCubit] to [GoRouter.refreshListenable].
 ///

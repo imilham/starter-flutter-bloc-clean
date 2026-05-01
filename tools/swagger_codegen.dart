@@ -498,7 +498,7 @@ class CodeGenerator {
         final op = methodEntry.value;
         final firstSegment = path.split('/').where((s) => s.isNotEmpty).firstOrNull;
 
-        String group = 'common';
+        var group = 'common';
         if (firstSegment != null && pathSegmentGroupsMapping.containsKey(firstSegment)) {
           group = pathSegmentGroupsMapping[firstSegment]!.first;
         } else if (op.tags.isNotEmpty) {
@@ -981,7 +981,7 @@ class CodeGenerator {
     final methodName = _sanitizeMethodName(_operationToMethodName(op));
     final useCaseName = '${_pascalCase(methodName)}UseCase';
     final fileBase = _camelToSnake(methodName);
-    final path = '$libDir/features/$group/domain/usecases/$fileBase\_use_case.dart';
+    final path = '$libDir/features/$group/domain/usecases/${fileBase}_use_case.dart';
     final repoInterface = '${_pascalCase(group)}Repository';
     final repoFileBase = _camelToSnake(group);
     final returnType = _entityReturnType(op, responseDefs);
@@ -1068,7 +1068,7 @@ class CodeGenerator {
       buffer.writeln(_fileHeader('Barrel: $group'));
 
       // Data — models
-      buffer.writeln("// Data layer");
+      buffer.writeln('// Data layer');
       final modelDir = Directory('$libDir/features/$group/data/models');
       if (!dryRun && modelDir.existsSync()) {
         for (final f in modelDir.listSync().whereType<File>()) {
@@ -1082,11 +1082,11 @@ class CodeGenerator {
       }
 
       // Data — datasources
-      buffer.writeln("// DataSources");
+      buffer.writeln('// DataSources');
       buffer.writeln("export 'data/datasources/${fileBase}_remote_data_source.dart';");
 
       // Domain — entities
-      buffer.writeln("// Domain layer");
+      buffer.writeln('// Domain layer');
       final entityDir = Directory('$libDir/features/$group/domain/entities');
       if (!dryRun && entityDir.existsSync()) {
         for (final f in entityDir.listSync().whereType<File>()) {
@@ -1181,7 +1181,7 @@ class CodeGenerator {
   String _sanitizeMethodName(String name) {
     var result = name.replaceAll(RegExp('[^a-zA-Z0-9_]'), '');
     if (result.isEmpty) result = 'operation';
-    if (RegExp(r'^[0-9]').hasMatch(result)) result = 'op$result';
+    if (RegExp('^[0-9]').hasMatch(result)) result = 'op$result';
     if (_dartReservedKeywords.contains(result)) result = '${result}Method';
     return result;
   }
@@ -1191,8 +1191,12 @@ class CodeGenerator {
     if (op.formParams.isNotEmpty || op.parameters.any((p) => p.location == 'body')) {
       params.add('${_operationToRequestModelName(op)}Model request');
     }
-    for (final p in op.pathParams) params.add('${p.dartType} ${p.dartName}');
-    for (final p in op.queryParams) params.add('${p.dartType}? ${p.dartName}');
+    for (final p in op.pathParams) {
+      params.add('${p.dartType} ${p.dartName}');
+    }
+    for (final p in op.queryParams) {
+      params.add('${p.dartType}? ${p.dartName}');
+    }
     return params;
   }
 
@@ -1218,7 +1222,7 @@ class CodeGenerator {
       dartName: p.dartName,
       dartType: p.dartType,
       isRequired: p.required_,
-    )).toList();
+    ),).toList();
   }
 }
 
@@ -1241,7 +1245,7 @@ String _snakeToCamel(String input) {
 String _safeDartName(String raw) {
   var result = _snakeToCamel(raw.replaceAll(RegExp(r'\[.*?\]'), ''));
   if (result.isEmpty) result = 'field';
-  if (RegExp(r'^[0-9]').hasMatch(result)) result = 'field$result';
+  if (RegExp('^[0-9]').hasMatch(result)) result = 'field$result';
   if (_dartReservedKeywords.contains(result)) result = '${result}Field';
   return result;
 }
