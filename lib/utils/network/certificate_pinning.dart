@@ -1,6 +1,8 @@
-import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:starter/utils/network/client.dart' show ApiClient;
+import 'package:starter/utils/network/network.dart' show ApiClient;
+import 'package:starter/utils/utils.dart' show ApiClient;
 
 /// Scaffold for certificate (public-key) pinning.
 ///

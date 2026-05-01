@@ -1,6 +1,6 @@
 export 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 export 'package:dio/dio.dart';
-export 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, WatchContext, SelectContext;
+export 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, SelectContext, WatchContext;
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
