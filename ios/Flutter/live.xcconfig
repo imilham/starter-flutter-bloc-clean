@@ -1,3 +1,5 @@
 // Live (production) flavor configuration
+#include "Generated.xcconfig"
+#include "../Pods/Target Support Files/Pods-Runner/Pods-Runner.debug-live.xcconfig"
 PRODUCT_BUNDLE_IDENTIFIER = em.starter.app
 BUNDLE_DISPLAY_NAME = App
