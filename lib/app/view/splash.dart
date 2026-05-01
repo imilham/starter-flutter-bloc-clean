@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/app/controller/app_cubit.dart';
 import 'package:starter/bootstrap.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
@@ -37,7 +38,7 @@ class _SplashPageState extends State<SplashPage> {
     // 4. If failed (no session or API error), AuthBloc emits AuthUnauthenticated.
     // ========================================================================
 
-    await getIt<AppStates>().onAppStart();
+    await getIt<AppCubit>().onAppStart();
 
     final authBloc = getIt<AuthBloc>()
       // Trigger session refresh (fetches profile from API to validate session)
@@ -48,7 +49,7 @@ class _SplashPageState extends State<SplashPage> {
       (state) => state is AuthAuthenticated || state is AuthUnauthenticated,
     );
 
-    getIt<AppStates>().isInitialized = true;
+    getIt<AppCubit>().setInitialized(value: true);
   }
 
   @override

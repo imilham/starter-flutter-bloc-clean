@@ -3,12 +3,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/utils/utils.dart';
 
-/// A service provider class for managing the theme of the application.
-/// This class provides methods to toggle the theme between light and dark,
-/// and retrieve the current theme data and mode.
+/// Provides [ThemeData] builders for light and dark themes.
 ///
 /// **Important**: Don't make colors public
 /// Always access through [Theme] using [BuildContext]
@@ -19,26 +16,12 @@ import 'package:starter/utils/utils.dart';
 /// color: Theme.of(context).colorScheme.primary
 /// color: context.colorScheme.primary - this method is using the extensions
 /// ```
-class ThemeServiceProvider with ChangeNotifier {
-  ThemeServiceProvider({bool isDark = false}) : _isDark = isDark;
+class ThemeService {
+  ThemeService({required this.isDark});
 
-  bool _isDark = false;
-  bool get isDark => _isDark;
+  final bool isDark;
 
-  ThemeData get lightTheme => _lightThemeData();
-  ThemeData get darkTheme => _darkThemeData();
-  ThemeMode get themeMode => _isDark ? ThemeMode.dark : ThemeMode.light;
-
-  void toggleTheme() {
-    _isDark = !_isDark;
-    Hive.box<bool>('themeMode').put('isDark', _isDark);
-    notifyListeners();
-  }
-
-  // todo : remove this
-  Color get demoSnapColor => _isDark ? Colors.orangeAccent : Colors.purpleAccent;
-
-  ThemeData _lightThemeData() {
+  ThemeData lightThemeData() {
     return ThemeData(
       scaffoldBackgroundColor: AppColorConstants.lightBackground,
       colorScheme: ColorScheme.fromSeed(
@@ -85,7 +68,7 @@ class ThemeServiceProvider with ChangeNotifier {
     );
   }
 
-  ThemeData _darkThemeData() {
+  ThemeData darkThemeData() {
     return ThemeData(
       scaffoldBackgroundColor: AppColorConstants.darkBackground,
       colorScheme: ColorScheme.fromSeed(
@@ -142,7 +125,7 @@ class ThemeServiceProvider with ChangeNotifier {
         textStyle: GoogleFonts.platypi(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: _isDark ? AppColorConstants.darkBackground : Colors.white,
+          color: isDark ? AppColorConstants.darkBackground : Colors.white,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -160,7 +143,7 @@ class ThemeServiceProvider with ChangeNotifier {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
         foregroundColor: AppColorConstants.primary,
-        backgroundColor: _isDark ? AppColorConstants.darkSurface : AppColorConstants.lightSurface,
+        backgroundColor: isDark ? AppColorConstants.darkSurface : AppColorConstants.lightSurface,
         elevation: 0,
         side: const BorderSide(
           color: AppColorConstants.primary,
@@ -244,12 +227,12 @@ class ThemeServiceProvider with ChangeNotifier {
         ),
       ),
       filled: true,
-      fillColor: _isDark ? AppColorConstants.darkSurface : Colors.white,
+      fillColor: isDark ? AppColorConstants.darkSurface : Colors.white,
       hintStyle: GoogleFonts.notoSans(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         height: 1.286,
-        color: _isDark ? AppColorConstants.lightBackground : AppColorConstants.coreText,
+        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.coreText,
       ),
       labelStyle: const TextStyle(color: Colors.white),
       floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -258,16 +241,16 @@ class ThemeServiceProvider with ChangeNotifier {
 
   AppBarTheme _appBarTheme() {
     return AppBarTheme(
-      foregroundColor: _isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
-      backgroundColor: _isDark ? AppColorConstants.darkSurface : AppColorConstants.primary,
+      foregroundColor: isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
+      backgroundColor: isDark ? AppColorConstants.darkSurface : AppColorConstants.primary,
       centerTitle: Platform.isIOS,
       iconTheme: IconThemeData(
-        color: _isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
+        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
       ),
       titleTextStyle: GoogleFonts.platypi(
         fontSize: 16,
         fontWeight: FontWeight.w700,
-        color: _isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
+        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -279,17 +262,17 @@ class ThemeServiceProvider with ChangeNotifier {
 
   IconThemeData _iconThemeData() {
     return IconThemeData(
-      color: _isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
+      color: isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
     );
   }
 
   BottomNavigationBarThemeData _bottomNavigationBarThemeData() {
     return BottomNavigationBarThemeData(
-      backgroundColor: _isDark ? AppColorConstants.bottomNavbarDark : AppColorConstants.bottomNavbar,
+      backgroundColor: isDark ? AppColorConstants.bottomNavbarDark : AppColorConstants.bottomNavbar,
       type: BottomNavigationBarType.fixed,
       elevation: 16,
       selectedItemColor: AppColorConstants.pink,
-      unselectedItemColor: _isDark ? AppColorConstants.lightBackground : const Color(0xff969696),
+      unselectedItemColor: isDark ? AppColorConstants.lightBackground : const Color(0xff969696),
       showUnselectedLabels: true,
     );
   }

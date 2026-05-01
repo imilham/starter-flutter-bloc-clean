@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:starter/app/theme/theme_cubit.dart';
 import 'package:starter/features/dev/presentation/pages/samples.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -36,9 +38,9 @@ class DesignSystemPage extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Switch(
-                value: context.watch<ThemeServiceProvider>().isDark,
+                value: context.watch<ThemeCubit>().state.isDark,
                 onChanged: (value) {
-                  context.read<ThemeServiceProvider>().toggleTheme();
+                  context.read<ThemeCubit>().toggle();
                 },
               ),
             ),

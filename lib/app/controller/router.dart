@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/app/controller/app_cubit.dart';
+import 'package:starter/app/controller/router_notifier.dart';
+import 'package:starter/bootstrap.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/features/dev/dev.dart';
 import 'package:starter/features/home/home.dart';
@@ -22,15 +25,16 @@ enum RouterAuthState {
 class AppRouter {
   AppRouter();
 
-  final AppStates _appStates = GetIt.instance<AppStates>();
+  final AppCubit _appCubit = getIt<AppCubit>();
+  final RouterNotifier _routerNotifier = getIt<RouterNotifier>();
 
   GoRouter get goRouter => _goRouter;
   GlobalKey<NavigatorState> get navigatorKey => _rootNavigatorKey;
 
   late final GoRouter _goRouter = GoRouter(
     /// Refresh the router when the app state changes.
-    refreshListenable: _appStates,
-    initialLocation: '${_appStates.homePrefix}/${Pages.home.toPath(isSubRoute: true)}',
+    refreshListenable: _routerNotifier,
+    initialLocation: '$homeRoutePrefix/${Pages.home.toPath(isSubRoute: true)}',
     navigatorKey: _rootNavigatorKey,
     /// Enable debug logging for diagnostics.
     debugLogDiagnostics: true,
@@ -106,7 +110,7 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Pages.home.toPath(pathPrefix: _appStates.homePrefix),
+                path: Pages.home.toPath(pathPrefix: homeRoutePrefix),
                 name: Pages.home.toPathName(),
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
@@ -118,7 +122,7 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Pages.chat.toPath(pathPrefix: _appStates.homePrefix),
+                path: Pages.chat.toPath(pathPrefix: homeRoutePrefix),
                 name: Pages.chat.toPathName(),
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
@@ -143,7 +147,7 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Pages.explore.toPath(pathPrefix: _appStates.homePrefix),
+                path: Pages.explore.toPath(pathPrefix: homeRoutePrefix),
                 name: Pages.explore.toPathName(),
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
@@ -162,7 +166,7 @@ class AppRouter {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: Pages.more.toPath(pathPrefix: _appStates.homePrefix),
+                path: Pages.more.toPath(pathPrefix: homeRoutePrefix),
                 name: Pages.more.toPathName(),
                 pageBuilder: (context, state) => NoTransitionPage(
                   key: state.pageKey,
@@ -226,7 +230,7 @@ class AppRouter {
       // For authenticated state, only check if path starts with homePrefix
       // For other states, ensure exact path match
       if (currentState == RouterAuthState.authenticated) {
-        if (!state.matchedLocation.startsWith(_appStates.homePrefix)) {
+        if (!state.matchedLocation.startsWith(homeRoutePrefix)) {
           final targetPath = state.namedLocation(targetPage.toPathName());
           return targetPath;
         }
@@ -244,10 +248,11 @@ class AppRouter {
 
   // Helper method to determine current auth state
   RouterAuthState _determineAuthState() {
-    if (!_appStates.isInitialized) return RouterAuthState.notInitialized;
-    if (!_appStates.isLogin) return RouterAuthState.notLoggedIn;
-    if (!_appStates.isCodeVerified) return RouterAuthState.notVerified;
-    // if (!_appStates.isAccountCompleted) return RouterAuthState.notCompleted;
+    final s = _appCubit.state;
+    if (!s.isInitialized) return RouterAuthState.notInitialized;
+    if (!s.isLogin) return RouterAuthState.notLoggedIn;
+    if (!s.isCodeVerified) return RouterAuthState.notVerified;
+    // if (!s.isAccountCompleted) return RouterAuthState.notCompleted;
     return RouterAuthState.authenticated;
   }
 }

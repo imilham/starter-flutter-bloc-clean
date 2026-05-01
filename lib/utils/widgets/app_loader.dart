@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/app/controller/app_cubit.dart';
+import 'package:starter/app/controller/app_state.dart';
 import 'package:starter/utils/utils.dart';
 
 /// A global loading overlay widget that wraps the entire app.
 ///
-/// This widget listens to [AppStates.isLoaderVisible] and displays
-/// a semi-transparent overlay with a loading indicator when active.
+/// This widget listens to [AppCubit] and displays a semi-transparent overlay
+/// with a loading indicator when [AppState.isLoaderVisible] is true.
 ///
 /// ## Features
 /// - 🚫 No BackdropFilter (performance optimized)
@@ -16,12 +19,12 @@ import 'package:starter/utils/utils.dart';
 /// ## Usage
 /// ```dart
 /// // Show loader before async operation
-/// context.read<AppStates>().showLoader();
+/// context.read<AppCubit>().showLoader();
 ///
 /// try {
 ///   await someAsyncOperation();
 /// } finally {
-///   context.read<AppStates>().hideLoader();
+///   context.read<AppCubit>().hideLoader();
 /// }
 /// ```
 ///
@@ -39,7 +42,6 @@ class AppLoader extends StatefulWidget {
 }
 
 class _AppLoaderState extends State<AppLoader> with SingleTickerProviderStateMixin {
-  late AppStates _appStates;
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
   bool _isOverlayVisible = false;
@@ -55,17 +57,10 @@ class _AppLoaderState extends State<AppLoader> with SingleTickerProviderStateMix
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _appStates = Provider.of<AppStates>(context, listen: false);
-      _appStates.addListener(_onLoaderStateChanged);
-    });
   }
 
-  void _onLoaderStateChanged() {
+  void _onLoaderStateChanged(bool shouldShow) {
     if (!mounted) return;
-
-    final shouldShow = _appStates.isLoaderVisible;
 
     if (shouldShow && !_isOverlayVisible) {
       setState(() => _isOverlayVisible = true);
@@ -87,7 +82,10 @@ class _AppLoaderState extends State<AppLoader> with SingleTickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
+    return BlocListener<AppCubit, AppState>(
+      listenWhen: (prev, curr) => prev.isLoaderVisible != curr.isLoaderVisible,
+      listener: (context, state) => _onLoaderStateChanged(state.isLoaderVisible),
+      child: Stack(
       children: [
         // Main app content
         Positioned.fill(child: widget.child ?? const SizedBox()),
@@ -120,6 +118,7 @@ class _AppLoaderState extends State<AppLoader> with SingleTickerProviderStateMix
             ),
           ),
       ],
+      ),
     );
   }
 }

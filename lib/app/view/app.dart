@@ -14,49 +14,27 @@ class StarterApp extends StatefulWidget {
 }
 
 class _StarterAppState extends State<StarterApp> {
-  final AppStates _appStates = GetIt.instance<AppStates>();
-  final ThemeServiceProvider _themeServiceProvider = GetIt.instance<ThemeServiceProvider>();
-
-  /// A stream subscription for handling ProfileState changes.
-
   @override
   void initState() {
-    /// Listens to changes in the theme mode provided by the [_themeServiceProvider].
-    /// If the theme mode is set to [ThemeMode.dark], it sets the system UI overlay style to dark.
-    /// Otherwise, it sets the system UI overlay style to the default.
-    _themeServiceProvider.addListener(() {
-      if (_themeServiceProvider.themeMode == ThemeMode.dark) {
-        ThemeServiceProvider.setSystemUIOverlayStyle(isDark: true);
-      } else {
-        ThemeServiceProvider.setSystemUIOverlayStyle();
-      }
-    });
-    
     // Trigger initial auth check
     GetIt.instance<AuthBloc>().add(const AuthCheckRequested());
-    
     super.initState();
   }
 
   @override
-  void dispose() {
-    super.dispose();
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MultiProvider(
+    return MultiBlocProvider(
       providers: [
-        Provider(create: (_) => GetIt.instance<AppSettings>()),
-        ChangeNotifierProvider.value(value: GetIt.instance<AppStates>()),
-        ChangeNotifierProvider(create: (_) => GetIt.instance<ThemeServiceProvider>()),
+        BlocProvider.value(value: GetIt.instance<AppCubit>()),
+        BlocProvider.value(value: GetIt.instance<ThemeCubit>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
+          final appCubit = GetIt.instance<AppCubit>();
           if (state is AuthAuthenticated) {
-            _appStates.currentSession = state.session;
-            _appStates.isInitialized = true;
+            appCubit..setSession(state.session)
+            ..setInitialized(value: true);
           } else if (state is AuthUnauthenticated) {
             if (state.message != null) {
               final router = GetIt.instance<AppRouter>();
@@ -69,24 +47,34 @@ class _StarterAppState extends State<StarterApp> {
               }
             }
 
-            _appStates.currentSession = null;
+            appCubit..setSession(null)
             // App is still initialized, just not logged in.
             // Keeping this true prevents redirecting to Splash page.
-            _appStates.isInitialized = true;
+            ..setInitialized(value: true);
           }
         },
         child: Builder(
           builder: (context) {
-            return MaterialApp.router(
-              onGenerateTitle: (context) => context.l10n.appName,
-              theme: context.watch<ThemeServiceProvider>().lightTheme,
-              darkTheme: context.watch<ThemeServiceProvider>().darkTheme,
-              themeMode: context.watch<ThemeServiceProvider>().themeMode,
-              routerConfig: GetIt.instance<AppRouter>().goRouter,
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              builder: (context, child) => OverlayUtility(child: child),
-              // showPerformanceOverlay: true,
+            return BlocListener<ThemeCubit, ThemeState>(
+              listener: (context, themeState) {
+                ThemeService.setSystemUIOverlayStyle(isDark: themeState.isDark);
+              },
+              child: BlocBuilder<ThemeCubit, ThemeState>(
+                builder: (context, themeState) {
+                  final themeCubit = context.read<ThemeCubit>();
+                  return MaterialApp.router(
+                    onGenerateTitle: (context) => context.l10n.appName,
+                    theme: themeCubit.lightTheme,
+                    darkTheme: themeCubit.darkTheme,
+                    themeMode: themeCubit.themeMode,
+                    routerConfig: GetIt.instance<AppRouter>().goRouter,
+                    localizationsDelegates: AppLocalizations.localizationsDelegates,
+                    supportedLocales: AppLocalizations.supportedLocales,
+                    builder: (context, child) => OverlayUtility(child: child),
+                    // showPerformanceOverlay: true,
+                  );
+                },
+              ),
             );
           },
         ),

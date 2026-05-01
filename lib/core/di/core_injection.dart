@@ -3,6 +3,7 @@ import 'package:starter/app/app.dart';
 import 'package:starter/core/storage/storage.dart';
 import 'package:starter/features/auth/auth.dart';
 import 'package:starter/utils/utils.dart';
+import 'package:starter/app/controller/router_notifier.dart';
 
 /// Extension on GetIt to register core application services.
 ///
@@ -19,9 +20,9 @@ extension CoreInjection on GetIt {
       ..registerSingleton<AppSettings>(AppSettings(environment))
       ..registerSingleton<HiveAesCipher>(hiveCipher)
       ..registerSingleton<SecureStorage>(SecureStorageImpl())
-      ..registerSingletonAsync<AppStates>(() async {
+      ..registerSingletonAsync<AppCubit>(() async {
         await Hive.openBox<bool>('states');
-        return AppStates();
+        return AppCubit();
       });
 
     // Network - API Client with Smart AuthInterceptor
@@ -36,14 +37,20 @@ extension CoreInjection on GetIt {
     );
 
     // Theme Service
-    registerSingletonAsync<ThemeServiceProvider>(() async {
+    registerSingletonAsync<ThemeCubit>(() async {
       await Hive.openBox<bool>('themeMode');
       final isDark = Hive.box<bool>('themeMode').get('isDark') ?? false;
-      ThemeServiceProvider.setSystemUIOverlayStyle(isDark: isDark);
-      return ThemeServiceProvider(isDark: isDark);
+      ThemeService.setSystemUIOverlayStyle(isDark: isDark);
+      return ThemeCubit(isDark: isDark);
     });
 
-    // App Router - depends on AppStates
-    registerSingletonWithDependencies(AppRouter.new, dependsOn: [AppStates]);
+    // RouterNotifier bridge - depends on AppCubit
+    registerSingletonWithDependencies<RouterNotifier>(
+      () => RouterNotifier(GetIt.instance<AppCubit>()),
+      dependsOn: [AppCubit],
+    );
+
+    // App Router - depends on AppCubit + RouterNotifier
+    registerSingletonWithDependencies(AppRouter.new, dependsOn: [AppCubit, RouterNotifier]);
   }
 }

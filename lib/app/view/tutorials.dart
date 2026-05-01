@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:starter/app/app.dart';
+import 'package:starter/app/controller/app_cubit.dart';
 import 'package:starter/utils/utils.dart';
 
 class TutorialPage extends StatefulWidget {
@@ -231,7 +232,7 @@ class _TutorialPageState extends State<TutorialPage> {
             Gap.medium16,
             ElevatedButton(
               onPressed: () {
-                GetIt.I<AppStates>().isTutorialShown = true;
+                GetIt.I<AppCubit>().setTutorialShown(value: true);
               },
               child: Text(
                 _currentIndex == 2 ? 'Get Started' : 'Skip',
