@@ -18,11 +18,11 @@ class _IntroPageState extends State<IntroPage> {
           const RelativeGap(mainAxisExtent: 0.2),
           const AppLogo(aspectRatio: 16 / 9),
           const RelativeGap(mainAxisExtent: 0.1),
-          CommonElevatedButton(
+          CommonButton.primary(
             onPressed: () {
               Pages.signUp.go(context);
             },
-            text: context.l10n.introSignUp,
+            label: context.l10n.introSignUp,
           ),
           const Spacer(),
           Gap.small8,

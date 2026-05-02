@@ -45,44 +45,45 @@ class _ComponentsSampleState extends State<ComponentsSample> {
           icon: Icons.smart_button,
           isExpanded: true,
           children: [
-            CommonElevatedButton(
-              text: 'Primary Button',
+            CommonButton.primary(
+              label: 'Primary Button',
               onPressed: () {},
             ),
             Gap.small8,
-            CommonElevatedButton(
-              text: 'Loading Button',
+            CommonButton.primary(
+              label: 'Loading Button',
               isLoading: true,
               onPressed: () {},
             ),
             Gap.small8,
-            const CommonElevatedButton(
-              text: 'Disabled Button',
+             CommonButton.primary(
+              label: 'Disabled Button',
+              onPressed: null,
             ),
             Gap.medium16,
-            CommonOutlineButton(
-              text: 'Outline Button',
+            CommonButton.primary(
+              label: 'Outline Button',
               onPressed: () {},
             ),
             Gap.small8,
-            CommonElevatedButton(
-              text: 'Fixed Width (120)',
-              width: 120,
+            CommonButton.primary(
+              label: 'Fixed Width (120)',
+              // width: 120,
               onPressed: () {},
             ),
             Gap.small8,
             Row(
               children: [
                 Expanded(
-                  child: CommonElevatedButton.small(
-                    text: 'Small Button',
+                  child: CommonButton.primary(
+                    label: 'Small Button',
                     onPressed: () {},
                   ),
                 ),
                 Gap.small8,
                 Expanded(
-                  child: CommonOutlineButton.small(
-                    text: 'Small Outline',
+                  child: CommonButton.primary(
+                    label: 'Small Outline',
                     onPressed: () {},
                   ),
                 ),

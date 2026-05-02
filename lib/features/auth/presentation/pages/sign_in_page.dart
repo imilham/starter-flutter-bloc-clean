@@ -93,8 +93,8 @@ class _SignInPageState extends State<SignInPage> {
                       ),
                     ),
                     Gap.medium16,
-                    CommonElevatedButton(
-                      text: context.l10n.signIn,
+                    CommonButton.primary(
+                      label: context.l10n.signIn,
                       isLoading: isLoading,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {

@@ -1,18 +1,12 @@
 /// Button size and position enums for common button components.
 library;
 
-/// Button size variants.
-///
-/// Controls the width of buttons. Height is always 48px.
-enum ButtonSize {
-  /// Small button: fixed width 220px
-  ///
-  /// Use for compact spaces or inline actions.
+/// Defines the size variants for the buttons.
+enum CommonButtonSize {
+  /// Small button: fixed width 220px (standard across TRP-L projects).
   small,
 
-  /// Large button: full width (double.infinity)
-  ///
-  /// Default size for primary CTAs.
+  /// Large button: uses theme default (typically full width).
   large,
 }
 

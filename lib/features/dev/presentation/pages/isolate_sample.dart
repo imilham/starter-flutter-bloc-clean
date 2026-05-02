@@ -135,8 +135,8 @@ class _IsolateSampleState extends State<IsolateSample> {
         ),
         Gap.small8,
         Center(
-          child: CommonElevatedButton(
-            text: 'Tap Me! (Test Responsiveness)',
+          child: CommonButton.primary(
+            label: 'Tap Me! (Test Responsiveness)',
             onPressed: () => setState(() => _counter++),
           ),
         ),
@@ -149,8 +149,8 @@ class _IsolateSampleState extends State<IsolateSample> {
         Row(
           children: [
             Expanded(
-              child: CommonElevatedButton(
-                text: 'Run on Main Thread',
+              child: CommonButton.primary(
+                label: 'Run on Main Thread',
                 // Using error color to indicate this is "bad" practice for heavy tasks
                 backgroundColor: context.colorScheme.error,
                 foregroundColor: context.colorScheme.onError,
@@ -160,8 +160,8 @@ class _IsolateSampleState extends State<IsolateSample> {
             ),
             Gap.medium16,
             Expanded(
-              child: CommonElevatedButton(
-                text: 'Run in Isolate',
+              child: CommonButton.primary(
+                label: 'Run in Isolate',
                 // Using primary color for "good" practice
                 isLoading: _isProcessing,
                 onPressed: _isProcessing ? null : _runHeavyTaskIsolate,

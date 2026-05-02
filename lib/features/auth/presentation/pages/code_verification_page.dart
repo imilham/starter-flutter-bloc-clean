@@ -154,8 +154,8 @@ class _CodeVerificationPageState extends State<CodeVerificationPage> {
                   ),
                   Gap.extraLarge32,
                   Gap.medium16,
-                  CommonElevatedButton(
-                    text: context.l10n.verification,
+                  CommonButton.primary(
+                    label: context.l10n.verification,
                     isLoading: isLoading,
                     onPressed: () {
                       if (_codeController.text.isNotEmpty) {

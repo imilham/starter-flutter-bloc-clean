@@ -71,8 +71,8 @@ class _OnboardingFlowView extends StatelessWidget {
                   ),
                 ),
                 Gap.medium16,
-                CommonElevatedButton(
-                  text: state.currentStep == 1 ? context.l10n.completeProfile : context.l10n.continueAction,
+                CommonButton.primary(
+                  label: state.currentStep == 1 ? context.l10n.completeProfile : context.l10n.continueAction,
                   isLoading: isLoading,
                   onPressed: () {
                     if (state.currentStep == 0) {

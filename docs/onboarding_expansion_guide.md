@@ -113,7 +113,7 @@ Finally, tell the UI to render the new step.
 
 1.  **Update the Navigation Button:**
     ```dart
-    CommonElevatedButton(
+    CommonButton.primary(
       // The button text should show "Complete" only on the LAST step (index 2)
       text: state.currentStep == 2 
           ? context.l10n.completeProfile 

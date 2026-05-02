@@ -116,8 +116,8 @@ class _SignUpPageState extends State<SignUpPage> {
                       ),
                     ).paddingHorizontal16,
                     Gap.large24,
-                    CommonElevatedButton(
-                      text: context.l10n.signUp,
+                    CommonButton.primary(
+                      label: context.l10n.signUp,
                       isLoading: isLoading,
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {

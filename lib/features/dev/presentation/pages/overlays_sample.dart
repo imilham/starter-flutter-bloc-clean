@@ -29,8 +29,8 @@ class OverlaysSample extends StatelessWidget {
           icon: Icons.window,
           isExpanded: true,
           children: [
-            CommonElevatedButton(
-              text: 'Show Alert Dialog',
+            CommonButton.primary(
+              label: 'Show Alert Dialog',
               onPressed: () {
                 CommonDialog.alert(
                   context,
@@ -40,8 +40,8 @@ class OverlaysSample extends StatelessWidget {
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Confirm Dialog',
+            CommonButton.primary(
+              label: 'Show Confirm Dialog',
               onPressed: () {
                 CommonDialog.confirm(
                   context,
@@ -57,8 +57,8 @@ class OverlaysSample extends StatelessWidget {
           title: 'Bottom Sheet',
           icon: Icons.layers,
           children: [
-            CommonElevatedButton(
-              text: 'Show Bottom Sheet',
+            CommonButton.primary(
+              label: 'Show Bottom Sheet',
               onPressed: () {
                 CommonBottomSheet.show<void>(
                   context,
@@ -77,22 +77,22 @@ class OverlaysSample extends StatelessWidget {
           title: 'Snackbars',
           icon: Icons.message,
           children: [
-            CommonElevatedButton(
-              text: 'Show Success Snackbar',
+            CommonButton.primary(
+              label: 'Show Success Snackbar',
               onPressed: () {
                 context.showSuccessSnackBar('Operation completed successfully!');
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Error Snackbar',
+            CommonButton.primary(
+              label: 'Show Error Snackbar',
               onPressed: () {
                 context.showErrorSnackBar('Something went wrong!');
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Custom Snackbar',
+            CommonButton.primary(
+              label: 'Show Custom Snackbar',
               onPressed: () {
                 context.showCustomSnackBar(
                   content: Row(
@@ -119,22 +119,22 @@ class OverlaysSample extends StatelessWidget {
           title: 'Toasts',
           icon: Icons.notifications_active,
           children: [
-            CommonElevatedButton(
-              text: 'Show Toast (Bottom)',
+            CommonButton.primary(
+              label: 'Show Toast (Bottom)',
               onPressed: () {
                 context.showToast('This is a toast message');
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Toast (Top)',
+            CommonButton.primary(
+              label: 'Show Toast (Top)',
               onPressed: () {
                 context.showToast('Top Toast', gravity: ToastGravity.top);
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Success Toast',
+            CommonButton.primary(
+              label: 'Show Success Toast',
               backgroundColor: Colors.green,
               foregroundColor: Colors.white,
               onPressed: () {
@@ -146,8 +146,8 @@ class OverlaysSample extends StatelessWidget {
               },
             ),
             Gap.medium16,
-            CommonElevatedButton(
-              text: 'Show Long Toast (3.5s)',
+            CommonButton.primary(
+              label: 'Show Long Toast (3.5s)',
               onPressed: () {
                 context.showToast('Long Toast Message', length: ToastLength.long);
               },

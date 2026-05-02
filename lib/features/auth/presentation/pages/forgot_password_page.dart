@@ -115,8 +115,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     hintText: 'me@example.com',
                   ),
                   Gap.large24,
-                  CommonElevatedButton(
-                    text: context.l10n.submit,
+                  CommonButton.primary(
+                    label: context.l10n.submit,
                     isLoading: _isLoading,
                     onPressed: _submitForgotPassword,
                   ),
