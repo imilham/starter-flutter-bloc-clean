@@ -1,216 +1,201 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_test/flutter_test.dart';
-// import 'package:starter/utils/widgets/buttons/buttons.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_test/flutter_test.dart';
+import 'package:starter/utils/widgets/buttons/buttons.dart';
 
-// void main() {
-//   group('CommonElevatedButton', () {
-//     testWidgets('renders with required parameters', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Test Button',
-//             ),
-//           ),
-//         ),
-//       );
+void main() {
+  group('CommonButton.primary', () {
+    testWidgets('renders with required parameters', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Test Button',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(find.text('Test Button'), findsOneWidget);
-//       expect(find.byType(ElevatedButton), findsOneWidget);
-//     });
+      expect(find.text('Test Button'), findsOneWidget);
+      expect(find.byType(ElevatedButton), findsOneWidget);
+    });
 
-//     testWidgets('calls onPressed when tapped', (tester) async {
-//       var pressed = false;
+    testWidgets('calls onPressed when tapped', (tester) async {
+      var pressed = false;
 
-//       await tester.pumpWidget(
-//         MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Test',
-//               onPressed: () => pressed = true,
-//             ),
-//           ),
-//         ),
-//       );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Test',
+              onPressed: () => pressed = true,
+            ),
+          ),
+        ),
+      );
 
-//       await tester.tap(find.byType(CommonElevatedButton));
-//       await tester.pump();
+      await tester.tap(find.text('Test'));
+      await tester.pump();
 
-//       expect(pressed, isTrue);
-//     });
+      expect(pressed, isTrue);
+    });
 
-//     testWidgets('shows loading spinner when isLoading is true', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Test',
-//               isLoading: true,
-//             ),
-//           ),
-//         ),
-//       );
+    testWidgets('shows loading spinner when isLoading is true', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Test',
+              isLoading: true,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-//       expect(find.text('Test'), findsNothing);
-//     });
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('Test'), findsNothing);
+    });
 
-//     testWidgets('disables button when isLoading is true', (tester) async {
-//       var pressed = false;
+    testWidgets('disables button when isLoading is true', (tester) async {
+      var pressed = false;
 
-//       await tester.pumpWidget(
-//         MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Test',
-//               isLoading: true,
-//               onPressed: () => pressed = true,
-//             ),
-//           ),
-//         ),
-//       );
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Test',
+              isLoading: true,
+              onPressed: () => pressed = true,
+            ),
+          ),
+        ),
+      );
 
-//       await tester.tap(find.byType(CommonElevatedButton));
-//       await tester.pump();
+      await tester.tap(find.byType(ElevatedButton), warnIfMissed: false);
+      await tester.pump();
 
-//       expect(pressed, isFalse);
-//     });
+      expect(pressed, isFalse);
+    });
 
-//     testWidgets('displays icon when provided', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Save',
-//               icon: Icons.save,
-//             ),
-//           ),
-//         ),
-//       );
+    testWidgets('displays icon when provided', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Save',
+              prefixIcon: Icons.save,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(find.byIcon(Icons.save), findsOneWidget);
-//       expect(find.text('Save'), findsOneWidget);
-//     });
+      expect(find.byIcon(Icons.save), findsOneWidget);
+      expect(find.text('Save'), findsOneWidget);
+    });
 
-//     testWidgets('large button expands to full width', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonButton.primary(
-//               text: 'Test',
-//             ),
-//           ),
-//         ),
-//       );
+    testWidgets('small size creates small button', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.primary(
+              label: 'Small',
+              size: CommonButtonSize.small,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       final sizedBox = tester.widget<SizedBox>(
-//         find
-//             .ancestor(
-//               of: find.byType(ElevatedButton),
-//               matching: find.byType(SizedBox),
-//             )
-//             .first,
-//       );
-//       expect(sizedBox.width, double.infinity);
-//     });
+      expect(find.text('Small'), findsOneWidget);
+    });
+  });
 
-//     testWidgets('small factory creates small button', (tester) async {
-//       await tester.pumpWidget(
-//         MaterialApp(
-//           home: Scaffold(
-//             body: CommonElevatedButton.small(
-//               text: 'Small',
-//               onPressed: () {},
-//             ),
-//           ),
-//         ),
-//       );
+  group('CommonButton.outline', () {
+    testWidgets('renders with required parameters', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.outline(
+              label: 'Cancel',
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(find.text('Small'), findsOneWidget);
-//     });
-//   });
+      expect(find.text('Cancel'), findsOneWidget);
+      expect(find.byType(OutlinedButton), findsOneWidget);
+    });
 
-//   group('CommonSecondaryButton', () {
-//     testWidgets('renders with required parameters', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonOutlineButton(
-//               text: 'Cancel',
-//             ),
-//           ),
-//         ),
-//       );
+    testWidgets('shows loading spinner when isLoading is true', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.outline(
+              label: 'Cancel',
+              isLoading: true,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(find.text('Cancel'), findsOneWidget);
-//       expect(find.byType(OutlinedButton), findsOneWidget);
-//     });
+      expect(find.byType(CircularProgressIndicator), findsOneWidget);
+      expect(find.text('Cancel'), findsNothing);
+    });
 
-//     testWidgets('shows loading spinner when isLoading is true', (tester) async {
-//       await tester.pumpWidget(
-//         const MaterialApp(
-//           home: Scaffold(
-//             body: CommonOutlineButton(
-//               text: 'Cancel',
-//               isLoading: true,
-//             ),
-//           ),
-//         ),
-//       );
+    testWidgets('calls onPressed when tapped', (tester) async {
+      var pressed = false;
 
-//       expect(find.byType(CircularProgressIndicator), findsOneWidget);
-//       expect(find.text('Cancel'), findsNothing);
-//     });
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.outline(
+              label: 'Cancel',
+              onPressed: () => pressed = true,
+            ),
+          ),
+        ),
+      );
 
-//     testWidgets('calls onPressed when tapped', (tester) async {
-//       var pressed = false;
+      await tester.tap(find.text('Cancel'));
+      await tester.pump();
 
-//       await tester.pumpWidget(
-//         MaterialApp(
-//           home: Scaffold(
-//             body: CommonOutlineButton(
-//               text: 'Cancel',
-//               onPressed: () => pressed = true,
-//             ),
-//           ),
-//         ),
-//       );
+      expect(pressed, isTrue);
+    });
 
-//       await tester.tap(find.byType(CommonOutlineButton));
-//       await tester.pump();
+    testWidgets('small size creates small button', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Scaffold(
+            body: CommonButton.outline(
+              label: 'Small',
+              size: CommonButtonSize.small,
+              onPressed: () {},
+            ),
+          ),
+        ),
+      );
 
-//       expect(pressed, isTrue);
-//     });
+      expect(find.text('Small'), findsOneWidget);
+    });
+  });
 
-//     testWidgets('small factory creates small button', (tester) async {
-//       await tester.pumpWidget(
-//         MaterialApp(
-//           home: Scaffold(
-//             body: CommonOutlineButton.small(
-//               text: 'Small',
-//               onPressed: () {},
-//             ),
-//           ),
-//         ),
-//       );
+  group('CommonButtonSize enum', () {
+    test('has correct values', () {
+      expect(CommonButtonSize.values.length, 2);
+      expect(CommonButtonSize.small, isNotNull);
+      expect(CommonButtonSize.large, isNotNull);
+    });
+  });
 
-//       expect(find.text('Small'), findsOneWidget);
-//     });
-//   });
-
-//   group('ButtonSize enum', () {
-//     test('has correct values', () {
-//       expect(ButtonSize.values.length, 2);
-//       expect(ButtonSize.small, isNotNull);
-//       expect(ButtonSize.large, isNotNull);
-//     });
-//   });
-
-//   group('IconPosition enum', () {
-//     test('has correct values', () {
-//       expect(IconPosition.values.length, 2);
-//       expect(IconPosition.leading, isNotNull);
-//       expect(IconPosition.trailing, isNotNull);
-//     });
-//   });
-// }
+  group('IconPosition enum', () {
+    test('has correct values', () {
+      expect(IconPosition.values.length, 2);
+      expect(IconPosition.leading, isNotNull);
+      expect(IconPosition.trailing, isNotNull);
+    });
+  });
+}
