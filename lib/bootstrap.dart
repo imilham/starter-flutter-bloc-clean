@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:starter/core/di/injection_container.dart';
 import 'package:starter/utils/utils.dart';
 
@@ -41,6 +44,11 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   /// todo - uncomment if using Firebase services
   // await Firebase.initializeApp();
   final hiveCipher = await hiveInit();
+  
+  HydratedBloc.storage = await HydratedStorage.build(
+    storageDirectory: await getApplicationDocumentsDirectory(),
+  );
+
   await setup(environment: environment, hiveCipher: hiveCipher);
   runApp(await builder());
 }
