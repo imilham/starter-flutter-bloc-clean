@@ -74,14 +74,14 @@ extension FontFamilyExtension on FontFamily {
   }) {
     switch (this) {
       case FontFamily.heading:
-        return GoogleFonts.platypi(
+        return platypi(
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,
           height: height,
         );
       case FontFamily.body:
-        return GoogleFonts.notoSans(
+        return notoSans(
           fontSize: fontSize,
           fontWeight: fontWeight,
           color: color,
@@ -186,3 +186,57 @@ class AppTypography {
 
   static String? get fontFamily => FontFamily.body.familyName;
 }
+
+// ============================================================================
+// Direct GoogleFonts Wrappers
+// ============================================================================
+
+TextStyle platypi({
+  double? fontSize,
+  Color? color,
+  FontWeight? fontWeight,
+  double? letterSpacing,
+  double? height,
+  FontStyle? fontStyle,
+  TextDecoration? decoration,
+  List<Shadow>? shadows,
+  Color? decorationColor,
+  TextDecorationStyle? decorationStyle,
+}) =>
+    GoogleFonts.platypi(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
+
+TextStyle notoSans({
+  double? fontSize,
+  Color? color,
+  FontWeight? fontWeight,
+  double? letterSpacing,
+  double? height,
+  FontStyle? fontStyle,
+  TextDecoration? decoration,
+  List<Shadow>? shadows,
+  Color? decorationColor,
+  TextDecorationStyle? decorationStyle,
+}) =>
+    GoogleFonts.notoSans(
+      color: color,
+      fontSize: fontSize,
+      fontWeight: fontWeight,
+      letterSpacing: letterSpacing,
+      height: height,
+      fontStyle: fontStyle,
+      decoration: decoration,
+      shadows: shadows,
+      decorationColor: decorationColor,
+      decorationStyle: decorationStyle,
+    );
