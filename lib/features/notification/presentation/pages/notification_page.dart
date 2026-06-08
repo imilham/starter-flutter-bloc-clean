@@ -4,6 +4,8 @@ import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:starter/features/notification/domain/domain.dart';
 import 'package:starter/features/notification/presentation/bloc/bloc.dart';
 import 'package:starter/features/notification/notification_injection.dart';
+import 'package:starter/features/notification/presentation/widgets/widgets.dart';
+import 'package:starter/utils/widgets/widgets.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -78,33 +80,13 @@ class _NotificationPageState extends State<NotificationPage> {
                 onMarkAsRead: () => _markAsRead(context, notification),
                 onDelete: () => _deleteNotification(context, notification),
               ),
-              noItemsFoundIndicatorBuilder: (context) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.notifications_none, size: 64, color: Colors.grey),
-                    const SizedBox(height: 16),
-                    const Text(
-                      'No notifications',
-                      style: TextStyle(color: Colors.grey, fontSize: 16),
-                    ),
-                  ],
-                ),
+              noItemsFoundIndicatorBuilder: (context) => const CommonEmptyWidget(
+                title: 'No notifications',
+                iconData: Icons.notifications_none,
               ),
-              firstPageErrorIndicatorBuilder: (context) => Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.error_outline, size: 64, color: Colors.red),
-                    const SizedBox(height: 16),
-                    const Text('Failed to load notifications'),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () => _pagingController.refresh(),
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
+              firstPageErrorIndicatorBuilder: (context) => CommonErrorWidget(
+                errorMessage: 'Failed to load notifications',
+                onRetry: () => _pagingController.refresh(),
               ),
             ),
           ),
@@ -150,89 +132,4 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 }
 
-class NotificationItemWidget extends StatelessWidget {
-  const NotificationItemWidget({
-    Key? key,
-    required this.notification,
-    this.onTap,
-    this.onMarkAsRead,
-    this.onDelete,
-  }) : super(key: key);
 
-  final NotificationEntity notification;
-  final VoidCallback? onTap;
-  final VoidCallback? onMarkAsRead;
-  final VoidCallback? onDelete;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-      child: ListTile(
-        onTap: onTap,
-        leading: notification.isRead
-            ? null
-            : Container(
-                width: 12,
-                height: 12,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.blue,
-                ),
-              ),
-        title: Text(
-          notification.title,
-          style: TextStyle(
-            fontWeight: notification.isRead ? FontWeight.normal : FontWeight.bold,
-          ),
-        ),
-        subtitle: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 8),
-            Text(
-              notification.message,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            if (notification.createdAt != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 8),
-                child: Text(
-                  notification.createdAt!,
-                  style: const TextStyle(fontSize: 12, color: Colors.grey),
-                ),
-              ),
-          ],
-        ),
-        trailing: PopupMenuButton<void>(
-          itemBuilder: (context) => [
-            if (!notification.isRead)
-              PopupMenuItem<void>(
-                onTap: onMarkAsRead,
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.done, size: 20),
-                    SizedBox(width: 8),
-                    Text('Mark as read'),
-                  ],
-                ),
-              ),
-            PopupMenuItem<void>(
-              onTap: onDelete,
-              child: const Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Icon(Icons.delete, size: 20, color: Colors.red),
-                  SizedBox(width: 8),
-                  Text('Delete', style: TextStyle(color: Colors.red)),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
