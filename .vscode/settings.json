@@ -15,5 +15,7 @@
         "rxdart",
         "unfocus",
         "usecase"
-    ]
+    ],
+    "dart.flutterSdkPath": "/Users/developer/.puro/envs/v2/flutter",
+    "dart.sdkPath": "/Users/developer/.puro/envs/v2/flutter/bin/cache/dart-sdk"
 }

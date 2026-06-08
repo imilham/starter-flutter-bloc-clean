@@ -1,6 +1,6 @@
-import 'package:starter/core/usecases/result.dart';
 import 'package:starter/core/error/exceptions.dart';
 import 'package:starter/core/error/failures.dart';
+import 'package:starter/core/usecases/result.dart';
 import 'package:starter/features/notification/data/datasources/datasources.dart';
 import 'package:starter/features/notification/data/models/models.dart';
 import 'package:starter/features/notification/domain/domain.dart';

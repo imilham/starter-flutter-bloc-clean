@@ -42,7 +42,7 @@ class _PrimaryButton extends StatelessWidget {
   final FocusNode? focusNode;
   final bool autofocus;
 
-  static const double _smallWidth = 220.0;
+  static const double _smallWidth = 220;
 
   @override
   Widget build(BuildContext context) {

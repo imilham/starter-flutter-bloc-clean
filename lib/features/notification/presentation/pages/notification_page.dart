@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 import 'package:starter/features/notification/domain/domain.dart';
-import 'package:starter/features/notification/presentation/bloc/bloc.dart';
 import 'package:starter/features/notification/notification_injection.dart';
+import 'package:starter/features/notification/presentation/bloc/bloc.dart';
 import 'package:starter/features/notification/presentation/widgets/widgets.dart';
 import 'package:starter/utils/widgets/widgets.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+  const NotificationPage({super.key});
 
   @override
   State<NotificationPage> createState() => _NotificationPageState();
@@ -31,7 +31,7 @@ class _NotificationPageState extends State<NotificationPage> {
           onSuccess: (notifications) {
             _lastPage = notifications.metadata.lastPage;
             return notifications.items;
-          });
+          },);
     },
   );
 

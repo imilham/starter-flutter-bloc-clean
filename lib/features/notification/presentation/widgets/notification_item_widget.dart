@@ -3,11 +3,11 @@ import 'package:starter/features/notification/domain/domain.dart';
 
 class NotificationItemWidget extends StatelessWidget {
   const NotificationItemWidget({
-    required this.notification, Key? key,
+    required this.notification, super.key,
     this.onTap,
     this.onMarkAsRead,
     this.onDelete,
-  }) : super(key: key);
+  });
 
   final NotificationEntity notification;
   final VoidCallback? onTap;

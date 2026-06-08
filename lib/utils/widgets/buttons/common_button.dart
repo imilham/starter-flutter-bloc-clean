@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:starter/utils/utils.dart';
-import 'button_enums.dart';
 
 part 'primary_button.dart';
 part 'outline_button.dart';

@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'notification_entity.dart';
+import 'package:starter/features/notification/domain/entities/notification_entity.dart';
 
 class PaginationMetadata extends Equatable {
   const PaginationMetadata({

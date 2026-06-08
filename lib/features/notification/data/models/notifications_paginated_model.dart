@@ -54,7 +54,7 @@ abstract class NotificationsPaginatedModel with _$NotificationsPaginatedModel {
 
   factory NotificationsPaginatedModel.fromEntity(NotificationsPaginatedEntity entity) {
     return NotificationsPaginatedModel(
-      items: entity.items.map((e) => NotificationModel.fromEntity(e)).toList(),
+      items: entity.items.map(NotificationModel.fromEntity).toList(),
       metadata: PaginationMetadataModel.fromEntity(entity.metadata),
     );
   }

@@ -68,7 +68,7 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
       }
 
       emit(NotificationsLoadedState(_currentNotifications!));
-    });
+    },);
   }
 
   Future<void> _onFetchNotificationById(
@@ -85,7 +85,7 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (notification) {
       emit(NotificationDetailLoadedState(notification));
-    });
+    },);
   }
 
   Future<void> _onMarkAsRead(
@@ -112,7 +112,7 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
       }
 
       emit(NotificationUpdatedState(notification));
-    });
+    },);
   }
 
   Future<void> _onDeleteNotification(
@@ -137,7 +137,7 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
       }
 
       emit(NotificationDeletedState(event.uuid));
-    });
+    },);
   }
 
   Future<void> _onDeleteAllNotifications(
@@ -146,27 +146,27 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
   ) async {
     emit(const NotificationLoadingState());
 
-    final result = await deleteAllNotificationsUseCase(NoParams());
+    final result = await deleteAllNotificationsUseCase(const NoParams());
 
     result.fold(onFailure: (failure) {
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (_) {
       _currentNotifications = null;
       emit(const AllNotificationsDeletedState());
-    });
+    },);
   }
 
   Future<void> _onGetNotificationSettings(
     GetNotificationSettingsEvent event,
     Emitter<NotificationState> emit,
   ) async {
-    final result = await getNotificationSettingsUseCase(NoParams());
+    final result = await getNotificationSettingsUseCase(const NoParams());
 
     result.fold(onFailure: (failure) {
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (isEnabled) {
       emit(NotificationSettingsLoadedState(isEnabled));
-    });
+    },);
   }
 
   Future<void> _onIncomingPushNotification(
