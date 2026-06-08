@@ -271,11 +271,17 @@ abstract class AppLocalizations {
   /// **'Yes'**
   String get yes;
 
-  /// Label for no action
+  /// Title for notifications page
   ///
   /// In en, this message translates to:
-  /// **'No'**
-  String get no;
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @noNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'No Notifications'**
+  String get noNotifications;
 
   /// Content placeholder for home page
   ///

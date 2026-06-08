@@ -19,6 +19,7 @@ enum Pages {
   more,
   settings,
   profile,
+  notifications,
   designSystem,
 }
 

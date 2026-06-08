@@ -120,10 +120,11 @@
     "@yes": {
         "description": "Label for yes action"
     },
-    "no": "No",
-    "@no": {
-        "description": "Label for no action"
+    "notifications": "Notifications",
+    "@notifications": {
+        "description": "Title for notifications page"
     },
+    "noNotifications": "No Notifications",
     "homeContent": "Home Content",
     "@homeContent": {
         "description": "Content placeholder for home page"

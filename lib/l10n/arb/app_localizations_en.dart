@@ -99,7 +99,10 @@ class AppLocalizationsEn extends AppLocalizations {
   String get yes => 'Yes';
 
   @override
-  String get no => 'No';
+  String get notifications => 'Notifications';
+
+  @override
+  String get noNotifications => 'No Notifications';
 
   @override
   String get homeContent => 'Home Content';

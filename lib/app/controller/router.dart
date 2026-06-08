@@ -6,6 +6,7 @@ import 'package:starter/features/auth/auth.dart';
 import 'package:starter/features/dev/dev.dart';
 import 'package:starter/features/home/home.dart';
 import 'package:starter/features/more/more.dart';
+import 'package:starter/features/notification/notification.dart' hide getIt;
 import 'package:starter/features/onboarding/onboarding.dart';
 import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';
@@ -190,6 +191,18 @@ class AppRouter {
                     pageBuilder: (context, state) => MaterialPage(
                       key: state.pageKey,
                       child: const SettingsPage(),
+                    ),
+                  ),
+                  GoRoute(
+                    path: Pages.notifications.toPath(isSubRoute: true),
+                    name: Pages.notifications.toPathName(),
+                    parentNavigatorKey: _rootNavigatorKey,
+                    pageBuilder: (context, state) => MaterialPage(
+                      key: state.pageKey,
+                      child: BlocProvider(
+                        create: (context) => getIt<NotificationBloc>(),
+                        child: const NotificationPage(),
+                      ),
                     ),
                   ),
                   GoRoute(

@@ -4,66 +4,67 @@ import 'package:starter/features/notification/domain/domain.dart';
 import 'package:starter/features/notification/presentation/presentation.dart';
 import 'package:starter/utils/utils.dart';
 
-final getIt = GetIt.instance;
+/// Extension on GetIt to register notification feature dependencies.
+extension NotificationInjection on GetIt {
+  /// Registers all notification-related dependencies
+  void registerNotificationFeature() {
+    // Services
+    final pushNotificationService = PushNotificationService();
+    this..registerSingleton<PushNotificationService>(pushNotificationService)
 
-/// Register all notification-related dependencies
-Future<void> setupNotificationInjection() async {
-  // Services
-  final pushNotificationService = PushNotificationService();
-  getIt..registerSingleton<PushNotificationService>(pushNotificationService)
+    // Data Sources
+    ..registerSingleton<NotificationRemoteDataSource>(
+      NotificationRemoteDataSourceImpl(networkClient: get<ApiClient>()),
+    )
 
-  // Data Sources
-  ..registerSingleton<NotificationRemoteDataSource>(
-    NotificationRemoteDataSourceImpl(networkClient: getIt<ApiClient>()),
-  )
+    // Repository
+    ..registerSingleton<NotificationRepository>(
+      NotificationRepositoryImpl(
+        remoteDataSource: get<NotificationRemoteDataSource>(),
+      ),
+    )
 
-  // Repository
-  ..registerSingleton<NotificationRepository>(
-    NotificationRepositoryImpl(
-      remoteDataSource: getIt<NotificationRemoteDataSource>(),
-    ),
-  )
+    // Use Cases
+    ..registerSingleton<FetchNotificationsUseCase>(
+      FetchNotificationsUseCase(get<NotificationRepository>()),
+    )
 
-  // Use Cases
-  ..registerSingleton<FetchNotificationsUseCase>(
-    FetchNotificationsUseCase(getIt<NotificationRepository>()),
-  )
+    ..registerSingleton<FetchNotificationByIdUseCase>(
+      FetchNotificationByIdUseCase(get<NotificationRepository>()),
+    )
 
-  ..registerSingleton<FetchNotificationByIdUseCase>(
-    FetchNotificationByIdUseCase(getIt<NotificationRepository>()),
-  )
+    ..registerSingleton<MarkAsReadUseCase>(
+      MarkAsReadUseCase(get<NotificationRepository>()),
+    )
 
-  ..registerSingleton<MarkAsReadUseCase>(
-    MarkAsReadUseCase(getIt<NotificationRepository>()),
-  )
+    ..registerSingleton<DeleteNotificationUseCase>(
+      DeleteNotificationUseCase(get<NotificationRepository>()),
+    )
 
-  ..registerSingleton<DeleteNotificationUseCase>(
-    DeleteNotificationUseCase(getIt<NotificationRepository>()),
-  )
+    ..registerSingleton<DeleteAllNotificationsUseCase>(
+      DeleteAllNotificationsUseCase(get<NotificationRepository>()),
+    )
 
-  ..registerSingleton<DeleteAllNotificationsUseCase>(
-    DeleteAllNotificationsUseCase(getIt<NotificationRepository>()),
-  )
+    ..registerSingleton<GetNotificationSettingsUseCase>(
+      GetNotificationSettingsUseCase(get<NotificationRepository>()),
+    )
 
-  ..registerSingleton<GetNotificationSettingsUseCase>(
-    GetNotificationSettingsUseCase(getIt<NotificationRepository>()),
-  )
+    // BLoC
+    ..registerFactory<NotificationBloc>(
+      () => NotificationBloc(
+        fetchNotificationsUseCase: get<FetchNotificationsUseCase>(),
+        fetchNotificationByIdUseCase: get<FetchNotificationByIdUseCase>(),
+        markAsReadUseCase: get<MarkAsReadUseCase>(),
+        deleteNotificationUseCase: get<DeleteNotificationUseCase>(),
+        deleteAllNotificationsUseCase: get<DeleteAllNotificationsUseCase>(),
+        getNotificationSettingsUseCase: get<GetNotificationSettingsUseCase>(),
+      ),
+    );
+  }
 
-  // BLoC
-  ..registerFactory<NotificationBloc>(
-    () => NotificationBloc(
-      fetchNotificationsUseCase: getIt<FetchNotificationsUseCase>(),
-      fetchNotificationByIdUseCase: getIt<FetchNotificationByIdUseCase>(),
-      markAsReadUseCase: getIt<MarkAsReadUseCase>(),
-      deleteNotificationUseCase: getIt<DeleteNotificationUseCase>(),
-      deleteAllNotificationsUseCase: getIt<DeleteAllNotificationsUseCase>(),
-      getNotificationSettingsUseCase: getIt<GetNotificationSettingsUseCase>(),
-    ),
-  );
-}
-
-/// Initialize push notification service
-Future<void> initializePushNotifications() async {
-  final pushNotificationService = getIt<PushNotificationService>();
-  await pushNotificationService.initialize();
+  /// Initialize push notification service
+  Future<void> initializePushNotifications() async {
+    final pushNotificationService = get<PushNotificationService>();
+    await pushNotificationService.initialize();
+  }
 }

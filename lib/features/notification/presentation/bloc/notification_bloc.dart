@@ -2,12 +2,11 @@ import 'dart:async';
 
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:starter/core/core.dart';
-import 'package:starter/features/notification/data/models/models.dart';
 import 'package:starter/features/notification/domain/domain.dart';
 import 'package:starter/features/notification/presentation/bloc/notification_event.dart';
 import 'package:starter/features/notification/presentation/bloc/notification_state.dart';
 
-class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState> {
+class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState> with PaginationMixin<NotificationEntity> {
   NotificationBloc({
     required this.fetchNotificationsUseCase,
     required this.fetchNotificationByIdUseCase,
@@ -16,7 +15,6 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
     required this.deleteAllNotificationsUseCase,
     required this.getNotificationSettingsUseCase,
   }) : super(const NotificationInitialState()) {
-    on<FetchNotificationsEvent>(_onFetchNotifications);
     on<FetchNotificationByIdEvent>(_onFetchNotificationById);
     on<MarkAsReadEvent>(_onMarkAsRead);
     on<DeleteNotificationEvent>(_onDeleteNotification);
@@ -33,42 +31,22 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
   final DeleteAllNotificationsUseCase deleteAllNotificationsUseCase;
   final GetNotificationSettingsUseCase getNotificationSettingsUseCase;
 
-  /// Current notifications in memory (for accumulating paginated results)
-  NotificationsPaginatedEntity? _currentNotifications;
+  @override
+  Future<({List<NotificationEntity> items, int lastPage})> fetchApi(int pageKey) async {
+    final result = await fetchNotificationsUseCase(FetchNotificationsParams(page: pageKey));
+    return result.fold(
+      onFailure: (failure) => throw failure,
+      onSuccess: (notifications) => (
+        items: notifications.items,
+        lastPage: notifications.metadata.lastPage,
+      ),
+    );
+  }
 
-  Future<void> _onFetchNotifications(
-    FetchNotificationsEvent event,
-    Emitter<NotificationState> emit,
-  ) async {
-    if (event.page == 1) {
-      emit(const NotificationLoadingState());
-    }
-
-    final result = await fetchNotificationsUseCase(FetchNotificationsParams(page: event.page));
-
-    result.fold(onFailure: (failure) {
-      emit(NotificationErrorState(failure.message));
-    }, onSuccess: (notifications) {
-      // For page 1, replace the list; for subsequent pages, append
-      if (event.page == 1) {
-        _currentNotifications = notifications;
-      } else {
-        if (_currentNotifications != null) {
-          final combinedItems = [
-            ..._currentNotifications!.items,
-            ...notifications.items,
-          ];
-          _currentNotifications = NotificationsPaginatedEntity(
-            items: combinedItems,
-            metadata: notifications.metadata,
-          );
-        } else {
-          _currentNotifications = notifications;
-        }
-      }
-
-      emit(NotificationsLoadedState(_currentNotifications!));
-    },);
+  @override
+  Future<void> close() {
+    disposePagination();
+    return super.close();
   }
 
   Future<void> _onFetchNotificationById(
@@ -97,20 +75,8 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
     result.fold(onFailure: (failure) {
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (notification) {
-      // Update the notification in the current list
-      if (_currentNotifications != null) {
-        final index = _currentNotifications!.items.indexWhere((item) => item.uuid == notification.uuid);
-        if (index != -1) {
-          final updatedItems = [..._currentNotifications!.items];
-          updatedItems[index] = notification;
-          _currentNotifications = NotificationsPaginatedEntity(
-            items: updatedItems,
-            metadata: _currentNotifications!.metadata,
-          );
-          emit(NotificationsLoadedState(_currentNotifications!));
-        }
-      }
-
+      // Refresh the list to show the updated state
+      pagingController.refresh();
       emit(NotificationUpdatedState(notification));
     },);
   }
@@ -126,16 +92,8 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
     result.fold(onFailure: (failure) {
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (_) {
-      // Remove from current list
-      if (_currentNotifications != null) {
-        final updatedItems = _currentNotifications!.items.where((item) => item.uuid != event.uuid).toList();
-        _currentNotifications = NotificationsPaginatedEntity(
-          items: updatedItems,
-          metadata: _currentNotifications!.metadata,
-        );
-        emit(NotificationsLoadedState(_currentNotifications!));
-      }
-
+      // Refresh the list to remove the deleted item
+      pagingController.refresh();
       emit(NotificationDeletedState(event.uuid));
     },);
   }
@@ -151,7 +109,7 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
     result.fold(onFailure: (failure) {
       emit(NotificationErrorState(failure.message));
     }, onSuccess: (_) {
-      _currentNotifications = null;
+      pagingController.refresh();
       emit(const AllNotificationsDeletedState());
     },);
   }
@@ -182,37 +140,19 @@ class NotificationBloc extends HydratedBloc<NotificationEvent, NotificationState
     ClearNotificationsEvent event,
     Emitter<NotificationState> emit,
   ) async {
-    _currentNotifications = null;
+    pagingController.refresh();
     emit(const NotificationsClearedState());
   }
 
   @override
   NotificationState? fromJson(Map<String, dynamic> json) {
-    try {
-      if (json['notifications'] != null) {
-        final notificationsModel = NotificationsPaginatedModel.fromJson(json['notifications'] as Map<String, dynamic>);
-        final notifications = notificationsModel.toEntity();
-        _currentNotifications = notifications;
-        return NotificationsLoadedState(notifications);
-      }
-    } catch (_) {
-      // Ignored
-    }
+    // We don't persist paginated data via HydratedBloc anymore as PagingController handles its own state
+    // But we could persist settings if needed.
     return null;
   }
 
   @override
   Map<String, dynamic>? toJson(NotificationState state) {
-    if (state is NotificationsLoadedState) {
-      return {
-        'notifications': NotificationsPaginatedModel.fromEntity(state.notifications).toJson(),
-      };
-    }
-    if (_currentNotifications != null) {
-      return {
-        'notifications': NotificationsPaginatedModel.fromEntity(_currentNotifications!).toJson(),
-      };
-    }
     return null;
   }
 }

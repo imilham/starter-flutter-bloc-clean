@@ -38,6 +38,13 @@ class MorePage extends StatelessWidget {
         },
       ),
       MenuItem(
+        title: 'Notifications',
+        icon: Icons.notifications_none_outlined,
+        onTap: () {
+          Pages.notifications.go(context);
+        },
+      ),
+      MenuItem(
         title: context.l10n.helpSupport,
         icon: Icons.help_outline,
         onTap: () {
