@@ -18,7 +18,7 @@ Make sure you have:
 Instead of `flutter create`, clone this boilerplate directly to preserve the custom `android` and `ios` flavor setups.
 
 ```bash
-git clone -b feature/starter-clean-bloc-swagger-gen https://github.com/imilham/starter-flutter-bloc-clean.git <your_app_name>
+git clone -b main https://github.com/imilham/starter-flutter-bloc-clean.git <your_app_name>
 cd <your_app_name>
 ```
 
