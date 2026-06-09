@@ -45,15 +45,11 @@ class ThemeService {
   final Color _outlineColor = const Color(0xFF90A4AE);
   final Color _bottomNavbarColor = const Color(0xffF1FCFD);
   final Color _bottomNavbarDarkColor = const Color(0xFF1A1A1A);
-  final Color _bottomNavbarSelectedColor = const Color(0xffFBE5E9);
   
   // Text Colors
   final Color _coreTextColor = const Color(0xff464646);
-  final Color _black400Color = const Color(0xff969696);
-  final Color _deemphasizedTextColor = const Color(0xff878787);
 
   // Input Borders
-  final Color _inputBorderColor = const Color(0xff262D2E);
   final Color _inputBorderEnabledColor = const Color(0xffC6DEE0);
 
   Color get shimmersColor => isDark ? const Color(0xFF263238) : const Color(0xFFE0E0E0);
@@ -89,20 +85,6 @@ class ThemeService {
         labelColor: Colors.white,
         unselectedLabelColor: Colors.grey.shade400,
       ),
-      extensions: const [
-        AppColors(
-          shimmerColor: AppColorConstants.shimmerLight,
-          shimmerBgColor: AppColorConstants.shimmerBgLight,
-          success: AppColorConstants.successLight,
-          bottomNavbarColor: AppColorConstants.bottomNavbar,
-          bottomNavbarSelectedColor: AppColorConstants.bottomNavbarSelected,
-          pink: AppColorConstants.pink,
-          coreTextColor: AppColorConstants.coreText,
-          black400: AppColorConstants.black400,
-          deemphasizedText: AppColorConstants.deemphasizedText,
-          themeLerpColor: Colors.purpleAccent,
-        ),
-      ],
     );
   }
 
@@ -137,20 +119,6 @@ class ThemeService {
         labelColor: Colors.white,
         unselectedLabelColor: Colors.grey.shade400,
       ),
-      extensions: [
-        AppColors(
-          shimmerColor: AppColorConstants.shimmerDark.withValues(alpha: 0.1),
-          shimmerBgColor: AppColorConstants.shimmerDark,
-          success: AppColorConstants.successDark,
-          bottomNavbarColor: AppColorConstants.bottomNavbarDark,
-          bottomNavbarSelectedColor: AppColorConstants.bottomNavbarSelected,
-          pink: AppColorConstants.pink,
-          coreTextColor: Colors.red,
-          black400: AppColorConstants.black400,
-          deemphasizedText: AppColorConstants.deemphasizedText,
-          themeLerpColor: Colors.orangeAccent,
-        ),
-      ],
     );
   }
 
