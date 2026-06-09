@@ -35,8 +35,9 @@ Future<void> setup({
   // 4. Onboarding Feature (Repository, UseCase)
   getIt
     ..registerProfileFeature()
-    ..registerOnboardingFeature()
-    ..registerNotificationFeature();
+    ..registerOnboardingFeature();
+    // todo - notification feature has a dependency on ApiClient, so it must be registered after core services
+    // ..registerNotificationFeature();
 
   // Wait for all async registrations to complete
   await getIt.allReady();
