@@ -300,5 +300,13 @@
     "sessionExpired": "Session Expired",
     "@sessionExpired": {
         "description": "Error title when session expires"
+    },
+    "noInternetConnection": "No internet. Please check your network connection.",
+    "@noInternetConnection": {
+        "description": "Message shown in the offline banner"
+    },
+    "goToSettings": "Settings",
+    "@goToSettings": {
+        "description": "Button label to open device network settings"
     }
 }

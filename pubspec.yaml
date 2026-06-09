@@ -11,6 +11,7 @@ dependencies:
   cached_network_image: ^3.4.1
   carousel_slider: ^5.1.1
   check_disposable_email: ^0.2.1
+  connectivity_plus: ^7.1.0
   country_picker: ^2.0.27
   device_info_plus: ^11.4.0
   dio: ^5.8.0+1

@@ -235,4 +235,10 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get sessionExpired => 'Session Expired';
+
+  @override
+  String get noInternetConnection => 'No internet. Please check your network connection.';
+
+  @override
+  String get goToSettings => 'Settings';
 }

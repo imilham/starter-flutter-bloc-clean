@@ -9,6 +9,7 @@ export './common_empty_widget.dart';
 export './common_error_widget.dart';
 export './common_image.dart';
 export './common_shimmer.dart';
+export './connectivity_overlay.dart';
 export './extended_column.dart';
 export './form_fields/form_fields.dart';
 export './input_formatters.dart';

@@ -546,6 +546,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Session Expired'**
   String get sessionExpired;
+
+  /// Message shown in the offline banner
+  ///
+  /// In en, this message translates to:
+  /// **'No internet. Please check your network connection.'**
+  String get noInternetConnection;
+
+  /// Button label to open device network settings
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get goToSettings;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

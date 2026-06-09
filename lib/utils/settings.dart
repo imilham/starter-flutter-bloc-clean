@@ -1,8 +1,10 @@
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:uuid/uuid.dart';
 
 /// This file contains the [AppSettings] class, which represents the application settings.
@@ -29,6 +31,26 @@ class AppSettings {
   bool get isDevelopment => _environment == AppEnvironment.development;
   bool get isProduction => _environment == AppEnvironment.production;
   bool get isStaging => _environment == AppEnvironment.staging;
+
+  /// Whether to show the persistent offline overlay when internet is disconnected.
+  bool get showOfflineOverlay => true;
+
+  /// Opens the device network settings.
+  Future<void> openSettings() async {
+    try {
+      if (Platform.isAndroid) {
+        const action = 'android.settings.WIRELESS_SETTINGS';
+        await launchUrl(Uri(scheme: 'intent', path: '#Intent;action=$action;end'));
+      } else if (Platform.isIOS) {
+        final url = Uri.parse('app-settings:');
+        if (await canLaunchUrl(url)) {
+          await launchUrl(url);
+        }
+      }
+    } catch (e) {
+      log('Error opening settings: $e');
+    }
+  }
 
   String get baseUrl => dotenv.env['BASE_URL'] ?? '';
 

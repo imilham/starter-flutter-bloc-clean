@@ -43,7 +43,9 @@ class ApiError implements Exception {
 T onError<T>(Exception e) {
   try {
     if (e is DioException) {
-      if (e.response?.data is Map<String, dynamic>) {
+      if (e.type == DioExceptionType.connectionError) {
+        throw ApiError(message: 'No internet connection. Please check your network.', statusCode: 0);
+      } else if (e.response?.data is Map<String, dynamic>) {
         throw ApiError.fromJson(e.response?.data as Map<String, dynamic>, statusCode: e.response?.statusCode ?? 0);
       } else {
         throw ApiError(message: e.message ?? 'Unknown Error', statusCode: 400);

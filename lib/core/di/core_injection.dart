@@ -19,6 +19,7 @@ extension CoreInjection on GetIt {
       ..registerSingleton<AppSettings>(AppSettings(environment))
       ..registerSingleton<HiveAesCipher>(hiveCipher)
       ..registerSingleton<SecureStorage>(SecureStorageImpl())
+      ..registerSingleton<ConnectivityService>(ConnectivityService())
       ..registerSingletonAsync<AppCubit>(() async {
         await Hive.openBox<bool>('states');
         return AppCubit();
@@ -29,11 +30,19 @@ extension CoreInjection on GetIt {
     registerLazySingleton<ApiClient>(
       () => ApiClient(
         interceptors: [
+          ConnectivityInterceptor(), // Rejects requests when offline
           AuthInterceptor(), // Auto-adds tokens, skips login/register/forgot-password
           TokenExpirationInterceptor(), // Handles 401 Unauthorized
         ],
       ),
     );
+
+    // Connectivity Cubit - only needed when the offline banner is enabled
+    if (GetIt.instance<AppSettings>().showOfflineOverlay) {
+      registerSingleton<ConnectivityCubit>(
+        ConnectivityCubit(GetIt.instance<ConnectivityService>()),
+      );
+    }
 
     // Theme Service
     registerSingletonAsync<ThemeCubit>(() async {

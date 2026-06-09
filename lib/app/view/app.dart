@@ -28,6 +28,8 @@ class _StarterAppState extends State<StarterApp> {
         BlocProvider.value(value: GetIt.instance<AppCubit>()),
         BlocProvider.value(value: GetIt.instance<ThemeCubit>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
+        if (GetIt.instance<AppSettings>().showOfflineOverlay)
+          BlocProvider.value(value: GetIt.instance<ConnectivityCubit>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
@@ -70,7 +72,9 @@ class _StarterAppState extends State<StarterApp> {
                     routerConfig: GetIt.instance<AppRouter>().goRouter,
                     localizationsDelegates: AppLocalizations.localizationsDelegates,
                     supportedLocales: AppLocalizations.supportedLocales,
-                    builder: (context, child) => OverlayUtility(child: child),
+                    builder: (context, child) => ConnectivityOverlay(
+                      child: OverlayUtility(child: child),
+                    ),
                     // showPerformanceOverlay: true,
                   );
                 },
