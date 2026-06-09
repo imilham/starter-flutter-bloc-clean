@@ -21,24 +21,62 @@ class ThemeService {
 
   final bool isDark;
 
+  // Brand Colors
+  final Color _primaryColor = const Color(0xFF127592);
+  final Color _secondaryColor = const Color(0xFF7FD0D3);
+  final Color _tertiaryColor = const Color(0xFFFFCB4D);
+  final Color _pinkColor = const Color(0xffEA7085);
+
+  // Surface & Background
+  final Color _lightSurfaceColor = const Color(0xFFB8B8FF);
+  final Color _darkSurfaceColor = const Color(0xFF023047);
+  final Color _lightBackgroundColor = const Color(0xFFF7F7F7);
+  final Color _darkBackgroundColor = const Color(0xFF000000);
+  
+  // Shadows
+  final Color _lightShadowColor = const Color(0xFFE2E8F0);
+  final Color _darkShadowColor = const Color(0xFF0D1117);
+
+  // Semantic
+  final Color _errorColor = const Color(0XFFD32F2F);
+  final Color _errorDarkColor = const Color(0XFFEF9A9A);
+  
+  // UI Elements
+  final Color _outlineColor = const Color(0xFF90A4AE);
+  final Color _bottomNavbarColor = const Color(0xffF1FCFD);
+  final Color _bottomNavbarDarkColor = const Color(0xFF1A1A1A);
+  final Color _bottomNavbarSelectedColor = const Color(0xffFBE5E9);
+  
+  // Text Colors
+  final Color _coreTextColor = const Color(0xff464646);
+  final Color _black400Color = const Color(0xff969696);
+  final Color _deemphasizedTextColor = const Color(0xff878787);
+
+  // Input Borders
+  final Color _inputBorderColor = const Color(0xff262D2E);
+  final Color _inputBorderEnabledColor = const Color(0xffC6DEE0);
+
+  Color get shimmersColor => isDark ? const Color(0xFF263238) : const Color(0xFFE0E0E0);
+  Color get shimmersBgColor => isDark ? const Color(0xFF121212) : const Color(0xFFF5F5F5);
+
   ThemeData lightThemeData() {
     return ThemeData(
-      scaffoldBackgroundColor: AppColorConstants.lightBackground,
+      scaffoldBackgroundColor: _lightBackgroundColor,
       colorScheme: ColorScheme.fromSeed(
-        seedColor: AppColorConstants.primary,
-        primary: AppColorConstants.primary,
+        seedColor: _primaryColor,
+        primary: _primaryColor,
         onPrimary: Colors.white,
-        secondary: AppColorConstants.secondary,
+        secondary: _secondaryColor,
         onSecondary: Colors.white,
-        tertiary: AppColorConstants.tertiary,
+        tertiary: _tertiaryColor,
         onTertiary: Colors.white,
-        surface: AppColorConstants.lightSurface,
-        onSurface: AppColorConstants.darkBackground,
-        shadow: AppColorConstants.lightShadow,
-        outline: AppColorConstants.outline,
-        error: AppColorConstants.error,
+        surface: _lightSurfaceColor,
+        onSurface: _darkBackgroundColor,
+        shadow: _lightShadowColor,
+        outline: _outlineColor,
+        error: _errorColor,
       ),
-      textTheme: AppTypography.textTheme(AppColorConstants.coreText),
+      textTheme: AppTypography.textTheme(_coreTextColor),
       fontFamily: AppTypography.fontFamily,
       elevatedButtonTheme: _elevatedButtonThemeData(),
       outlinedButtonTheme: _outlinedButtonThemeData(),
@@ -70,23 +108,23 @@ class ThemeService {
 
   ThemeData darkThemeData() {
     return ThemeData(
-      scaffoldBackgroundColor: AppColorConstants.darkBackground,
+      scaffoldBackgroundColor: _darkBackgroundColor,
       colorScheme: ColorScheme.fromSeed(
         brightness: Brightness.dark,
-        seedColor: AppColorConstants.primary,
-        primary: AppColorConstants.primary,
+        seedColor: _primaryColor,
+        primary: _primaryColor,
         onPrimary: Colors.white,
-        secondary: AppColorConstants.secondary,
+        secondary: _secondaryColor,
         onSecondary: Colors.white,
-        tertiary: AppColorConstants.tertiary,
+        tertiary: _tertiaryColor,
         onTertiary: Colors.white,
-        surface: AppColorConstants.darkSurface,
-        onSurface: AppColorConstants.lightBackground,
-        shadow: AppColorConstants.darkShadow,
-        outline: AppColorConstants.outline,
-        error: AppColorConstants.errorDark,
+        surface: _darkSurfaceColor,
+        onSurface: _lightBackgroundColor,
+        shadow: _darkShadowColor,
+        outline: _outlineColor,
+        error: _errorDarkColor,
       ),
-      textTheme: AppTypography.textTheme(AppColorConstants.coreText),
+      textTheme: AppTypography.textTheme(_coreTextColor),
       fontFamily: AppTypography.fontFamily,
       elevatedButtonTheme: _elevatedButtonThemeData(),
       outlinedButtonTheme: _outlinedButtonThemeData(),
@@ -120,12 +158,12 @@ class ThemeService {
     return ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.white,
-        backgroundColor: AppColorConstants.primary,
+        backgroundColor: _primaryColor,
         elevation: 0,
         textStyle: GoogleFonts.platypi(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: isDark ? AppColorConstants.darkBackground : Colors.white,
+          color: isDark ? _darkBackgroundColor : Colors.white,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -142,16 +180,16 @@ class ThemeService {
   OutlinedButtonThemeData _outlinedButtonThemeData() {
     return OutlinedButtonThemeData(
       style: OutlinedButton.styleFrom(
-        foregroundColor: AppColorConstants.primary,
-        backgroundColor: isDark ? AppColorConstants.darkSurface : AppColorConstants.lightSurface,
+        foregroundColor: _primaryColor,
+        backgroundColor: isDark ? _darkSurfaceColor : _lightSurfaceColor,
         elevation: 0,
-        side: const BorderSide(
-          color: AppColorConstants.primary,
+        side: BorderSide(
+          color: _primaryColor,
         ),
         textStyle: GoogleFonts.notoSans(
           fontSize: 16,
           fontWeight: FontWeight.w700,
-          color: AppColorConstants.primary,
+          color: _primaryColor,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 16,
@@ -168,12 +206,12 @@ class ThemeService {
   TextButtonThemeData _textButtonThemeData() {
     return TextButtonThemeData(
       style: TextButton.styleFrom(
-        foregroundColor: AppColorConstants.primary,
+        foregroundColor: _primaryColor,
         elevation: 0,
         textStyle: GoogleFonts.platypi(
           fontSize: 14,
           fontWeight: FontWeight.w600,
-          color: AppColorConstants.primary,
+          color: _primaryColor,
         ),
         padding: const EdgeInsets.symmetric(
           vertical: 8,
@@ -197,14 +235,14 @@ class ThemeService {
       ),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(
-          color: AppColorConstants.inputBorderEnabled,
+        borderSide: BorderSide(
+          color: _inputBorderEnabledColor,
         ),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
-        borderSide: const BorderSide(
-          color: AppColorConstants.inputBorderEnabled,
+        borderSide: BorderSide(
+          color: _inputBorderEnabledColor,
         ),
       ),
       errorBorder: OutlineInputBorder(
@@ -227,12 +265,12 @@ class ThemeService {
         ),
       ),
       filled: true,
-      fillColor: isDark ? AppColorConstants.darkSurface : Colors.white,
+      fillColor: isDark ? _darkSurfaceColor : Colors.white,
       hintStyle: GoogleFonts.notoSans(
         fontSize: 14,
         fontWeight: FontWeight.w500,
         height: 1.286,
-        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.coreText,
+        color: isDark ? _lightBackgroundColor : _coreTextColor,
       ),
       labelStyle: const TextStyle(color: Colors.white),
       floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -241,16 +279,16 @@ class ThemeService {
 
   AppBarTheme _appBarTheme() {
     return AppBarTheme(
-      foregroundColor: isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
-      backgroundColor: isDark ? AppColorConstants.darkSurface : AppColorConstants.primary,
+      foregroundColor: isDark ? _lightBackgroundColor : _darkBackgroundColor,
+      backgroundColor: isDark ? _darkSurfaceColor : _primaryColor,
       centerTitle: Platform.isIOS,
       iconTheme: IconThemeData(
-        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
+        color: isDark ? _lightBackgroundColor : _lightBackgroundColor,
       ),
       titleTextStyle: GoogleFonts.platypi(
         fontSize: 16,
         fontWeight: FontWeight.w700,
-        color: isDark ? AppColorConstants.lightBackground : AppColorConstants.lightBackground,
+        color: isDark ? _lightBackgroundColor : _lightBackgroundColor,
       ),
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(
@@ -262,17 +300,17 @@ class ThemeService {
 
   IconThemeData _iconThemeData() {
     return IconThemeData(
-      color: isDark ? AppColorConstants.lightBackground : AppColorConstants.darkBackground,
+      color: isDark ? _lightBackgroundColor : _darkBackgroundColor,
     );
   }
 
   BottomNavigationBarThemeData _bottomNavigationBarThemeData() {
     return BottomNavigationBarThemeData(
-      backgroundColor: isDark ? AppColorConstants.bottomNavbarDark : AppColorConstants.bottomNavbar,
+      backgroundColor: isDark ? _bottomNavbarDarkColor : _bottomNavbarColor,
       type: BottomNavigationBarType.fixed,
       elevation: 16,
-      selectedItemColor: AppColorConstants.pink,
-      unselectedItemColor: isDark ? AppColorConstants.lightBackground : const Color(0xff969696),
+      selectedItemColor: _pinkColor,
+      unselectedItemColor: isDark ? _lightBackgroundColor : const Color(0xff969696),
       showUnselectedLabels: true,
     );
   }

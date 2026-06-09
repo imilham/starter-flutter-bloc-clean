@@ -55,7 +55,7 @@ extension SnackBarExtension on BuildContext {
             Expanded(child: Text(message)),
           ],
         ),
-        backgroundColor: appColors.success,
+        backgroundColor: colorScheme.primary,
         duration: duration,
         behavior: SnackBarBehavior.floating,
       ),

@@ -50,11 +50,11 @@ class StylesSample extends StatelessWidget {
               children: [
                 _ColorChip(
                   name: 'Shimmer',
-                  color: context.appColors.shimmerColor,
+                  color: context.colorScheme.scrim,
                 ),
                 _ColorChip(
                   name: 'Shimmer BG',
-                  color: context.appColors.shimmerBgColor,
+                  color: context.colorScheme.error,
                 ),
               ],
             ),
@@ -71,7 +71,7 @@ class StylesSample extends StatelessWidget {
                       width: 150,
                       height: 150,
                       decoration: BoxDecoration(
-                        color: context.appColors.themeLerpColor,
+                        // color: context.appColors.themeLerpColor,
                           borderRadius: AppRadius.medium12,
                           boxShadow: [
                             BoxShadow(

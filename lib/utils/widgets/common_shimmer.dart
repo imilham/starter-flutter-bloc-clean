@@ -66,19 +66,16 @@ class CommonShimmer extends StatelessWidget {
   final Widget? child;
 
   @override
-  Widget build(BuildContext context) {
-    // Access colors directly from theme extension
-    final appColors = context.appColors;
-
+  Widget build(BuildContext context) {    
     final shimmerWidget = Shimmer.fromColors(
-      baseColor: appColors.shimmerBgColor,
-      highlightColor: appColors.shimmerColor,
+      baseColor: context.colorScheme.primary,
+      highlightColor: context.colorScheme.primary,
       child: child ??
           Container(
             width: width,
             height: height,
             decoration: BoxDecoration(
-              color: appColors.shimmerBgColor,
+              color: context.colorScheme.primary,
               shape: isCircle ? BoxShape.circle : BoxShape.rectangle,
               borderRadius: isCircle ? null : BorderRadius.circular(radius),
             ),
