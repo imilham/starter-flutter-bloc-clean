@@ -242,7 +242,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.titleMedium != null, 'Theme titleMedium must be defined');
     return platypi(
-      fontSize: 16,
+      fontSize: FontSize.md.sp,
       color: color ?? _textTheme.titleMedium!.color,
       fontWeight: fontWeight ?? _textTheme.titleMedium!.fontWeight,
       letterSpacing: letterSpacing ?? _textTheme.titleMedium!.letterSpacing,
@@ -323,7 +323,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
     return notoSans(
-      fontSize: 10,
+      fontSize: FontSize.xxs.sp,
       color: color ?? _textTheme.labelSmall!.color,
       fontWeight: fontWeight ?? _textTheme.labelSmall!.fontWeight,
       letterSpacing: letterSpacing ?? 0.5,
@@ -351,7 +351,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.bodyLarge != null, 'Theme bodyLarge must be defined');
     return notoSans(
-      fontSize: 16,
+      fontSize: FontSize.md.sp,
       color: color ?? _textTheme.bodyLarge!.color,
       fontWeight: fontWeight ?? _textTheme.bodyLarge!.fontWeight,
       letterSpacing: letterSpacing ?? _textTheme.bodyLarge!.letterSpacing,
@@ -378,7 +378,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.bodyMedium != null, 'Theme bodyMedium must be defined');
     return notoSans(
-      fontSize: 14,
+      fontSize: FontSize.s.sp,
       color: color ?? _textTheme.bodyMedium!.color,
       fontWeight: fontWeight ?? _textTheme.bodyMedium!.fontWeight,
       letterSpacing: letterSpacing ?? _textTheme.bodyMedium!.letterSpacing,
@@ -433,7 +433,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.bodySmall != null, 'Theme bodySmall must be defined');
     return notoSans(
-      fontSize: 10,
+      fontSize: FontSize.xxs.sp,
       color: color ?? _textTheme.bodySmall!.color,
       fontWeight: fontWeight ?? _textTheme.bodySmall!.fontWeight,
       letterSpacing: letterSpacing ?? 0.5,
@@ -599,7 +599,7 @@ extension TextStyleExtension on BuildContext {
     // Using labelSmall but overriding to 10px for tabs
     assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
     return notoSans(
-      fontSize: 10, // Override to ensure 10px for tabs,
+      fontSize: FontSize.xxs.sp, // Override to ensure 10px for tabs,
       color: color ?? _textTheme.labelSmall!.color,
       fontWeight: fontWeight ?? _textTheme.labelSmall!.fontWeight,
       letterSpacing: letterSpacing ?? _textTheme.labelSmall!.letterSpacing,
@@ -627,7 +627,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
     return notoSans(
-      fontSize: 10,
+      fontSize: FontSize.xxs.sp,
       color: color ?? _textTheme.labelSmall!.color,
       fontWeight: fontWeight ?? FontWeight.w700,
       letterSpacing: letterSpacing ?? _textTheme.labelSmall!.letterSpacing,
@@ -655,7 +655,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.labelSmall != null, 'Theme labelSmall must be defined');
     return notoSans(
-      fontSize: 10,
+      fontSize: FontSize.xxs.sp,
       color: color ?? _textTheme.labelSmall!.color,
       fontWeight: fontWeight ?? FontWeight.w400,
       letterSpacing: letterSpacing ?? _textTheme.labelSmall!.letterSpacing,
@@ -683,7 +683,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.titleMedium != null, 'Theme titleMedium must be defined');
     return platypi(
-      fontSize: 16,
+      fontSize: FontSize.md.sp,
       color: color ?? _textTheme.titleMedium!.color,
       fontWeight: fontWeight ?? FontWeight.w500,
       letterSpacing: letterSpacing ?? _textTheme.titleMedium!.letterSpacing,
@@ -710,7 +710,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.titleMedium != null, 'Theme titleMedium must be defined');
     return platypi(
-      fontSize: 16,
+      fontSize: FontSize.md.sp,
       color: color ?? _textTheme.titleMedium!.color,
       fontWeight: fontWeight ?? FontWeight.w400,
       letterSpacing: letterSpacing ?? _textTheme.titleMedium!.letterSpacing,
@@ -738,7 +738,7 @@ extension TextStyleExtension on BuildContext {
   }) {
     assert(_textTheme.labelMedium != null, 'Theme labelMedium must be defined');
     return notoSans(
-      fontSize: 14,
+      fontSize: FontSize.s.sp,
       color: color ?? _textTheme.labelMedium!.color,
       fontWeight: fontWeight ?? FontWeight.w700,
       letterSpacing: letterSpacing ?? _textTheme.labelMedium!.letterSpacing,
