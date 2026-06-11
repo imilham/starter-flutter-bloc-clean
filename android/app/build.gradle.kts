@@ -3,8 +3,7 @@ plugins {
     id("kotlin-android")
     // The Flutter Gradle Plugin must be applied after the Android and Kotlin Gradle plugins.
     id("dev.flutter.flutter-gradle-plugin")
-    // Firebase — uncomment after adding google-services.json per flavor
-    // id("com.google.gms.google-services")
+    id("com.google.gms.google-services")
 }
 
 // ─── Release Signing (uncomment when ready) ───

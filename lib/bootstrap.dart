@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -7,6 +8,7 @@ import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:starter/core/di/injection_container.dart';
+import 'package:starter/firebase_options.dart';
 import 'package:starter/utils/utils.dart';
 
 // Re-export getIt for convenient access throughout the app
@@ -40,8 +42,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await loadEnvFile(environment);
-  /// todo - uncomment if using Firebase services
-  // await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform(environment),
+  );
   final hiveCipher = await hiveInit();
   
   HydratedBloc.storage = await HydratedStorage.build(
