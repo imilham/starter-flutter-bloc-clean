@@ -2,7 +2,6 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:starter/core/di/core_injection.dart';
 import 'package:starter/core/storage/storage.dart';
 import 'package:starter/features/auth/auth.dart';
-import 'package:starter/features/notification/notification.dart';
 import 'package:starter/features/onboarding/onboarding.dart';
 import 'package:starter/features/profile/profile.dart';
 import 'package:starter/utils/utils.dart';

@@ -16,7 +16,10 @@ class ShellController extends StatelessWidget {
       body: navigationShell,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: navigationShell.currentIndex,
-        onTap: navigationShell.goBranch,
+        onTap: (index) => navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        ),
         items: const [
           BottomNavigationBarItem(
             icon: Icon(FontAwesomeIcons.house),

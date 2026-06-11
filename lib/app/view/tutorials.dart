@@ -15,59 +15,59 @@ class _TutorialPageState extends State<TutorialPage> {
 
   final List<Map<String, dynamic>> _pages = [
     {
-      'title': 'Withdrawal Restricted Savings Accounts',
+      'title': 'Welcome to the App',
       'description':
-          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+          'Replace this page with your first onboarding screen. Describe the main value your app delivers to the user.',
       'features': [
         {
-          'title': 'Feature 1',
-          'description': 'Feature 1 description',
+          'title': 'Feature One',
+          'description': 'Short description of feature one.',
         },
         {
-          'title': 'Feature 2',
-          'description': 'Feature 2 description',
+          'title': 'Feature Two',
+          'description': 'Short description of feature two.',
         },
         {
-          'title': 'Feature 3',
-          'description': 'Feature 3 description',
+          'title': 'Feature Three',
+          'description': 'Short description of feature three.',
         },
       ],
     },
     {
-      'title': 'Withdrawal Restricted Savings Accounts',
+      'title': 'Stay Connected',
       'description':
-          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+          'Replace this page with your second onboarding screen. Highlight a key feature or benefit.',
       'features': [
         {
-          'title': 'Feature 1',
-          'description': 'Feature 1 description',
+          'title': 'Feature One',
+          'description': 'Short description of feature one.',
         },
         {
-          'title': 'Feature 2',
-          'description': 'Feature 2 description',
+          'title': 'Feature Two',
+          'description': 'Short description of feature two.',
         },
         {
-          'title': 'Feature 3',
-          'description': 'Feature 3 description',
+          'title': 'Feature Three',
+          'description': 'Short description of feature three.',
         },
       ],
     },
     {
-      'title': 'Withdrawal Restricted Savings Accounts',
+      'title': 'Get Started',
       'description':
-          'Create your account in the settings if you have into do so. Select the amount and deposit interval and set the date for how long you willing to save for you',
+          'Replace this page with your third onboarding screen. End with a call to action.',
       'features': [
         {
-          'title': 'Feature 1',
-          'description': 'Feature 1 description',
+          'title': 'Feature One',
+          'description': 'Short description of feature one.',
         },
         {
-          'title': 'Feature 2',
-          'description': 'Feature 2 description',
+          'title': 'Feature Two',
+          'description': 'Short description of feature two.',
         },
         {
-          'title': 'Feature 3',
-          'description': 'Feature 3 description',
+          'title': 'Feature Three',
+          'description': 'Short description of feature three.',
         },
       ],
     },

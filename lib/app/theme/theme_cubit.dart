@@ -17,7 +17,4 @@ class ThemeCubit extends Cubit<ThemeState> {
   ThemeData get lightTheme => ThemeService(isDark: false).lightThemeData();
   ThemeData get darkTheme => ThemeService(isDark: true).darkThemeData();
   ThemeMode get themeMode => state.isDark ? ThemeMode.dark : ThemeMode.light;
-
-  // TODO: remove this
-  Color get demoSnapColor => state.isDark ? Colors.orangeAccent : Colors.purpleAccent;
 }
