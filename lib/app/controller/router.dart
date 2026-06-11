@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:starter/app/app.dart';
@@ -35,8 +36,8 @@ class AppRouter {
     refreshListenable: _routerNotifier,
     initialLocation: '$homeRoutePrefix/${Pages.home.toPath(isSubRoute: true)}',
     navigatorKey: _rootNavigatorKey,
-    /// Enable debug logging for diagnostics.
-    debugLogDiagnostics: true,
+    /// Enable debug logging only in debug builds.
+    debugLogDiagnostics: kDebugMode,
     routes: [
       GoRoute(
         path: Pages.splash.toPath(),

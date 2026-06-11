@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -21,6 +22,9 @@ export 'package:starter/core/di/injection_container.dart' show getIt;
 /// This function sets up error handling, initializes Flutter bindings, and registers singletons for various services.
 Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnvironment environment}) async {
   ErrorWidget.builder = (FlutterErrorDetails details) {
+    if (kReleaseMode) {
+      return const SizedBox.shrink();
+    }
     return Material(
       child: Center(
         child: Builder(
@@ -35,8 +39,32 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
     );
   };
 
+  // ─── Crash Reporting ──────────────────────────────────────────────────────
+  // Wire your crash reporter here before going to production.
+  //
+  // Option A — Firebase Crashlytics:
+  //   1. Add `firebase_crashlytics` to pubspec.yaml
+  //   2. Uncomment the blocks below
+  //
+  // Option B — Sentry:
+  //   1. Add `sentry_flutter` to pubspec.yaml
+  //   2. Wrap `runApp` in `SentryFlutter.init` and set `options.dsn`
+  //   3. Replace the Crashlytics calls below with:
+  //        Sentry.captureException(details.exception, stackTrace: details.stack)
+  // ─────────────────────────────────────────────────────────────────────────
   FlutterError.onError = (details) {
-    debugPrintStack(stackTrace: details.stack, label: details.exceptionAsString(), maxFrames: 10);
+    if (kReleaseMode) {
+      // FirebaseCrashlytics.instance.recordFlutterFatalError(details);
+    } else {
+      debugPrintStack(stackTrace: details.stack, label: details.exceptionAsString(), maxFrames: 10);
+    }
+  };
+
+  PlatformDispatcher.instance.onError = (error, stack) {
+    if (kReleaseMode) {
+      // FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+    }
+    return true;
   };
   final widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
@@ -47,8 +75,9 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   );
   final hiveCipher = await hiveInit();
   
+  // Use support directory — excluded from iCloud/GDrive auto-backup by default.
   HydratedBloc.storage = await HydratedStorage.build(
-    storageDirectory: await getApplicationDocumentsDirectory(),
+    storageDirectory: await getApplicationSupportDirectory(),
   );
 
   await setup(environment: environment, hiveCipher: hiveCipher);

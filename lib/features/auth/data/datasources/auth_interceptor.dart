@@ -28,7 +28,9 @@ class AuthInterceptor extends Interceptor {
 
   /// Checks if the given path is a public endpoint
   bool _isPublicEndpoint(String path) {
-    return _publicEndpoints.any((endpoint) => path.contains(endpoint));
+    return _publicEndpoints.any(
+      (endpoint) => path == endpoint || path.endsWith(endpoint),
+    );
   }
 
   /// Retrieves the current user session

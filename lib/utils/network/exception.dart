@@ -48,7 +48,10 @@ T onError<T>(Exception e) {
       } else if (e.response?.data is Map<String, dynamic>) {
         throw ApiError.fromJson(e.response?.data as Map<String, dynamic>, statusCode: e.response?.statusCode ?? 0);
       } else {
-        throw ApiError(message: e.message ?? 'Unknown Error', statusCode: 400);
+        throw ApiError(
+          message: e.message ?? 'Unknown Error',
+          statusCode: e.response?.statusCode ?? 0,
+        );
       }
     } else {
       throw ApiError(message: e.toString(), statusCode: 400);

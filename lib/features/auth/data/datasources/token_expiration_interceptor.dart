@@ -8,7 +8,7 @@ class TokenExpirationInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) {
     debugPrint('🚨 TokenExpirationInterceptor: Caught error ${err.response?.statusCode}');
-    if (err.response?.statusCode == 401 || err.response?.statusCode == 403) {
+    if (err.response?.statusCode == 401) {
       debugPrint('🚨 TokenExpirationInterceptor: Dispatching AuthLogoutRequested');
       // Lazy load AuthBloc to avoid circular dependency
       // Dispatch logout with a session expired message

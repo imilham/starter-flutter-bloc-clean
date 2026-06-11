@@ -7,8 +7,8 @@ class ApiClient {
   ApiClient({List<Interceptor> interceptors = const []}) {
     _dio = Dio();
     _dio.options.baseUrl = GetIt.instance<AppSettings>().baseUrl;
-    _dio.options.connectTimeout = const Duration(seconds: 5);
-    _dio.options.receiveTimeout = const Duration(seconds: 10);
+    _dio.options.connectTimeout = const Duration(seconds: 15);
+    _dio.options.receiveTimeout = const Duration(seconds: 30);
     _dio.options.headers = {
       'accept': 'application/json',
       'x-api-key': GetIt.instance<AppSettings>().apiKey,
