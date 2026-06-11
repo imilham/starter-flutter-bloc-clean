@@ -28,31 +28,32 @@ class _StarterAppState extends State<StarterApp> {
         BlocProvider.value(value: GetIt.instance<AppCubit>()),
         BlocProvider.value(value: GetIt.instance<ThemeCubit>()),
         BlocProvider.value(value: GetIt.instance<AuthBloc>()),
-        if (GetIt.instance<AppSettings>().showOfflineOverlay)
-          BlocProvider.value(value: GetIt.instance<ConnectivityCubit>()),
+        if (GetIt.instance<AppSettings>().showOfflineOverlay) BlocProvider.value(value: GetIt.instance<ConnectivityCubit>()),
       ],
       child: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           final appCubit = GetIt.instance<AppCubit>();
           if (state is AuthAuthenticated) {
-            appCubit..setSession(state.session)
-            ..setInitialized(value: true);
+            appCubit
+              ..setSession(state.session)
+              ..setInitialized(value: true);
           } else if (state is AuthUnauthenticated) {
             if (state.message != null) {
               final router = GetIt.instance<AppRouter>();
               // Use the root navigator context to ensure we can show dialogs
               // even if the listener context doesn't have a Navigator ancestor
               final navContext = router.navigatorKey.currentContext;
-              
+
               if (navContext != null && navContext.mounted) {
-                 navContext.showErrorSnackBar(state.message!);
+                navContext.showErrorSnackBar(state.message!);
               }
             }
 
-            appCubit..setSession(null)
-            // App is still initialized, just not logged in.
-            // Keeping this true prevents redirecting to Splash page.
-            ..setInitialized(value: true);
+            appCubit
+              ..setSession(null)
+              // App is still initialized, just not logged in.
+              // Keeping this true prevents redirecting to Splash page.
+              ..setInitialized(value: true);
           }
         },
         child: Builder(
@@ -64,18 +65,23 @@ class _StarterAppState extends State<StarterApp> {
               child: BlocBuilder<ThemeCubit, ThemeState>(
                 builder: (context, themeState) {
                   final themeCubit = context.read<ThemeCubit>();
-                  return MaterialApp.router(
-                    onGenerateTitle: (context) => context.l10n.appName,
-                    theme: themeCubit.lightTheme,
-                    darkTheme: themeCubit.darkTheme,
-                    themeMode: themeCubit.themeMode,
-                    routerConfig: GetIt.instance<AppRouter>().goRouter,
-                    localizationsDelegates: AppLocalizations.localizationsDelegates,
-                    supportedLocales: AppLocalizations.supportedLocales,
-                    builder: (context, child) => ConnectivityOverlay(
-                      child: OverlayUtility(child: child),
+                  return ScreenUtilInit(
+                    designSize: const Size(375, 812),
+                    minTextAdapt: true,
+                    splitScreenMode: true,
+                    builder: (context, child) => MaterialApp.router(
+                      onGenerateTitle: (context) => context.l10n.appName,
+                      theme: themeCubit.lightTheme,
+                      darkTheme: themeCubit.darkTheme,
+                      themeMode: themeCubit.themeMode,
+                      routerConfig: GetIt.instance<AppRouter>().goRouter,
+                      localizationsDelegates: AppLocalizations.localizationsDelegates,
+                      supportedLocales: AppLocalizations.supportedLocales,
+                      builder: (context, child) => ConnectivityOverlay(
+                        child: OverlayUtility(child: child),
+                      ),
+                      // showPerformanceOverlay: true,
                     ),
-                    // showPerformanceOverlay: true,
                   );
                 },
               ),

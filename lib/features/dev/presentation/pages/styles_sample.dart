@@ -94,32 +94,32 @@ class StylesSample extends StatelessWidget {
                   ],
                 ),
                 Gap.large24,
-                Column(
+                const Column(
                   children: [
-                    Container(
-                      width: 150,
-                      height: 150,
-                      decoration: BoxDecoration(
-                        color: context.watch<ThemeCubit>().demoSnapColor,
-                        borderRadius: AppRadius.medium12,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: 0.1),
-                            blurRadius: 10,
-                            spreadRadius: 2,
-                          ),
-                        ],
-                      ),
-                      child: const Center(
-                        child: Text(
-                          '',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
-                        ),
-                      ),
-                    ),
+                    // Container(
+                    //   width: 150,
+                    //   height: 150,
+                    //   decoration: BoxDecoration(
+                    //     color: context.watch<ThemeCubit>().demoSnapColor,
+                    //     borderRadius: AppRadius.medium12,
+                    //     boxShadow: [
+                    //       BoxShadow(
+                    //         color: Colors.black.withValues(alpha: 0.1),
+                    //         blurRadius: 10,
+                    //         spreadRadius: 2,
+                    //       ),
+                    //     ],
+                    //   ),
+                    //   child: const Center(
+                    //     child: Text(
+                    //       '',
+                    //       textAlign: TextAlign.center,
+                    //       style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20),
+                    //     ),
+                    //   ),
+                    // ),
                     Gap.small8,
-                    const Text('Direct Getter', style: TextStyle(fontSize: 12)),
+                    Text('Direct Getter', style: TextStyle(fontSize: 12)),
                   ],
                 ),
               ],

@@ -1,6 +1,7 @@
 export 'package:awesome_dio_interceptor/awesome_dio_interceptor.dart';
 export 'package:dio/dio.dart';
 export 'package:flutter_bloc/flutter_bloc.dart' show ReadContext, SelectContext, WatchContext;
+export 'package:flutter_screenutil/flutter_screenutil.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 export 'package:get_it/get_it.dart';
 export 'package:go_router/go_router.dart';
@@ -16,7 +17,5 @@ export './retry.dart';
 export './settings.dart';
 export './widgets/widgets.dart';
 export 'extensions/overlay_extension.dart';
-
-
 export 'extensions/toast_extension.dart';
 export 'extensions/widget_extension.dart';
