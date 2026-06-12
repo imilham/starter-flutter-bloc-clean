@@ -70,9 +70,10 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder, {required AppEnviron
   FlutterNativeSplash.preserve(widgetsBinding: widgetsBinding);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await loadEnvFile(environment);
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform(environment),
-  );
+  /// todo - Firebase initialization is currently optional and can be enabled when needed.
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform(environment),
+  // );
   final hiveCipher = await hiveInit();
   
   // Use support directory — excluded from iCloud/GDrive auto-backup by default.

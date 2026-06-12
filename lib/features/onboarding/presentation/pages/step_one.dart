@@ -11,7 +11,7 @@ class StepOne extends StatelessWidget {
     final cubit = context.read<OnboardingCubit>();
 
     return Form(
-      key: cubit.stepOneFormKey,
+      key: cubit.formKey,
       child: ExtendedColumn(
         children: [
           Text(

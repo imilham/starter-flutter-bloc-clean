@@ -4,7 +4,6 @@ import 'package:starter/bootstrap.dart';
 import 'package:starter/features/onboarding/domain/domain.dart';
 import 'package:starter/features/onboarding/presentation/bloc/onboarding_cubit.dart';
 import 'package:starter/features/onboarding/presentation/pages/step_one.dart';
-import 'package:starter/features/onboarding/presentation/pages/step_two.dart';
 import 'package:starter/utils/utils.dart';
 
 class OnboardingFlow extends StatelessWidget {
@@ -34,9 +33,6 @@ class _OnboardingFlowView extends StatelessWidget {
             title: context.l10n.error,
             message: state.errorMessage!,
           );
-        } else if (state.status == OnboardingStatus.success) {
-          // Navigate away or show success message, typically handled by auth state change
-          // but we can add specific logic here if needed.
         }
       },
       builder: (context, state) {
@@ -48,39 +44,16 @@ class _OnboardingFlowView extends StatelessWidget {
           child: Scaffold(
             appBar: CommonAppBar(
               title: context.l10n.introSignUp,
-              showBackButton: state.currentStep > 0,
-              onBackPress: cubit.previousStep,
+              showBackButton: false,
             ),
             body: Column(
               children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  child: LinearProgressIndicator(
-                    value: state.progress,
-                    borderRadius: AppRadius.small8,
-                    minHeight: 5,
-                  ),
-                ),
-                Expanded(
-                  child: PageView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    children: [
-                      if (state.currentStep == 0) const StepOne(),
-                      if (state.currentStep == 1) const StepTwo(),
-                    ],
-                  ),
-                ),
+                const Expanded(child: StepOne()),
                 Gap.medium16,
                 CommonButton.primary(
-                  label: state.currentStep == 1 ? context.l10n.completeProfile : context.l10n.continueAction,
+                  label: context.l10n.completeProfile,
                   isLoading: isLoading,
-                  onPressed: () {
-                    if (state.currentStep == 0) {
-                      cubit.submitStepOne();
-                    } else {
-                      cubit.submitStepTwo();
-                    }
-                  },
+                  onPressed: cubit.submit,
                 ).paddingHorizontal16,
                 const RelativeGap(mainAxisExtent: 0.05),
               ],
@@ -91,3 +64,4 @@ class _OnboardingFlowView extends StatelessWidget {
     );
   }
 }
+
